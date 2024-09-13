@@ -1,0 +1,30 @@
+.slider-banner {
+    .slick-dots li button:before {
+        content: '';
+        width: 32px;
+        height: 8px;
+        opacity: 1;
+        border-radius: 4px;
+        margin-right: 10px;
+        background-color: #dce0e3;
+        transition: width 0.3s linear, background-color 0.3s linear;
+        display: block;
+    }
+    .slick-dots li.slick-active button:before {
+        width: 50px;
+        background-color: #9aa6af;
+    }
+    .slick-dots button {
+    }
+    .slick-dots li {
+        margin: 0 10px;
+        width: 32px;
+    }
+    .slick-next {
+        right: 0;
+    }
+    .slick-prev {
+        z-index: 1;
+        left: 0;
+    }
+}

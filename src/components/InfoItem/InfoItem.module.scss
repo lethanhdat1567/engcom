@@ -1,0 +1,12 @@
+.wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #666;
+    font-size: 1.4rem;
+    .img {
+        width: 18px;
+        height: 18px;
+        object-fit: cover;
+    }
+}

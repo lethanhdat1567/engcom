@@ -1,0 +1,14 @@
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    .logo-desc {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #000;
+    }
+    .logo-desc.white,
+    .logo-icon.white {
+        color: #fff;
+    }
+}

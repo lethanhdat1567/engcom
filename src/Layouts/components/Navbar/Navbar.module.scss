@@ -1,0 +1,33 @@
+.navbar {
+    position: fixed;
+    left: 0;
+    padding: 0px 8px;
+    margin-top: 18px;
+    .list {
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+        .item {
+            display: flex;
+            flex-direction: column;
+            row-gap: 4px;
+            align-items: center;
+            padding: 10px;
+            transition: ease 0.3s;
+            border-radius: 16px;
+            color: #404040;
+            &:hover {
+                background-color: #e8ebed;
+            }
+        }
+        .item.active {
+            background-color: #e8ebed;
+            color: #1a1a1a;
+        }
+        .desc {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+    }
+}

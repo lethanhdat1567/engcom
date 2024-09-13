@@ -1,0 +1,77 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import './abstracts/';
+
+:root {
+    --primary-color: #f05123;
+    --black-color: #000;
+    --white-color: #fff;
+    --gray-color: #666;
+    --text-color: #333;
+    --plum-color: #b80257;
+    --fb-color: #4080ff;
+    --mail-color: #f47425;
+    --invalid-color: #f33a58;
+    --desc-color: #0000008a;
+    --first-color: #1dbfaf;
+    --second-color: #1dbfaf;
+    --button-color: #1dbfaf;
+    --button-image: linear-gradient(70.06deg, #2cccff -5%, #22dfbf 106%);
+    --system-ui: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol';
+    --font-code: 'SF Mono', monospace;
+    --header-height: 66px;
+    --layout-sidebar-width: 96px;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html {
+    font-size: 62.5%;
+}
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.6rem;
+    line-height: 1;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 8px; /* Đặt chiều rộng của thanh cuộn dọc */
+    height: 8px; /* Đặt chiều cao của thanh cuộn ngang */
+}
+
+/* Đặt kiểu cho phần "track" của thanh cuộn (phần nền) */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Màu nền của thanh cuộn */
+    border-radius: 0; /* Bo góc thanh cuộn */
+}
+
+/* Đặt kiểu cho phần "thumb" của thanh cuộn (phần kéo) */
+::-webkit-scrollbar-thumb {
+    background: #ccc; /* Màu của thanh kéo */
+    border-radius: 10px; /* Bo góc thanh kéo */
+}
+
+/* Đặt kiểu cho phần "thumb" của thanh cuộn khi hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Màu của thanh kéo khi hover */
+}
+
+button,
+input {
+    outline: none;
+    border: none;
+}
+a[href] {
+    color: #000;
+    text-decoration: none;
+}
+p {
+    margin: 0;
+}
+li {
+    list-style-type: none;
+}
