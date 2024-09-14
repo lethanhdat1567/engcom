@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './Navbar.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHome, faNewspaper } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -11,14 +11,13 @@ function Navbar() {
         {
             icon: <FontAwesomeIcon icon={faHome} className="fa-xl" />,
             title: 'Home',
+            to: '/',
         },
-        {
-            icon: <FontAwesomeIcon icon={faComment} className="fa-xl" />,
-            title: 'Communicate',
-        },
+
         {
             icon: <FontAwesomeIcon icon={faNewspaper} className="fa-xl" />,
             title: 'Blogs',
+            to: `/blogs`,
         },
     ];
     return (
@@ -26,12 +25,16 @@ function Navbar() {
             <ul className={cx('list')}>
                 {nav.map((item, index) => {
                     return (
-                        <Link key={index}>
-                            <li className={cx('item')}>
+                        <NavLink
+                            to={item.to}
+                            key={index}
+                            className={(nav) => cx('item', { active: nav.isActive })}
+                        >
+                            <li className={cx('')}>
                                 <span className={cx('icon')}>{item.icon}</span>
                                 <p className={cx('desc')}>{item.title}</p>
                             </li>
-                        </Link>
+                        </NavLink>
                     );
                 })}
             </ul>

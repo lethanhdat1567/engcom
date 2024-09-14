@@ -6,6 +6,8 @@ import Classes from './Classes';
 import imgs from '~/assets/Image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faEye, faUsers } from '@fortawesome/free-solid-svg-icons';
+import Validate from '../Validate/Validate';
+import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -58,6 +60,7 @@ function Home() {
             ],
         },
     ];
+
     return (
         <div className={cx('home')}>
             <div className={cx('banner')}>

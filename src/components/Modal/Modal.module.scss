@@ -1,0 +1,95 @@
+.modal {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    display: none;
+    &.show {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .content {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+    .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        opacity: 0.7;
+    }
+    .content {
+        z-index: 2;
+        position: absolute;
+        padding: 30px;
+        border-radius: 16px;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        animation: scale ease 0.3s;
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.08;
+            background-image: radial-gradient(#ffffff40, #fff0 40%),
+                radial-gradient(
+                    hsl(44, 100%, 66%) 30%,
+                    hsl(338, 68%, 65%),
+                    hsla(338, 68%, 65%, 0.4) 41%,
+                    transparent 52%
+                ),
+                radial-gradient(hsl(272, 100%, 60%) 37%, transparent 46%),
+                linear-gradient(155deg, transparent 65%, hsl(142, 70%, 49%) 95%),
+                linear-gradient(45deg, #0065e0, #0f8bff);
+            background-size: 200% 200%, 285% 500%, 285% 500%, cover, cover;
+            background-position: bottom left, 109% 68%, 109% 68%, center, center;
+        }
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: -2;
+            background: #fff;
+        }
+    }
+    .x-mart {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        color: #333;
+        background: #16182308;
+        font-size: 2.8rem;
+        line-height: 0;
+        cursor: pointer;
+        .icon {
+            color: #525050;
+            font-size: 2rem;
+        }
+    }
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

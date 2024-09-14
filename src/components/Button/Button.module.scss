@@ -10,6 +10,7 @@
     font-weight: 500;
     border-radius: 9999px;
     cursor: pointer;
+    gap: 10px;
 }
 .primary {
     transition: opacity 0.25s;
@@ -27,4 +28,8 @@
     &:hover {
         color: var(--primary-color);
     }
+}
+.disable {
+    opacity: 0.5;
+    cursor: not-allowed !important;
 }

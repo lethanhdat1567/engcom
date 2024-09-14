@@ -7,17 +7,18 @@
         display: flex;
         flex-direction: column;
         row-gap: 10px;
+        padding-left: 0;
         .item {
             display: flex;
             flex-direction: column;
             row-gap: 4px;
             align-items: center;
-            padding: 10px;
+            padding: 16px 20px;
             transition: ease 0.3s;
             border-radius: 16px;
             color: #404040;
             &:hover {
-                background-color: #e8ebed;
+                background-color: #f4f7f8;
             }
         }
         .item.active {

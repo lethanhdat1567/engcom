@@ -1,0 +1,99 @@
+.form {
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+        margin: 10px 0px;
+        .label {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 10px 0 10px 8px;
+            display: block;
+        }
+        .input-wrap {
+            position: relative;
+            background: #fff;
+            border: 1.5px solid var(--divider-color);
+            border-radius: 44px;
+            overflow: hidden;
+            height: 44px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            &:focus-within {
+                border: 1.5px solid var(--button-color);
+            }
+        }
+        .input {
+            display: block;
+            width: 100%;
+            padding: 12px 42px 12px 20px;
+            border: none;
+            outline: none;
+            font-size: 1.6rem;
+            font-weight: 500;
+            background-color: transparent;
+        }
+        .error {
+            position: absolute;
+            right: 16px;
+            color: var(--invalid-color);
+            animation: shake ease-in-out 0.4s;
+        }
+    }
+}
+.input-wrap:focus-within .eye-icon {
+    opacity: 1;
+    visibility: visible;
+}
+.eye-icon {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.1s ease, visibility 0.3s ease;
+    position: absolute;
+    right: 16px;
+    cursor: pointer;
+}
+.form-group.error {
+    .input-wrap {
+        background-color: #ff00001a;
+        border: 1.5px solid var(--invalid-color);
+        &:focus-within {
+            border: 1.5px solid var(--invalid-color);
+        }
+    }
+}
+.error-text {
+    margin: 8px 0 8px 8px;
+    color: var(--invalid-color);
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    50% {
+        transform: translateX(10px);
+    }
+    75% {
+        transform: translateX(-10px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+.submit-btn {
+    width: 100% !important;
+    color: #fff !important;
+    background-color: var(--button-color) !important;
+    background-image: var(--button-image) !important;
+    border: none !important;
+    padding: 14px 0px !important;
+}

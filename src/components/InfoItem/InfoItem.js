@@ -1,16 +1,17 @@
 import classNames from 'classnames/bind';
 import styles from './InfoItem.module.scss';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-function InfoItem({ data, className }) {
+function InfoItem({ data, className, large = false }) {
     return (
-        <div className={cx('wrap', className)}>
-            {data.leftIcon && <span className={cx('icon')}>{data.leftIcon}</span>}
-            {data.img && <img src={data.img} className={cx('img')} />}
-            <p className={cx('info')}>{data.title}</p>
-            {data.rightIcon && <span className={cx('icon')}>{data.rightIcon}</span>}
-        </div>
+        <Link>
+            <div className={cx('wrap', className)}>
+                {data.img && <img src={data.img} className={cx('img', { large })} />}
+                <p className={cx('info')}>{data.title}</p>
+            </div>
+        </Link>
     );
 }
 

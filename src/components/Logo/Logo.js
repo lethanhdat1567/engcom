@@ -6,9 +6,9 @@ import { faBookOpenReader } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
-function Logo({ white }) {
+function Logo({ white, className = false }) {
     return (
-        <Link to={'/'} className={cx('logo')}>
+        <Link to={'/'} className={cx('logo', `${className}`)}>
             <span className={cx('logo-icon', { white: white })}>
                 <FontAwesomeIcon icon={faBookOpenReader} className="fa-xl" />
             </span>

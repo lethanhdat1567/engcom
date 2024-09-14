@@ -5,8 +5,13 @@
     color: #666;
     font-size: 1.4rem;
     .img {
+        border-radius: 50%;
         width: 18px;
         height: 18px;
         object-fit: cover;
+        &.large {
+            width: 26px;
+            height: 26px;
+        }
     }
 }

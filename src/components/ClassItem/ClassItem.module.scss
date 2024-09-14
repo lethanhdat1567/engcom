@@ -1,0 +1,33 @@
+.wrap {
+    display: flex;
+    margin: 0 8px;
+    padding: 8px 12px;
+    transition: ease 0.3s;
+    border-radius: 10px;
+    .img {
+        width: 120px;
+        min-height: 67px;
+        display: block;
+        border-radius: 8px;
+        background-color: #ebebeb;
+        text-align: center;
+        line-height: 67px;
+    }
+    .info {
+        flex: 1;
+        margin-left: 12px;
+        display: flex;
+        flex-direction: column;
+        .title {
+            font-size: 1.4rem;
+            margin: 6px 0 0;
+            margin-bottom: 15px;
+            width: 200px;
+            display: -webkit-box; /* Hiển thị nội dung như một box */
+            -webkit-line-clamp: 2; /* Giới hạn số dòng */
+            -webkit-box-orient: vertical; /* Định hướng box theo chiều dọc */
+            overflow: hidden; /* Ẩn nội dung bị tràn */
+            text-overflow: ellipsis;
+        }
+    }
+}
