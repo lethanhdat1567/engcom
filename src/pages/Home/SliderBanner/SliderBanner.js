@@ -21,7 +21,7 @@ function SliderBanner() {
         autoplaySpeed: 5000,
     };
     return (
-        <Slider {...settings} className="slider-banner">
+        <Slider {...settings} className="slider-banner" arrows={false}>
             <div className={cx('banner-wrap')}>
                 <img src={imgs.banner1} className={cx('img')} />
             </div>

@@ -1,19 +1,23 @@
 import classNames from 'classnames/bind';
 import styles from './Navbar.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faHome, faNewspaper } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faHome, faNewspaper, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { Link, NavLink } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 function Navbar() {
-    const nav = [
+    const navPublic = [
         {
             icon: <FontAwesomeIcon icon={faHome} className="fa-xl" />,
             title: 'Home',
             to: '/',
         },
-
+        {
+            icon: <FontAwesomeIcon icon={faUsers} className="fa-xl" />,
+            title: 'Community',
+            to: '/community',
+        },
         {
             icon: <FontAwesomeIcon icon={faNewspaper} className="fa-xl" />,
             title: 'Blogs',
@@ -23,14 +27,14 @@ function Navbar() {
     return (
         <div className={cx('navbar')}>
             <ul className={cx('list')}>
-                {nav.map((item, index) => {
+                {navPublic.map((item, index) => {
                     return (
                         <NavLink
                             to={item.to}
                             key={index}
                             className={(nav) => cx('item', { active: nav.isActive })}
                         >
-                            <li className={cx('')}>
+                            <li className={cx('item-sub')}>
                                 <span className={cx('icon')}>{item.icon}</span>
                                 <p className={cx('desc')}>{item.title}</p>
                             </li>

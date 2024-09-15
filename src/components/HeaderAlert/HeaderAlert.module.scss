@@ -1,0 +1,57 @@
+.alert-body {
+    padding: 0px 10px;
+    max-height: 68vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+.class-drop {
+    background: var(--white-color);
+    box-shadow: 0 -4px 32px #0003;
+    transition: all ease-in-out 0.3s;
+    animation: fadeIn ease 0.3s;
+    border-radius: 10px;
+    padding-left: 0;
+    margin: 0;
+    overflow: hidden;
+    will-change: opacity, transform;
+    color: #1d2129;
+    .class-head {
+        padding: 14px 20px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .class-btn {
+            color: var(--invalid-color);
+            display: inline-block;
+            padding: 10px 0px;
+            font-size: 1.4rem;
+            font-weight: 400;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+    .class-body {
+        max-height: 68vh;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+}
+.icon {
+    cursor: pointer;
+    color: #706e6e;
+    &:hover {
+        color: #000;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

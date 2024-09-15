@@ -12,7 +12,12 @@ function Classes({ data }) {
     return (
         <div className={cx('wrap')}>
             <div className={cx('header-wrap')}>
-                <h2 className={cx('title')}>{data.title}</h2>
+                <h2 className={cx('title')}>
+                    {data.title}
+                    {data.cost && (
+                        <span className={cx('sub-title', { cost: data.cost === 'cost' })}>{data.cost}</span>
+                    )}
+                </h2>
                 <div className={cx('see-wrap')}>
                     <Link className={cx('link')}>See all</Link>
                     <span className={cx('icon')}>
@@ -22,19 +27,19 @@ function Classes({ data }) {
             </div>
             <div className="row row-cols-4 g-5">
                 <div className="col">
-                    <CartItem data={data.children} type={data.type} />
+                    <CartItem data={data.children} type={data.type} cost={data.cost} />
                 </div>
                 <div className="col">
-                    <CartItem data={data.children} type={data.type} />
+                    <CartItem data={data.children} type={data.type} cost={data.cost} />
                 </div>
                 <div className="col">
-                    <CartItem data={data.children} type={data.type} />
+                    <CartItem data={data.children} type={data.type} cost={data.cost} />
                 </div>
                 <div className="col">
-                    <CartItem data={data.children} type={data.type} />
+                    <CartItem data={data.children} type={data.type} cost={data.cost} />
                 </div>
                 <div className="col">
-                    <CartItem data={data.children} type={data.type} />
+                    <CartItem data={data.children} type={data.type} cost={data.cost} />
                 </div>
             </div>
         </div>

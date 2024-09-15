@@ -6,7 +6,7 @@ import InfoItem from '../InfoItem/InfoItem';
 
 const cx = classNames.bind(styles);
 
-function CartItem({ data, type }) {
+function CartItem({ data, type, cost }) {
     return (
         <div className={cx('wrap')}>
             <Link className={cx('banner')}>
@@ -17,7 +17,7 @@ function CartItem({ data, type }) {
             </Link>
             <div className={cx('info')}>
                 <h3 className={cx('title')}>HTML CSS PRO</h3>
-                {type === 'cart' && (
+                {type === 'cart' && cost === 'cost' && (
                     <div className={cx('cost')}>
                         <p className={cx('price')}>{priceTrander(10)}</p>
                         <p className={cx('total')}>{priceTrander(5)}</p>

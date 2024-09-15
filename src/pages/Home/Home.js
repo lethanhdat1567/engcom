@@ -16,6 +16,7 @@ function Home() {
         {
             title: 'Pro classes',
             type: 'cart',
+            cost: 'cost',
             children: [
                 {
                     title: 'Le Thanh Dat',
@@ -33,7 +34,8 @@ function Home() {
         },
         {
             title: 'Free classes',
-            type: 'blog',
+            type: 'cart',
+            cost: 'free',
             children: [
                 {
                     title: 'Le Thanh Dat',
