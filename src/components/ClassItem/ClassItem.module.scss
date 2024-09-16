@@ -18,10 +18,9 @@
         margin-left: 12px;
         display: flex;
         flex-direction: column;
+        gap: 4px;
         .title {
             font-size: 1.4rem;
-            margin: 6px 0 0;
-            margin-bottom: 15px;
             width: 200px;
             display: -webkit-box; /* Hiển thị nội dung như một box */
             -webkit-line-clamp: 2; /* Giới hạn số dòng */
@@ -30,4 +29,11 @@
             text-overflow: ellipsis;
         }
     }
+}
+.process {
+    position: relative;
+    height: 8px;
+    background-color: var(--bg-color, #ddd);
+    border-radius: 4px;
+    overflow: hidden;
 }

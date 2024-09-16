@@ -1,10 +1,10 @@
 import classNames from 'classnames/bind';
 import styles from './Classes.module.scss';
 import CartItem from '~/components/CartItem';
-import Button from '~/components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import BlogItem from '~/components/BlogItem';
 
 const cx = classNames.bind(styles);
 
@@ -14,8 +14,8 @@ function Classes({ data }) {
             <div className={cx('header-wrap')}>
                 <h2 className={cx('title')}>
                     {data.title}
-                    {data.cost && (
-                        <span className={cx('sub-title', { cost: data.cost === 'cost' })}>{data.cost}</span>
+                    {data.price && (
+                        <span className={cx('sub-title', { cost: data.price === 'cost' })}>{data.price}</span>
                     )}
                 </h2>
                 <div className={cx('see-wrap')}>
@@ -26,21 +26,22 @@ function Classes({ data }) {
                 </div>
             </div>
             <div className="row row-cols-4 g-5">
-                <div className="col">
-                    <CartItem data={data.children} type={data.type} cost={data.cost} />
-                </div>
-                <div className="col">
-                    <CartItem data={data.children} type={data.type} cost={data.cost} />
-                </div>
-                <div className="col">
-                    <CartItem data={data.children} type={data.type} cost={data.cost} />
-                </div>
-                <div className="col">
-                    <CartItem data={data.children} type={data.type} cost={data.cost} />
-                </div>
-                <div className="col">
-                    <CartItem data={data.children} type={data.type} cost={data.cost} />
-                </div>
+                {data.type === 'class' &&
+                    data.children.map((item, index) => {
+                        return (
+                            <div className="col" key={index}>
+                                <CartItem data={item} />
+                            </div>
+                        );
+                    })}
+                {data.type === 'blogs' &&
+                    data.children.map((item, index) => {
+                        return (
+                            <div className="col" key={index}>
+                                <BlogItem data={item} />
+                            </div>
+                        );
+                    })}
             </div>
         </div>
     );

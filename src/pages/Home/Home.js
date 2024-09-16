@@ -12,57 +12,64 @@ import { useState } from 'react';
 const cx = classNames.bind(styles);
 
 function Home() {
-    const classes = [
+    const data = [
         {
             title: 'Pro classes',
-            type: 'cart',
-            cost: 'cost',
+            type: 'class',
+            price: 'cost',
             children: [
                 {
-                    title: 'Le Thanh Dat',
-                    img: imgs.unsetAvatar,
+                    total: 100,
                 },
                 {
-                    title: '16.000',
-                    leftIcon: <FontAwesomeIcon icon={faUsers} />,
+                    total: 100,
                 },
                 {
-                    title: '5',
-                    leftIcon: <FontAwesomeIcon icon={faBook} />,
+                    total: 100,
+                },
+                {
+                    total: 100,
                 },
             ],
         },
         {
             title: 'Free classes',
-            type: 'cart',
-            cost: 'free',
+            type: 'class',
+            price: 'free',
             children: [
                 {
-                    title: 'Le Thanh Dat',
-                    img: imgs.unsetAvatar,
+                    total: 0,
                 },
                 {
-                    title: '16.000',
-                    leftIcon: <FontAwesomeIcon icon={faEye} />,
+                    total: 0,
+                },
+                {
+                    total: 0,
+                },
+                {
+                    total: 0,
                 },
             ],
         },
         {
             title: 'Blogs',
-            type: 'blog',
+            type: 'blogs',
             children: [
                 {
-                    title: 'Le Thanh Dat',
-                    img: imgs.unsetAvatar,
+                    total: 0,
                 },
                 {
-                    title: '16.000',
-                    leftIcon: <FontAwesomeIcon icon={faEye} />,
+                    total: 0,
+                },
+                {
+                    total: 0,
+                },
+                {
+                    total: 0,
                 },
             ],
         },
     ];
-
     return (
         <div className={cx('home')}>
             <div className={cx('banner')}>
@@ -70,7 +77,7 @@ function Home() {
             </div>
             <div className="container">
                 <div className={cx('content')}>
-                    {classes.map((item, index) => {
+                    {data.map((item, index) => {
                         return <Classes data={item} key={index} />;
                     })}
                 </div>

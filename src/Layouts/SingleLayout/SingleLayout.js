@@ -9,7 +9,7 @@ const cx = classNames.bind(styles);
 function SingleLayout({ children }) {
     return (
         <div>
-            <HeaderSingle />
+            <HeaderSingle transparent />
             <div className={cx('content')}>
                 <div className="row">
                     <div className="col-1">

@@ -1,0 +1,15 @@
+.post-design {
+    border: none !important;
+    .jodit-status-bar {
+        display: none;
+    }
+    .jodit-wysiwyg {
+        min-height: calc(-250px + 100vh) !important;
+    }
+    .jodit-ui-group_line_true + .jodit-ui-group_line_true {
+        display: none;
+    }
+    .jodit-add-new-line {
+        display: none;
+    }
+}

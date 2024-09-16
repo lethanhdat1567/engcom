@@ -6,18 +6,23 @@ import { faBookOpenReader, faChevronLeft } from '@fortawesome/free-solid-svg-ico
 import PrivateHeader from '../Header/PrivateHeader/PrivateHeader';
 import HeaderAlert from '~/components/HeaderAlert/HeaderAlert';
 import ProfileHeader from '~/components/ProfileHeader/ProfileHeader';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-function HeaderSingle() {
+function HeaderSingle({ transparent }) {
+    const navigate = useNavigate();
+
     return (
-        <div className={cx('wrap')}>
+        <div
+            className={cx('wrap', { border: !transparent })}
+            style={{ background: transparent ? 'transparent ' : '' }}
+        >
             <div className={cx('left')}>
                 <Link to="/" className={cx('logo')}>
                     <FontAwesomeIcon icon={faBookOpenReader} className="fa-xl" />
                 </Link>
-                <div className={cx('back-wrap')}>
+                <div className={cx('back-wrap')} onClick={() => navigate(-1)}>
                     <span className={cx('icon')}>
                         <span className={cx('font-icon')}>
                             <FontAwesomeIcon icon={faChevronLeft} className="fa-lg" />

@@ -10,8 +10,11 @@
     gap: 30px;
     padding: 0 28px;
     height: var(--header-height);
-    background-color: transparent;
+    background-color: #fff;
     font-size: 1.4rem;
+}
+.wrap.border {
+    border-bottom: 1px solid #e8ebed;
 }
 .left {
     display: flex;

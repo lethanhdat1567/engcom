@@ -12,6 +12,7 @@ function Search() {
         <div>
             <Tippy
                 interactive
+                trigger="click"
                 render={(attrs) => {
                     return (
                         <div {...attrs} tabIndex={'-1'} className={cx('dropdown')}>

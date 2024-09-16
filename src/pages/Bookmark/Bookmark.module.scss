@@ -1,0 +1,38 @@
+.header-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 32px 0 80px;
+    .title {
+        font-size: 2.4rem;
+        font-weight: 900;
+        line-height: 1.4;
+        color: #242424;
+    }
+}
+.list {
+    display: flex;
+    gap: 10px;
+    list-style: none;
+    margin-top: 16px;
+    margin-bottom: 0;
+    padding-left: 0;
+    .item-link {
+        font-weight: 700;
+        position: relative;
+    }
+}
+.seperate {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: block;
+    font-size: 1.8rem;
+    color: var(--desc-color);
+    padding-bottom: 14px;
+    font-weight: 500;
+}
+.blog-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}

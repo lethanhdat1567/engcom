@@ -32,8 +32,14 @@
     }
 }
 .class-title {
-    margin-bottom: 0;
+    font-size: 1.6rem;
+    font-weight: 500;
     cursor: pointer;
+    padding: 8px;
+    color: #333;
+    background-color: transparent;
+    margin-bottom: 0;
+    color: var(--primary-color);
 }
 .class-drop {
     background: var(--white-color);

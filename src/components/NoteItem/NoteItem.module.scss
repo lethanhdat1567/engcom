@@ -1,0 +1,39 @@
+.wrap {
+    padding: 16px;
+    border-radius: 4px;
+    transition: background-color 0.25s;
+    background-color: transparent;
+    &:hover {
+        background-color: #32353b;
+    }
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        .title {
+            color: #52eeee;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            font-size: 1.6rem;
+            margin: 0px;
+        }
+        .utils {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            transition: ease 0.3s;
+        }
+        .icon {
+            cursor: pointer;
+        }
+    }
+    .desc-wrap {
+        word-wrap: break-word;
+    }
+}
+.wrap:hover {
+    .utils {
+        display: flex;
+    }
+}

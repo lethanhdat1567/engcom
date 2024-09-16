@@ -38,13 +38,28 @@ function ProfileHeader() {
                         <hr />
                         <ul className={cx('profile-list')}>
                             <li className={cx('profile-item')}>
-                                <Link className={cx('profile-item-link')}>Viet Blogs</Link>
+                                <Link
+                                    to={`${process.env.REACT_APP_ROOT}/new-post`}
+                                    className={cx('profile-item-link')}
+                                >
+                                    Viet Blogs
+                                </Link>
                             </li>
                             <li className={cx('profile-item')}>
-                                <Link className={cx('profile-item-link')}>Bai viet cua toi</Link>
+                                <Link
+                                    to={`${process.env.REACT_APP_ROOT}/me/post`}
+                                    className={cx('profile-item-link')}
+                                >
+                                    Bai viet cua toi
+                                </Link>
                             </li>
                             <li className={cx('profile-item')}>
-                                <Link className={cx('profile-item-link')}>Bai viet da luu</Link>
+                                <Link
+                                    to={`${process.env.REACT_APP_ROOT}/me/bookmark`}
+                                    className={cx('profile-item-link')}
+                                >
+                                    Bai viet da luu
+                                </Link>
                             </li>
                         </ul>
                         <hr />

@@ -19,3 +19,29 @@
         grid-area: 16px;
     }
 }
+.wrap {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.back-wrap {
+    .icon {
+        cursor: pointer;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 1.2rem;
+        color: #808990;
+    }
+    .back-desc {
+        margin-left: 4px;
+    }
+    .font-icon {
+        display: inline-block;
+        transition: ease 0.4s;
+    }
+    &:hover {
+        .font-icon {
+            transform: translateX(-4px);
+        }
+    }
+}

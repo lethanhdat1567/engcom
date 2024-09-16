@@ -1,11 +1,10 @@
 import classNames from 'classnames/bind';
-import styles from './CartItem.module.scss';
+import styles from './BlogItem.module.scss';
 import { Link } from 'react-router-dom';
-import priceTrander from '~/utils/priceTranfer';
 import InfoItem from '../InfoItem/InfoItem';
 import imgs from '~/assets/Image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
@@ -17,11 +16,7 @@ function CartItem({ data }) {
         },
         {
             title: '16.000',
-            leftIcon: <FontAwesomeIcon icon={faUsers} />,
-        },
-        {
-            title: '5',
-            leftIcon: <FontAwesomeIcon icon={faBook} />,
+            leftIcon: <FontAwesomeIcon icon={faEye} />,
         },
     ];
     return (
@@ -31,12 +26,6 @@ function CartItem({ data }) {
             </Link>
             <div className={cx('info')}>
                 <h3 className={cx('title')}>HTML CSS PRO</h3>
-                {data.total > 0 && (
-                    <div className={cx('cost')}>
-                        <p className={cx('price')}>{priceTrander(10)}</p>
-                        <p className={cx('total')}>{priceTrander(5)}</p>
-                    </div>
-                )}
                 <div className={cx('footer')}>
                     {infoData.map((item, index) => {
                         return <InfoItem data={item} key={index} />;
