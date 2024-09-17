@@ -30,7 +30,9 @@ function CartItem({ data }) {
                 <img src={imgs.cartImg} className={cx('img')} />
             </Link>
             <div className={cx('info')}>
-                <h3 className={cx('title')}>HTML CSS PRO</h3>
+                <Link to={`${process.env.REACT_APP_ROOT}/class/1`}>
+                    <h3 className={cx('title')}>HTML CSS PRO</h3>
+                </Link>
                 {data.total > 0 && (
                     <div className={cx('cost')}>
                         <p className={cx('price')}>{priceTrander(10)}</p>

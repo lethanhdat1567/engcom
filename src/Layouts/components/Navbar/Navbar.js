@@ -20,6 +20,11 @@ function Navbar() {
         },
         {
             icon: <FontAwesomeIcon icon={faNewspaper} className="fa-xl" />,
+            title: 'Classes',
+            to: `/classes/all`,
+        },
+        {
+            icon: <FontAwesomeIcon icon={faNewspaper} className="fa-xl" />,
             title: 'Blogs',
             to: `/blogs`,
         },

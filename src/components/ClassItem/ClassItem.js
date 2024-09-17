@@ -13,11 +13,11 @@ function ClassItem() {
     };
     return (
         <div className={cx('wrap')}>
-            <Link>
+            <Link to={`${process.env.REACT_APP_ROOT}/course/1`}>
                 <img className={cx('img')} src={imgs.banner1} />
             </Link>
             <div className={cx('info')}>
-                <Link>
+                <Link to={`${process.env.REACT_APP_ROOT}/course/1`}>
                     <span className={cx('title')}>HTML CSS PRML CSS PML CSS PML CSS PO</span>
                 </Link>
                 <InfoItem data={infoData} />

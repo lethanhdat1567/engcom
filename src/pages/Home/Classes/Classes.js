@@ -19,7 +19,9 @@ function Classes({ data }) {
                     )}
                 </h2>
                 <div className={cx('see-wrap')}>
-                    <Link className={cx('link')}>See all</Link>
+                    <Link className={cx('link')} to={`${process.env.REACT_APP_ROOT}/classes/1`}>
+                        See all
+                    </Link>
                     <span className={cx('icon')}>
                         <FontAwesomeIcon icon={faChevronRight} className="fa-sm" />
                     </span>

@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { publicPage } from './routes/routes';
+import { publicPage, userPage } from './routes/routes';
 import { DefaultLayout } from './Layouts';
 import { Fragment } from 'react';
 import ScrollToTop from './utils/ScrollToTop';
@@ -10,7 +10,7 @@ function App() {
             <div className="App">
                 <ScrollToTop />
                 <Routes>
-                    {publicPage.map((item, index) => {
+                    {userPage.map((item, index) => {
                         const Page = item.element;
                         let Layout = DefaultLayout;
                         if (item.layout) {

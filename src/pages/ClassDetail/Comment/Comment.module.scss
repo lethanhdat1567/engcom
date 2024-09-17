@@ -1,0 +1,105 @@
+.comment-wrap {
+    margin-top: 50px;
+    .com-title {
+        font-size: 2rem;
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+}
+.comment {
+    .com-head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 50px;
+    }
+    .com-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    .com-input-wrap {
+        position: relative;
+        flex: 1;
+        .com-input {
+            padding-bottom: 10px;
+            width: 100%;
+        }
+        &::after {
+            content: '';
+            width: 100%;
+            height: 1px;
+            background-color: #ccc;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+    }
+    .com-utils {
+        display: none;
+        align-items: center;
+        position: absolute;
+        gap: 10px;
+        bottom: -44px;
+        right: 0;
+        .com-cancle {
+            background-color: transparent;
+            color: #000;
+            font-size: 1.8rem;
+            font-weight: 400;
+            padding: 10px 20px;
+            border-radius: 999px;
+            &:hover {
+                background-color: #e8e6e6;
+            }
+        }
+        .com-submit {
+            background-color: #ccc;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 999px;
+            font-size: 1.6rem;
+            font-weight: 500;
+            cursor: default;
+            &.active {
+                background-color: #7baeff;
+                color: #fff;
+            }
+        }
+    }
+}
+
+.com-input-wrap.active {
+    &::after {
+        background-color: #000;
+    }
+    .com-utils {
+        display: flex;
+        animation: fadeIn ease 0.3s;
+    }
+}
+
+.com-submit.active {
+    cursor: pointer !important;
+    background-color: #7baeff;
+    color: #fff;
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+    }
+    100% {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.comment-body {
+    margin-top: 20px;
+}

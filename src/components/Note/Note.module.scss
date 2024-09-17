@@ -7,6 +7,12 @@
         }
     }
 }
+.note.white {
+    .icon:hover {
+        color: #fff;
+    }
+}
+
 .note-content {
     position: fixed;
     display: flex;
@@ -89,6 +95,8 @@
 .over-lay {
     position: fixed;
     inset: 0;
+    width: 100vw;
+    height: 100vh;
     background-color: #000;
     opacity: 0;
     visibility: hidden;

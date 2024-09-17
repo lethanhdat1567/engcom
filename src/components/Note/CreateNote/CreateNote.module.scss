@@ -43,10 +43,14 @@
     opacity: 1;
     visibility: visible;
     animation: scale ease 0.3s;
+    width: 100vw;
+    height: 100vh;
 }
 .over-lay.show {
     opacity: 0.7;
     visibility: visible;
+    width: 100vw;
+    height: 100vh;
 }
 .input-title {
     background-color: transparent;

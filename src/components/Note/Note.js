@@ -9,12 +9,12 @@ import NoteItem from '../NoteItem/NoteItem';
 
 const cx = classNames.bind(styles);
 
-function Note() {
+function Note({ white = false }) {
     const [showNote, setShowNote] = useState(false);
     const [showCreateNote, setShowCreateNote] = useState(false);
     return (
         <>
-            <div className={cx('note')} onClick={() => setShowNote(true)}>
+            <div className={cx('note', { white })} onClick={() => setShowNote(true)}>
                 <span className={cx('icon')}>
                     <FontAwesomeIcon icon={faBook} className="fa-xl" />
                 </span>

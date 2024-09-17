@@ -1,0 +1,15 @@
+.wrap {
+    height: 100vh;
+    .body {
+        margin-top: 50px;
+        min-height: calc(100vh - 50px);
+        display: flex;
+        padding: 20px 0px 0px 20px;
+    }
+    .content {
+        width: 77%;
+    }
+    .content.full {
+        width: 100%;
+    }
+}
