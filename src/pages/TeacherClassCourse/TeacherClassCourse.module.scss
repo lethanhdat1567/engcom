@@ -1,0 +1,25 @@
+.wrap {
+    .title {
+        margin-bottom: 40px;
+    }
+}
+.btn-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0px;
+    background-color: #678cff;
+    border-radius: 999px;
+    color: #fff;
+    gap: 10px;
+    width: 150px;
+    cursor: pointer;
+    &:hover {
+        opacity: 0.7;
+    }
+    .btn-text {
+        display: block;
+        font-size: 1.4rem;
+        color: #fff;
+    }
+}

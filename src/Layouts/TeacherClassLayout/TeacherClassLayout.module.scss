@@ -1,0 +1,19 @@
+.content {
+    margin-top: 66px;
+    min-height: 100vh;
+    margin-bottom: 20px;
+    .body {
+        padding: 0px 32px 0px 10px;
+        margin-top: 18px;
+    }
+}
+.content {
+    width: 77%;
+    margin-left: 23%;
+    padding: 0px 20px;
+    margin-bottom: 60px;
+}
+.content.full {
+    width: 100%;
+    margin-left: 0;
+}

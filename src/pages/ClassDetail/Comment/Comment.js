@@ -49,6 +49,11 @@ function Comment() {
                 </div>
                 <div className={cx('comment-body')}>
                     <CommentItem />
+                    <CommentItem />
+                    <CommentItem />
+                    <CommentItem />
+                    <CommentItem />
+                    <CommentItem />
                 </div>
             </div>
         </div>

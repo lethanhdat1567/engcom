@@ -1,0 +1,38 @@
+.course {
+    border: 1px solid #ccc;
+    transition: ease 0.4s;
+    padding: 10px;
+    margin: 10px 0px;
+    &:hover {
+        border: 1px solid #000;
+        box-shadow: 0px 0px 10px 0px rgba(167, 164, 164, 0.75);
+        -webkit-box-shadow: 0px 0px 10px 0px rgba(167, 164, 164, 0.75);
+        -moz-box-shadow: 0px 0px 10px 0px rgba(167, 164, 164, 0.75);
+        .arrow {
+            transform: translateX(4px);
+        }
+    }
+}
+.arrow {
+    transition: ease 0.4s;
+}
+.wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .name {
+            font-size: 2rem;
+            font-weight: 500;
+        }
+        .lesson {
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: #4e4e4e;
+        }
+    }
+}

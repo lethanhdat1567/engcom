@@ -27,11 +27,11 @@ function CartItem({ data }) {
     return (
         <div className={cx('wrap')}>
             <Link to={`${process.env.REACT_APP_ROOT}/class/1`} className={cx('banner')}>
-                <img src={imgs.cartImg} className={cx('img')} />
+                <img src={imgs.cartImg || imgs.NoImg} className={cx('img')} />
             </Link>
             <div className={cx('info')}>
                 <Link to={`${process.env.REACT_APP_ROOT}/class/1`}>
-                    <h3 className={cx('title')}>HTML CSS PRO</h3>
+                    <h3 className={cx('title')}>{data.title}</h3>
                 </Link>
                 {data.total > 0 && (
                     <div className={cx('cost')}>

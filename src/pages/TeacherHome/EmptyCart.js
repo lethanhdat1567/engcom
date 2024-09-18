@@ -8,7 +8,7 @@ const cx = classNames.bind(styles);
 
 function EmptyCart() {
     return (
-        <Link>
+        <Link to={`${process.env.REACT_APP_ROOT}/class/1`}>
             <div className={cx('empty-cart')}>
                 <div className={cx('info')}>
                     <span className={cx('icon')}>

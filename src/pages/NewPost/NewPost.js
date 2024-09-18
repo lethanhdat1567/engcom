@@ -9,8 +9,17 @@ const cx = classNames.bind(styles);
 
 function NewPost() {
     const editor = useRef(null);
-    const [content, setContent] = useState('');
-
+    const handleChange = (newContent) => {
+        editor.current = newContent;
+    };
+    const config = {
+        uploader: {
+            url: '/api/upload',
+            format: 'json',
+            insertImageAsBase64URI: true,
+        },
+        readonly: false,
+    };
     return (
         <div className={cx('wrap')}>
             <div className={cx('input-wrap')}>
@@ -20,21 +29,14 @@ function NewPost() {
                 </Button>
             </div>
             <div className={cx('content')}>
-                <div className="row g-0" style={{ height: '100%' }}>
-                    <div className="col">
-                        <div className={cx('design')}>
-                            <JoditEditor
-                                className="post-design"
-                                ref={editor}
-                                value={content}
-                                onChange={(newContent) => setContent(newContent)}
-                            />
-                        </div>
-                    </div>
-                    <div className="col">
-                        <h3 className={cx('body-title')}>View</h3>
-                        <div className={cx('output')} dangerouslySetInnerHTML={{ __html: content }}></div>
-                    </div>
+                <div className={cx('design')}>
+                    <JoditEditor
+                        className="post-design"
+                        ref={editor}
+                        config={config}
+                        value={editor.current}
+                        onChange={handleChange}
+                    />
                 </div>
             </div>
         </div>
