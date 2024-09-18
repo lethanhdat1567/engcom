@@ -29,6 +29,7 @@ function Classes() {
                     <div {...attrs} className={cx('class-drop')}>
                         <div className={cx('class-head')}>
                             <h3 className={cx('class-title')}>My Classes</h3>
+                            {/* Fix link */}
                             <Link
                                 to={`${process.env.REACT_APP_ROOT}/my-class`}
                                 className={cx('class-btn')}

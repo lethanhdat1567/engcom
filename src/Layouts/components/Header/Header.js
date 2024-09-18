@@ -36,7 +36,7 @@ function Header() {
                         </div>
                     )}
                 </div>
-                <Search />
+                {/* <Search /> */}
                 {/* <PublicHeader toggle={regisModal} setToggle={setRegisModal} /> */}
                 <PrivateHeader />
             </header>
