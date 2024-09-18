@@ -1,0 +1,47 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
+.wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    .title {
+        font-size: 3rem;
+        font-weight: 600;
+        color: #fff;
+    }
+    .chart {
+        height: 167px;
+    }
+}
+
+.options {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+    gap: 5px;
+    .item {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    .decor {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        @include abs.screen(sm) {
+            width: 5px;
+            height: 5px;
+        }
+    }
+    .options-title {
+        color: #fff;
+        @include abs.screen(sm) {
+            font-size: 1.4rem;
+        }
+    }
+    .options-quantiy {
+        color: #fff;
+    }
+}

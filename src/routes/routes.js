@@ -1,15 +1,19 @@
+import AdminLayout from '~/Layouts/AdminLayout/AdminLayout';
 import CourseLayout from '~/Layouts/CourseLayout/CourseLayout';
 import HeaderOnly from '~/Layouts/HeaderOnly/HeaderOnly';
 import SingleLayout from '~/Layouts/SingleLayout/SingleLayout';
 import TeacherClassLayout from '~/Layouts/TeacherClassLayout/TeacherClassLayout';
+import BlogAdmin from '~/pages/BlogAdmin/BlogAdmin';
 import Blogs from '~/pages/Blogs';
 import Bookmark from '~/pages/Bookmark/Bookmark';
+import ClassAdmin from '~/pages/ClassAdmin/ClassAdmin';
 import ClassDetail from '~/pages/ClassDetail/ClassDetail';
 import Classes from '~/pages/Classes/Classes';
 import ClassMore from '~/pages/ClassMore/ClassMore';
 import Community from '~/pages/Community';
 import Course from '~/pages/Course/Course';
 import Home from '~/pages/Home';
+import HomeAdmin from '~/pages/HomeAdmin/HomeAdmin';
 import MyBlogs from '~/pages/MyBlogs/MyBlogs';
 import NewPost from '~/pages/NewPost/NewPost';
 import Profile from '~/pages/Profile/Profile';
@@ -19,6 +23,7 @@ import TeacherClassDesign from '~/pages/TeacherClassDesign/TeacherClassDesign';
 import TeacherClassHome from '~/pages/TeacherClassHome/TeacherClassHome';
 import TeacherClassUser from '~/pages/TeacherClassUser/TeacherClassUSer';
 import TeacherHome from '~/pages/TeacherHome/TeachderHome';
+import UserAdmin from '~/pages/UserAdmin/UserAdmin';
 
 const studentPage = [
     { path: '/', element: Home },
@@ -50,5 +55,11 @@ const teacherPage = [
     { path: '/class/:slug/users', element: TeacherClassUser, layout: TeacherClassLayout },
     { path: '/class/:slug/comments', element: TeacherClassComment, layout: TeacherClassLayout },
 ];
+const adminPage = [
+    { path: '/', element: HomeAdmin, layout: AdminLayout },
+    { path: '/admin/users', element: UserAdmin, layout: AdminLayout },
+    { path: '/admin/blogs', element: BlogAdmin, layout: AdminLayout },
+    { path: '/admin/classes', element: ClassAdmin, layout: AdminLayout },
+];
 
-export { studentPage, teacherPage };
+export { studentPage, teacherPage, adminPage };

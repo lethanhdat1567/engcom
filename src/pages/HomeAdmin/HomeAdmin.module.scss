@@ -1,0 +1,29 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
+.home {
+    padding: 0px 20px 20px 20px;
+    .top-deals {
+        border: 1px solid #ccc;
+        width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        padding: 20px;
+
+        .users {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+    .charts {
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+    }
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #fff;
+}

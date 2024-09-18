@@ -1,0 +1,42 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
+.wrap {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .user {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        .avatar {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 50%;
+            @include abs.screen(sm) {
+                width: 40px;
+                height: 40px;
+            }
+        }
+        .info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            .name {
+                font-size: 1.8rem;
+                font-weight: 500;
+                color: #fff;
+            }
+            .email {
+                font-size: 1.6rem;
+                font-weight: 600;
+                color: #e7e4e4;
+            }
+        }
+    }
+    .price {
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: #fff;
+    }
+}
