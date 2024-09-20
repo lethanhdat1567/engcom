@@ -6,6 +6,7 @@ import CourseFooter from '../components/CourseFooter/CourseFooter';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
+import CourseSidebarTeacher from '../components/CourseSideBarTeacher/CourseSidebarTeacher';
 
 const cx = classNames.bind(styles);
 
@@ -15,12 +16,9 @@ function CourseLayout({ children }) {
         <div className={cx('wrap')}>
             <HeaderCourse />
             <div className={cx('body')}>
-                <div className={cx('content', { full: !showNav })}>
-                    Day la unit 1 nha !!Day la unit 1 nha !!Day la unit 1 nha !!Day la unit 1 nha !!Day la
-                    unit 1 nha !!Day la unit 1 nha !!Day la unit 1 nha !!Day la unit 1 nha !!Day la unit 1 nha
-                    !!Day la unit 1 nha !!Day la unit 1 nha !!
-                </div>
+                <div className={cx('content', { full: !showNav })}>{children}</div>
                 <CourseSidebar showNav={showNav} />
+                {/* <CourseSidebarTeacher showNav={showNav} /> */}
             </div>
             <CourseFooter showNav={showNav} setShowNav={setShowNav} />
         </div>

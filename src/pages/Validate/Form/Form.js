@@ -10,7 +10,6 @@ import { useEffect, useRef, useState } from 'react';
 const cx = classNames.bind(styles);
 
 function Form({ type }) {
-    // Initialize react-hook-form
     const {
         register,
         handleSubmit,
@@ -84,10 +83,7 @@ function Form({ type }) {
     };
 
     const handleEyeClick = () => {
-        // Toggle the showPassword state
         setShowPassword((prev) => !prev);
-
-        // Focus the input field when eye icon is clicked
         passRef.current.focus();
     };
     const onSubmit = (data) => {
@@ -112,9 +108,9 @@ function Form({ type }) {
                                     id={name}
                                     name={name}
                                     placeholder={placeholder}
-                                    {...register(name, rules)}
                                     type={showPassword ? 'text' : 'password'}
                                     ref={passRef}
+                                    {...register(name, rules)}
                                 />
                                 <span className={cx('eye-icon')} onClick={handleEyeClick}>
                                     <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />

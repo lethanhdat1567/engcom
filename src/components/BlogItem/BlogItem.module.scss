@@ -35,11 +35,12 @@
             color: #292929;
             font-size: 1.6rem;
             line-height: 1.4;
+            height: 20px;
             overflow: hidden;
             word-wrap: break-word;
             display: -webkit-box;
             -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
+            -webkit-line-clamp: 1;
         }
         .cost {
             display: flex;

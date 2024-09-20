@@ -22,6 +22,7 @@ import TeacherClassCourse from '~/pages/TeacherClassCourse/TeacherClassCourse';
 import TeacherClassDesign from '~/pages/TeacherClassDesign/TeacherClassDesign';
 import TeacherClassHome from '~/pages/TeacherClassHome/TeacherClassHome';
 import TeacherClassUser from '~/pages/TeacherClassUser/TeacherClassUSer';
+import TeacherCourse from '~/pages/TeacherCourse/TeacherCourse';
 import TeacherHome from '~/pages/TeacherHome/TeachderHome';
 import UserAdmin from '~/pages/UserAdmin/UserAdmin';
 
@@ -54,6 +55,8 @@ const teacherPage = [
     { path: '/class/:slug/courses', element: TeacherClassCourse, layout: TeacherClassLayout },
     { path: '/class/:slug/users', element: TeacherClassUser, layout: TeacherClassLayout },
     { path: '/class/:slug/comments', element: TeacherClassComment, layout: TeacherClassLayout },
+    // Course
+    { path: '/class/:slug/course/:slug', element: TeacherCourse, layout: CourseLayout },
 ];
 const adminPage = [
     { path: '/', element: HomeAdmin, layout: AdminLayout },

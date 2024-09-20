@@ -1,28 +1,3 @@
-.navbar {
-    width: 23%;
-    position: fixed;
-    top: 50px;
-    bottom: 50px;
-    right: 0;
-    overflow-y: auto;
-    background-color: #282933;
-    color: #fff;
-    transition: ease 0.4s;
-    transform: translateX(100%);
-    opacity: 0;
-    visibility: hidden;
-    .heading {
-        padding: 20px 10px;
-        text-align: center;
-        font-size: 1.8rem;
-        font-weight: 500;
-    }
-}
-.navbar.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
-}
 .course-wrap {
     cursor: pointer;
     .course {
@@ -59,15 +34,18 @@
         }
     }
 }
-.course.active {
-    .course-icon {
-        transform: rotate(180deg);
-    }
-}
 .lesson-body {
     display: none;
-    flex-direction: column;
+    animation: 200ms ease-out 0s 1 normal forwards running fadeIn;
 }
 .lesson-body.show {
-    display: flex;
+    display: block;
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }

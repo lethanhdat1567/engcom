@@ -18,29 +18,33 @@
         font-weight: 500;
     }
 }
+.course-wrap {
+    border-bottom: 2px solid #ccc;
+}
 .navbar.show {
     opacity: 1;
     visibility: visible;
     transform: translateX(0);
 }
 .course-wrap {
-    cursor: pointer;
     .course {
         padding: 10px;
-        transition: ease 0.4s;
         display: flex;
         align-items: center;
         justify-content: space-between;
         border-bottom: 1px solid #000;
-        &:hover {
-            background-color: #33343c;
-        }
+        gap: 10px;
     }
     .course-header {
         display: flex;
         flex-direction: column;
         gap: 4px;
+        flex: 1;
         .title {
+            display: flex;
+            flex: 1;
+            align-items: center;
+            gap: 10px;
             font-size: 1.8rem;
             font-weight: 500;
         }
@@ -51,23 +55,48 @@
         }
     }
     .course-icon {
-        font-size: 1.6rem;
-        color: #9d9fa9;
-        transition: ease 0.3s;
-        &.active {
-            transform: rotate(180deg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: #33343c;
+        border-radius: 10px;
+        cursor: pointer;
+        &:hover {
+            opacity: 0.7;
         }
     }
 }
-.course.active {
-    .course-icon {
-        transform: rotate(180deg);
+
+.course-input {
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid #454444;
+    padding: 4px;
+    border-radius: 4px;
+    font-size: 1.8rem;
+    font-weight: 500;
+    transition: ease 0.4s;
+    flex: 1;
+    &:focus {
+        border: 1px solid #ccc;
     }
 }
-.lesson-body {
-    display: none;
-    flex-direction: column;
-}
-.lesson-body.show {
+.create-course-wrap {
+    width: 100%;
     display: flex;
+    justify-content: flex-end;
+}
+.create-course {
+    width: 100%;
+    padding: 10px;
+    color: #fff;
+    border-radius: 16px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+    &:hover {
+        opacity: 0.7;
+    }
 }

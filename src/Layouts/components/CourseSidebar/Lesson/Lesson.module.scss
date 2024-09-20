@@ -1,19 +1,18 @@
 .wrap {
-    display: none;
+    display: flex;
     align-items: center;
     padding: 10px;
     border-bottom: 1px solid #000;
     transition: ease 0.4s;
-    animation: 200ms ease-out 0s 1 normal forwards running fadeIn;
-    &.show {
-        display: flex;
-    }
     &:hover {
         background-color: #33343c;
     }
     .decor {
-        display: block;
-        padding-right: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
     }
     .main {
         display: flex;

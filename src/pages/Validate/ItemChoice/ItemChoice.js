@@ -5,9 +5,9 @@ import { google } from '~/assets/Icon';
 
 const cx = classNames.bind(styles);
 
-function ItemChoice({ data, ...props }) {
+function ItemChoice({ data, onClick, ...props }) {
     return (
-        <Link className={cx('wrap')} {...props}>
+        <Link className={cx('wrap')} onClick={onClick} {...props}>
             <span className={cx('icon')}>{data.icon}</span>
             <span className={cx('desc')}>{data.desc}</span>
         </Link>

@@ -3,6 +3,7 @@ import styles from './Home.module.scss';
 
 import SliderBanner from './SliderBanner';
 import Classes from './Classes';
+import Role from '~/components/Role/Role';
 
 const cx = classNames.bind(styles);
 
@@ -14,15 +15,19 @@ function Home() {
             price: 'cost',
             children: [
                 {
+                    title: 'Khoa hoc tieng anh cap toc',
                     total: 100,
                 },
                 {
+                    title: 'Khoa hoc tieng anh cap toc',
                     total: 100,
                 },
                 {
+                    title: 'Khoa hoc tieng anh cap toc',
                     total: 100,
                 },
                 {
+                    title: 'Khoa hoc tieng anh cap toc',
                     total: 100,
                 },
             ],
@@ -33,15 +38,19 @@ function Home() {
             price: 'free',
             children: [
                 {
+                    title: 'Khoa hoc tieng anh cap toc',
                     total: 0,
                 },
                 {
+                    title: 'Khoa hoc tieng anh cap toc',
                     total: 0,
                 },
                 {
+                    title: 'Khoa hoc tieng anh cap toc',
                     total: 0,
                 },
                 {
+                    title: 'Khoa hoc tieng anh cap toc',
                     total: 0,
                 },
             ],
@@ -51,33 +60,36 @@ function Home() {
             type: 'blogs',
             children: [
                 {
-                    total: 0,
+                    title: 'Day la bai blogs nhe!',
                 },
                 {
-                    total: 0,
+                    title: 'Day la bai blogs nhe!',
                 },
                 {
-                    total: 0,
+                    title: 'Day la bai blogs nhe!',
                 },
                 {
-                    total: 0,
+                    title: 'Day la bai blogs nhe!',
                 },
             ],
         },
     ];
     return (
-        <div className={cx('home')}>
-            <div className={cx('banner')}>
-                <SliderBanner />
-            </div>
-            <div className="container">
-                <div className={cx('content')}>
-                    {data.map((item, index) => {
-                        return <Classes data={item} key={index} />;
-                    })}
+        <>
+            {/* <Role /> */}
+            <div className={cx('home')}>
+                <div className={cx('banner')}>
+                    <SliderBanner />
+                </div>
+                <div className="container">
+                    <div className={cx('content')}>
+                        {data.map((item, index) => {
+                            return <Classes data={item} key={index} />;
+                        })}
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 

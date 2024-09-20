@@ -1,0 +1,126 @@
+.wrap {
+    display: none;
+    align-items: center;
+    padding: 10px;
+    transition: ease 0.4s;
+    animation: 200ms ease-out 0s 1 normal forwards running fadeIn;
+    border-bottom: 1px solid #ccc;
+    &.show {
+        display: flex;
+    }
+    .decor {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: flex-start;
+        width: 30px;
+        height: 30px;
+    }
+    .main {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-around;
+        gap: 4px;
+        flex: 1;
+        .title {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+    }
+    .check {
+        margin-left: auto;
+    }
+}
+.lesson-input {
+    background-color: transparent;
+    border: 1px solid #555555;
+    padding: 4px;
+    color: #fff;
+    border-radius: 4px;
+    flex: 1;
+    &:focus {
+        border: 1px solid #ccc;
+    }
+}
+.lesson-type {
+    background-color: #1e1f24;
+    padding: 10px;
+    border-radius: 10px;
+    .lesson-drop-list {
+        padding: 0;
+        margin: 0;
+        .lesson-drop-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 10px;
+            transition: ease 0.4s;
+            &:hover {
+                background-color: #3a3a3a;
+            }
+        }
+    }
+}
+.course-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #33343c;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 10px;
+    &:hover {
+        opacity: 0.7;
+    }
+}
+.create-lesson {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-bottom: 1px solid #000;
+    transition: ease 0.4s;
+    animation: 200ms ease-out 0s 1 normal forwards running fadeIn;
+    &:hover {
+        background-color: #1e1f24;
+    }
+}
+.create-lesson.show {
+    display: flex;
+}
+.sub-title {
+    display: flex;
+    gap: 10px;
+    .sub-desc {
+        color: rgb(128, 139, 154);
+        font-weight: 400;
+        font-size: 1.2rem;
+    }
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes fadeInDrop {
+    0% {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

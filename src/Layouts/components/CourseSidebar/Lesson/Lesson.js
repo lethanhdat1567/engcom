@@ -6,9 +6,9 @@ import { faBook } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
-function Lesson({ show = false }) {
+function Lesson() {
     return (
-        <div className={cx('wrap', { show })}>
+        <div className={cx('wrap')}>
             <span className={cx('decor')}>
                 <FontAwesomeIcon icon={faBook} />
             </span>

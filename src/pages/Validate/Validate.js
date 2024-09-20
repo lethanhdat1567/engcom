@@ -9,10 +9,39 @@ import { useEffect, useState } from 'react';
 import Form from './Form/Form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { auth } from '~/firebase/config';
 
 const cx = classNames.bind(styles);
+const fbProvider = new FacebookAuthProvider();
+const ggProvider = new GoogleAuthProvider();
 
 function Validate({ toggle, setToggle, field }) {
+    const handleFbLogin = () => {
+        signInWithPopup(auth, fbProvider)
+            .then((result) => {
+                const user = result.user;
+                console.log('User Info:', user);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+    const handleGGLogin = () => {
+        signInWithPopup(auth, ggProvider)
+            .then((result) => {
+                const user = result.user;
+                console.log('User Info:', user);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+    const handleForm = (item) => {
+        if (item.type) {
+            setShowForm(true);
+        }
+    };
     // Text Validate
     const ValidateText = {
         Register: {
@@ -41,26 +70,23 @@ function Validate({ toggle, setToggle, field }) {
             icon: user,
             desc: `${toggleText.text} with email/phone number`,
             type: 'form',
+            onClick: handleForm,
         },
         {
             icon: google,
             desc: `${toggleText.text} with google account`,
+            onClick: handleGGLogin,
         },
         {
             icon: facebook,
             desc: `${toggleText.text} with facebook account`,
+            onClick: handleFbLogin,
         },
     ];
 
     useEffect(() => {
         setToggleText(ValidateText[type]);
     }, [type]);
-
-    const handleForm = (item) => {
-        if (item.type) {
-            setShowForm(true);
-        }
-    };
 
     return (
         <div className={cx('validate')}>
@@ -86,13 +112,7 @@ function Validate({ toggle, setToggle, field }) {
                         <div className={cx('form-wrap')}>
                             {!showForm &&
                                 ItemChoices.map((item, index) => {
-                                    return (
-                                        <ItemChoice
-                                            data={item}
-                                            key={index}
-                                            onClick={() => handleForm(item)}
-                                        />
-                                    );
+                                    return <ItemChoice data={item} key={index} onClick={item.onClick} />;
                                 })}
                             {/* Form */}
                             {showForm && <Form type={type} />}

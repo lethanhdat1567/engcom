@@ -25,7 +25,7 @@ function CartItem({ data }) {
                 <img src={imgs.cartImg} className={cx('img')} />
             </Link>
             <div className={cx('info')}>
-                <h3 className={cx('title')}>HTML CSS PRO</h3>
+                <h3 className={cx('title')}>{data.title}</h3>
                 <div className={cx('footer')}>
                     {infoData.map((item, index) => {
                         return <InfoItem data={item} key={index} />;

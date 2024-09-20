@@ -4,6 +4,10 @@ const imgs = {
     profileBanner: require('./imgs/profileBanner.png'),
     cartImg: require('./imgs/cartImg.png'),
     NoImg: require('./imgs/NoImg.png'),
+    StudentRole: require('./imgs/StudentRole.png'),
+    TeacherRole: require('./imgs/teacherRole.png'),
+    AnimateStudent: require('./imgs/animateStudent.gif'),
+    AnimateTeacher: require('./imgs/animateTeacher.gif'),
 };
 
 export default imgs;

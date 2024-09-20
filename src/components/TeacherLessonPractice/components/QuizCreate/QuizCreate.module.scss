@@ -1,0 +1,24 @@
+.wrap {
+    margin-top: 30px;
+}
+.more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 1px solid #ccc;
+    padding: 4px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: ease 0.2s;
+    &:hover {
+        background-color: #e4e1e1;
+    }
+    .more-title {
+        font-size: 1.4rem;
+        font-weight: 500;
+    }
+}
+.answers {
+    margin-bottom: 20px;
+}
