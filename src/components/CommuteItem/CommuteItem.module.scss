@@ -1,5 +1,6 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
 .wrap {
-    width: 600px;
+    width: 100%;
     padding: 24px;
     border-radius: 16px;
     border: 2px solid #e8e8e8;
@@ -10,6 +11,9 @@
     display: flex;
     align-items: center;
     gap: 24px;
+    @include abs.screen(sm) {
+        flex-direction: column;
+    }
     .info {
         .title {
             display: block;
@@ -27,4 +31,7 @@
 }
 .btn {
     width: 160px;
+    @include abs.screen(sm) {
+        width: 100%;
+    }
 }

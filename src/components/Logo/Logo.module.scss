@@ -1,3 +1,5 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
+
 .logo {
     display: flex;
     align-items: center;
@@ -6,6 +8,9 @@
         font-size: 1.6rem;
         font-weight: 700;
         color: #000;
+        @include abs.screen(lg) {
+            display: none;
+        }
     }
     .logo-desc.white,
     .logo-icon.white {

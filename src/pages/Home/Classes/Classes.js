@@ -8,14 +8,16 @@ import BlogItem from '~/components/BlogItem';
 
 const cx = classNames.bind(styles);
 
-function Classes({ data }) {
+function Classes({ cartData, BlogData }) {
+    const headTitle = cartData?.title || BlogData?.title;
+    const headPrice = cartData?.price;
     return (
         <div className={cx('wrap')}>
             <div className={cx('header-wrap')}>
                 <h2 className={cx('title')}>
-                    {data.title}
-                    {data.price && (
-                        <span className={cx('sub-title', { cost: data.price === 'cost' })}>{data.price}</span>
+                    {headTitle}
+                    {headPrice && (
+                        <span className={cx('sub-title', { cost: headPrice === 'cost' })}>{headPrice}</span>
                     )}
                 </h2>
                 <div className={cx('see-wrap')}>
@@ -27,17 +29,17 @@ function Classes({ data }) {
                     </span>
                 </div>
             </div>
-            <div className="row row-cols-4 g-5">
-                {data.type === 'class' &&
-                    data.children.map((item, index) => {
+            <div className="row row-cols-1 row-cols-sm-2 row-cols-xl-3 g-5">
+                {cartData &&
+                    cartData.children.map((item, index) => {
                         return (
                             <div className="col" key={index}>
                                 <CartItem data={item} />
                             </div>
                         );
                     })}
-                {data.type === 'blogs' &&
-                    data.children.map((item, index) => {
+                {BlogData &&
+                    BlogData.children.map((item, index) => {
                         return (
                             <div className="col" key={index}>
                                 <BlogItem data={item} />

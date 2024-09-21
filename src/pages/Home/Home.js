@@ -4,76 +4,215 @@ import styles from './Home.module.scss';
 import SliderBanner from './SliderBanner';
 import Classes from './Classes';
 import Role from '~/components/Role/Role';
+import imgs from '~/assets/Image';
+import { useEffect } from 'react';
+import * as request from '~/utils/request';
 
 const cx = classNames.bind(styles);
 
 function Home() {
-    const data = [
+    const BlogsData = [
+        {
+            title: 'Blogs',
+            children: [
+                {
+                    title: 'Day la bai blogs nhe!',
+                    info: [
+                        {
+                            user: 'Le Thanh Dat',
+                            img: imgs.unsetAvatar, // Avatar lay tu BE
+                        },
+                        {
+                            view: '16.000',
+                        },
+                    ],
+                },
+                {
+                    title: 'Day la bai blogs nhe!',
+                    info: [
+                        {
+                            user: 'Le Thanh Dat',
+                            img: imgs.unsetAvatar, // Avatar lay tu BE
+                        },
+                        {
+                            view: '16.000',
+                        },
+                    ],
+                },
+                {
+                    title: 'Day la bai blogs nhe!',
+                    info: [
+                        {
+                            user: 'Le Thanh Dat',
+                            img: imgs.unsetAvatar, // Avatar lay tu BE
+                        },
+                        {
+                            view: '16.000',
+                        },
+                    ],
+                },
+                {
+                    title: 'Day la bai blogs nhe!',
+                    info: [
+                        {
+                            user: 'Le Thanh Dat',
+                            img: imgs.unsetAvatar, // Avatar lay tu BE
+                        },
+                        {
+                            view: '16.000',
+                        },
+                    ],
+                },
+            ],
+        },
+    ];
+    const Cartsdata = [
         {
             title: 'Pro classes',
-            type: 'class',
-            price: 'cost',
+            type: 'cost',
             children: [
                 {
                     title: 'Khoa hoc tieng anh cap toc',
                     total: 100,
+                    info: [
+                        {
+                            user: 'Le Thanh Dat',
+                            img: imgs.unsetAvatar, // Avatar lay tu BE
+                        },
+                        {
+                            view: '16.000',
+                        },
+                        {
+                            comment: '5',
+                        },
+                    ],
                 },
                 {
                     title: 'Khoa hoc tieng anh cap toc',
                     total: 100,
+                    info: [
+                        {
+                            user: 'Le Thanh Dat',
+                            img: imgs.unsetAvatar, // Avatar lay tu BE
+                        },
+                        {
+                            view: '16.000',
+                        },
+                        {
+                            comment: '5',
+                        },
+                    ],
                 },
                 {
                     title: 'Khoa hoc tieng anh cap toc',
                     total: 100,
+                    info: [
+                        {
+                            user: 'Le Thanh Dat',
+                            img: imgs.unsetAvatar, // Avatar lay tu BE
+                        },
+                        {
+                            view: '16.000',
+                        },
+                        {
+                            comment: '5',
+                        },
+                    ],
                 },
                 {
                     title: 'Khoa hoc tieng anh cap toc',
                     total: 100,
+                    info: [
+                        {
+                            user: 'Le Thanh Dat',
+                            img: imgs.unsetAvatar, // Avatar lay tu BE
+                        },
+                        {
+                            view: '16.000',
+                        },
+                        {
+                            comment: '5',
+                        },
+                    ],
                 },
             ],
         },
         {
             title: 'Free classes',
-            type: 'class',
-            price: 'free',
+            type: 'free',
             children: [
                 {
                     title: 'Khoa hoc tieng anh cap toc',
-                    total: 0,
+                    info: [
+                        {
+                            user: 'Le Thanh Dat',
+                            img: imgs.unsetAvatar, // Avatar lay tu BE
+                        },
+                        {
+                            view: '16.000',
+                        },
+                        {
+                            comment: '5',
+                        },
+                    ],
                 },
                 {
                     title: 'Khoa hoc tieng anh cap toc',
-                    total: 0,
+                    info: [
+                        {
+                            user: 'Le Thanh Dat',
+                            img: imgs.unsetAvatar, // Avatar lay tu BE
+                        },
+                        {
+                            view: '16.000',
+                        },
+                        {
+                            comment: '5',
+                        },
+                    ],
                 },
                 {
                     title: 'Khoa hoc tieng anh cap toc',
-                    total: 0,
+                    info: [
+                        {
+                            user: 'Le Thanh Dat',
+                            img: imgs.unsetAvatar, // Avatar lay tu BE
+                        },
+                        {
+                            view: '16.000',
+                        },
+                        {
+                            comment: '5',
+                        },
+                    ],
                 },
                 {
                     title: 'Khoa hoc tieng anh cap toc',
-                    total: 0,
-                },
-            ],
-        },
-        {
-            title: 'Blogs',
-            type: 'blogs',
-            children: [
-                {
-                    title: 'Day la bai blogs nhe!',
-                },
-                {
-                    title: 'Day la bai blogs nhe!',
-                },
-                {
-                    title: 'Day la bai blogs nhe!',
-                },
-                {
-                    title: 'Day la bai blogs nhe!',
+                    info: [
+                        {
+                            user: 'Le Thanh Dat',
+                            img: imgs.unsetAvatar, // Avatar lay tu BE
+                        },
+                        {
+                            view: '16.000',
+                        },
+                        {
+                            comment: '5',
+                        },
+                    ],
                 },
             ],
         },
     ];
+
+    // useEffect(() => {
+    //     request
+    //         .get('history/1')
+    //         .then((res) => {
+    //             console.log(res.data);
+    //         })
+    //         .catch((error) => console.log(error));
+    // }, []);
     return (
         <>
             {/* <Role /> */}
@@ -83,8 +222,11 @@ function Home() {
                 </div>
                 <div className="container">
                     <div className={cx('content')}>
-                        {data.map((item, index) => {
-                            return <Classes data={item} key={index} />;
+                        {Cartsdata.map((item, index) => {
+                            return <Classes cartData={item} key={index} />;
+                        })}
+                        {BlogsData.map((item, index) => {
+                            return <Classes BlogData={item} key={index} />;
                         })}
                     </div>
                 </div>

@@ -24,21 +24,27 @@ function Header() {
         <>
             <header className={cx('header')}>
                 <div className={cx('wrap')}>
-                    <Logo />
-                    {showBackButton && (
-                        <div className={cx('back-wrap')} onClick={() => navigate(-1)}>
-                            <span className={cx('icon')}>
-                                <span className={cx('font-icon')}>
-                                    <FontAwesomeIcon icon={faChevronLeft} className="fa-lg" />
+                    {showBackButton ? (
+                        <>
+                            <div className={cx('logo')}>
+                                <Logo />
+                            </div>
+                            <div className={cx('back-wrap')} onClick={() => navigate(-1)}>
+                                <span className={cx('icon')}>
+                                    <span className={cx('font-icon')}>
+                                        <FontAwesomeIcon icon={faChevronLeft} className="fa-lg" />
+                                    </span>
+                                    <span className={cx('back-desc')}>Back</span>
                                 </span>
-                                <span className={cx('back-desc')}>Back</span>
-                            </span>
-                        </div>
+                            </div>
+                        </>
+                    ) : (
+                        <Logo />
                     )}
                 </div>
-                {/* <Search /> */}
-                {/* <PublicHeader toggle={regisModal} setToggle={setRegisModal} /> */}
-                <PrivateHeader />
+                <Search />
+                <PublicHeader toggle={regisModal} setToggle={setRegisModal} />
+                {/* <PrivateHeader /> */}
             </header>
             {regisModal && <Validate toggle={regisModal} setToggle={setRegisModal} field="Register" />}
             {LoginModal && <Validate toggle={LoginModal} setToggle={setloginModal} field="Login" />}

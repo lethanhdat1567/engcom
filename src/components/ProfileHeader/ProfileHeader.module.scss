@@ -1,3 +1,4 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
 .profile-drop {
     background: var(--white-color);
     padding: 20px;
@@ -61,6 +62,13 @@
         object-fit: cover;
     }
 }
+.response {
+    display: none;
+    @include abs.screen(lg) {
+        display: block;
+    }
+}
+
 @keyframes fadeIn {
     0% {
         opacity: 0;

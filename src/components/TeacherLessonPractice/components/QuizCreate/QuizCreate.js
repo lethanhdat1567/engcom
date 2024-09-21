@@ -45,6 +45,7 @@ function QuizCreate() {
                     <MemoizedJoditEditor config={config} className="edit" />
                 </div>
                 <div className={cx('answers')}>
+                    <h2>Selection</h2>
                     <div className={cx('answers-body')}>
                         {questionData.map((item, index) => {
                             const letter = String.fromCharCode(65 + index);
@@ -86,7 +87,7 @@ function QuizCreate() {
                         <span className={cx('more-icon')}>
                             <FontAwesomeIcon icon={faSquarePlus} className="fa-lg" />
                         </span>
-                        <span className={cx('more-title')}>Create more</span>
+                        <span className={cx('more-title')}>Create selection</span>
                     </div>
                 </div>
                 <Button type="primary">Export</Button>

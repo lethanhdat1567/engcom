@@ -7,7 +7,9 @@ const cx = classNames.bind(styles);
 function PublicHeader({ toggle, setToggle }) {
     return (
         <div className={cx('btn-wrap')}>
-            <Button onClick={() => setToggle(true)}>Register</Button>
+            <Button classNames={cx('register')} onClick={() => setToggle(true)}>
+                Register
+            </Button>
             <Button onClick={() => setToggle(true)} primary>
                 Login
             </Button>

@@ -12,7 +12,7 @@ function Community() {
                 Để bắt đầu một cách thuận lợi, bạn nên tập trung vào một lộ trình học. Ví dụ: Để đi làm với vị
                 trí "Lập trình viên Front-end" bạn nên tập trung vào lộ trình "Front-end".
             </p>
-            <div className={cx('row row-cols-2 g-5')}>
+            <div className={cx('row row-cols-1 row-cols-lg-2 g-5')}>
                 <div className={cx('col')}>
                     <CommuItem />
                 </div>

@@ -8,10 +8,13 @@ const cx = classNames.bind(styles);
 function TeacherLessonText() {
     return (
         <div className={cx('wrap')}>
-            <Button type="primary" className={cx('btn')}>
-                Export
-            </Button>
-            <JoditEditor config={{ height: 600 }} />
+            <div className={cx('create')}>
+                <Button type="primary" className={cx('btn')}>
+                    Export
+                </Button>
+                <JoditEditor config={{ height: 600 }} />
+            </div>
+            {/* <div className={cx('content')}>alo alo</div> */}
         </div>
     );
 }

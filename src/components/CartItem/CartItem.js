@@ -4,26 +4,10 @@ import { Link } from 'react-router-dom';
 import priceTrander from '~/utils/priceTranfer';
 import InfoItem from '../InfoItem/InfoItem';
 import imgs from '~/assets/Image';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faUsers } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
 function CartItem({ data }) {
-    const infoData = [
-        {
-            title: 'Le Thanh Dat',
-            img: imgs.unsetAvatar,
-        },
-        {
-            title: '16.000',
-            leftIcon: <FontAwesomeIcon icon={faUsers} />,
-        },
-        {
-            title: '5',
-            leftIcon: <FontAwesomeIcon icon={faBook} />,
-        },
-    ];
     return (
         <div className={cx('wrap')}>
             <Link to={`${process.env.REACT_APP_ROOT}/class/1`} className={cx('banner')}>
@@ -35,12 +19,12 @@ function CartItem({ data }) {
                 </Link>
                 {data.total > 0 && (
                     <div className={cx('cost')}>
-                        <p className={cx('price')}>{priceTrander(10)}</p>
-                        <p className={cx('total')}>{priceTrander(5)}</p>
+                        <p className={cx('price')}>{priceTrander(data.price)}</p>
+                        <p className={cx('total')}>{priceTrander(data.total)}</p>
                     </div>
                 )}
                 <div className={cx('footer')}>
-                    {infoData.map((item, index) => {
+                    {data?.info?.map((item, index) => {
                         return <InfoItem data={item} key={index} />;
                     })}
                 </div>

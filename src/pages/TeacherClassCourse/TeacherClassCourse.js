@@ -21,9 +21,6 @@ function TeacherClassCourse() {
                         <span className={cx('btn-text')}>Create course</span>
                     </div>
                     <CourseItem />
-                    <CourseItem />
-                    <CourseItem />
-                    <CourseItem />
                 </div>
             </div>
         </Link>

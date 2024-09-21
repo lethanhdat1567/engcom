@@ -8,7 +8,7 @@ const cx = classNames.bind(styles);
 
 function ClassItemLarge() {
     const infoItem = {
-        title: 'Le THanh Dat',
+        user: 'Le THanh Dat',
         img: imgs.unsetAvatar,
     };
     return (

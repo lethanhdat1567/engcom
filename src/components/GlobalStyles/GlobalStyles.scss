@@ -23,6 +23,12 @@
     --font-code: 'SF Mono', monospace;
     --header-height: 66px;
     --layout-sidebar-width: 96px;
+    --navbar-height: 50px;
+    --action-bar-height: 50px;
+    --videojs-max-width: min(
+        100vh * (16 / 9) -(var(--navbar-height) + var(--action-bar-height)) * (16 / 9) - 100px,
+        1600px
+    );
 }
 * {
     box-sizing: border-box;
@@ -32,13 +38,14 @@
 html {
     scroll-behavior: unset !important;
     font-size: 62.5%;
+    overflow-x: hidden;
 }
 
 body {
     font-family: 'Roboto', sans-serif;
     font-size: 1.6rem;
     line-height: 1;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
 }
 ::-webkit-scrollbar {
     width: 8px; /* Đặt chiều rộng của thanh cuộn dọc */

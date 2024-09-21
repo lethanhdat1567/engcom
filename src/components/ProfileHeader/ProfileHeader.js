@@ -35,6 +35,19 @@ function ProfileHeader() {
                                 </Link>
                             </li>
                         </ul>
+                        <div className={cx('response')}>
+                            <hr />
+                            <ul className={cx('profile-list')}>
+                                <li className={cx('profile-item')}>
+                                    <Link
+                                        to={`${process.env.REACT_APP_ROOT}/profile`}
+                                        className={cx('profile-item-link')}
+                                    >
+                                        My Classes
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
                         <hr />
                         <ul className={cx('profile-list')}>
                             <li className={cx('profile-item')}>

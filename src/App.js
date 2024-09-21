@@ -10,7 +10,7 @@ function App() {
             <div className="App">
                 <ScrollToTop />
                 <Routes>
-                    {teacherPage.map((item, index) => {
+                    {studentPage.map((item, index) => {
                         const Page = item.element;
                         let Layout = DefaultLayout;
                         if (item.layout) {

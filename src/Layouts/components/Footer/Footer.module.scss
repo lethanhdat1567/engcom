@@ -1,16 +1,25 @@
+@use '../../../components/GlobalStyles/abstracts/' as abs;
 .footer {
     background-color: #181821;
-    padding: 50px;
+    padding: 50px 50px 100px 50px;
     .main {
         display: flex;
         flex-direction: column;
         height: 100%;
         color: #fff;
+        @include abs.screen(lg) {
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+        }
         .main-desc {
             margin-top: 40px;
             color: #ccc;
             font-size: 1.4rem;
             font-weight: 400;
+            @include abs.screen(lg) {
+                margin-top: 0;
+            }
         }
     }
     .list-wrap {
@@ -18,6 +27,10 @@
         align-items: flex-start;
         flex-wrap: wrap;
         justify-content: space-around;
+        gap: 20px;
+        @include abs.screen(lg) {
+            justify-content: flex-start;
+        }
         .title {
             color: #fff;
             font-size: 1.6rem;
@@ -34,4 +47,9 @@
             cursor: pointer;
         }
     }
+}
+
+.list {
+    margin: 0;
+    padding: 0;
 }

@@ -1,6 +1,8 @@
 .wrap {
     display: flex;
     flex-direction: column;
+    max-width: 860px;
+    margin: 0 auto;
 }
 .btn {
     display: inline-block;

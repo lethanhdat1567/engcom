@@ -1,0 +1,13 @@
+.wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.cart-wrap {
+    margin: 0 auto;
+    width: 358px;
+    height: 270px;
+}
+.desc {
+    word-break: break-all;
+}

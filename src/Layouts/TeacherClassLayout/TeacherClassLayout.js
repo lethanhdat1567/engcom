@@ -4,6 +4,7 @@ import HeaderCourse from '../components/HeaderCourse/HeaderCourse';
 import { useState } from 'react';
 import TeacherNavbar from '../components/TeacherNavbar/TeacherNavbar';
 import TeacherFooter from '../components/TeacherFooter/TeacherFooter';
+import HeaderCreateCourse from '../components/HeaderCreateCourse.js/HeaderCreateCourse';
 
 const cx = classNames.bind(styles);
 

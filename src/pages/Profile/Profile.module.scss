@@ -1,3 +1,4 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
 .banner {
     width: 100%;
     margin-top: calc(-1 * var(--header-height));
@@ -16,12 +17,28 @@
     display: flex;
     align-items: flex-end;
     z-index: 1;
+    @include abs.screen(md) {
+        left: 50%;
+        bottom: -100px;
+        transform: translateX(-50%);
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
     .avatar {
         border-radius: 50%;
         overflow: hidden;
         width: 172px;
         height: 172px;
         object-fit: cover;
+        @include abs.screen(md) {
+            width: 120px;
+            height: 120px;
+        }
+        @include abs.screen(sm) {
+            width: 100px;
+            height: 100px;
+        }
     }
     .name {
         font-size: 2.8rem;

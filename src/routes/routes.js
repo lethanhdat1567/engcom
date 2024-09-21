@@ -21,6 +21,7 @@ import TeacherClassComment from '~/pages/TeacherClassComment/TeacherClassComment
 import TeacherClassCourse from '~/pages/TeacherClassCourse/TeacherClassCourse';
 import TeacherClassDesign from '~/pages/TeacherClassDesign/TeacherClassDesign';
 import TeacherClassHome from '~/pages/TeacherClassHome/TeacherClassHome';
+import TeacherClassOverView from '~/pages/TeacherClassOverView/TeacherClassOverView';
 import TeacherClassUser from '~/pages/TeacherClassUser/TeacherClassUSer';
 import TeacherCourse from '~/pages/TeacherCourse/TeacherCourse';
 import TeacherHome from '~/pages/TeacherHome/TeachderHome';
@@ -51,7 +52,7 @@ const teacherPage = [
     { path: '/me/post', element: MyBlogs },
     { path: '/me/bookmark', element: Bookmark },
     { path: '/class/:slug/', element: TeacherClassHome, layout: TeacherClassLayout },
-    { path: '/class/:slug/design', element: TeacherClassDesign, layout: TeacherClassLayout },
+    { path: '/class/:slug/overview', element: TeacherClassOverView, layout: TeacherClassLayout },
     { path: '/class/:slug/courses', element: TeacherClassCourse, layout: TeacherClassLayout },
     { path: '/class/:slug/users', element: TeacherClassUser, layout: TeacherClassLayout },
     { path: '/class/:slug/comments', element: TeacherClassComment, layout: TeacherClassLayout },

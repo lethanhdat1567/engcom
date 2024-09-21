@@ -30,8 +30,8 @@ function Footer() {
     return (
         <footer className={cx('footer')}>
             <div className="container">
-                <div className="row">
-                    <div className="col col-2">
+                <div className="row g-5">
+                    <div className="col-12 col-lg-2">
                         <div className={cx('main')}>
                             <Logo white />
                             <p className={cx('main-desc')}>
@@ -39,7 +39,7 @@ function Footer() {
                             </p>
                         </div>
                     </div>
-                    <div className="col col-10">
+                    <div className="col-12 col-lg-10">
                         <div className={cx('list-wrap')}>
                             {list.map((item, index) => {
                                 return (

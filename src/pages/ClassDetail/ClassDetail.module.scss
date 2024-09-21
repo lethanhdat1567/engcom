@@ -1,3 +1,4 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
 .wrap {
     margin-top: 24px;
     padding: 0 44px 68px;
@@ -25,6 +26,14 @@
     flex-direction: column;
     gap: 6px;
     padding: 0;
+    @include abs.screen(lg) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 50px;
+    }
     .item {
         display: flex;
         align-items: center;

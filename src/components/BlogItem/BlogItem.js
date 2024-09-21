@@ -9,16 +9,6 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 const cx = classNames.bind(styles);
 
 function CartItem({ data }) {
-    const infoData = [
-        {
-            title: 'Le Thanh Dat',
-            img: imgs.unsetAvatar,
-        },
-        {
-            title: '16.000',
-            leftIcon: <FontAwesomeIcon icon={faEye} />,
-        },
-    ];
     return (
         <div className={cx('wrap')}>
             <Link to={`${process.env.REACT_APP_ROOT}/class/1`} className={cx('banner')}>
@@ -27,7 +17,7 @@ function CartItem({ data }) {
             <div className={cx('info')}>
                 <h3 className={cx('title')}>{data.title}</h3>
                 <div className={cx('footer')}>
-                    {infoData.map((item, index) => {
+                    {data?.info?.map((item, index) => {
                         return <InfoItem data={item} key={index} />;
                     })}
                 </div>

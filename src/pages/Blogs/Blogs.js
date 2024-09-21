@@ -13,7 +13,7 @@ function Blogs() {
                     Collection of articles sharing experiences in self-studying english online and more than
                     that!.
                 </p>
-                <div className={cx('row row-cols-2 g-4')}>
+                <div className={cx('row row-cols-1 row-cols-lg-2 g-4')}>
                     <div className={cx('col')}>
                         <BlogItem />
                     </div>

@@ -17,10 +17,10 @@ function Profile() {
             </div>
             <div className={cx('content')}>
                 <div className="row">
-                    <div className="col col-4">
+                    <div className="col col-12 col-lg-4">
                         <InfoUser />
                     </div>
-                    <div className="col col-8">
+                    <div className="col col-12 col-lg-8">
                         <div className={cx('wrapper')}>
                             <h2 className={cx('info-title')}>Your classes</h2>
                             <ClassItemLarge />

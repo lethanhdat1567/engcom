@@ -6,11 +6,11 @@ import { penNote, trashNote } from '~/assets/Icon';
 
 const cx = classNames.bind(styles);
 
-function NoteItem({ setShowCreateNote }) {
+function NoteItem({ data, setShowCreateNote }) {
     return (
         <div className={cx('wrap')}>
             <div className={cx('header')}>
-                <h4 className={cx('title')}>Xin Chao, HELLU!!</h4>
+                <h4 className={cx('title')}>{data.title}</h4>
                 <div className={cx('utils')}>
                     <span className={cx('icon')} onClick={() => setShowCreateNote(true)}>
                         {penNote}
@@ -19,9 +19,7 @@ function NoteItem({ setShowCreateNote }) {
                 </div>
             </div>
             <div className={cx('desc-wrap')}>
-                <p>
-                    adasjdhaldfhlasduifhl;asudfhl;sauidfgh;sdufghpuasdpfhl;asudfhl;sauidfgh;sdufghpuasdpfhl;asudfhl;sauidfgh;sdufghpuafhl;asudfhl;sauidfgh;sdufghpuasdpfhl;asudfhl;sauidfgh;sdufghpuasdpfhl;asudfhl;sauidfgh;sdufghpuasdpfhl;asudfhl;sauidfgh;sdufghpuasdpfhl;asudfhl;sauidfgh;sdufghpuasdpfhl;asudfhl;sauidfgh;sdufghpuasdpsdpfhl;asudfhl;sauidfgh;sdufghpuasdpfhp;asduhfp;sduhfpsudg
-                </p>
+                <p>{data.content}</p>
             </div>
         </div>
     );

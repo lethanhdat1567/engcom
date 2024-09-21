@@ -7,24 +7,37 @@ import Button from '~/components/Button';
 
 const cx = classNames.bind(styles);
 
+const editorConfig = {
+    uploader: {
+        insertImageAsBase64URI: true,
+    },
+    toolbar: true,
+    askBeforePasteHTML: false,
+    height: 450,
+};
 function NewPost() {
+    const [titleValue, setTitleValue] = useState('');
+    const [editorContent, setEditorContent] = useState('');
     const editor = useRef(null);
-    const handleChange = (newContent) => {
-        editor.current = newContent;
-    };
-    const config = {
-        uploader: {
-            url: '/api/upload',
-            format: 'json',
-            insertImageAsBase64URI: true,
-        },
-        readonly: false,
+
+    const handleExport = () => {
+        const values = {
+            title: titleValue,
+            content: editorContent,
+        };
+
+        console.log(values);
     };
     return (
         <div className={cx('wrap')}>
             <div className={cx('input-wrap')}>
-                <input className={cx('input')} placeholder="Title" />
-                <Button primary classNames={cx('btn-export')}>
+                <input
+                    className={cx('input')}
+                    placeholder="Title"
+                    onChange={(e) => setTitleValue(e.target.value)}
+                    value={titleValue}
+                />
+                <Button primary classNames={cx('btn-export')} onClick={handleExport}>
                     Export
                 </Button>
             </div>
@@ -33,9 +46,9 @@ function NewPost() {
                     <JoditEditor
                         className="post-design"
                         ref={editor}
-                        config={config}
-                        value={editor.current}
-                        onChange={handleChange}
+                        value={editorContent}
+                        onChange={(newContent) => setEditorContent(newContent)}
+                        config={editorConfig}
                     />
                 </div>
             </div>

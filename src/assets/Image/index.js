@@ -8,6 +8,7 @@ const imgs = {
     TeacherRole: require('./imgs/teacherRole.png'),
     AnimateStudent: require('./imgs/animateStudent.gif'),
     AnimateTeacher: require('./imgs/animateTeacher.gif'),
+    videoTest: require('./video/videoTest.mp4'),
 };
 
 export default imgs;

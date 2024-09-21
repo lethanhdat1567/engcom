@@ -12,6 +12,17 @@ const cx = classNames.bind(styles);
 function Note({ white = false }) {
     const [showNote, setShowNote] = useState(false);
     const [showCreateNote, setShowCreateNote] = useState(false);
+
+    const noteItems = [
+        {
+            title: 'Day la note title',
+            content: 'Day la note content',
+        },
+        {
+            title: 'Day la note title',
+            content: 'Hom nay la ngay 21/9/2024',
+        },
+    ];
     return (
         <>
             <div className={cx('note', { white })} onClick={() => setShowNote(true)}>
@@ -39,8 +50,11 @@ function Note({ white = false }) {
                             />
                         </span>
                     </div>
+                    {/* Note item */}
                     <div className={cx('note-body')}>
-                        <NoteItem setShowCreateNote={setShowCreateNote} />
+                        {noteItems.map((item, index) => {
+                            return <NoteItem setShowCreateNote={setShowCreateNote} data={item} key={index} />;
+                        })}
                     </div>
                 </div>
             </div>

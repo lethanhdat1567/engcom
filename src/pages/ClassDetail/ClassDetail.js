@@ -11,12 +11,12 @@ const cx = classNames.bind(styles);
 function ClassDetail() {
     return (
         <div className={cx('wrap')}>
-            <div className={cx('row')}>
-                <div className={cx('col col-8')}>
+            <div className={cx('row', 'd-lg-flex', 'flex-column-reverse', 'flex-lg-row')}>
+                <div className={cx('col col-12 col-lg-8')}>
                     <div className={cx('design')}>Design</div>
                     <Comment />
                 </div>
-                <div className={cx('col col-4')}>
+                <div className={cx('col col-12 col-lg-4')}>
                     <div className={cx('info')}>
                         <img className={cx('banner')} src={imgs.banner1} />
                         <span className={cx('costs')}>Free Class</span>

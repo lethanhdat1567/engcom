@@ -1,3 +1,4 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
 .search {
     width: 420px;
     max-width: 100%;
@@ -7,6 +8,14 @@
     border: 2px solid rgb(232, 232, 232);
     transition: border-color 0.2s ease-in-out;
     display: flex;
+    margin-left: 120px;
+    @include abs.screen(xl) {
+        margin-left: 80px;
+    }
+    @include abs.screen(md) {
+        width: 100%;
+        margin-left: 0;
+    }
     .btn-search {
         background-color: #fff;
         width: 30px;
@@ -46,6 +55,9 @@
     overflow: hidden;
     color: #1d2129;
     background-color: #fff;
+    @include abs.screen(sm) {
+        width: calc(100vw - 10px);
+    }
     .drop-header {
         display: flex;
         align-items: center;

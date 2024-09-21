@@ -4,14 +4,32 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
 import SearchContent from './SearchContent';
+import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
 function Search() {
+    const [searchHoder, setSearchHoder] = useState('Search classes, users, blogs, ...');
+    const handleResize = () => {
+        if (window.innerWidth < 766) {
+            setSearchHoder('Search...');
+        } else {
+            setSearchHoder('Search classes, users, blogs, ...');
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
     return (
-        <div>
+        <>
             <Tippy
                 interactive
+                placement="bottom"
                 trigger="click"
                 render={(attrs) => {
                     return (
@@ -35,14 +53,10 @@ function Search() {
                     <button className={cx('btn-search')}>
                         <FontAwesomeIcon icon={faSearch} />
                     </button>
-                    <input
-                        className={cx('input')}
-                        placeholder="Search classes, users, blogs, ..."
-                        spellCheck={false}
-                    />
+                    <input className={cx('input')} placeholder={searchHoder} spellCheck={false} />
                 </div>
             </Tippy>
-        </div>
+        </>
     );
 }
 

@@ -19,7 +19,7 @@ function Classes() {
     };
 
     return (
-        <li className={cx('item')}>
+        <li className={cx('item-classes')}>
             <Tippy
                 interactive
                 placement="bottom-end"
