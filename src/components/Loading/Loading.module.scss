@@ -1,0 +1,25 @@
+.wrap {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .over-lay {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+    .loading {
+        position: absolute;
+        z-index: 99;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .load {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+    }
+}

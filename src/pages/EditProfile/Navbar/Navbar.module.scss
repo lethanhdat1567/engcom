@@ -1,0 +1,89 @@
+@use '../../../components/GlobalStyles/abstracts/' as abs;
+.wrap {
+    position: relative;
+    border-right: 1px solid #dee3e9;
+    padding: 30px 40px 0px 0px;
+    height: 100%;
+    @include abs.screen(lg) {
+        border: none;
+        padding: 10px;
+    }
+    .out {
+        display: none;
+        top: 10px;
+        right: 0;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background-color: #e3e2e2;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        &:hover {
+            background-color: #ccc;
+        }
+        @include abs.screen(lg) {
+            display: flex;
+        }
+    }
+    .out-nav {
+        display: none;
+        top: 10px;
+        right: 0;
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background-color: #e3e2e2;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        &:hover {
+            background-color: #ccc;
+        }
+        @include abs.screen(lg) {
+            display: flex;
+        }
+    }
+    .title {
+        margin: 20px 0px;
+        font-size: 2.4rem;
+        font-weight: 500;
+    }
+    .desc {
+        font-size: 1.5rem;
+        opacity: 0.9;
+    }
+    .nav-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        margin: 40px 0px;
+    }
+}
+// Item
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: background-color 0.1s;
+    transition: ease 0.4s;
+    opacity: 0.9;
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+    .nav-item-title {
+        font-size: 1.8rem;
+        font-weight: 500;
+    }
+    &.active {
+        color: rgb(255, 255, 255);
+        background: rgb(52, 72, 84);
+        opacity: 1;
+    }
+}

@@ -1,3 +1,4 @@
+@use '../../../components/GlobalStyles/abstracts/' as abs;
 .navbar {
     width: 23%;
     position: fixed;
@@ -11,12 +12,46 @@
     transform: translateX(100%);
     opacity: 0;
     visibility: hidden;
+    @include abs.screen(lg) {
+        width: 300px;
+    }
+    @include abs.screen(md) {
+        width: 100%;
+    }
     .heading {
         padding: 20px 10px;
         text-align: center;
         font-size: 1.8rem;
         font-weight: 500;
     }
+    .heading {
+        padding: 20px 10px;
+        text-align: center;
+        font-size: 1.8rem;
+        font-weight: 500;
+    }
+}
+.head-wrap {
+    padding: 10px 20px;
+    justify-content: center;
+    @include abs.screen(md) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+.x-mark {
+    color: #fff;
+    display: none;
+    @include abs.screen(md) {
+        display: inline-block;
+    }
+}
+.title {
+    font-size: 1.8rem;
+    color: #fff;
+    text-align: center;
+    margin: 0;
 }
 .course-wrap {
     border-bottom: 2px solid #ccc;

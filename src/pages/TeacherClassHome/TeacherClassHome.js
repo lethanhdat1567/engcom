@@ -49,12 +49,12 @@ function TeacherClassHome() {
                     <Button save>Save</Button>
                 </div>
                 <div className="row g-5">
-                    <div className="col-4">
+                    <div className="col-12 col-sm-6 col-md-4">
                         <div className={cx('cart-item')}>
                             <CartItem data={cartItem} />
                         </div>
                     </div>
-                    <div className="col-8">
+                    <div className="col-12 col-sm-6 col-md-8">
                         <div className={cx('cart-info')}>
                             <CartForm states={states} />
                         </div>

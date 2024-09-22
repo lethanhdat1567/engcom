@@ -1,3 +1,4 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
 .wrap {
     display: flex;
     flex-direction: column;
@@ -7,6 +8,9 @@
     margin: 0 auto;
     width: 358px;
     height: 270px;
+    @include abs.screen(sm) {
+        width: 100%;
+    }
 }
 .desc {
     word-break: break-all;

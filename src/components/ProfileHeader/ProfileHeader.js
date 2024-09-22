@@ -3,10 +3,26 @@ import styles from './ProfileHeader.module.scss';
 import imgs from '~/assets/Image';
 import Tippy from '@tippyjs/react/headless';
 import { Link } from 'react-router-dom';
+import { signOut } from 'firebase/auth';
+import { auth } from '~/firebase/config';
+import { useDispatch } from 'react-redux';
+import { usersSlice } from '~/redux/reducer/UserSlice';
+import { logoutRequest } from '~/requestApi/requestApi';
 
 const cx = classNames.bind(styles);
 
 function ProfileHeader() {
+    const dispatch = useDispatch();
+
+    const handleLogout = async () => {
+        try {
+            await signOut(auth);
+            await logoutRequest();
+            dispatch(usersSlice.actions.logoutUser());
+        } catch (error) {
+            console.error('Error signing out:', error);
+        }
+    };
     return (
         <li className={cx('item')}>
             <Tippy
@@ -80,7 +96,7 @@ function ProfileHeader() {
                             <li className={cx('profile-item')}>
                                 <Link className={cx('profile-item-link')}>Cai dat</Link>
                             </li>
-                            <li className={cx('profile-item')}>
+                            <li className={cx('profile-item')} onClick={handleLogout}>
                                 <Link className={cx('profile-item-link')}>Dang xuat</Link>
                             </li>
                         </ul>

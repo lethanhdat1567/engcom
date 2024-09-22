@@ -3,7 +3,7 @@ import styles from './Register.module.scss';
 import Modal from '~/components/Modal/Modal';
 import Logo from '~/components/Logo/Logo';
 import ItemChoice from './ItemChoice';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { facebook, google, user } from '~/assets/Icon';
 import { useEffect, useState } from 'react';
 import Form from './Form/Form';
@@ -11,31 +11,66 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '~/firebase/config';
+import Loading from '~/components/Loading/Loading';
+import { postSocial } from '~/requestApi/requestApi';
+import { useDispatch } from 'react-redux';
+import { usersSlice } from '~/redux/reducer/UserSlice';
 
 const cx = classNames.bind(styles);
 const fbProvider = new FacebookAuthProvider();
 const ggProvider = new GoogleAuthProvider();
 
 function Validate({ toggle, setToggle, field }) {
-    const handleFbLogin = () => {
-        signInWithPopup(auth, fbProvider)
-            .then((result) => {
-                const user = result.user;
-                console.log('User Info:', user);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+    const [validateError, setValidateError] = useState(false);
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+    const handleError = async (error) => {
+        if (error.code === 'auth/account-exists-with-different-credential') {
+            console.log('aloalo');
+        } else {
+            console.log(error);
+        }
     };
-    const handleGGLogin = () => {
-        signInWithPopup(auth, ggProvider)
-            .then((result) => {
-                const user = result.user;
-                console.log('User Info:', user);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+    // Facebook
+    const handleFbLogin = async () => {
+        setLoading(true);
+        try {
+            const result = await signInWithPopup(auth, fbProvider);
+            const userValue = await postSocial(result);
+            dispatch(usersSlice.actions.getToken(userValue.data.access_token));
+            dispatch(usersSlice.actions.getUser(userValue.data.user));
+            setToggle(false);
+            if (userValue.data.user.role_id === 1) {
+                navigate('/user/role');
+            }
+            setLoading(false);
+        } catch (error) {
+            console.error('Error posting social:', error);
+            handleError(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+    // Google
+    const handleGGLogin = async () => {
+        setLoading(true);
+        try {
+            const result = await signInWithPopup(auth, ggProvider);
+            const userValue = await postSocial(result);
+            dispatch(usersSlice.actions.getUser(userValue.data.user));
+            dispatch(usersSlice.actions.getToken(userValue.data.access_token));
+            setToggle(false);
+            if (userValue.data.user.role_id === 1) {
+                navigate('/user/role');
+            }
+            setLoading(false);
+        } catch (error) {
+            console.error('Error posting social:', error);
+            handleError(error);
+        } finally {
+            setLoading(false);
+        }
     };
     const handleForm = (item) => {
         if (item.type) {
@@ -90,6 +125,7 @@ function Validate({ toggle, setToggle, field }) {
 
     return (
         <div className={cx('validate')}>
+            {loading && <Loading />}
             <Modal toggle={toggle} setToggle={setToggle}>
                 <div className={cx('wrap')}>
                     {showForm && (
@@ -115,7 +151,7 @@ function Validate({ toggle, setToggle, field }) {
                                     return <ItemChoice data={item} key={index} onClick={item.onClick} />;
                                 })}
                             {/* Form */}
-                            {showForm && <Form type={type} />}
+                            {showForm && <Form setToggle={setToggle} type={type} />}
                         </div>
                         <p className={cx('sub')}>
                             {toggleText.ask}

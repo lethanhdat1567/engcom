@@ -27,7 +27,7 @@ function TeacherClassOverView() {
     ];
     return (
         <div className={cx('wrap')}>
-            <div className="row row-cols-3">
+            <div className="row row-cols-1 row-cols-md-3 g-5">
                 {AnaData.map((item, index) => {
                     return (
                         <div className="col" key={index}>

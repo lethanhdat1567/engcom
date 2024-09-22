@@ -1,6 +1,7 @@
 import AdminLayout from '~/Layouts/AdminLayout/AdminLayout';
 import CourseLayout from '~/Layouts/CourseLayout/CourseLayout';
 import HeaderOnly from '~/Layouts/HeaderOnly/HeaderOnly';
+import NotFound from '~/Layouts/NotFound/NotFound';
 import SingleLayout from '~/Layouts/SingleLayout/SingleLayout';
 import TeacherClassLayout from '~/Layouts/TeacherClassLayout/TeacherClassLayout';
 import BlogAdmin from '~/pages/BlogAdmin/BlogAdmin';
@@ -12,11 +13,13 @@ import Classes from '~/pages/Classes/Classes';
 import ClassMore from '~/pages/ClassMore/ClassMore';
 import Community from '~/pages/Community';
 import Course from '~/pages/Course/Course';
+import EditProfile from '~/pages/EditProfile/EditProfile';
 import Home from '~/pages/Home';
 import HomeAdmin from '~/pages/HomeAdmin/HomeAdmin';
 import MyBlogs from '~/pages/MyBlogs/MyBlogs';
 import NewPost from '~/pages/NewPost/NewPost';
 import Profile from '~/pages/Profile/Profile';
+import Role from '~/pages/Role/Role';
 import TeacherClassComment from '~/pages/TeacherClassComment/TeacherClassComment';
 import TeacherClassCourse from '~/pages/TeacherClassCourse/TeacherClassCourse';
 import TeacherClassDesign from '~/pages/TeacherClassDesign/TeacherClassDesign';
@@ -27,11 +30,21 @@ import TeacherCourse from '~/pages/TeacherCourse/TeacherCourse';
 import TeacherHome from '~/pages/TeacherHome/TeachderHome';
 import UserAdmin from '~/pages/UserAdmin/UserAdmin';
 
+const publicPage = [
+    { path: '/', element: Home },
+    { path: '/blogs', element: Blogs },
+    { path: '/community', element: Community },
+    { path: '/classes/:slug', element: ClassMore },
+    { path: '/user/role', element: Role },
+    { path: '*', element: NotFound, layout: null },
+];
+
 const studentPage = [
     { path: '/', element: Home },
     { path: '/community', element: Community },
     { path: '/blogs', element: Blogs },
     { path: '/profile', element: Profile, layout: SingleLayout },
+    { path: '/edit-profile', element: EditProfile, layout: null },
     { path: '/new-post', element: NewPost, layout: HeaderOnly },
     { path: '/my-class', element: Classes },
     { path: '/classes/:slug', element: ClassMore },
@@ -39,6 +52,7 @@ const studentPage = [
     { path: '/me/bookmark', element: Bookmark },
     { path: '/class/:slug', element: ClassDetail },
     { path: '/course/:slug', element: Course, layout: CourseLayout },
+    { path: '*', element: NotFound, layout: null },
 ];
 const teacherPage = [
     { path: '/', element: TeacherHome },
@@ -47,6 +61,7 @@ const teacherPage = [
     { path: '/blogs', element: Blogs },
     { path: '/blogs', element: Blogs },
     { path: '/profile', element: Profile, layout: SingleLayout },
+    { path: '/edit-profile', element: EditProfile, layout: null },
     { path: '/new-post', element: NewPost, layout: HeaderOnly },
     { path: '/course/:slug', element: Course, layout: CourseLayout },
     { path: '/me/post', element: MyBlogs },
@@ -58,12 +73,14 @@ const teacherPage = [
     { path: '/class/:slug/comments', element: TeacherClassComment, layout: TeacherClassLayout },
     // Course
     { path: '/class/:slug/course/:slug', element: TeacherCourse, layout: CourseLayout },
+    { path: '*', element: NotFound, layout: null },
 ];
 const adminPage = [
     { path: '/', element: HomeAdmin, layout: AdminLayout },
     { path: '/admin/users', element: UserAdmin, layout: AdminLayout },
     { path: '/admin/blogs', element: BlogAdmin, layout: AdminLayout },
     { path: '/admin/classes', element: ClassAdmin, layout: AdminLayout },
+    { path: '*', element: NotFound, layout: null },
 ];
 
-export { studentPage, teacherPage, adminPage };
+export { publicPage, studentPage, teacherPage, adminPage };

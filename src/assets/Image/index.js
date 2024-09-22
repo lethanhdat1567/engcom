@@ -9,6 +9,8 @@ const imgs = {
     AnimateStudent: require('./imgs/animateStudent.gif'),
     AnimateTeacher: require('./imgs/animateTeacher.gif'),
     videoTest: require('./video/videoTest.mp4'),
+    notFound: require('./imgs/notFound.png'),
+    loading: require('./imgs/loading.gif'),
 };
 
 export default imgs;

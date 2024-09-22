@@ -1,18 +1,18 @@
-// @use '../../components/GlobalStyles/abstracts/' as abs;
+@use '../../components/GlobalStyles/abstracts/' as abs;
 .nav {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
     padding: 20px 0px 20px 20px;
-    // @include abs.screen(lg) {
-    //     gap: 10px;
-    //     padding: 10px;
-    // }
-    // @include abs.screen(md) {
-    //     padding: 0;
-    //     padding-left: 5px;
-    // }
+    @include abs.screen(lg) {
+        gap: 10px;
+        padding: 10px;
+    }
+    @include abs.screen(md) {
+        padding: 0;
+        padding-left: 5px;
+    }
 }
 .btn {
     display: flex;
@@ -26,42 +26,40 @@
     border: none;
     color: #fff;
     transition: ease 0.2s;
-    // @include abs.screen(lg) {
-    //     gap: 10px;
-    // }
-    // @include abs.screen(md) {
-    //     justify-content: center;
-    //     align-items: center;
-    //     width: 100%;
-    // }
+    @include abs.screen(lg) {
+        gap: 10px;
+    }
+    @include abs.screen(md) {
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
     &:hover {
         background-color: #807c7c;
     }
     .icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        width: 30px;
-        height: 30px !important;
+        display: inline-block;
+        width: 28px;
+        height: 30px;
         color: #fff;
     }
     .name {
         color: #fff;
-        // @include abs.screen(md) {
-        //     display: none;
-        // }
+        @include abs.screen(md) {
+            display: none;
+        }
     }
 }
 .title-nav {
     font-size: 1.8rem;
-    font-weight: 400;
+    font-weight: 300;
     color: #fff;
     margin-bottom: 20px;
 }
 
 .body {
     border-left: 1px solid #ccc;
+    min-height: calc(100vh - 150px);
 }
 .wrapper {
     background-color: #262d3b;

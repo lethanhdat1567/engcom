@@ -3,10 +3,9 @@ import styles from './Home.module.scss';
 
 import SliderBanner from './SliderBanner';
 import Classes from './Classes';
-import Role from '~/components/Role/Role';
 import imgs from '~/assets/Image';
-import { useEffect } from 'react';
-import * as request from '~/utils/request';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '~/firebase/config';
 
 const cx = classNames.bind(styles);
 
@@ -205,17 +204,9 @@ function Home() {
         },
     ];
 
-    // useEffect(() => {
-    //     request
-    //         .get('history/1')
-    //         .then((res) => {
-    //             console.log(res.data);
-    //         })
-    //         .catch((error) => console.log(error));
-    // }, []);
     return (
         <>
-            {/* <Role /> */}
+            {/* <Loading /> */}
             <div className={cx('home')}>
                 <div className={cx('banner')}>
                     <SliderBanner />

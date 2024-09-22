@@ -1,3 +1,4 @@
+@use '../../../components/GlobalStyles/abstracts/' as abs;
 .footer {
     position: fixed;
     bottom: 0;
@@ -12,6 +13,9 @@
     .unit {
         font-size: 1.4rem;
         color: hsla(0, 0%, 100%, 0.8);
+        @include abs.screen(md) {
+            display: none;
+        }
     }
     .lesson {
         display: flex;
@@ -29,6 +33,9 @@
             cursor: pointer;
             border-radius: 10px; /* Áp dụng border-radius cho phần tử */
             border: 2px solid transparent;
+            @include abs.screen(sm) {
+                width: 144px;
+            }
             &:hover {
                 background: linear-gradient(#191d1e, #191d1e) padding-box,
                     /* Nền của phần tử */ linear-gradient(141.34deg, #5ebbff 0%, #a174ff 91.11%) border-box; /* Gradient cho border */

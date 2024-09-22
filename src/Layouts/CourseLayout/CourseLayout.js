@@ -20,7 +20,7 @@ function CourseLayout({ children }) {
             <div className={cx('body')}>
                 <div className={cx('content', { full: !showNav })}>{children}</div>
                 {/* <CourseSidebar showNav={showNav} /> */}
-                <CourseSidebarTeacher showNav={showNav} />
+                <CourseSidebarTeacher showNav={showNav} setShowNav={setShowNav} />
             </div>
             <CourseFooter showNav={showNav} setShowNav={setShowNav} />
         </div>

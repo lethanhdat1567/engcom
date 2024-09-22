@@ -81,7 +81,7 @@ function TeacherClassUser() {
         },
     ];
 
-    return <Table dataSource={data} columns={columns} className={cx('table')} />;
+    return <Table scroll={{ x: 1000 }} dataSource={data} columns={columns} className={cx('table')} />;
 }
 
 export default TeacherClassUser;

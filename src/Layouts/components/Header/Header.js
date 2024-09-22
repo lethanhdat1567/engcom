@@ -9,12 +9,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import PublicHeader from './PublicHeader/PublicHeader';
+import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles);
 
 function Header() {
     const [regisModal, setRegisModal] = useState(false);
     const [LoginModal, setloginModal] = useState(false);
+    const user = useSelector((state) => state.user.user);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -43,8 +45,11 @@ function Header() {
                     )}
                 </div>
                 <Search />
-                <PublicHeader toggle={regisModal} setToggle={setRegisModal} />
-                {/* <PrivateHeader /> */}
+                {user.id && user.role_id ? (
+                    <PrivateHeader />
+                ) : (
+                    <PublicHeader toggle={regisModal} setToggle={setRegisModal} />
+                )}
             </header>
             {regisModal && <Validate toggle={regisModal} setToggle={setRegisModal} field="Register" />}
             {LoginModal && <Validate toggle={LoginModal} setToggle={setloginModal} field="Login" />}

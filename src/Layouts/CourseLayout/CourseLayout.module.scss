@@ -1,3 +1,4 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
 .wrap {
     height: 100vh;
     .body {
@@ -9,6 +10,10 @@
     .content {
         width: 77%;
         margin-bottom: 50px;
+        @include abs.screen(lg) {
+            margin-left: 0;
+            width: 100%;
+        }
     }
     .content.full {
         width: 100%;

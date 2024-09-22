@@ -6,17 +6,33 @@ import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useRef, useState } from 'react';
+import { loginValue, RegisterValue } from '~/utils/ValidateFilter';
+import request from '~/utils/request';
+import Loading from '~/components/Loading/Loading';
+import { useDispatch, useSelector } from 'react-redux';
+import { usersSlice } from '~/redux/reducer/UserSlice';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-function Form({ type }) {
+function Form({ type, setToggle }) {
+    // redux
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.user.user);
+
+    // hooks
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const {
         register,
         handleSubmit,
         formState: { errors },
+        setError,
     } = useForm();
     const [showPassword, setShowPassword] = useState(false);
-    const passRef = useRef();
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const passRef = useRef(null);
+    const confirmPassRef = useRef(null);
     const validate = {
         Login: [
             {
@@ -79,19 +95,90 @@ function Form({ type }) {
                     },
                 },
             },
+            {
+                name: 'password_confirmation',
+                label: 'Confirm password',
+                type: 'password',
+                placeholder: 'Confirm your password',
+                rules: {
+                    required: 'Vui long nhap lai mat khau',
+                },
+            },
         ],
     };
 
-    const handleEyeClick = () => {
-        setShowPassword((prev) => !prev);
-        passRef.current.focus();
+    const handleEyeClick = (name) => {
+        if (name === 'password') {
+            setShowPassword((prev) => !prev);
+        } else if (name === 'password_confirmation') {
+            setShowConfirmPassword((prev) => !prev);
+        }
     };
     const onSubmit = (data) => {
-        console.log('Form submitted with data:', data);
+        // Register
+        if (data.name) {
+            setLoading(true);
+            const values = RegisterValue(data);
+            request
+                .post('/engcom/register', values)
+                .then((res) => {
+                    const role = res.data.user.role_id;
+                    dispatch(usersSlice.actions.getToken(res.data.access_token));
+                    dispatch(usersSlice.actions.getUser(res.data.user));
+                    setLoading(false);
+                    setToggle(false);
+                    if (role === 1) {
+                        navigate(`/user/role`);
+                    }
+                })
+                .catch((error) => {
+                    const errorValue = error.response.data.error;
+                    if (errorValue) {
+                        setError(error.response.data.field, {
+                            type: 'manual',
+                            message: errorValue,
+                        });
+                        setLoading(false);
+                        return;
+                    }
+                });
+        } else {
+            // login
+            setLoading(true);
+            const values = loginValue(data);
+            request
+                .post('/engcom/login', values)
+                .then((res) => {
+                    const role = res.data.user.role_id;
+                    dispatch(usersSlice.actions.getUser(res.data.user));
+                    dispatch(usersSlice.actions.getToken(res.data.access_token));
+                    setLoading(false);
+                    setToggle(false);
+                    if (role === 1) {
+                        navigate(`/user/role`);
+                    }
+                })
+                .catch((error) => {
+                    const errorValue = error.response.data.error;
+                    if (errorValue) {
+                        setError('password', {
+                            type: 'manual',
+                            message: errorValue,
+                        });
+                        setError('email', {
+                            type: 'manual',
+                            message: errorValue,
+                        });
+                        setLoading(false);
+                        return;
+                    }
+                });
+        }
     };
 
     return (
         <form className={cx('form')} onSubmit={handleSubmit(onSubmit)}>
+            {loading && <Loading />}
             {validate[type].map((item, index) => {
                 const { name, label, placeholder, rules, type } = item;
                 if (type === 'password') {
@@ -108,11 +195,16 @@ function Form({ type }) {
                                     id={name}
                                     name={name}
                                     placeholder={placeholder}
-                                    type={showPassword ? 'text' : 'password'}
-                                    ref={passRef}
+                                    type={
+                                        (name === 'password' && showPassword) ||
+                                        (name === 'password_confirmation' && showConfirmPassword)
+                                            ? 'text'
+                                            : 'password'
+                                    }
+                                    ref={name === 'password' ? passRef : confirmPassRef}
                                     {...register(name, rules)}
                                 />
-                                <span className={cx('eye-icon')} onClick={handleEyeClick}>
+                                <span className={cx('eye-icon')} onClick={() => handleEyeClick(name)}>
                                     <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
                                 </span>
                             </div>

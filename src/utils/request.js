@@ -1,7 +1,10 @@
 import axios from 'axios';
 
 const request = axios.create({
-    baseURL: process.env.REACT_APP_BACKEND_API,
+    baseURL: `${process.env.REACT_APP_BACKEND_API}`,
+    headers: {
+        'Content-Type': 'application/json',
+    },
 });
 
 request.interceptors.request.use(
@@ -22,6 +25,8 @@ export const get = async (path, options = {}) => {
 };
 
 export const post = async (path, value) => {
+    console.log(process.env.REACT_APP_BACKEND_API);
+
     const response = await request.post(path, value);
 
     return response.data;

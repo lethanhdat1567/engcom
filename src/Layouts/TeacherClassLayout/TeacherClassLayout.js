@@ -14,7 +14,7 @@ function TeacherClassLayout({ children }) {
         <div className={cx('wrap')}>
             <HeaderCourse />
             <div className={cx('body')}>
-                <TeacherNavbar showNav={showNav} />
+                <TeacherNavbar showNav={showNav} setShowNav={setShowNav} />
                 <div className={cx('content', { full: !showNav })}>{children}</div>
             </div>
             <TeacherFooter showNav={showNav} setShowNav={setShowNav} />
