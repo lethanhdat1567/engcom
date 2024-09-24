@@ -3,9 +3,11 @@ import styles from './UpdateBlog.module.scss';
 import JoditEditor from 'jodit-react';
 import { useEffect, useRef, useState } from 'react';
 import Button from '~/components/Button';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createBlog, readBlog, updateBlog } from '~/requestApi/requestBlog';
 import { useNavigate, useParams } from 'react-router-dom';
+import { ownData } from '~/redux/reducer/OwnDataSlice';
+import Loading from '~/components/Loading/Loading';
 
 const cx = classNames.bind(styles);
 
@@ -21,8 +23,10 @@ const editorConfig = {
 function UpdateBLog() {
     const user = useSelector((state) => state.user.user);
     const { slug } = useParams();
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const [isMounted, setIsMounted] = useState(false);
     const [blogId, setBlogId] = useState();
     const [titleValue, setTitleValue] = useState('');
     const [editorContent, setEditorContent] = useState('');
@@ -37,6 +41,7 @@ function UpdateBLog() {
 
         try {
             const res = await updateBlog(blogId, values);
+            dispatch(ownData.actions.updateBlogs(res.data));
             setLoading(false);
             navigate('/me/post');
         } catch (error) {
@@ -46,16 +51,22 @@ function UpdateBLog() {
     };
 
     useEffect(() => {
+        setLoading(true);
         readBlog(slug)
             .then((res) => {
                 setTitleValue(res.data.title);
                 setEditorContent(res.data.content);
                 setBlogId(res.data.id);
+                setLoading(false);
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log(error);
+                setLoading(false);
+            });
     }, [slug]);
     return (
         <div className={cx('wrap')}>
+            {loading && <Loading />}
             <div className={cx('input-wrap')}>
                 <input
                     className={cx('input')}
@@ -73,7 +84,9 @@ function UpdateBLog() {
                         className="post-design"
                         ref={editor}
                         value={editorContent}
-                        onBlur={(newContent) => setEditorContent(newContent)}
+                        onChange={(newContent) => {
+                            setEditorContent(newContent);
+                        }}
                         config={editorConfig}
                     />
                 </div>

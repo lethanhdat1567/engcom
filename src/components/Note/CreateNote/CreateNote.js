@@ -6,10 +6,10 @@ import { useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import Button from '~/components/Button';
-import HeaderSingle from '~/Layouts/components/HeaderSingle/HeaderSingle';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createNote } from '~/requestApi/requestNote';
 import Loading from '~/components/Loading/Loading';
+import { ownData } from '~/redux/reducer/OwnDataSlice';
 
 const cx = classNames.bind(styles);
 const editorConfig = {
@@ -21,16 +21,20 @@ const editorConfig = {
     height: 300,
 };
 
-function CreateNote({ utils }) {
-    const { showCreateNote, setShowCreateNote, setNoteItems, noteItems } = utils;
+function CreateNote({ utils, createLoading, setCreateLoading }) {
+    // redux
+    const dispatch = useDispatch();
+    const noteItems = useSelector((state) => state.ownData.notes);
+
+    const { showCreateNote, setShowCreateNote } = utils;
     const user = useSelector((state) => state.user.user);
-    const [loading, setLoading] = useState(false);
     const editor = useRef(null);
     const [content, setContent] = useState('');
     const [titleValue, setTitleValue] = useState('');
 
     const handleSave = async () => {
-        setLoading(true);
+        setShowCreateNote(false);
+        setCreateLoading(true);
         const values = {
             user_id: user.id,
             title: titleValue,
@@ -38,20 +42,19 @@ function CreateNote({ utils }) {
         };
         try {
             const response = await createNote(values);
-            setNoteItems([...noteItems, response.data.notebook]);
-            setLoading(false);
-            setShowCreateNote(false);
+
+            dispatch(ownData.actions.setNotes(response.data.notebook));
+            setCreateLoading(false);
             setContent('');
             setTitleValue('');
         } catch (error) {
             console.log(error);
-            setLoading(false);
+            setCreateLoading(false);
         }
     };
     return (
         <>
             <div className={cx('wrap', { show: showCreateNote })}>
-                {loading && <Loading />}
                 <div className={cx('content')}>
                     <div className={cx('header-wrap')}>
                         <h4 className={cx('title')}>Create Note</h4>

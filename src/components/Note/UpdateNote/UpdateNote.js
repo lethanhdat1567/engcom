@@ -6,9 +6,10 @@ import { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import Button from '~/components/Button';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateNote } from '~/requestApi/requestNote';
 import Loading from '~/components/Loading/Loading';
+import { ownData } from '~/redux/reducer/OwnDataSlice';
 
 const cx = classNames.bind(styles);
 const editorConfig = {
@@ -22,7 +23,10 @@ const editorConfig = {
 };
 
 function UpdateNote({ showUpdate, setShowUpdate, data, utils }) {
-    const { noteItems, setNoteItems } = utils;
+    // redux
+    const dispatch = useDispatch();
+    const noteItems = useSelector((state) => state.ownData.notes);
+
     const user = useSelector((state) => state.user.user);
     const [loading, setLoading] = useState(false);
     const editor = useRef(null);
@@ -39,11 +43,7 @@ function UpdateNote({ showUpdate, setShowUpdate, data, utils }) {
         try {
             const response = await updateNote(data.id, values);
             const updatedNotebook = response.notebook;
-
-            const newNoteItems = noteItems.map((item) => {
-                return item.id === updatedNotebook.id ? updatedNotebook : item;
-            });
-            setNoteItems(newNoteItems);
+            dispatch(ownData.actions.updateNotes(updatedNotebook));
 
             setLoading(false);
             setShowUpdate(false);

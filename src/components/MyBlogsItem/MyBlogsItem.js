@@ -6,16 +6,19 @@ import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { deleteBlog } from '~/requestApi/requestBlog';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { ownData } from '~/redux/reducer/OwnDataSlice';
 
 const cx = classNames.bind(styles);
 
 function MyBlogsItem({ data }) {
+    const dispatch = useDispatch();
     const [showTippy, setShowTippy] = useState(false);
     const handleDelete = () => {
         setShowTippy(false);
         deleteBlog(data.id)
             .then((res) => {
-                console.log(res);
+                dispatch(ownData.actions.deleteBlogs(res.data));
             })
             .catch((error) => {
                 console.log(error);
@@ -23,7 +26,7 @@ function MyBlogsItem({ data }) {
     };
     return (
         <div className={cx('blog-item')}>
-            <h3 className={cx('blog-title')}>{data.title}</h3>
+            <h3 className={cx('blog-title')}>{data?.title}</h3>
             <div className={cx('author')}>
                 <span className={cx('timer')}>Chinh sua 1 gio truoc</span>
                 <span className={cx('dot')}></span>
@@ -37,7 +40,7 @@ function MyBlogsItem({ data }) {
                             <ul className={cx('drop-list')}>
                                 <li className={cx('drop-item')}>
                                     <Link
-                                        to={`${process.env.REACT_APP_ROOT}/post/${data.id}`}
+                                        to={`${process.env.REACT_APP_ROOT}/post/${data?.id}`}
                                         style={{ width: '100%', height: '100%' }}
                                     >
                                         Chinh sua

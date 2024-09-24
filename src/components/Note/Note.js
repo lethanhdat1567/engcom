@@ -7,16 +7,23 @@ import { useEffect, useState } from 'react';
 import CreateNote from './CreateNote/CreateNote';
 import NoteItem from '../NoteItem/NoteItem';
 import { readNote } from '~/requestApi/requestNote';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import UpdateNote from './UpdateNote/UpdateNote';
+import { ownData } from '~/redux/reducer/OwnDataSlice';
+import SkeletonLoading from '../Loading/SkeletonLoading';
 
 const cx = classNames.bind(styles);
 
 function Note({ white = false }) {
+    // redux
+    const dispatch = useDispatch();
+    const noteItems = useSelector((state) => state.ownData.notes);
     const user = useSelector((state) => state.user.user);
+
+    const [loading, setLoading] = useState(false);
+    const [createLoading, setCreateLoading] = useState(false);
     const [showNote, setShowNote] = useState(false);
     const [showCreateNote, setShowCreateNote] = useState(false);
-    const [noteItems, setNoteItems] = useState([]);
     const [showUpdate, setShowUpdate] = useState(false);
     const [updateValues, setUpdateValues] = useState({});
 
@@ -26,21 +33,23 @@ function Note({ white = false }) {
         setShowNote,
         showCreateNote,
         setShowCreateNote,
-        noteItems,
-        setNoteItems,
         UpdateNote,
         setShowUpdate,
         updateValues,
         setUpdateValues,
     };
     useEffect(() => {
-        const handleRequest = async () => {
-            const result = await readNote(user.id);
+        if (!noteItems) {
+            setLoading(true);
+            const handleRequest = async () => {
+                const result = await readNote(user.id);
 
-            setNoteItems([...noteItems, ...result.notebook]);
-        };
-        handleRequest();
-    }, []);
+                dispatch(ownData.actions.getNotes(result.notebook));
+                setLoading(false);
+            };
+            handleRequest();
+        }
+    }, [noteItems]);
     return (
         <>
             <div className={cx('note', { white })} onClick={() => setShowNote(true)}>
@@ -70,13 +79,18 @@ function Note({ white = false }) {
                     </div>
                     {/* Note item */}
                     <div className={cx('note-body')}>
-                        {noteItems.map((item, index) => {
-                            return <NoteItem utils={utilsNote} data={item} key={index} />;
-                        })}
+                        {loading ? (
+                            <SkeletonLoading dark count={5} height={70} margin={6} />
+                        ) : (
+                            noteItems?.map((item, index) => {
+                                return <NoteItem utils={utilsNote} data={item} key={index} />;
+                            })
+                        )}
                     </div>
+                    {createLoading && <SkeletonLoading dark count={1} height={70} margin={10} />}
                 </div>
             </div>
-            <CreateNote utils={utilsNote} />
+            <CreateNote setCreateLoading={setCreateLoading} createLoading={createLoading} utils={utilsNote} />
             <div className={cx('over-lay', { show: showNote })} onClick={() => setShowNote(false)}></div>
             <UpdateNote
                 showUpdate={showUpdate}

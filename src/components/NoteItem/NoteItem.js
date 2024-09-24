@@ -5,27 +5,33 @@ import { deleteNote } from '~/requestApi/requestNote';
 import CreateNote from '../Note/CreateNote/CreateNote';
 import { useState } from 'react';
 import UpdateNote from '../Note/UpdateNote/UpdateNote';
+import { useDispatch, useSelector } from 'react-redux';
+import { ownData } from '~/redux/reducer/OwnDataSlice';
 
 const cx = classNames.bind(styles);
 
 function NoteItem({ data, utils }) {
-    const { setNoteItems, noteItems, setShowUpdate, setUpdateValues } = utils;
+    const { setShowUpdate, setUpdateValues } = utils;
+    // redux
+    const dispatch = useDispatch();
+    const noteItems = useSelector((state) => state.ownData.notes);
+    const [deleteLoading, setDeleteLoading] = useState(false);
 
     const handleDelete = async () => {
-        const res = await deleteNote(data.id);
-
-        const deleteUser = res.data.data;
-        const newNotes = noteItems.filter((item, index) => {
-            return item.id !== deleteUser.id;
-        });
-        setNoteItems(newNotes);
+        if (!deleteLoading) {
+            setDeleteLoading(true);
+            const res = await deleteNote(data.id);
+            const deleteUser = res.data.data;
+            dispatch(ownData.actions.deleteNotes(deleteUser));
+            setDeleteLoading(false);
+        }
     };
     const handleUpdate = () => {
         setShowUpdate(true);
         setUpdateValues(data);
     };
     return (
-        <div className={cx('wrap')}>
+        <div className={cx('wrap', { delete: deleteLoading })}>
             <div className={cx('header')}>
                 <h4 className={cx('title')}>{data.title}</h4>
                 <div className={cx('utils')}>

@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-function AccountItem() {
+function AccountItem({ data }) {
     return (
         <Link>
             <div className={cx('wrap')}>
-                <Img src="" className={cx('avatar')} />
-                <p className={cx('desc')}>Xay dung trang web voi ReactJS</p>
+                <Img src={data.banner} className={cx('avatar')} />
+                <p className={cx('desc')}>{data.title}</p>
             </div>
         </Link>
     );

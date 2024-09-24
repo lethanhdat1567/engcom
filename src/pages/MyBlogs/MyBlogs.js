@@ -3,20 +3,33 @@ import styles from './MyBlogs.module.scss';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { readListBlog } from '~/requestApi/requestBlog';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import MyBlogsItem from '~/components/MyBlogsItem/MyBlogsItem';
+import { ownData } from '~/redux/reducer/OwnDataSlice';
+import Loading from '~/components/Loading/Loading';
+import SkeletonLoading from '~/components/Loading/SkeletonLoading';
 
 const cx = classNames.bind(styles);
 
 function MyBlogs() {
-    const [blogItems, setBlogItems] = useState([]);
+    const dispatch = useDispatch();
+    const blogItems = useSelector((state) => state.ownData.blogs);
     const user = useSelector((state) => state.user.user);
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
-        readListBlog(user.id)
-            .then((res) => {
-                setBlogItems([...blogItems, ...res.data]);
-            })
-            .catch((error) => console.log(error));
+        if (!blogItems) {
+            setLoading(true);
+            readListBlog(user.id)
+                .then((res) => {
+                    dispatch(ownData.actions.getBlogs(res.data));
+                    setLoading(false);
+                })
+                .catch((error) => {
+                    console.log(error);
+
+                    setLoading(false);
+                });
+        }
     }, []);
 
     return (
@@ -36,9 +49,13 @@ function MyBlogs() {
                             <div className={cx('seperate')}></div>
                         </div>
                         <div className={cx('blog-wrap')}>
-                            {blogItems.map((item, index) => {
-                                return <MyBlogsItem data={item} key={index} />;
-                            })}
+                            {loading ? (
+                                <SkeletonLoading height={100} margin={10} count={3} />
+                            ) : (
+                                blogItems?.map((item, index) => {
+                                    return <MyBlogsItem data={item} key={index} />;
+                                })
+                            )}
                         </div>
                     </div>
                     <div className="col-12 col-lg-4">sdsd</div>

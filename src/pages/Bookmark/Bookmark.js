@@ -2,10 +2,34 @@ import classNames from 'classnames/bind';
 import styles from './Bookmark.module.scss';
 import { Link } from 'react-router-dom';
 import MyBlogsItem from '~/components/MyBlogsItem/MyBlogsItem';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { readListBlog } from '~/requestApi/requestBlog';
+import { ownData } from '~/redux/reducer/OwnDataSlice';
+import SkeletonLoading from '~/components/Loading/SkeletonLoading';
 
 const cx = classNames.bind(styles);
 
 function Bookmark() {
+    const dispatch = useDispatch();
+    const blogItems = useSelector((state) => state.ownData.blogs);
+    const user = useSelector((state) => state.user.user);
+    const [loading, setLoading] = useState(false);
+    useEffect(() => {
+        if (!blogItems) {
+            setLoading(true);
+            readListBlog(user.id)
+                .then((res) => {
+                    dispatch(ownData.actions.getBlogs(res.data));
+                    setLoading(false);
+                })
+                .catch((error) => {
+                    console.log(error);
+
+                    setLoading(false);
+                });
+        }
+    }, []);
     return (
         <div className={cx('wrap')}>
             <div className={cx('header-wrap')}>
@@ -22,7 +46,13 @@ function Bookmark() {
                             </ul>
                             <div className={cx('seperate')}></div>
                             <div className={cx('blog-wrap')}>
-                                <MyBlogsItem />
+                                {loading ? (
+                                    <SkeletonLoading height={100} margin={10} count={3} />
+                                ) : (
+                                    blogItems?.map((item, index) => {
+                                        return <MyBlogsItem data={item} key={index} />;
+                                    })
+                                )}
                             </div>
                         </div>
                     </div>

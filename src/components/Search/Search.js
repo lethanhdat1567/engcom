@@ -5,6 +5,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
 import SearchContent from './SearchContent';
 import { useEffect, useState } from 'react';
+import imgs from '~/assets/Image';
 
 const cx = classNames.bind(styles);
 
@@ -17,6 +18,40 @@ function Search() {
             setSearchHoder('Search classes, users, blogs, ...');
         }
     };
+
+    const searchData = [
+        {
+            type: 'Users',
+            children: [
+                {
+                    title: 'Le Thanh Dat',
+                    banner: imgs.unsetAvatar,
+                },
+                {
+                    title: 'Le Thanh Dat',
+                    banner: imgs.unsetAvatar,
+                },
+            ],
+        },
+        {
+            type: 'Classes',
+            children: [
+                {
+                    title: 'Lop hoc vo',
+                    banner: imgs.unsetAvatar,
+                },
+            ],
+        },
+        {
+            type: 'Blogs',
+            children: [
+                {
+                    title: 'Cach hoc tieng anh',
+                    banner: imgs.unsetAvatar,
+                },
+            ],
+        },
+    ];
 
     useEffect(() => {
         window.addEventListener('resize', handleResize);
@@ -41,9 +76,9 @@ function Search() {
                                 <p className={cx('head-desc')}>Result of 'React'</p>
                             </div>
                             <div className={cx('search-content')}>
-                                <SearchContent />
-                                <SearchContent />
-                                <SearchContent />
+                                {searchData.map((item, index) => {
+                                    return <SearchContent key={index} data={item} />;
+                                })}
                             </div>
                         </div>
                     );

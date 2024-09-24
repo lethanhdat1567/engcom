@@ -4,9 +4,11 @@ import './DesignPost.scss';
 import JoditEditor from 'jodit-react';
 import { useRef, useState } from 'react';
 import Button from '~/components/Button';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createBlog } from '~/requestApi/requestBlog';
 import { useNavigate } from 'react-router-dom';
+import { ownData } from '~/redux/reducer/OwnDataSlice';
+import Loading from '~/components/Loading/Loading';
 
 const cx = classNames.bind(styles);
 
@@ -20,6 +22,7 @@ const editorConfig = {
 };
 function NewPost() {
     const user = useSelector((state) => state.user.user);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [titleValue, setTitleValue] = useState('');
@@ -35,6 +38,8 @@ function NewPost() {
         };
         try {
             const res = await createBlog(values);
+
+            dispatch(ownData.actions.setBlogs(res.data));
             setLoading(false);
             navigate('/me/post');
         } catch (error) {
@@ -44,6 +49,7 @@ function NewPost() {
     };
     return (
         <div className={cx('wrap')}>
+            {loading && <Loading />}
             <div className={cx('input-wrap')}>
                 <input
                     className={cx('input')}
