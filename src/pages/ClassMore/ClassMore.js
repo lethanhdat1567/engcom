@@ -1,40 +1,62 @@
 import classNames from 'classnames/bind';
 import styles from './ClassMore.module.scss';
 import CartItem from '~/components/CartItem';
+import imgs from '~/assets/Image';
 
 const cx = classNames.bind(styles);
 
 function ClassMore() {
     const classData = [
         {
-            title: 'Pro classes',
-            type: 'cart',
-            cost: 'cost',
+            title: 'Khoa hoc tieng anh cap toc',
             total: 100,
+            price: 200,
+            info: [
+                {
+                    user: 'Le Thanh Dat',
+                    img: imgs.unsetAvatar,
+                },
+                {
+                    view: '16.000',
+                },
+                {
+                    comment: '5',
+                },
+            ],
         },
         {
-            title: 'Pro classes',
-            type: 'cart',
-            cost: 'cost',
-            total: 200,
+            title: 'Khoa hoc tieng anh cap toc',
+            total: 100,
+            price: 200,
+            info: [
+                {
+                    user: 'Le Thanh Dat',
+                    img: imgs.unsetAvatar,
+                },
+                {
+                    view: '16.000',
+                },
+                {
+                    comment: '5',
+                },
+            ],
         },
         {
-            title: 'Pro classes',
-            type: 'cart',
-            cost: 'cost',
-            total: 200,
-        },
-        {
-            title: 'Pro classes',
-            type: 'cart',
-            cost: 'cost',
-            total: 200,
-        },
-        {
-            title: 'Pro classes',
-            type: 'cart',
-            cost: 'cost',
-            total: 200,
+            title: 'Khoa hoc tieng anh cap toc',
+            total: 100,
+            price: 200,
+            info: [
+                {
+                    user: 'Le Thanh Dat',
+                    img: imgs.unsetAvatar,
+                },
+                {
+                    view: '16.000',
+                },
+                {
+                    comment: '5',
+                },
+            ],
         },
     ];
     return (

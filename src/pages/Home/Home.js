@@ -73,6 +73,7 @@ function Home() {
                 {
                     title: 'Khoa hoc tieng anh cap toc',
                     total: 100,
+                    price: 200,
                     info: [
                         {
                             user: 'Le Thanh Dat',
@@ -89,6 +90,7 @@ function Home() {
                 {
                     title: 'Khoa hoc tieng anh cap toc',
                     total: 100,
+                    price: 200,
                     info: [
                         {
                             user: 'Le Thanh Dat',
@@ -105,6 +107,7 @@ function Home() {
                 {
                     title: 'Khoa hoc tieng anh cap toc',
                     total: 100,
+                    price: 200,
                     info: [
                         {
                             user: 'Le Thanh Dat',
@@ -121,6 +124,7 @@ function Home() {
                 {
                     title: 'Khoa hoc tieng anh cap toc',
                     total: 100,
+                    price: 200,
                     info: [
                         {
                             user: 'Le Thanh Dat',

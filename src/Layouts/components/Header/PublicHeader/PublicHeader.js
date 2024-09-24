@@ -4,13 +4,13 @@ import Button from '~/components/Button';
 
 const cx = classNames.bind(styles);
 
-function PublicHeader({ toggle, setToggle }) {
+function PublicHeader({ registerModal, setToggleRegister, loginModal, setToggleLoginr }) {
     return (
         <div className={cx('btn-wrap')}>
-            <Button classNames={cx('register')} onClick={() => setToggle(true)}>
+            <Button classNames={cx('register')} onClick={() => setToggleRegister(true)}>
                 Register
             </Button>
-            <Button onClick={() => setToggle(true)} primary>
+            <Button onClick={() => setToggleLoginr(true)} primary>
                 Login
             </Button>
         </div>

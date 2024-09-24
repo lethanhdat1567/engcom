@@ -28,6 +28,7 @@ import TeacherClassOverView from '~/pages/TeacherClassOverView/TeacherClassOverV
 import TeacherClassUser from '~/pages/TeacherClassUser/TeacherClassUSer';
 import TeacherCourse from '~/pages/TeacherCourse/TeacherCourse';
 import TeacherHome from '~/pages/TeacherHome/TeachderHome';
+import UpdateBLog from '~/pages/UpdateBlog/UpdateBlog';
 import UserAdmin from '~/pages/UserAdmin/UserAdmin';
 
 const publicPage = [
@@ -46,6 +47,7 @@ const studentPage = [
     { path: '/profile', element: Profile, layout: SingleLayout },
     { path: '/edit-profile', element: EditProfile, layout: null },
     { path: '/new-post', element: NewPost, layout: HeaderOnly },
+    { path: '/post/:slug', element: UpdateBLog, layout: HeaderOnly },
     { path: '/my-class', element: Classes },
     { path: '/classes/:slug', element: ClassMore },
     { path: '/me/post', element: MyBlogs },

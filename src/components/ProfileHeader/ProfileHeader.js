@@ -7,24 +7,31 @@ import { signOut } from 'firebase/auth';
 import { auth } from '~/firebase/config';
 import { useDispatch } from 'react-redux';
 import { usersSlice } from '~/redux/reducer/UserSlice';
-import { logoutRequest } from '~/requestApi/requestApi';
+import { logoutRequest } from '~/requestApi/requestSocial';
+import { useState } from 'react';
+import Loading from '../Loading/Loading';
 
 const cx = classNames.bind(styles);
 
 function ProfileHeader() {
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
 
     const handleLogout = async () => {
+        setLoading(true);
         try {
             await signOut(auth);
             await logoutRequest();
             dispatch(usersSlice.actions.logoutUser());
+            setLoading(false);
         } catch (error) {
+            setLoading(false);
             console.error('Error signing out:', error);
         }
     };
     return (
         <li className={cx('item')}>
+            {loading && <Loading />}
             <Tippy
                 interactive
                 trigger="click"

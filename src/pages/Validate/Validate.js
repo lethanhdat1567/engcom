@@ -12,7 +12,7 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '~/firebase/config';
 import Loading from '~/components/Loading/Loading';
-import { postSocial } from '~/requestApi/requestApi';
+import { postSocial } from '~/requestApi/requestSocial';
 import { useDispatch } from 'react-redux';
 import { usersSlice } from '~/redux/reducer/UserSlice';
 

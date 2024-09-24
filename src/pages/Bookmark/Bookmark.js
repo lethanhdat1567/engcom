@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './Bookmark.module.scss';
 import { Link } from 'react-router-dom';
-import BlogsList from '../MyBlogs/BlogsList';
+import MyBlogsItem from '~/components/MyBlogsItem/MyBlogsItem';
 
 const cx = classNames.bind(styles);
 
@@ -21,7 +21,9 @@ function Bookmark() {
                                 </li>
                             </ul>
                             <div className={cx('seperate')}></div>
-                            <BlogsList />
+                            <div className={cx('blog-wrap')}>
+                                <MyBlogsItem />
+                            </div>
                         </div>
                     </div>
                     <div className="col-12 col-lg-4">sdsd</div>

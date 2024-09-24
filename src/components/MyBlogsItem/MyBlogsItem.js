@@ -3,13 +3,27 @@ import styles from './MyBlogsItem.module.scss';
 import Tippy from '@tippyjs/react/headless';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
+import { deleteBlog } from '~/requestApi/requestBlog';
+import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 
-function MyBlogsItem() {
+function MyBlogsItem({ data }) {
+    const [showTippy, setShowTippy] = useState(false);
+    const handleDelete = () => {
+        setShowTippy(false);
+        deleteBlog(data.id)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
     return (
         <div className={cx('blog-item')}>
-            <h3 className={cx('blog-title')}>sasasasassaas</h3>
+            <h3 className={cx('blog-title')}>{data.title}</h3>
             <div className={cx('author')}>
                 <span className={cx('timer')}>Chinh sua 1 gio truoc</span>
                 <span className={cx('dot')}></span>
@@ -21,17 +35,27 @@ function MyBlogsItem() {
                     <div {...attrs}>
                         <div className={cx('drop')}>
                             <ul className={cx('drop-list')}>
-                                <li className={cx('drop-item')}>Chinh sua</li>
-                                <li className={cx('drop-item')}>Xoa</li>
+                                <li className={cx('drop-item')}>
+                                    <Link
+                                        to={`${process.env.REACT_APP_ROOT}/post/${data.id}`}
+                                        style={{ width: '100%', height: '100%' }}
+                                    >
+                                        Chinh sua
+                                    </Link>
+                                </li>
+                                <li className={cx('drop-item')} onClick={handleDelete}>
+                                    Delete
+                                </li>
                             </ul>
                         </div>
                     </div>
                 )}
                 placement="bottom-end"
-                trigger="click"
+                visible={showTippy}
+                onClickOutside={() => setShowTippy(false)}
                 interactive
             >
-                <span className={cx('icon')}>
+                <span className={cx('icon')} onClick={() => setShowTippy(true)}>
                     <FontAwesomeIcon icon={faEllipsis} />
                 </span>
             </Tippy>

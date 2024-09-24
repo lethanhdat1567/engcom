@@ -48,7 +48,12 @@ function Header() {
                 {user.id && user.role_id ? (
                     <PrivateHeader />
                 ) : (
-                    <PublicHeader toggle={regisModal} setToggle={setRegisModal} />
+                    <PublicHeader
+                        registerModal={regisModal}
+                        setToggleRegister={setRegisModal}
+                        loginModal={LoginModal}
+                        setToggleLoginr={setloginModal}
+                    />
                 )}
             </header>
             {regisModal && <Validate toggle={regisModal} setToggle={setRegisModal} field="Register" />}

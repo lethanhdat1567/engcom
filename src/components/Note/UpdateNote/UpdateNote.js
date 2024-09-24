@@ -1,14 +1,13 @@
 import classNames from 'classnames/bind';
-import styles from './CreateNote.module.scss';
+import styles from './UpdateNote.module.scss';
 import './Design.scss';
 import JoditEditor from 'jodit-react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import Button from '~/components/Button';
-import HeaderSingle from '~/Layouts/components/HeaderSingle/HeaderSingle';
 import { useSelector } from 'react-redux';
-import { createNote } from '~/requestApi/requestNote';
+import { updateNote } from '~/requestApi/requestNote';
 import Loading from '~/components/Loading/Loading';
 
 const cx = classNames.bind(styles);
@@ -17,17 +16,18 @@ const editorConfig = {
         insertImageAsBase64URI: true,
     },
     askBeforePasteHTML: false,
+    placeholder: '',
     width: 600,
     height: 300,
 };
 
-function CreateNote({ utils }) {
-    const { showCreateNote, setShowCreateNote, setNoteItems, noteItems } = utils;
+function UpdateNote({ showUpdate, setShowUpdate, data, utils }) {
+    const { noteItems, setNoteItems } = utils;
     const user = useSelector((state) => state.user.user);
     const [loading, setLoading] = useState(false);
     const editor = useRef(null);
-    const [content, setContent] = useState('');
-    const [titleValue, setTitleValue] = useState('');
+    const [content, setContent] = useState(data.content || '');
+    const [titleValue, setTitleValue] = useState(data.title || '');
 
     const handleSave = async () => {
         setLoading(true);
@@ -37,25 +37,35 @@ function CreateNote({ utils }) {
             content: content,
         };
         try {
-            const response = await createNote(values);
-            setNoteItems([...noteItems, response.data.notebook]);
+            const response = await updateNote(data.id, values);
+            const updatedNotebook = response.notebook;
+
+            const newNoteItems = noteItems.map((item) => {
+                return item.id === updatedNotebook.id ? updatedNotebook : item;
+            });
+            setNoteItems(newNoteItems);
+
             setLoading(false);
-            setShowCreateNote(false);
-            setContent('');
-            setTitleValue('');
+            setShowUpdate(false);
         } catch (error) {
             console.log(error);
             setLoading(false);
         }
     };
+    useEffect(() => {
+        if (data) {
+            setContent(data.content || '');
+            setTitleValue(data.title || '');
+        }
+    }, [data]);
     return (
         <>
-            <div className={cx('wrap', { show: showCreateNote })}>
+            <div className={cx('wrap', { show: showUpdate })}>
                 {loading && <Loading />}
                 <div className={cx('content')}>
                     <div className={cx('header-wrap')}>
-                        <h4 className={cx('title')}>Create Note</h4>
-                        <span className={cx('x-mark')} onClick={() => setShowCreateNote(false)}>
+                        <h4 className={cx('title')}>Update Note</h4>
+                        <span className={cx('x-mark')} onClick={() => setShowUpdate(false)}>
                             <FontAwesomeIcon icon={faXmark} />
                         </span>
                     </div>
@@ -77,12 +87,9 @@ function CreateNote({ utils }) {
                     </Button>
                 </div>
             </div>
-            <div
-                className={cx('over-lay', { show: showCreateNote })}
-                onClick={() => setShowCreateNote(false)}
-            ></div>
+            <div className={cx('over-lay', { show: showUpdate })} onClick={() => setShowUpdate(false)}></div>
         </>
     );
 }
 
-export default CreateNote;
+export default UpdateNote;

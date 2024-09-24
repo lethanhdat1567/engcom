@@ -1,12 +1,11 @@
 import classNames from 'classnames/bind';
-import styles from './NewPost.module.scss';
-import './DesignPost.scss';
+import styles from './UpdateBlog.module.scss';
 import JoditEditor from 'jodit-react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Button from '~/components/Button';
 import { useSelector } from 'react-redux';
-import { createBlog } from '~/requestApi/requestBlog';
-import { useNavigate } from 'react-router-dom';
+import { createBlog, readBlog, updateBlog } from '~/requestApi/requestBlog';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -17,11 +16,14 @@ const editorConfig = {
     toolbar: true,
     askBeforePasteHTML: false,
     height: 450,
+    placeholder: '',
 };
-function NewPost() {
+function UpdateBLog() {
     const user = useSelector((state) => state.user.user);
+    const { slug } = useParams();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const [blogId, setBlogId] = useState();
     const [titleValue, setTitleValue] = useState('');
     const [editorContent, setEditorContent] = useState('');
     const editor = useRef(null);
@@ -29,12 +31,12 @@ function NewPost() {
     const handleExport = async () => {
         setLoading(true);
         const values = {
-            user_id: user.id,
             title: titleValue,
             content: editorContent,
         };
+
         try {
-            const res = await createBlog(values);
+            const res = await updateBlog(blogId, values);
             setLoading(false);
             navigate('/me/post');
         } catch (error) {
@@ -42,6 +44,16 @@ function NewPost() {
             setLoading(false);
         }
     };
+
+    useEffect(() => {
+        readBlog(slug)
+            .then((res) => {
+                setTitleValue(res.data.title);
+                setEditorContent(res.data.content);
+                setBlogId(res.data.id);
+            })
+            .catch((error) => console.log(error));
+    }, [slug]);
     return (
         <div className={cx('wrap')}>
             <div className={cx('input-wrap')}>
@@ -61,7 +73,7 @@ function NewPost() {
                         className="post-design"
                         ref={editor}
                         value={editorContent}
-                        onChange={(newContent) => setEditorContent(newContent)}
+                        onBlur={(newContent) => setEditorContent(newContent)}
                         config={editorConfig}
                     />
                 </div>
@@ -70,4 +82,4 @@ function NewPost() {
     );
 }
 
-export default NewPost;
+export default UpdateBLog;

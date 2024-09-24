@@ -3,26 +3,44 @@ import styles from './Note.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faSquarePlus } from '@fortawesome/free-regular-svg-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CreateNote from './CreateNote/CreateNote';
 import NoteItem from '../NoteItem/NoteItem';
+import { readNote } from '~/requestApi/requestNote';
+import { useSelector } from 'react-redux';
+import UpdateNote from './UpdateNote/UpdateNote';
 
 const cx = classNames.bind(styles);
 
 function Note({ white = false }) {
+    const user = useSelector((state) => state.user.user);
     const [showNote, setShowNote] = useState(false);
     const [showCreateNote, setShowCreateNote] = useState(false);
+    const [noteItems, setNoteItems] = useState([]);
+    const [showUpdate, setShowUpdate] = useState(false);
+    const [updateValues, setUpdateValues] = useState({});
 
-    const noteItems = [
-        {
-            title: 'Day la note title',
-            content: 'Day la note content',
-        },
-        {
-            title: 'Day la note title',
-            content: 'Hom nay la ngay 21/9/2024',
-        },
-    ];
+    // Midlewate
+    const utilsNote = {
+        showNote,
+        setShowNote,
+        showCreateNote,
+        setShowCreateNote,
+        noteItems,
+        setNoteItems,
+        UpdateNote,
+        setShowUpdate,
+        updateValues,
+        setUpdateValues,
+    };
+    useEffect(() => {
+        const handleRequest = async () => {
+            const result = await readNote(user.id);
+
+            setNoteItems([...noteItems, ...result.notebook]);
+        };
+        handleRequest();
+    }, []);
     return (
         <>
             <div className={cx('note', { white })} onClick={() => setShowNote(true)}>
@@ -53,13 +71,20 @@ function Note({ white = false }) {
                     {/* Note item */}
                     <div className={cx('note-body')}>
                         {noteItems.map((item, index) => {
-                            return <NoteItem setShowCreateNote={setShowCreateNote} data={item} key={index} />;
+                            return <NoteItem utils={utilsNote} data={item} key={index} />;
                         })}
                     </div>
                 </div>
             </div>
-            <CreateNote showCreateNote={showCreateNote} setShowCreateNote={setShowCreateNote} />
+            <CreateNote utils={utilsNote} />
             <div className={cx('over-lay', { show: showNote })} onClick={() => setShowNote(false)}></div>
+            <UpdateNote
+                showUpdate={showUpdate}
+                setShowUpdate={setShowUpdate}
+                data={updateValues}
+                utils={utilsNote}
+            />
+            <div className={cx('over-lay', { show: showUpdate })} onClick={() => setShowUpdate(false)}></div>
         </>
     );
 }

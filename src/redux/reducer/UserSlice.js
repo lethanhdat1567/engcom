@@ -4,11 +4,12 @@ export const usersSlice = createSlice({
     name: 'user',
     initialState: {
         token: localStorage.getItem('ACCESS_TOKEN') || '',
-        user: {},
+        user: JSON.parse(localStorage.getItem('USER')) || {},
     },
     reducers: {
         getUser(state, action) {
             state.user = action.payload;
+            localStorage.setItem('USER', JSON.stringify(state.user));
         },
         getToken(state, action) {
             state.token = action.payload;
@@ -16,9 +17,7 @@ export const usersSlice = createSlice({
         },
         updateRole(state, action) {
             state.user.role_id = action.payload;
-        },
-        updateUser(state, action) {
-            state.user = action.payload;
+            localStorage.setItem('USER', JSON.stringify(state.user));
         },
         logoutUser(state) {
             state.user = {};
