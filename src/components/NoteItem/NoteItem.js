@@ -12,7 +12,7 @@ function NoteItem({ data, utils }) {
     const { setNoteItems, noteItems, setShowUpdate, setUpdateValues } = utils;
 
     const handleDelete = async () => {
-        const res = await deleteNote(data.id, data.user_id);
+        const res = await deleteNote(data.id);
 
         const deleteUser = res.data.data;
         const newNotes = noteItems.filter((item, index) => {
