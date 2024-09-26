@@ -8,17 +8,21 @@ const cx = classNames.bind(styles);
 function SearchContent({ data }) {
     return (
         <div className={cx('wrap')}>
-            <div className={cx('heading')}>
-                <h3 className={cx('title')}>{data.type}</h3>
-                <Button text classNames={cx('btn')}>
-                    Show more
-                </Button>
-            </div>
-            <div className={cx('content')}>
-                {data.children.map((item, index) => {
-                    return <AccountItem key={index} data={item} />;
-                })}
-            </div>
+            {data.children.length > 0 && (
+                <>
+                    <div className={cx('heading')}>
+                        <h3 className={cx('title')}>{data.type}</h3>
+                        <Button text classNames={cx('btn')}>
+                            Show more
+                        </Button>
+                    </div>
+                    <div className={cx('content')}>
+                        {data.children.map((item, index) => {
+                            return <AccountItem key={index} data={item} />;
+                        })}
+                    </div>
+                </>
+            )}
         </div>
     );
 }

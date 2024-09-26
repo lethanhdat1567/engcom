@@ -1,14 +1,17 @@
 import classNames from 'classnames/bind';
 import styles from './TeacherNavbar.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faChevronUp, faLock, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles);
 
 function NavList({ item }) {
     const [active, setActive] = useState(true);
+    const cartData = useSelector((state) => state.teacher.carts);
+    const courses = useSelector((state) => state.teacher.courses);
     return (
         <li className={cx('item-wrap')}>
             <div className={cx('item-main')} onClick={() => setActive(!active)}>
@@ -20,17 +23,36 @@ function NavList({ item }) {
                     <FontAwesomeIcon icon={active ? faChevronUp : faChevronDown} className="fa-md" />
                 </span>
             </div>
-            <ul className={cx('list-wrap', { active: active })}>
-                {item.children?.map((item, index) => {
+            <ul className={cx('list-wrap', { active })}>
+                {item.children?.map((childItem, index) => {
+                    let store = null;
+                    if (childItem.title === 'Your class') {
+                        store = cartData; // Đây là đối tượng
+                    } else if (childItem.title === 'Courses') {
+                        store = courses; // Đây là mảng
+                    }
+
                     return (
                         <li key={index}>
                             <NavLink
-                                to={`/class/1${item.to}`}
-                                className={(nav) => cx('item-sub', { active: nav.isActive })}
+                                to={`/${childItem.to}`}
+                                className={({ isActive }) => cx('item-sub', { active: isActive })}
                                 end
                             >
-                                <span className={cx('item-icon-sub')}>{item.icon}</span>
-                                <span className={cx('item-link')}>{item.title}</span>
+                                <span className={cx('item-icon-sub')}>{childItem.icon}</span>
+                                <span className={cx('item-link')}>{childItem.title}</span>
+                                {childItem.title === 'Your class' && Object.keys(store).length === 0 && (
+                                    <span style={{ color: 'red' }} className={cx('null-alert')}>
+                                        <FontAwesomeIcon icon={faXmark} />
+                                    </span>
+                                )}
+                                {childItem.title === 'Courses' &&
+                                    Array.isArray(store) &&
+                                    store.length === 0 && (
+                                        <span style={{ color: 'red' }} className={cx('null-alert')}>
+                                            <FontAwesomeIcon icon={faXmark} />
+                                        </span>
+                                    )}
                             </NavLink>
                         </li>
                     );

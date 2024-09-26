@@ -11,6 +11,8 @@ import { useSelector } from 'react-redux';
 const cx = classNames.bind(styles);
 
 function CartItem({ data }) {
+    console.log(data);
+
     const user = useSelector((state) => state.user.user);
     const [regisModal, setRegisModal] = useState(false);
     const handleOpenModal = () => {

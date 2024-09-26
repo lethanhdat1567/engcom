@@ -8,7 +8,8 @@ import { useEffect, useState } from 'react';
 const cx = classNames.bind(styles);
 
 function CartForm({ states }) {
-    const { cartPrice, cartDiscount, setTitleCart, setCartPrice, setCartDiscount, setCartTotal } = states;
+    const { cartPrice, titleCart, cartDiscount, setTitleCart, setCartPrice, setCartDiscount, setCartTotal } =
+        states;
     const [cartType, setCartType] = useState('free');
     const props = {
         name: 'file',
@@ -40,6 +41,7 @@ function CartForm({ states }) {
                 <Form.Item label="Cart title">
                     <Input
                         placeholder="Write your cart title..."
+                        value={titleCart}
                         onChange={(e) => setTitleCart(e.target.value)}
                     />
                 </Form.Item>
@@ -53,14 +55,22 @@ function CartForm({ states }) {
                             <Row gutter={[16, 16]}>
                                 <Col span={24}>
                                     <Input
+                                        type="number"
                                         placeholder="your price..."
-                                        onChange={(e) => setCartPrice(e.target.value)}
+                                        onChange={(e) => {
+                                            const value = Math.max(0, e.target.value);
+                                            setCartPrice(value);
+                                        }}
                                     />
                                 </Col>
                                 <Col span={24}>
                                     <Input
+                                        type="number"
                                         placeholder="your discount..."
-                                        onChange={(e) => setCartDiscount(e.target.value)}
+                                        onChange={(e) => {
+                                            const value = Math.max(0, e.target.value);
+                                            setCartDiscount(value);
+                                        }}
                                     />
                                 </Col>
                             </Row>

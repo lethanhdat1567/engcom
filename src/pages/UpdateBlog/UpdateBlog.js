@@ -8,13 +8,11 @@ import { createBlog, readBlog, updateBlog } from '~/requestApi/requestBlog';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ownData } from '~/redux/reducer/OwnDataSlice';
 import Loading from '~/components/Loading/Loading';
+import { storeData } from '~/redux/reducer/StoreSlice';
 
 const cx = classNames.bind(styles);
 
 const editorConfig = {
-    uploader: {
-        insertImageAsBase64URI: true,
-    },
     toolbar: true,
     askBeforePasteHTML: false,
     height: 450,
@@ -38,6 +36,7 @@ function UpdateBLog() {
             title: titleValue,
             content: editorContent,
         };
+        console.log(values);
 
         try {
             const res = await updateBlog(blogId, values);

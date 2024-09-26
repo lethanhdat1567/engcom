@@ -9,13 +9,11 @@ import { createBlog } from '~/requestApi/requestBlog';
 import { useNavigate } from 'react-router-dom';
 import { ownData } from '~/redux/reducer/OwnDataSlice';
 import Loading from '~/components/Loading/Loading';
+import { storeData } from '~/redux/reducer/StoreSlice';
 
 const cx = classNames.bind(styles);
 
 const editorConfig = {
-    uploader: {
-        insertImageAsBase64URI: true,
-    },
     toolbar: true,
     askBeforePasteHTML: false,
     height: 450,
@@ -34,17 +32,16 @@ function NewPost() {
         const values = {
             user_id: user.id,
             title: titleValue,
-            content: editorContent,
+            content: `${editorContent}`,
         };
+
         try {
             const res = await createBlog(values);
-
             dispatch(ownData.actions.setBlogs(res.data));
             setLoading(false);
             navigate('/me/post');
         } catch (error) {
-            console.log(error);
-            setLoading(false);
+            console.error('Error details:', error.response ? error.response.data : error.message);
         }
     };
     return (

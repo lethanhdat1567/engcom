@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faMoneyBill1, faUser } from '@fortawesome/free-solid-svg-icons';
 import AnalystItem from '../TeacherClassHome/AnalystItem';
 import CartItem from '~/components/CartItem';
+import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles);
 
@@ -25,6 +26,8 @@ function TeacherClassOverView() {
             total: '16.203$',
         },
     ];
+
+    const cartData = useSelector((state) => state.teacher.carts);
     return (
         <div className={cx('wrap')}>
             <div className="row row-cols-1 row-cols-md-3 g-5">
@@ -38,13 +41,11 @@ function TeacherClassOverView() {
             </div>
             <h1 className={cx('title')}>Your class cart</h1>
             <div className={cx('cart-wrap')}>
-                <CartItem data={{ title: 'test' }} />
+                <CartItem data={cartData} />
             </div>
             <div className={cx('desc-wrap')}>
                 <h2 className={cx('desc-title')}>Your description</h2>
-                <p className={cx('desc')}>
-                    sdsadi;ashdfa;hf;ddsadi;ashdfa;hf;ddsadi;ashdfa;hf;ddsadi;ashdfa;hf;ddsadi;ashdfa;hf;ddsadi;ashdfa;hf;ddsadi;ashdfa;hf;ddsadi;ashdfa;hf;ddsadi;ashdfa;hf;ddsadi;ashdfa;hf;d
-                </p>
+                <div className={cx('desc')} dangerouslySetInnerHTML={{ __html: cartData.desc }}></div>
             </div>
         </div>
     );

@@ -7,7 +7,7 @@
 .cart-wrap {
     margin: 0 auto;
     width: 358px;
-    height: 270px;
+    height: auto;
     @include abs.screen(sm) {
         width: 100%;
     }

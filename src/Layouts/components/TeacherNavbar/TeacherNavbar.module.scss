@@ -38,7 +38,8 @@
 }
 .item,
 .item-main,
-.item-sub {
+.item-sub,
+.lock {
     user-select: none;
     width: 100%;
     display: flex;
@@ -67,8 +68,10 @@
     }
 }
 .item-sub {
+    position: relative;
     padding-left: 30px;
 }
+
 .item-main {
     justify-content: space-between;
     border-bottom: 2px solid #9c9b9b;
@@ -77,6 +80,12 @@
     font-size: 1.4rem;
     font-weight: 400;
     color: #000 !important;
+}
+.null-alert {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
 }
 .wrap {
     width: 23%;

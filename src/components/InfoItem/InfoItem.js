@@ -11,7 +11,7 @@ const cx = classNames.bind(styles);
 function InfoItem({ data, className, large = false }) {
     return (
         <Link>
-            {data.img ? (
+            {data.user ? (
                 <div className={cx('wrap', className)}>
                     <Img src={`${data?.img}`} className={cx('img', { large })} />
                     <p className={cx('info')}>{data?.user}</p>

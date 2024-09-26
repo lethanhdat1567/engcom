@@ -6,9 +6,6 @@ import JoditEditor from 'jodit-react';
 const cx = classNames.bind(styles);
 
 const editorConfig = {
-    uploader: {
-        insertImageAsBase64URI: true,
-    },
     width: '100%',
     height: 600,
 };

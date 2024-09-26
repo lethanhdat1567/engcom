@@ -2,23 +2,37 @@ import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import Search from '~/components/Search';
 import Logo from '~/components/Logo/Logo';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Validate from '~/pages/Validate';
 import PrivateHeader from './PrivateHeader/PrivateHeader';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import PublicHeader from './PublicHeader/PublicHeader';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { refreshToken } from '~/requestApi/requestToken';
+import { usersSlice } from '~/redux/reducer/UserSlice';
 
 const cx = classNames.bind(styles);
 
 function Header() {
+    const dispatch = useDispatch();
     const [regisModal, setRegisModal] = useState(false);
     const [LoginModal, setloginModal] = useState(false);
     const user = useSelector((state) => state.user.user);
+    const refresh_token = useSelector((state) => state.user.refresh_token);
     const navigate = useNavigate();
     const location = useLocation();
+
+    useEffect(() => {
+        const interval = setInterval(async () => {
+            const res = await refreshToken(refresh_token);
+            console.log(res);
+            dispatch(usersSlice.actions.getToken(res.data.access_token));
+            dispatch(usersSlice.actions.getRefreshToken(res.data.refresh_token));
+        }, 3600 * 1000);
+        return () => clearInterval(interval);
+    }, []);
 
     const showBackButton =
         location.pathname !== '/' && location.pathname !== '/community' && location.pathname !== '/blogs';

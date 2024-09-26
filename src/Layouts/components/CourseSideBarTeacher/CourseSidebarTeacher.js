@@ -6,11 +6,28 @@ import CreateLesson from './Lesson/CreateLesson';
 import CourseTeacher from './CourseTeacher/CourseTeacher';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 function CourseSidebarTeacher({ showNav, setShowNav }) {
+    const courses = useSelector((state) => state.teacher.courses);
+    const navigate = useNavigate();
+    const { slug } = useParams();
     const [showCreate, setShowCreate] = useState(false);
+    const lessons = useSelector((state) => state.teacher.lessons);
+
+    const handleSave = () => {
+        if (lessons.length !== 0) {
+            if (slug) {
+                navigate('/class/1');
+            } else {
+                navigate('/create-class/courses');
+            }
+        }
+    };
+
     return (
         <div className={cx('navbar', { show: showNav })}>
             <div className={cx('head-wrap')}>
@@ -24,8 +41,17 @@ function CourseSidebarTeacher({ showNav, setShowNav }) {
                     {showCreate ? 'Delete' : 'Create'} Course
                 </button>
             </div>
+            {/* Create course */}
             {showCreate && <CreateCourse setShowCreate={setShowCreate} />}
-            <CourseTeacher />
+            {/* Create lesson */}
+            {courses.map((item, index) => {
+                return <CourseTeacher key={index} index={index} data={item} />;
+            })}
+            <div className={cx('save-course-wrap', { block: lessons.length === 0 })} onClick={handleSave}>
+                <button className={cx('save-course')} style={{ background: 'blue' }}>
+                    Save Course
+                </button>
+            </div>
         </div>
     );
 }

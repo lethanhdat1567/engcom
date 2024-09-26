@@ -6,6 +6,7 @@ import SingleLayout from '~/Layouts/SingleLayout/SingleLayout';
 import TeacherClassLayout from '~/Layouts/TeacherClassLayout/TeacherClassLayout';
 import BlogAdmin from '~/pages/BlogAdmin/BlogAdmin';
 import Blogs from '~/pages/Blogs';
+import BlogsDetail from '~/pages/BlogsDetail/BlogsDetail';
 import Bookmark from '~/pages/Bookmark/Bookmark';
 import ClassAdmin from '~/pages/ClassAdmin/ClassAdmin';
 import ClassDetail from '~/pages/ClassDetail/ClassDetail';
@@ -44,6 +45,7 @@ const studentPage = [
     { path: '/', element: Home },
     { path: '/community', element: Community },
     { path: '/blogs', element: Blogs },
+    { path: '/blogs/:slug', element: BlogsDetail, layout: HeaderOnly },
     { path: '/profile', element: Profile, layout: SingleLayout },
     { path: '/edit-profile', element: EditProfile, layout: null },
     { path: '/new-post', element: NewPost, layout: HeaderOnly },
@@ -68,13 +70,23 @@ const teacherPage = [
     { path: '/course/:slug', element: Course, layout: CourseLayout },
     { path: '/me/post', element: MyBlogs },
     { path: '/me/bookmark', element: Bookmark },
+    // Update class
     { path: '/class/:slug/', element: TeacherClassHome, layout: TeacherClassLayout },
     { path: '/class/:slug/overview', element: TeacherClassOverView, layout: TeacherClassLayout },
     { path: '/class/:slug/courses', element: TeacherClassCourse, layout: TeacherClassLayout },
     { path: '/class/:slug/users', element: TeacherClassUser, layout: TeacherClassLayout },
     { path: '/class/:slug/comments', element: TeacherClassComment, layout: TeacherClassLayout },
-    // Course
+    // Create class
+    { path: '/create-class', element: TeacherClassHome, layout: TeacherClassLayout },
+    { path: '/create-class/overview', element: TeacherClassOverView, layout: TeacherClassLayout },
+    { path: '/create-class/courses', element: TeacherClassCourse, layout: TeacherClassLayout },
+    { path: '/create-class/users', element: TeacherClassUser, layout: TeacherClassLayout },
+    { path: '/create-class/comments', element: TeacherClassComment, layout: TeacherClassLayout },
+    // Update course
     { path: '/class/:slug/course/:slug', element: TeacherCourse, layout: CourseLayout },
+    // Create course
+    { path: '/class/course', element: TeacherCourse, layout: CourseLayout },
+    // Not found
     { path: '*', element: NotFound, layout: null },
 ];
 const adminPage = [

@@ -1,0 +1,22 @@
+.wrap {
+    margin-bottom: 20px;
+}
+.head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.user {
+    width: 100px;
+}
+.info {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.title {
+    margin-bottom: 20px;
+}

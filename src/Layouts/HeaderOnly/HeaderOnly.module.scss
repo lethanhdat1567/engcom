@@ -1,5 +1,9 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
 .content {
     margin-top: var(--header-height);
     padding: 0 32px;
     background-color: #fff;
+    @include abs.screen(md) {
+        padding: 10px;
+    }
 }

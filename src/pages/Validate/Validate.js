@@ -57,9 +57,11 @@ function Validate({ toggle, setToggle, field }) {
         setLoading(true);
         try {
             const result = await signInWithPopup(auth, ggProvider);
+
             const userValue = await postSocial(result);
             dispatch(usersSlice.actions.getUser(userValue.data.user));
             dispatch(usersSlice.actions.getToken(userValue.data.access_token));
+            dispatch(usersSlice.actions.getRefreshToken(userValue.data.refresh_token));
             setToggle(false);
             if (userValue.data.user.role_id === 1) {
                 navigate('/user/role');

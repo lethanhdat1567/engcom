@@ -5,11 +5,13 @@ import { faBook, faComment, faEye, faHome, faUsersLine, faXmark } from '@fortawe
 import Button from '~/components/Button';
 import NavList from './NavList';
 import { edit, view } from '~/assets/Icon';
+import { useParams } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 function TeacherNavbar({ showNav, setShowNav }) {
-    const navItems = [
+    const { slug } = useParams();
+    const createNav = [
         {
             title: 'Design',
             icon: edit,
@@ -17,12 +19,12 @@ function TeacherNavbar({ showNav, setShowNav }) {
                 {
                     title: 'Your class',
                     icon: <FontAwesomeIcon className="fa-md" icon={faHome} />,
-                    to: '',
+                    to: 'create-class',
                 },
                 {
                     title: 'Courses',
                     icon: <FontAwesomeIcon className="fa-md" icon={faBook} />,
-                    to: '/courses',
+                    to: 'create-class/courses',
                 },
             ],
         },
@@ -33,17 +35,46 @@ function TeacherNavbar({ showNav, setShowNav }) {
                 {
                     title: 'OverView',
                     icon: <FontAwesomeIcon className="fa-md" icon={faEye} />,
-                    to: '/overview',
+                    to: 'create-class/overview',
+                },
+            ],
+        },
+    ];
+    const navItems = [
+        {
+            title: 'Design',
+            icon: edit,
+            children: [
+                {
+                    title: 'Your class',
+                    icon: <FontAwesomeIcon className="fa-md" icon={faHome} />,
+                    to: 'class/1',
+                },
+                {
+                    title: 'Courses',
+                    icon: <FontAwesomeIcon className="fa-md" icon={faBook} />,
+                    to: 'class/1/courses',
+                },
+            ],
+        },
+        {
+            title: 'View',
+            icon: view,
+            children: [
+                {
+                    title: 'OverView',
+                    icon: <FontAwesomeIcon className="fa-md" icon={faEye} />,
+                    to: 'class/1/overview',
                 },
                 {
                     title: 'Users',
                     icon: <FontAwesomeIcon className="fa-md" icon={faUsersLine} />,
-                    to: '/users',
+                    to: 'class/1/users',
                 },
                 {
                     title: 'All comments',
                     icon: <FontAwesomeIcon className="fa-md" icon={faComment} />,
-                    to: '/comments',
+                    to: 'class/1/comments',
                 },
             ],
         },
@@ -57,9 +88,13 @@ function TeacherNavbar({ showNav, setShowNav }) {
                 </span>
             </div>
             <ul className={cx('list')}>
-                {navItems.map((item, index) => {
-                    return <NavList item={item} key={index} />;
-                })}
+                {slug
+                    ? navItems.map((item, index) => {
+                          return <NavList item={item} key={index} />;
+                      })
+                    : createNav.map((item, index) => {
+                          return <NavList item={item} key={index} />;
+                      })}
             </ul>
             <Button classNames={cx('export-btn')}>Export class</Button>
         </div>

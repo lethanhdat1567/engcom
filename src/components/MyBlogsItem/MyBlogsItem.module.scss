@@ -47,7 +47,9 @@
         margin: 0;
     }
     .drop-item {
-        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-size: 1.4rem;
         cursor: pointer;
         color: #444;
@@ -55,12 +57,18 @@
         display: flex;
         align-items: center;
         gap: 16px;
-        min-width: 200px;
+        min-width: 150px;
+        height: 38px;
         &:hover {
             color: #292929;
             background-color: #f0f0f0;
         }
     }
+}
+.link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @keyframes fadeIn {

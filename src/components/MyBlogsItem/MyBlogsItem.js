@@ -8,6 +8,7 @@ import { deleteBlog } from '~/requestApi/requestBlog';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { ownData } from '~/redux/reducer/OwnDataSlice';
+import { storeData } from '~/redux/reducer/StoreSlice';
 
 const cx = classNames.bind(styles);
 
@@ -42,6 +43,7 @@ function MyBlogsItem({ data }) {
                                     <Link
                                         to={`${process.env.REACT_APP_ROOT}/post/${data?.id}`}
                                         style={{ width: '100%', height: '100%' }}
+                                        className={cx('link')}
                                     >
                                         Chinh sua
                                     </Link>
