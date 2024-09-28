@@ -11,8 +11,6 @@ import { useSelector } from 'react-redux';
 const cx = classNames.bind(styles);
 
 function CartItem({ data }) {
-    console.log(data);
-
     const user = useSelector((state) => state.user.user);
     const [regisModal, setRegisModal] = useState(false);
     const handleOpenModal = () => {
@@ -20,17 +18,25 @@ function CartItem({ data }) {
             setRegisModal(true);
         }
     };
+
     return (
         <>
             <div className={cx('wrap')} onClick={handleOpenModal}>
                 <Link
-                    to={user.role_id ? `${process.env.REACT_APP_ROOT}/class/1` : ``}
+                    to={user.role_id && data.to ? `${process.env.REACT_APP_ROOT}${data.to}` : ``}
                     className={cx('banner')}
                 >
-                    <img src={imgs.cartImg || imgs.NoImg} className={cx('img')} />
+                    <img
+                        src={
+                            data.banner
+                                ? `${process.env.REACT_APP_BACKEND_UPLOAD}/${data.banner}`
+                                : imgs.NoImg
+                        }
+                        className={cx('img')}
+                    />
                 </Link>
                 <div className={cx('info')}>
-                    <Link to={user.role_id ? `${process.env.REACT_APP_ROOT}/class/1` : ``}>
+                    <Link to={user.role_id && data.to ? `${process.env.REACT_APP_ROOT}${data.to}` : ``}>
                         <h3 className={cx('title')}>{data.title}</h3>
                     </Link>
                     {data.total > 0 && (

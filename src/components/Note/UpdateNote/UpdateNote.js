@@ -25,7 +25,6 @@ const editorConfig = {
 function UpdateNote({ showUpdate, setShowUpdate, data, utils }) {
     // redux
     const dispatch = useDispatch();
-    const noteItems = useSelector((state) => state.ownData.notes);
 
     const user = useSelector((state) => state.user.user);
     const [loading, setLoading] = useState(false);
@@ -40,13 +39,13 @@ function UpdateNote({ showUpdate, setShowUpdate, data, utils }) {
             title: titleValue,
             content: content,
         };
+        setShowUpdate(false);
         try {
             const response = await updateNote(data.id, values);
             const updatedNotebook = response.notebook;
             dispatch(ownData.actions.updateNotes(updatedNotebook));
 
             setLoading(false);
-            setShowUpdate(false);
         } catch (error) {
             console.log(error);
             setLoading(false);
@@ -60,8 +59,8 @@ function UpdateNote({ showUpdate, setShowUpdate, data, utils }) {
     }, [data]);
     return (
         <>
+            {loading && <Loading />}
             <div className={cx('wrap', { show: showUpdate })}>
-                {loading && <Loading />}
                 <div className={cx('content')}>
                     <div className={cx('header-wrap')}>
                         <h4 className={cx('title')}>Update Note</h4>

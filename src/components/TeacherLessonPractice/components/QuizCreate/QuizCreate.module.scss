@@ -22,3 +22,24 @@
 .answers {
     margin-bottom: 20px;
 }
+.choice-wrap {
+    margin: 10px 0px;
+    border: 0.7px solid #000;
+    padding: 6px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .choice-head {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+}
+.choice-delete {
+    background-color: red;
+    color: #fff;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}

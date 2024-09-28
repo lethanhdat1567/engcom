@@ -4,25 +4,83 @@ import SliderBanner from '../Home/SliderBanner';
 import Classes from '../Classes/Classes';
 import EmptyCart from './EmptyCart';
 import CartItem from '~/components/CartItem';
+import imgs from '~/assets/Image';
 
 const cx = classNames.bind(styles);
 
 function TeacherHome() {
-    const cartData = [
+    const Cartsdata = [
         {
-            total: 10,
+            title: 'Khoa hoc tieng anh cap toc',
+            banner: imgs.profileBanner,
+            total: 100,
+            price: 200,
+            info: [
+                {
+                    user: 'Le Thanh Dat',
+                    img: imgs.unsetAvatar, // Avatar lay tu BE
+                },
+                {
+                    view: '16.000',
+                },
+                {
+                    comment: '5',
+                },
+            ],
         },
         {
-            total: 10,
+            title: 'Khoa hoc tieng anh cap toc',
+            banner: imgs.profileBanner,
+            total: 100,
+            price: 200,
+            info: [
+                {
+                    user: 'Le Thanh Dat',
+                    img: imgs.unsetAvatar, // Avatar lay tu BE
+                },
+                {
+                    view: '16.000',
+                },
+                {
+                    comment: '5',
+                },
+            ],
         },
         {
-            total: 10,
+            title: 'Khoa hoc tieng anh cap toc',
+            banner: imgs.profileBanner,
+            total: 100,
+            price: 200,
+            info: [
+                {
+                    user: 'Le Thanh Dat',
+                    img: imgs.unsetAvatar, // Avatar lay tu BE
+                },
+                {
+                    view: '16.000',
+                },
+                {
+                    comment: '5',
+                },
+            ],
         },
         {
-            total: 10,
-        },
-        {
-            total: 10,
+            title: 'Khoa hoc tieng anh cap toc',
+            banner: imgs.profileBanner,
+            total: 100,
+            price: 200,
+            info: [
+                {
+                    user: 'Le Thanh Dat',
+                    img: imgs.unsetAvatar, // Avatar lay tu BE
+                },
+                {
+                    view: '16.000',
+                },
+                {
+                    comment: '5',
+                },
+            ],
         },
     ];
     return (
@@ -38,7 +96,7 @@ function TeacherHome() {
                             <div className="col">
                                 <EmptyCart />
                             </div>
-                            {cartData.map((item, index) => {
+                            {Cartsdata.map((item, index) => {
                                 return (
                                     <div className="col" key={index}>
                                         <CartItem data={item} />

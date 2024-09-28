@@ -24,19 +24,17 @@ function TeacherClassHome() {
     const [cartPrice, setCartPrice] = useState(0);
     const [cartDiscount, setCartDiscount] = useState(0);
     const [cartTotal, setCartTotal] = useState(0);
-    const [cartBanner, setCartBanner] = useState('dsd');
     const [descValue, setDescValue] = useState(cartData.desc || '');
     const [cartType, setCartType] = useState('free');
+    const [cartThumbnail, setCartThumbnail] = useState(cartData.banner || '');
     const cartId = useId();
     const validateCart = () => {
-        return titleCart !== '' && cartBanner !== '';
+        return titleCart !== '' && cartThumbnail !== '';
     };
 
     const states = {
         titleCart,
         setTitleCart,
-        cartBanner,
-        setCartBanner,
         cartPrice,
         setCartPrice,
         cartDiscount,
@@ -50,7 +48,7 @@ function TeacherClassHome() {
         icon: <FontAwesomeIcon className="fa-md" icon={faHome} />,
         price: cartPrice,
         total: cartTotal,
-        to: '/home',
+        banner: cartThumbnail,
     };
     useEffect(() => {
         if (cartTotal === 0) {
@@ -67,7 +65,7 @@ function TeacherClassHome() {
                 price: cartPrice,
                 discount: cartDiscount,
                 total: cartTotal,
-                banner: cartBanner,
+                banner: cartThumbnail,
                 desc: descValue,
                 type: cartType,
             };
@@ -92,7 +90,11 @@ function TeacherClassHome() {
                     </div>
                     <div className="col-12 col-sm-6 col-md-8">
                         <div className={cx('cart-info')}>
-                            <CartForm states={states} />
+                            <CartForm
+                                setCartBanner={setCartThumbnail}
+                                cartBanner={cartThumbnail}
+                                states={states}
+                            />
                         </div>
                     </div>
                 </div>

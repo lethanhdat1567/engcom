@@ -6,6 +6,7 @@ export const teacher = createSlice({
         carts: {},
         courses: [],
         lessons: [],
+        content: [],
     },
     reducers: {
         // carts
@@ -50,14 +51,17 @@ export const teacher = createSlice({
         },
         // Lesson content
         setContent(state, action) {
-            const lessonIndex = state.lessons.findIndex((item) => item.id === action.payload.id);
-            if (lessonIndex !== -1) {
-                const updatedLesson = {
-                    ...state.lessons[lessonIndex],
-                    ...action.payload,
-                };
-                state.lessons[lessonIndex] = updatedLesson;
+            state.content.push(action.payload);
+        },
+        updateContent(state, action) {
+            const stateIndex = state.content.findIndex((item) => item.id === action.payload.id);
+            if (stateIndex !== -1) {
+                state.content[stateIndex] = { ...state.lessons[stateIndex], ...action.payload };
             }
+        },
+        deleteContent(state, action) {
+            const newCourse = state.content.filter((item) => item.id !== action.payload);
+            state.content = newCourse;
         },
     },
 });

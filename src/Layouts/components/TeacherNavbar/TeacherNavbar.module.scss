@@ -129,13 +129,44 @@
     height: 20px;
 }
 
-.export-btn {
+.export-btn,
+.delete-btn {
     margin-top: 10px;
     width: 100%;
     color: #fff;
     background-color: #6597fe !important;
 }
-
+.delete-btn {
+    background-color: red !important;
+}
+.btn-cancle {
+    background-color: red !important;
+    color: #fff;
+}
+.modal {
+    width: 100%;
+    height: 100%;
+    .modal-icon {
+        font-size: 4rem;
+        color: rgb(206, 206, 2);
+    }
+    .modal-title {
+        font-size: 3rem;
+        font-weight: 500;
+    }
+    .drop-head {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 30px;
+    }
+    .drop-mbody {
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+        font-weight: 400;
+    }
+}
 @keyframes fadeIn {
     0% {
         opacity: 0;

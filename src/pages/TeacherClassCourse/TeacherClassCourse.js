@@ -31,10 +31,10 @@ function TeacherClassCourse() {
             </div>
         </Link>
     ) : (
-        <Link to={`${process.env.REACT_APP_ROOT}/class/course`}>
-            <div className={cx('wrap')}>
-                <h1 className={cx('title')}>Your courses</h1>
+        <div className={cx('wrap')}>
+            <h1 className={cx('title')}>Your courses</h1>
 
+            <Link to={`${process.env.REACT_APP_ROOT}/class/course`}>
                 <div className={cx('body')}>
                     <div className={cx('btn-wrap')}>
                         <span className={cx('icon')}>
@@ -46,8 +46,8 @@ function TeacherClassCourse() {
                         return <CourseItem data={item} key={index} />;
                     })}
                 </div>
-            </div>
-        </Link>
+            </Link>
+        </div>
     );
 }
 

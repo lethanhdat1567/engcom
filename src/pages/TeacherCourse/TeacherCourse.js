@@ -9,18 +9,23 @@ const cx = classNames.bind(styles);
 
 function TeacherCourse() {
     const activeLesson = useSelector((state) => state.activeLesson.lesson);
+    const lessonContents = useSelector((state) => state.teacher.content);
+    const data = lessonContents.find((item) => {
+        return item.lesson_id === activeLesson.id;
+    });
+
     switch (activeLesson.type) {
         case 0: {
-            return <TeacherLessonVideo />;
+            return <TeacherLessonVideo data={data} />;
         }
         case 1: {
-            return <TeacherLessonText />;
+            return <TeacherLessonText data={data} />;
         }
         case 2: {
-            return <TeacherLessonPractice />;
+            return <TeacherLessonPractice data={data} />;
         }
         default: {
-            return <div>Alo chua co gi het !</div>;
+            return <div>Set your lesson type!</div>;
         }
     }
 }

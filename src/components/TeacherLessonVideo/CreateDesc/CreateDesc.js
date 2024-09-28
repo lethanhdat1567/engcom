@@ -6,10 +6,10 @@ import JoditEditor from 'jodit-react';
 
 const cx = classNames.bind(styles);
 
-function CreateDesc() {
+function CreateDesc({ utils }) {
     return (
         <div className={cx('wrap')}>
-            <JoditEditor config={{ height: 600 }} />
+            <JoditEditor config={{ height: 600 }} onBlur={(content) => utils.setDescValue(content)} />
         </div>
     );
 }

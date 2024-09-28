@@ -4,28 +4,34 @@ import { Button, Col, Flex, Form, Input, message, Row, Select, Upload } from 'an
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
+import { requestDeleteUpload, requestUploadCart } from '~/requestApi/requestUpload';
 
 const cx = classNames.bind(styles);
 
-function CartForm({ states }) {
+function CartForm({ states, setCartBanner, cartBanner }) {
     const { cartPrice, titleCart, cartDiscount, setTitleCart, setCartPrice, setCartDiscount, setCartTotal } =
         states;
     const [cartType, setCartType] = useState('free');
     const props = {
         name: 'file',
-        action: '',
-        headers: {
-            authorization: 'authorization-text',
-        },
+        action: `${process.env.REACT_APP_BACKEND_API}engcom/upload-cart`,
         onChange(info) {
-            if (info.file.status !== 'uploading') {
-                console.log(info.file, info.fileList);
+            if (info.file.status === 'uploading') {
+                console.log('Uploading:', info.fileList);
             }
             if (info.file.status === 'done') {
                 message.success(`${info.file.name} file uploaded successfully`);
+                setCartBanner(info.file.response.url);
             } else if (info.file.status === 'error') {
                 message.error(`${info.file.name} file upload failed.`);
             }
+        },
+        onRemove(file) {
+            requestDeleteUpload(cartBanner)
+                .then((res) => {
+                    setCartBanner('');
+                })
+                .catch((error) => console.log(error));
         },
     };
 

@@ -102,7 +102,7 @@ function CreateLessonForm({ showCreateLesson, setShowCreateLesson, course_id }) 
                     <span className={cx('sub-desc')}>{lessonType[typeValue]?.lesson}</span>
                     <Select
                         onChange={(value) => setTypeValue(value)}
-                        defaultValue={lessonType[0].value}
+                        value={lessonType[typeValue].value}
                         style={{
                             width: 120,
                         }}

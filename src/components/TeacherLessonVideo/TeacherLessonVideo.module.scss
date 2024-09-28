@@ -22,6 +22,17 @@
         }
     }
 }
+.delete-btn {
+    background-color: red;
+    color: #fff;
+    margin: 10px 0px;
+}
 .desc {
     margin-top: 20px;
+}
+
+.btn-wrap {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
 }

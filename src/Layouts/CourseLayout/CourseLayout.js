@@ -4,11 +4,13 @@ import HeaderCourse from '../components/HeaderCourse/HeaderCourse';
 import CourseFooter from '../components/CourseFooter/CourseFooter';
 import { useState } from 'react';
 import CourseSidebarTeacher from '../components/CourseSideBarTeacher/CourseSidebarTeacher';
+import { useSelector } from 'react-redux';
+import CourseSidebar from '../components/CourseSidebar/CourseSidebar';
 const cx = classNames.bind(styles);
 
 function CourseLayout({ children }) {
     const [showNav, setShowNav] = useState(true);
-
+    const user = useSelector((state) => state.user.user);
     return (
         <div className={cx('wrap')}>
             <HeaderCourse />
@@ -16,9 +18,9 @@ function CourseLayout({ children }) {
             <div className={cx('body')}>
                 <div className={cx('content', { full: !showNav })}>{children}</div>
                 {/* Student */}
-                {/* <CourseSidebar showNav={showNav} /> */}
+                {user.role_id === 2 && <CourseSidebar showNav={showNav} />}
                 {/* Teacher */}
-                <CourseSidebarTeacher showNav={showNav} setShowNav={setShowNav} />
+                {user.role_id === 3 && <CourseSidebarTeacher showNav={showNav} setShowNav={setShowNav} />}
             </div>
             <CourseFooter showNav={showNav} setShowNav={setShowNav} />
         </div>

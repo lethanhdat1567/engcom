@@ -5,6 +5,8 @@ import { faComment, faMoneyBill1, faUser } from '@fortawesome/free-solid-svg-ico
 import AnalystItem from '../TeacherClassHome/AnalystItem';
 import CartItem from '~/components/CartItem';
 import { useSelector } from 'react-redux';
+import CourseItem from '~/components/CourseItem/CourseItem';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -28,9 +30,11 @@ function TeacherClassOverView() {
     ];
 
     const cartData = useSelector((state) => state.teacher.carts);
+    const courses = useSelector((state) => state.teacher.courses);
+
     return (
         <div className={cx('wrap')}>
-            <div className="row row-cols-1 row-cols-md-3 g-5">
+            {/* <div className="row row-cols-1 row-cols-md-3 g-5">
                 {AnaData.map((item, index) => {
                     return (
                         <div className="col" key={index}>
@@ -38,7 +42,7 @@ function TeacherClassOverView() {
                         </div>
                     );
                 })}
-            </div>
+            </div> */}
             <h1 className={cx('title')}>Your class cart</h1>
             <div className={cx('cart-wrap')}>
                 <CartItem data={cartData} />
@@ -46,6 +50,14 @@ function TeacherClassOverView() {
             <div className={cx('desc-wrap')}>
                 <h2 className={cx('desc-title')}>Your description</h2>
                 <div className={cx('desc')} dangerouslySetInnerHTML={{ __html: cartData.desc }}></div>
+            </div>
+            <div className={cx('course-wrap')}>
+                <h2 className={cx('course-titlte')}>Courses</h2>
+                <Link to={`${process.env.REACT_APP_ROOT}/class/course`}>
+                    {courses.map((item, index) => {
+                        return <CourseItem data={item} key={index} />;
+                    })}
+                </Link>
             </div>
         </div>
     );
