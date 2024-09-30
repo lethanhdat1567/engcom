@@ -5,11 +5,33 @@ import Classes from '../Classes/Classes';
 import EmptyCart from './EmptyCart';
 import CartItem from '~/components/CartItem';
 import imgs from '~/assets/Image';
+import { useEffect, useState } from 'react';
+import { getClasses } from '~/requestApi/requestClass';
+import { useSelector } from 'react-redux';
+import CartLoading from '~/components/Loading/CartLoading/CartLoading';
 
 const cx = classNames.bind(styles);
 
 function TeacherHome() {
-    const Cartsdata = [
+    const user = useSelector((state) => state.user.user);
+
+    const [Cartsdata, setCartsData] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        setLoading(true);
+        getClasses(user.id)
+            .then((res) => {
+                setCartsData(res.data);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.log(error);
+                setLoading(false);
+            });
+    }, []);
+
+    const CartsdataClone = [
         {
             title: 'Khoa hoc tieng anh cap toc',
             banner: imgs.profileBanner,
@@ -96,6 +118,12 @@ function TeacherHome() {
                             <div className="col">
                                 <EmptyCart />
                             </div>
+                            {loading &&
+                                Array.from({ length: 3 }).map((_, index) => (
+                                    <div className="col" key={index}>
+                                        <CartLoading />
+                                    </div>
+                                ))}
                             {Cartsdata.map((item, index) => {
                                 return (
                                     <div className="col" key={index}>

@@ -20,6 +20,9 @@ export const teacher = createSlice({
             state.carts = {};
         },
         // courses
+        setUpdateCourse(state, action) {
+            state.courses = action.payload;
+        },
         setCourse(state, action) {
             state.courses.push(action.payload);
         },
@@ -35,6 +38,9 @@ export const teacher = createSlice({
             const newLesson = state.lessons.filter((item) => item.course_id !== action.payload);
             state.lessons = newLesson;
         },
+        deleteAllCourse(state, action) {
+            state.courses = [];
+        },
         // lesson
         setLesson(state, action) {
             state.lessons.push(action.payload);
@@ -49,6 +55,9 @@ export const teacher = createSlice({
             const newCourse = state.lessons.filter((item) => item.id !== action.payload);
             state.lessons = newCourse;
         },
+        deleteAllLesson(state, action) {
+            state.lessons = [];
+        },
         // Lesson content
         setContent(state, action) {
             state.content.push(action.payload);
@@ -62,6 +71,15 @@ export const teacher = createSlice({
         deleteContent(state, action) {
             const newCourse = state.content.filter((item) => item.id !== action.payload);
             state.content = newCourse;
+        },
+        deleteAllContent(state, action) {
+            state.content = [];
+        },
+        resetState(state) {
+            state.carts = {};
+            state.courses = [];
+            state.lessons = [];
+            state.content = [];
         },
     },
 });

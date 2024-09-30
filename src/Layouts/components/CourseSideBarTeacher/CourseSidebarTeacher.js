@@ -12,11 +12,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 function CourseSidebarTeacher({ showNav, setShowNav }) {
+    const carts = useSelector((state) => state.teacher.carts);
     const courses = useSelector((state) => state.teacher.courses);
+    const lessons = useSelector((state) => state.teacher.lessons);
+    const contents = useSelector((state) => state.teacher.content);
     const navigate = useNavigate();
     const { slug } = useParams();
     const [showCreate, setShowCreate] = useState(false);
-    const lessons = useSelector((state) => state.teacher.lessons);
 
     const handleSave = () => {
         if (lessons.length !== 0) {

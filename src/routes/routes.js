@@ -83,7 +83,7 @@ const teacherPage = [
     { path: '/create-class/users', element: TeacherClassUser, layout: TeacherClassLayout },
     { path: '/create-class/comments', element: TeacherClassComment, layout: TeacherClassLayout },
     // Update course
-    { path: '/class/:slug/course/:slug', element: TeacherCourse, layout: CourseLayout },
+    { path: '/class/:slug/course', element: TeacherCourse, layout: CourseLayout },
     // Create course
     { path: '/class/course', element: TeacherCourse, layout: CourseLayout },
     // Not found

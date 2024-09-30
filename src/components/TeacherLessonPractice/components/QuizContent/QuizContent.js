@@ -24,7 +24,7 @@ function QuizContent({ data }) {
                                 key={index}
                                 onClick={() => setChoiceActive(index)}
                             >
-                                {`${letter}. ${item}`}
+                                {`${letter}. ${item.name}`}
                             </li>
                         );
                     })}

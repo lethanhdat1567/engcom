@@ -6,10 +6,7 @@ export const requestUploadCart = async (file) => {
     return result;
 };
 export const requestDeleteUpload = async (file) => {
-    console.log(file);
-
     const value = { url: file };
-    console.log(value);
 
     const result = await request.post('engcom/delete-cart', value);
 

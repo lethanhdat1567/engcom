@@ -11,6 +11,7 @@ import Button from '~/components/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { teacher } from '~/redux/reducer/TeacherSlice';
 import { useNavigate, useParams } from 'react-router-dom';
+import { getClasses, getDetailClass } from '~/requestApi/requestClass';
 
 const cx = classNames.bind(styles);
 
@@ -19,14 +20,16 @@ function TeacherClassHome() {
     const navigate = useNavigate();
     const cartData = useSelector((state) => state.teacher.carts);
     const { slug } = useParams();
+    const user = useSelector((state) => state.user.user);
     // Data
-    const [titleCart, setTitleCart] = useState(cartData.title || '');
-    const [cartPrice, setCartPrice] = useState(0);
-    const [cartDiscount, setCartDiscount] = useState(0);
-    const [cartTotal, setCartTotal] = useState(0);
-    const [descValue, setDescValue] = useState(cartData.desc || '');
-    const [cartType, setCartType] = useState('free');
-    const [cartThumbnail, setCartThumbnail] = useState(cartData.banner || '');
+    const [titleCart, setTitleCart] = useState(cartData.name || '');
+    const [cartPrice, setCartPrice] = useState(cartData.price || 0);
+    const [cartDiscount, setCartDiscount] = useState(cartData.discount || 0);
+    const [cartTotal, setCartTotal] = useState(cartData.total || 0);
+    const [cartPassword, setCartPassword] = useState(cartData.password || '');
+    const [descValue, setDescValue] = useState(cartData.description || '');
+    const [cartType, setCartType] = useState(cartData.type || 'public');
+    const [cartThumbnail, setCartThumbnail] = useState(cartData.thumbnail || '');
     const cartId = useId();
     const validateCart = () => {
         return titleCart !== '' && cartThumbnail !== '';
@@ -41,38 +44,74 @@ function TeacherClassHome() {
         setCartDiscount,
         cartTotal,
         setCartTotal,
+        cartPassword,
+        setCartPassword,
+        cartType,
+        setCartType,
     };
 
     const cartItem = {
-        title: titleCart,
+        name: titleCart,
         icon: <FontAwesomeIcon className="fa-md" icon={faHome} />,
         price: cartPrice,
         total: cartTotal,
-        banner: cartThumbnail,
+        thumbnail: cartThumbnail,
     };
-    useEffect(() => {
-        if (cartTotal === 0) {
-            setCartType('free');
-        } else {
-            setCartType('fee');
-        }
-    }, [cartTotal]);
     const handleSave = () => {
         if (validateCart()) {
             const values = {
                 id: cartId,
-                title: titleCart,
+                user_id: user.id,
+                name: titleCart,
                 price: cartPrice,
                 discount: cartDiscount,
                 total: cartTotal,
-                banner: cartThumbnail,
-                desc: descValue,
+                password: cartPassword,
+                thumbnail: cartThumbnail,
+                description: descValue,
                 type: cartType,
             };
             dispatch(teacher.actions.setCart(values));
-            slug ? navigate('/class/1/courses') : navigate('/create-class/courses');
+            slug ? navigate(`/class/${slug}/courses`) : navigate('/create-class/courses');
         }
     };
+
+    useEffect(() => {
+        if (cartType === 'public') {
+            setCartPrice(0);
+            setCartDiscount(0);
+            setCartTotal(0);
+            setCartPassword('');
+        } else if (cartType === 'cost') {
+            setCartPassword('');
+        } else {
+            setCartPrice(0);
+            setCartDiscount(0);
+            setCartTotal(0);
+        }
+    }, [cartType]);
+    useEffect(() => {
+        setTitleCart(cartData.name);
+        setCartPrice(cartData.price);
+        setCartDiscount(cartData.discount);
+        setCartTotal(cartData.total);
+        setCartPassword(cartData.password);
+        setDescValue(cartData.description);
+        setCartType(cartData.type);
+        setCartThumbnail(cartData.thumbnail);
+    }, [cartData]);
+    useEffect(() => {
+        if (slug && Object.keys(cartData).length === 0) {
+            getDetailClass(slug)
+                .then((res) => {
+                    const cart = res.data;
+                    dispatch(teacher.actions.setCart(cart));
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    }, [slug, cartData]);
     return (
         <div className={cx('wrap')}>
             <div className={cx('cart-wrap')}>

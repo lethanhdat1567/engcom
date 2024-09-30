@@ -11,6 +11,7 @@ const cx = classNames.bind(styles);
 
 function HeaderCreateCourse() {
     const navigate = useNavigate();
+
     return (
         <div className={cx('wrap')}>
             <div className={cx('left')}>

@@ -16,8 +16,6 @@ const cx = classNames.bind(styles);
 function BlogItem({ data }) {
     const { blog, user } = data;
     const { firstImage, content } = extractContent(blog?.content);
-    console.log(blog?.content);
-
     const ellipData = [
         {
             title: 'Chia se len Facebook',

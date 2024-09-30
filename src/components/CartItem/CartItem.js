@@ -23,21 +23,21 @@ function CartItem({ data }) {
         <>
             <div className={cx('wrap')} onClick={handleOpenModal}>
                 <Link
-                    to={user.role_id && data.to ? `${process.env.REACT_APP_ROOT}${data.to}` : ``}
+                    to={data.id && `${process.env.REACT_APP_ROOT}/class/${data.id}`}
                     className={cx('banner')}
                 >
                     <img
                         src={
-                            data.banner
-                                ? `${process.env.REACT_APP_BACKEND_UPLOAD}/${data.banner}`
+                            data.thumbnail
+                                ? `${process.env.REACT_APP_BACKEND_UPLOAD}/${data.thumbnail}`
                                 : imgs.NoImg
                         }
                         className={cx('img')}
                     />
                 </Link>
                 <div className={cx('info')}>
-                    <Link to={user.role_id && data.to ? `${process.env.REACT_APP_ROOT}${data.to}` : ``}>
-                        <h3 className={cx('title')}>{data.title}</h3>
+                    <Link to={data.id && `${process.env.REACT_APP_ROOT}/class/${data.id}`}>
+                        <h3 className={cx('title')}>{data.name}</h3>
                     </Link>
                     {data.total > 0 && (
                         <div className={cx('cost')}>

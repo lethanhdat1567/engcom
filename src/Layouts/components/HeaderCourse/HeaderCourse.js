@@ -15,14 +15,14 @@ const cx = classNames.bind(styles);
 
 function HeaderCourse() {
     const navigate = useNavigate();
-    const location = useLocation();
+    const user = useSelector((state) => state.user.user);
     const handleBack = () => {
         navigate(-1);
     };
     return (
         <div className={cx('wrap')}>
             <div className={cx('left')}>
-                {location.pathname !== '/create-class' && (
+                {user.role_id !== 3 && (
                     <div className={cx('icon-back')} onClick={handleBack}>
                         <FontAwesomeIcon icon={faChevronLeft} className="fa-xl" />
                     </div>

@@ -34,13 +34,15 @@ function QuizCreate() {
     );
 
     const handleSave = () => {
+        const questions = questionData.map((item, index) => {
+            return { name: item, is_correct: index === correctAnswerIndex ? 1 : 0 };
+        });
         const values = {
             id,
             lesson_id: lesson.id,
             title: title,
-            desc: desc,
-            questions: questionData,
-            correctAnswerIndex: correctAnswerIndex,
+            content: desc,
+            questions: questions,
         };
         dispatch(teacher.actions.setContent(values));
     };

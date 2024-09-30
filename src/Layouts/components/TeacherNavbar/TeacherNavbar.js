@@ -13,19 +13,29 @@ import {
 import NavList from './NavList';
 import { edit, view } from '~/assets/Icon';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '~/components/Button';
 import { useState } from 'react';
 import Modal from '~/components/Modal/Modal';
 import { Flex } from 'antd';
+import { requestDeleteUpload, requestDeleteVideo } from '~/requestApi/requestUpload';
+import { teacher } from '~/redux/reducer/TeacherSlice';
+import Loading from '~/components/Loading/Loading';
+import { createClass } from '~/requestApi/requestClass';
+import { activeLesson } from '~/redux/reducer/ActiveLesson';
 
 const cx = classNames.bind(styles);
 
 function TeacherNavbar({ showNav, setShowNav }) {
     const { slug } = useParams();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
+    // redux data
     const cartsCreate = useSelector((state) => state.teacher.carts);
     const coursesCreate = useSelector((state) => state.teacher.courses);
+    const lessonsCreate = useSelector((state) => state.teacher.lessons);
+    const contentsCreate = useSelector((state) => state.teacher.content);
 
     const [showModal, setShowModal] = useState(false);
 
@@ -66,12 +76,12 @@ function TeacherNavbar({ showNav, setShowNav }) {
                 {
                     title: 'Your class',
                     icon: <FontAwesomeIcon className="fa-md" icon={faHome} />,
-                    to: 'class/1',
+                    to: `class/${slug}`,
                 },
                 {
                     title: 'Courses',
                     icon: <FontAwesomeIcon className="fa-md" icon={faBook} />,
-                    to: 'class/1/courses',
+                    to: `class/${slug}/courses`,
                 },
             ],
         },
@@ -82,25 +92,42 @@ function TeacherNavbar({ showNav, setShowNav }) {
                 {
                     title: 'OverView',
                     icon: <FontAwesomeIcon className="fa-md" icon={faEye} />,
-                    to: 'class/1/overview',
+                    to: `class/${slug}/overview`,
                 },
                 {
                     title: 'Users',
                     icon: <FontAwesomeIcon className="fa-md" icon={faUsersLine} />,
-                    to: 'class/1/users',
+                    to: `class/${slug}/users`,
                 },
                 {
                     title: 'All comments',
                     icon: <FontAwesomeIcon className="fa-md" icon={faComment} />,
-                    to: 'class/1/comments',
+                    to: `class/${slug}/comments`,
                 },
             ],
         },
     ];
-
+    const contents = useSelector((state) => state.teacher.content);
     const handleClick = () => {
         if (Object.keys(cartsCreate).length > 0 && coursesCreate.length > 0) {
-            console.log('export');
+            setLoading(true);
+            const values = {
+                carts: cartsCreate,
+                courses: coursesCreate,
+                lessons: lessonsCreate,
+                contents: contentsCreate,
+            };
+            createClass(values)
+                .then((res) => {
+                    setLoading(false);
+                    dispatch(teacher.actions.resetState());
+                    dispatch(activeLesson.actions.deleteActiveLesson());
+                    navigate('/');
+                })
+                .catch((error) => {
+                    setLoading(false);
+                    console.log(error);
+                });
         }
     };
     const handleCancle = () => {
@@ -110,11 +137,33 @@ function TeacherNavbar({ showNav, setShowNav }) {
         }
         navigate('/');
     };
+
     const handleAdopt = () => {
+        setLoading(true);
+        if (cartsCreate.banner) {
+            requestDeleteUpload(cartsCreate.banner);
+        }
+        contents.map((item, index) => {
+            if (item.video) {
+                requestDeleteVideo({ url: item.video })
+                    .then((res) => {
+                        setLoading(false);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        setLoading(false);
+                    });
+            }
+        });
+        dispatch(teacher.actions.deleteCarts());
+        dispatch(teacher.actions.deleteAllCourse());
+        dispatch(teacher.actions.deleteAllLesson());
+        dispatch(teacher.actions.deleteAllContent());
         navigate('/');
     };
     return (
         <>
+            {loading && <Loading />}
             <div className={cx('wrap', { show: showNav })}>
                 <div className={cx('head-wrap')}>
                     <h2 className={cx('title')}>Navigation</h2>
