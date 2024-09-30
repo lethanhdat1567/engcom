@@ -49,7 +49,7 @@ function TeacherClassOverView() {
             </div>
             <div className={cx('desc-wrap')}>
                 <h2 className={cx('desc-title')}>Your description</h2>
-                <div className={cx('desc')} dangerouslySetInnerHTML={{ __html: cartData.desc }}></div>
+                <div className={cx('desc')} dangerouslySetInnerHTML={{ __html: cartData.description }}></div>
             </div>
             <div className={cx('course-wrap')}>
                 <h2 className={cx('course-titlte')}>Courses</h2>

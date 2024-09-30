@@ -21,8 +21,9 @@ import { Flex } from 'antd';
 import { requestDeleteUpload, requestDeleteVideo } from '~/requestApi/requestUpload';
 import { teacher } from '~/redux/reducer/TeacherSlice';
 import Loading from '~/components/Loading/Loading';
-import { createClass } from '~/requestApi/requestClass';
+import { createClass, deleteClass, updateClass } from '~/requestApi/requestClass';
 import { activeLesson } from '~/redux/reducer/ActiveLesson';
+import { faLess } from '@fortawesome/free-brands-svg-icons';
 
 const cx = classNames.bind(styles);
 
@@ -109,7 +110,8 @@ function TeacherNavbar({ showNav, setShowNav }) {
     ];
     const contents = useSelector((state) => state.teacher.content);
     const handleClick = () => {
-        if (Object.keys(cartsCreate).length > 0 && coursesCreate.length > 0) {
+        // Create
+        if (Object.keys(cartsCreate).length > 0 && coursesCreate.length > 0 && !slug) {
             setLoading(true);
             const values = {
                 carts: cartsCreate,
@@ -128,7 +130,38 @@ function TeacherNavbar({ showNav, setShowNav }) {
                     setLoading(false);
                     console.log(error);
                 });
+            // Update
+        } else if (Object.keys(cartsCreate).length > 0 && coursesCreate.length > 0 && slug) {
+            setLoading(true);
+            const values = {
+                carts: cartsCreate,
+                courses: coursesCreate,
+                lessons: lessonsCreate,
+                contents: contentsCreate,
+            };
+
+            updateClass(values, slug)
+                .then((res) => {
+                    console.log(res);
+                    setLoading(false); // Hoặc setLoading(faLess);
+                    navigate('/');
+                })
+                .catch((error) => {
+                    console.error(error);
+                    setLoading(false);
+                });
         }
+    };
+    const handleDeleteCart = () => {
+        setLoading(true);
+        deleteClass(cartsCreate.id)
+            .then((res) => {
+                setLoading(false);
+                navigate('/');
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
     const handleCancle = () => {
         if (Object.keys(cartsCreate).length > 0 || coursesCreate.length > 0) {
@@ -139,27 +172,35 @@ function TeacherNavbar({ showNav, setShowNav }) {
     };
 
     const handleAdopt = () => {
-        setLoading(true);
-        if (cartsCreate.banner) {
-            requestDeleteUpload(cartsCreate.banner);
-        }
-        contents.map((item, index) => {
-            if (item.video) {
-                requestDeleteVideo({ url: item.video })
-                    .then((res) => {
-                        setLoading(false);
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                        setLoading(false);
-                    });
+        if (!slug) {
+            setLoading(true);
+            if (cartsCreate.banner) {
+                requestDeleteUpload(cartsCreate.banner);
             }
-        });
-        dispatch(teacher.actions.deleteCarts());
-        dispatch(teacher.actions.deleteAllCourse());
-        dispatch(teacher.actions.deleteAllLesson());
-        dispatch(teacher.actions.deleteAllContent());
-        navigate('/');
+            contents.map((item, index) => {
+                if (item.video) {
+                    requestDeleteVideo({ url: item.video })
+                        .then((res) => {
+                            setLoading(false);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                            setLoading(false);
+                        });
+                }
+            });
+            dispatch(teacher.actions.deleteCarts());
+            dispatch(teacher.actions.deleteAllCourse());
+            dispatch(teacher.actions.deleteAllLesson());
+            dispatch(teacher.actions.deleteAllContent());
+            navigate('/');
+        } else {
+            dispatch(teacher.actions.deleteCarts());
+            dispatch(teacher.actions.deleteAllCourse());
+            dispatch(teacher.actions.deleteAllLesson());
+            dispatch(teacher.actions.deleteAllContent());
+            navigate('/');
+        }
     };
     return (
         <>
@@ -183,13 +224,18 @@ function TeacherNavbar({ showNav, setShowNav }) {
                 <Button
                     classNames={cx('export-btn')}
                     onClick={handleClick}
-                    disable={Object.keys(cartsCreate).length > 0 && coursesCreate.length > 0 ? false : true}
+                    disable={Object.keys(cartsCreate)?.length > 0 && coursesCreate?.length > 0 ? false : true}
                 >
-                    Export class
+                    {slug ? 'Update class' : 'Export class'}
                 </Button>
-                <Button classNames={cx('delete-btn')} onClick={handleCancle}>
-                    Cancle class
+                <Button classNames={cx('delete-btn')} onClick={handleDeleteCart}>
+                    Delete Cart
                 </Button>
+                {slug && (
+                    <Button classNames={cx('cancle-btn')} onClick={handleCancle}>
+                        {slug ? 'Cancle update' : 'Cancle class'}
+                    </Button>
+                )}
             </div>
             <Modal toggle={showModal} setToggle={setShowModal}>
                 <div className={cx('modal')}>

@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './TeacherNavbar.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp, faLock, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -10,6 +10,7 @@ const cx = classNames.bind(styles);
 
 function NavList({ item }) {
     const [active, setActive] = useState(true);
+    const slug = useParams();
     const cartData = useSelector((state) => state.teacher.carts);
     const courses = useSelector((state) => state.teacher.courses);
     return (
@@ -41,12 +42,15 @@ function NavList({ item }) {
                             >
                                 <span className={cx('item-icon-sub')}>{childItem.icon}</span>
                                 <span className={cx('item-link')}>{childItem.title}</span>
-                                {childItem.title === 'Your class' && Object.keys(store).length === 0 && (
-                                    <span style={{ color: 'red' }} className={cx('null-alert')}>
-                                        <FontAwesomeIcon icon={faXmark} />
-                                    </span>
-                                )}
+                                {childItem.title === 'Your class' &&
+                                    !slug &&
+                                    Object.keys(store).length === 0 && (
+                                        <span style={{ color: 'red' }} className={cx('null-alert')}>
+                                            <FontAwesomeIcon icon={faXmark} />
+                                        </span>
+                                    )}
                                 {childItem.title === 'Courses' &&
+                                    !slug &&
                                     Array.isArray(store) &&
                                     store.length === 0 && (
                                         <span style={{ color: 'red' }} className={cx('null-alert')}>

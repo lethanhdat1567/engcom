@@ -17,3 +17,15 @@ export const getDetailClass = async (id) => {
 
     return result.data;
 };
+
+export const updateClass = async (values, class_id) => {
+    const result = await request.put(`engcom/class/${class_id}`, values);
+
+    return result.data;
+};
+
+export const deleteClass = async (class_id) => {
+    const result = await request.delete(`engcom/class/${class_id}`);
+
+    return result;
+};

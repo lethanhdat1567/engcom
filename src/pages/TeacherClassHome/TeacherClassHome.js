@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { teacher } from '~/redux/reducer/TeacherSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getClasses, getDetailClass } from '~/requestApi/requestClass';
+import UpdateLoading from '~/components/Loading/UpdateLoading/UpdateLoading';
 
 const cx = classNames.bind(styles);
 
@@ -22,14 +23,15 @@ function TeacherClassHome() {
     const { slug } = useParams();
     const user = useSelector((state) => state.user.user);
     // Data
-    const [titleCart, setTitleCart] = useState(cartData.name || '');
-    const [cartPrice, setCartPrice] = useState(cartData.price || 0);
-    const [cartDiscount, setCartDiscount] = useState(cartData.discount || 0);
-    const [cartTotal, setCartTotal] = useState(cartData.total || 0);
-    const [cartPassword, setCartPassword] = useState(cartData.password || '');
-    const [descValue, setDescValue] = useState(cartData.description || '');
-    const [cartType, setCartType] = useState(cartData.type || 'public');
-    const [cartThumbnail, setCartThumbnail] = useState(cartData.thumbnail || '');
+    const [loading, setLoading] = useState(false);
+    const [titleCart, setTitleCart] = useState(cartData?.name || '');
+    const [cartPrice, setCartPrice] = useState(cartData?.price || 0);
+    const [cartDiscount, setCartDiscount] = useState(cartData?.discount || 0);
+    const [cartTotal, setCartTotal] = useState(cartData?.total || 0);
+    const [cartPassword, setCartPassword] = useState(cartData?.password || '');
+    const [descValue, setDescValue] = useState(cartData?.description || '');
+    const [cartType, setCartType] = useState(cartData?.type || 'public');
+    const [cartThumbnail, setCartThumbnail] = useState(cartData?.thumbnail || '');
     const cartId = useId();
     const validateCart = () => {
         return titleCart !== '' && cartThumbnail !== '';
@@ -66,11 +68,13 @@ function TeacherClassHome() {
                 price: cartPrice,
                 discount: cartDiscount,
                 total: cartTotal,
-                password: cartPassword,
+                password: cartPassword || '',
                 thumbnail: cartThumbnail,
                 description: descValue,
-                type: cartType,
+                type: cartType || '',
             };
+            console.log(values);
+
             dispatch(teacher.actions.setCart(values));
             slug ? navigate(`/class/${slug}/courses`) : navigate('/create-class/courses');
         }
@@ -102,10 +106,12 @@ function TeacherClassHome() {
     }, [cartData]);
     useEffect(() => {
         if (slug && Object.keys(cartData).length === 0) {
+            setLoading(true);
             getDetailClass(slug)
                 .then((res) => {
                     const cart = res.data;
                     dispatch(teacher.actions.setCart(cart));
+                    setLoading(false);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -114,33 +120,37 @@ function TeacherClassHome() {
     }, [slug, cartData]);
     return (
         <div className={cx('wrap')}>
-            <div className={cx('cart-wrap')}>
-                <div className={cx('head-wrap')}>
-                    <h1 className={cx('cart-title')}>Your cart class</h1>
-                    <Button disable={validateCart() ? false : true} save onClick={handleSave}>
-                        Save
-                    </Button>
-                </div>
-                <div className="row g-5">
-                    <div className="col-12 col-sm-6 col-md-4">
-                        <div className={cx('cart-item')}>
-                            <CartItem data={cartItem} />
+            {loading ? (
+                <UpdateLoading />
+            ) : (
+                <div className={cx('cart-wrap')}>
+                    <div className={cx('head-wrap')}>
+                        <h1 className={cx('cart-title')}>Your cart class</h1>
+                        <Button disable={validateCart() ? false : true} save onClick={handleSave}>
+                            Save
+                        </Button>
+                    </div>
+                    <div className="row g-5">
+                        <div className="col-12 col-sm-6 col-md-4">
+                            <div className={cx('cart-item')}>
+                                <CartItem data={cartItem} />
+                            </div>
+                        </div>
+                        <div className="col-12 col-sm-6 col-md-8">
+                            <div className={cx('cart-info')}>
+                                <CartForm
+                                    setCartBanner={setCartThumbnail}
+                                    cartBanner={cartThumbnail}
+                                    states={states}
+                                />
+                            </div>
                         </div>
                     </div>
-                    <div className="col-12 col-sm-6 col-md-8">
-                        <div className={cx('cart-info')}>
-                            <CartForm
-                                setCartBanner={setCartThumbnail}
-                                cartBanner={cartThumbnail}
-                                states={states}
-                            />
-                        </div>
+                    <div className={cx('desc')}>
+                        <TeacherClassDesign states={{ descValue, setDescValue }} />
                     </div>
                 </div>
-                <div className={cx('desc')}>
-                    <TeacherClassDesign states={{ descValue, setDescValue }} />
-                </div>
-            </div>
+            )}
         </div>
     );
 }

@@ -11,7 +11,7 @@ function QuizContent({ data }) {
         <div className={cx('wrap')}>
             <h1 className={cx('title')}>{data.title}</h1>
             <div className={cx('content')}>
-                <div className={cx('desc')} dangerouslySetInnerHTML={{ __html: data.desc }}></div>
+                <div className={cx('desc')} dangerouslySetInnerHTML={{ __html: data.content }}></div>
             </div>
             <div className={cx('choices')}>
                 <p className={cx('choices-sub')}>Chọn câu trả lời đúng.</p>
@@ -29,11 +29,6 @@ function QuizContent({ data }) {
                         );
                     })}
                 </ul>
-            </div>
-            <div className={cx('subwrap')}>
-                <Button className={cx('btn-submit')} type="primary">
-                    Answer
-                </Button>
             </div>
         </div>
     );

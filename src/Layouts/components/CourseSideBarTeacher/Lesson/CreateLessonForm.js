@@ -74,7 +74,7 @@ function CreateLessonForm({ showCreateLesson, setShowCreateLesson, course_id }) 
                 id: uuidv4(),
                 course_id: course_id,
                 type: typeValue,
-                title: titleValue,
+                name: titleValue,
             };
             setTitleValue('');
             setTypeValue(0);

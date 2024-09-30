@@ -42,6 +42,9 @@ export const teacher = createSlice({
             state.courses = [];
         },
         // lesson
+        setUpdateLesson(state, action) {
+            state.lessons = action.payload;
+        },
         setLesson(state, action) {
             state.lessons.push(action.payload);
         },
@@ -59,6 +62,9 @@ export const teacher = createSlice({
             state.lessons = [];
         },
         // Lesson content
+        setUpdateContent(state, action) {
+            state.content = action.payload;
+        },
         setContent(state, action) {
             state.content.push(action.payload);
         },

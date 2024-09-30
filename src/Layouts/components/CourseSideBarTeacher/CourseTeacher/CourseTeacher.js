@@ -27,7 +27,7 @@ function CourseTeacher({ data, index }) {
             <div className={cx('course')} onClick={() => setShowLesson(!showLesson)}>
                 <div className={cx('course-header')}>
                     <h4 className={cx('title')}>
-                        {index + 1}. {data.title}
+                        {index + 1}. {data.name}
                     </h4>
                     <span className={cx('quantity')}>{lessonData.length} lesson available</span>
                 </div>

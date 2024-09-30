@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './CourseSidebarTeacher.module.scss';
 import CreateCourse from './CreateCourse';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CreateLesson from './Lesson/CreateLesson';
 import CourseTeacher from './CourseTeacher/CourseTeacher';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -29,6 +29,8 @@ function CourseSidebarTeacher({ showNav, setShowNav }) {
             }
         }
     };
+
+    useEffect(() => {}, []);
 
     return (
         <div className={cx('navbar', { show: showNav })}>

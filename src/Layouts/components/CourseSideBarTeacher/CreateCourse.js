@@ -29,7 +29,7 @@ function CreateCourse({ setShowCreate, data }) {
         else {
             const values = {
                 id: courseId,
-                title: courseValue,
+                name: courseValue,
             };
             dispatch(teacher.actions.setCourse(values));
             setShowCreate(false);

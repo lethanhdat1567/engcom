@@ -32,7 +32,7 @@ function LessonTeacher({ data, index }) {
             <span className={cx('decor')}>{<FontAwesomeIcon icon={validateIcon(data.type)} />}</span>
             <div className={cx('main')} onClick={() => dispatch(activeLesson.actions.setActiveLesson(data))}>
                 <h5 className={cx('title')}>
-                    1.{index + 1} {data.title}
+                    1.{index + 1} {data.name}
                 </h5>
                 <span className={cx('sub-title')}>{validateText(data.type)}</span>
             </div>
