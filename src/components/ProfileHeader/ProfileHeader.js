@@ -42,7 +42,16 @@ function ProfileHeader() {
                     <div {...attrs} className={cx('profile-drop')}>
                         <Link>
                             <div className={cx('profile-info')}>
-                                <img className={cx('profile-avatar')} src={user.avatar} />
+                                <Img
+                                    className={cx('profile-avatar')}
+                                    src={
+                                        user?.avatar?.includes('googleusercontent.com') ||
+                                        user?.avatar?.includes('facebook.com')
+                                            ? user.avatar
+                                            : `${process.env.REACT_APP_BACKEND_UPLOAD}/${user.avatar}`
+                                    }
+                                    alt="User Avatar"
+                                />
                                 <div className={cx('profile-user')}>
                                     <h2 className={cx('profile-name')}>{user.name}</h2>
                                     <h2 className={cx('profile-email')}>{user.email}</h2>
@@ -116,8 +125,8 @@ function ProfileHeader() {
                     <Img
                         className={cx('avatar-img')}
                         src={
-                            user.avatar.includes('googleusercontent.com') ||
-                            user.avatar.includes('facebook.com')
+                            user?.avatar?.includes('googleusercontent.com') ||
+                            user?.avatar?.includes('facebook.com')
                                 ? user.avatar
                                 : `${process.env.REACT_APP_BACKEND_UPLOAD}/${user.avatar}`
                         }

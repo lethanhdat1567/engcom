@@ -5,29 +5,49 @@ import { faChevronDown, faChevronUp, faEllipsisVertical, faTrash } from '@fortaw
 import imgs from '~/assets/Image';
 import Tippy from '@tippyjs/react/headless';
 import ReplyItem from '../ReplyItem/ReplyItem';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FormReply from './FormReply';
+import { useSelector } from 'react-redux';
+import { deleteComment, getComment } from '~/requestApi/requestComment';
+import moment from 'moment';
+import Img from '../Img';
 
 const cx = classNames.bind(styles);
 
-function CommentItem() {
+function CommentItem({ item, setComments }) {
+    const user = useSelector((state) => state.user.user);
+    const owner = item.user;
     const [showRes, setShowRes] = useState(false);
     const [isReply, setIsReply] = useState(false);
+    const [isDelete, setIsDelete] = useState(false);
 
+    const handleTime = () => {
+        const timeString = item.updated_at;
+        const timeAgo = moment(timeString).fromNow();
+
+        return timeAgo;
+    };
+    const handleDelete = () => {
+        setIsDelete(false);
+        deleteComment(item.id).then((res) => {
+            getComment(res.data.class_id)
+                .then((res) => {
+                    setComments(res.data);
+                })
+                .catch((error) => console.log(error));
+        });
+    };
+
+    useEffect(() => {}, []);
     return (
         <div className={cx('item')}>
             <div className={cx('info-wrap')}>
-                <img className={cx('avatar')} src={imgs.unsetAvatar} />
+                <Img src={owner.avatar || ''} className={cx('avatar')} />
                 <div className={cx('user')}>
                     <h2 className={cx('user-name')}>
-                        Datlethanh <span className={cx('timer')}>3 months ago</span>
+                        {owner.name} <span className={cx('timer')}>{handleTime()}</span>
                     </h2>
-                    <p className={cx('content')}>
-                        Xin chao, co ai o day khongXin chao, co ai o day khong ?Xin chao, co ai o day khong
-                        ?Xin chao, co ai o day khong ?Xin chao, co ai o day khong ?Xin chao, co ai o day khong
-                        ?Xin chao, co ai o day khong ?Xin chao, co ai o day khong ?Xin chao, co ai o day khong
-                        ? ?
-                    </p>
+                    <p className={cx('content')}>{item.content}</p>
                     <div className={cx('reply-wrap')}>
                         <span className={cx('reply')} onClick={() => setIsReply(true)}>
                             Reply
@@ -50,11 +70,12 @@ function CommentItem() {
             <Tippy
                 interactive
                 placement="bottom-end"
-                trigger="click"
+                visible={isDelete}
+                onClickOutside={() => setIsDelete(false)}
                 render={(attrs) => (
                     <div {...attrs} className={cx('drop-wrap')}>
                         <ul className={cx('drop-list')}>
-                            <li className={cx('item')}>
+                            <li className={cx('item')} onClick={handleDelete}>
                                 <span>
                                     <FontAwesomeIcon icon={faTrash} />
                                 </span>
@@ -64,9 +85,11 @@ function CommentItem() {
                     </div>
                 )}
             >
-                <span className={cx('setting')}>
-                    <FontAwesomeIcon icon={faEllipsisVertical} />
-                </span>
+                {user.id === item.user_id && (
+                    <span className={cx('setting')} onClick={() => setIsDelete(true)}>
+                        <FontAwesomeIcon icon={faEllipsisVertical} />
+                    </span>
+                )}
             </Tippy>
         </div>
     );

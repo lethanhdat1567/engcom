@@ -9,21 +9,26 @@ import { faComment, faUser } from '@fortawesome/free-solid-svg-icons';
 const cx = classNames.bind(styles);
 
 function InfoItem({ data, className, large = false }) {
-    return (
-        <Link>
-            {data.user ? (
-                <div className={cx('wrap', className)}>
-                    <Img src={`${data?.img}`} className={cx('img', { large })} />
-                    <p className={cx('info')}>{data?.user}</p>
-                </div>
-            ) : (
+    if (data) {
+        return (
+            <div className={cx('wrap-body')}>
+                <Link>
+                    <div className={cx('wrap', className)}>
+                        <Img src={`${data.user?.avatar}`} className={cx('img', { large })} />
+                        <p className={cx('info')}>{data.user?.name}</p>
+                    </div>
+                </Link>
                 <div className={cx('wrap')}>
-                    <FontAwesomeIcon icon={(data?.view && faUser) || (data?.comment && faComment)} />
-                    <p className={cx('info')}>{data?.view || data?.comment}</p>
+                    <FontAwesomeIcon icon={faUser} />
+                    <p className={cx('info')}>10</p>
                 </div>
-            )}
-        </Link>
-    );
+                <div className={cx('wrap')}>
+                    <FontAwesomeIcon icon={faComment} />
+                    <p className={cx('info')}>{data.comment_count}</p>
+                </div>
+            </div>
+        );
+    }
 }
 
 export default InfoItem;

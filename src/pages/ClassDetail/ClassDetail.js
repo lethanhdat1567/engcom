@@ -8,7 +8,6 @@ import Comment from './Comment/Comment';
 import { useEffect, useState } from 'react';
 import { getDetailClass } from '~/requestApi/requestClass';
 import { useParams } from 'react-router-dom';
-import UpdateLoading from '~/components/Loading/UpdateLoading/UpdateLoading';
 import ClassDetailLoading from '~/components/Loading/ClassDetailLoading/ClassDetailLoading';
 
 const cx = classNames.bind(styles);
@@ -17,12 +16,13 @@ function ClassDetail() {
     const { slug } = useParams();
     const [loading, setLoading] = useState(false);
     const [classData, setClassData] = useState({});
+    const [comments, setComment] = useState([]);
     useEffect(() => {
         setLoading(true);
         getDetailClass(slug)
             .then((res) => {
-                setLoading(false);
                 setClassData(res.data);
+                setLoading(false);
             })
             .catch((error) => {
                 setLoading(false);

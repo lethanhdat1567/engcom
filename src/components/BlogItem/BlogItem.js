@@ -16,11 +16,11 @@ function CartItem({ data }) {
             </Link>
             <div className={cx('info')}>
                 <h3 className={cx('title')}>{data.title}</h3>
-                <div className={cx('footer')}>
+                {/* <div className={cx('footer')}>
                     {data?.info?.map((item, index) => {
                         return <InfoItem data={item} key={index} />;
                     })}
-                </div>
+                </div> */}
             </div>
         </div>
     );
