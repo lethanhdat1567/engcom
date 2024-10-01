@@ -21,18 +21,25 @@ function Header() {
     const [LoginModal, setloginModal] = useState(false);
     const user = useSelector((state) => state.user.user);
     const refresh_token = useSelector((state) => state.user.refresh_token);
+    const token = useSelector((state) => state.user.token);
     const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
-        const interval = setInterval(async () => {
-            const res = await refreshToken(refresh_token);
-            console.log(res);
-            dispatch(usersSlice.actions.getToken(res.data.access_token));
-            dispatch(usersSlice.actions.getRefreshToken(res.data.refresh_token));
-        }, 3600 * 1000);
+        const interval = setInterval(() => {
+            if (token) {
+                refreshToken(refresh_token)
+                    .then((res) => {
+                        // Cập nhật token sau khi nhận được phản hồi
+                        dispatch(usersSlice.actions.getToken(res.data.access_token));
+                        dispatch(usersSlice.actions.getRefreshToken(res.data.refresh_token));
+                    })
+                    .catch((error) => console.log(error));
+            }
+        }, (3600 - 300) * 1000);
+
         return () => clearInterval(interval);
-    }, []);
+    }, [refresh_token, dispatch]);
 
     const showBackButton =
         location.pathname !== '/' && location.pathname !== '/community' && location.pathname !== '/blogs';

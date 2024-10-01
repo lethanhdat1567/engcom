@@ -70,12 +70,13 @@
 }
 .info-list {
     padding: 0;
-    .info-item {
-        display: flex;
-        align-content: center;
-        gap: 14px;
-        margin: 10px 0px;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.info-item {
+    display: flex;
+    flex-direction: column;
 }
 .info-edit {
     width: 100%;
@@ -90,4 +91,17 @@
     &:hover {
         background-color: #ccc;
     }
+}
+.head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.icon {
+    width: 30px;
+}
+.unset {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #686565;
 }

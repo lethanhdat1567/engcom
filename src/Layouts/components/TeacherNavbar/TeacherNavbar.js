@@ -39,6 +39,7 @@ function TeacherNavbar({ showNav, setShowNav }) {
     const contentsCreate = useSelector((state) => state.teacher.content);
 
     const [showModal, setShowModal] = useState(false);
+    const [isDelete, setIsDelete] = useState(false);
 
     const createNav = [
         {
@@ -143,7 +144,7 @@ function TeacherNavbar({ showNav, setShowNav }) {
             updateClass(values, slug)
                 .then((res) => {
                     console.log(res);
-                    setLoading(false); // Hoặc setLoading(faLess);
+                    setLoading(false);
                     navigate('/');
                 })
                 .catch((error) => {
@@ -153,15 +154,8 @@ function TeacherNavbar({ showNav, setShowNav }) {
         }
     };
     const handleDeleteCart = () => {
-        setLoading(true);
-        deleteClass(cartsCreate.id)
-            .then((res) => {
-                setLoading(false);
-                navigate('/');
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        setShowModal(true);
+        setIsDelete(true);
     };
     const handleCancle = () => {
         if (Object.keys(cartsCreate).length > 0 || coursesCreate.length > 0) {
@@ -173,12 +167,12 @@ function TeacherNavbar({ showNav, setShowNav }) {
 
     const handleAdopt = () => {
         if (!slug) {
-            setLoading(true);
-            if (cartsCreate.banner) {
+            if (cartsCreate.thumbnail) {
                 requestDeleteUpload(cartsCreate.banner);
             }
             contents.map((item, index) => {
                 if (item.video) {
+                    setLoading(true);
                     requestDeleteVideo({ url: item.video })
                         .then((res) => {
                             setLoading(false);
@@ -189,16 +183,26 @@ function TeacherNavbar({ showNav, setShowNav }) {
                         });
                 }
             });
-            dispatch(teacher.actions.deleteCarts());
-            dispatch(teacher.actions.deleteAllCourse());
-            dispatch(teacher.actions.deleteAllLesson());
-            dispatch(teacher.actions.deleteAllContent());
+            dispatch(teacher.actions.resetState());
+            dispatch(activeLesson.actions.deleteActiveLesson());
+            navigate('/');
+        } else if (slug && isDelete) {
+            setLoading(true);
+            deleteClass(slug)
+                .then((res) => {
+                    setLoading(false);
+                    setIsDelete(false);
+                    navigate('/');
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            dispatch(activeLesson.actions.deleteActiveLesson());
+            dispatch(teacher.actions.resetState());
             navigate('/');
         } else {
-            dispatch(teacher.actions.deleteCarts());
-            dispatch(teacher.actions.deleteAllCourse());
-            dispatch(teacher.actions.deleteAllLesson());
-            dispatch(teacher.actions.deleteAllContent());
+            dispatch(activeLesson.actions.deleteActiveLesson());
+            dispatch(teacher.actions.resetState());
             navigate('/');
         }
     };
@@ -228,14 +232,14 @@ function TeacherNavbar({ showNav, setShowNav }) {
                 >
                     {slug ? 'Update class' : 'Export class'}
                 </Button>
-                <Button classNames={cx('delete-btn')} onClick={handleDeleteCart}>
-                    Delete Cart
-                </Button>
                 {slug && (
-                    <Button classNames={cx('cancle-btn')} onClick={handleCancle}>
-                        {slug ? 'Cancle update' : 'Cancle class'}
+                    <Button classNames={cx('delete-btn')} onClick={handleDeleteCart}>
+                        Delete Cart
                     </Button>
                 )}
+                <Button classNames={cx('cancle-btn')} onClick={handleCancle}>
+                    {slug ? 'Cancle update' : 'Cancle class'}
+                </Button>
             </div>
             <Modal toggle={showModal} setToggle={setShowModal}>
                 <div className={cx('modal')}>
@@ -246,7 +250,7 @@ function TeacherNavbar({ showNav, setShowNav }) {
                         <span className={cx('modal-title')}>Warning</span>
                     </div>
                     <div className={cx('drop-mbody')}>
-                        <p className={cx('drop-desc')}>Tat ca du lieu cua ban se mat sau khi thoat ra !.</p>
+                        <p className={cx('drop-desc')}>Tat ca du lieu cua ban se mat het !.</p>
                     </div>
                     <Flex gap={10} justify="right">
                         <Button classNames={cx('btn-cancle')} onClick={() => setShowModal(false)}>

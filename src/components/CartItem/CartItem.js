@@ -7,10 +7,11 @@ import imgs from '~/assets/Image';
 import { useState } from 'react';
 import Validate from '~/pages/Validate';
 import { useSelector } from 'react-redux';
+import InfoCart from './InfoCart';
 
 const cx = classNames.bind(styles);
 
-function CartItem({ data }) {
+function CartItem({ data, create = false }) {
     const user = useSelector((state) => state.user.user);
     const [regisModal, setRegisModal] = useState(false);
     const handleOpenModal = () => {
@@ -23,7 +24,11 @@ function CartItem({ data }) {
         <>
             <div className={cx('wrap')} onClick={handleOpenModal}>
                 <Link
-                    to={data.id && `${process.env.REACT_APP_ROOT}/class/${data.id}`}
+                    to={
+                        data.id && create
+                            ? `${process.env.REACT_APP_ROOT}/own/${data.id}`
+                            : `${process.env.REACT_APP_ROOT}/class/${data.id}`
+                    }
                     className={cx('banner')}
                 >
                     <img
@@ -39,12 +44,7 @@ function CartItem({ data }) {
                     <Link to={data.id && `${process.env.REACT_APP_ROOT}/class/${data.id}`}>
                         <h3 className={cx('title')}>{data.name}</h3>
                     </Link>
-                    {data.total > 0 && (
-                        <div className={cx('cost')}>
-                            <p className={cx('price')}>{priceTrander(data.price)}</p>
-                            <p className={cx('total')}>{priceTrander(data.total)}</p>
-                        </div>
-                    )}
+                    <InfoCart data={data} />
                     <div className={cx('footer')}>
                         {data?.info?.map((item, index) => {
                             return <InfoItem data={item} key={index} />;

@@ -29,3 +29,15 @@ export const deleteClass = async (class_id) => {
 
     return result;
 };
+
+export const getAllClasses = async () => {
+    const result = await request.get('engcom/class');
+
+    return result.data;
+};
+
+export const getMoreClass = async (type) => {
+    const result = await request.get(`engcom/class-more/${type}`);
+
+    return result.data;
+};

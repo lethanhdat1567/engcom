@@ -13,6 +13,8 @@ import { teacher } from '~/redux/reducer/TeacherSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getClasses, getDetailClass } from '~/requestApi/requestClass';
 import UpdateLoading from '~/components/Loading/UpdateLoading/UpdateLoading';
+import { getCourse } from '~/requestApi/requestCourse';
+import Loading from '~/components/Loading/Loading';
 
 const cx = classNames.bind(styles);
 
@@ -30,11 +32,11 @@ function TeacherClassHome() {
     const [cartTotal, setCartTotal] = useState(cartData?.total || 0);
     const [cartPassword, setCartPassword] = useState(cartData?.password || '');
     const [descValue, setDescValue] = useState(cartData?.description || '');
-    const [cartType, setCartType] = useState(cartData?.type || 'public');
+    const [cartType, setCartType] = useState(cartData?.type || '');
     const [cartThumbnail, setCartThumbnail] = useState(cartData?.thumbnail || '');
     const cartId = useId();
     const validateCart = () => {
-        return titleCart !== '' && cartThumbnail !== '';
+        return titleCart !== '' && cartType !== null;
     };
 
     const states = {
@@ -58,23 +60,22 @@ function TeacherClassHome() {
         price: cartPrice,
         total: cartTotal,
         thumbnail: cartThumbnail,
+        type: cartType,
     };
     const handleSave = () => {
         if (validateCart()) {
             const values = {
-                id: cartId,
-                user_id: user.id,
-                name: titleCart,
-                price: cartPrice,
-                discount: cartDiscount,
-                total: cartTotal,
+                id: cartId || '',
+                user_id: user.id || '',
+                name: titleCart || '',
+                price: cartPrice || '',
+                discount: cartDiscount || '',
+                total: cartTotal || '',
                 password: cartPassword || '',
-                thumbnail: cartThumbnail,
-                description: descValue,
+                thumbnail: cartThumbnail || '',
+                description: descValue || '',
                 type: cartType || '',
             };
-            console.log(values);
-
             dispatch(teacher.actions.setCart(values));
             slug ? navigate(`/class/${slug}/courses`) : navigate('/create-class/courses');
         }
@@ -105,23 +106,30 @@ function TeacherClassHome() {
         setCartThumbnail(cartData.thumbnail);
     }, [cartData]);
     useEffect(() => {
-        if (slug && Object.keys(cartData).length === 0) {
+        if (slug) {
             setLoading(true);
             getDetailClass(slug)
                 .then((res) => {
                     const cart = res.data;
                     dispatch(teacher.actions.setCart(cart));
-                    setLoading(false);
+                    getCourse(slug)
+                        .then((res) => {
+                            dispatch(teacher.actions.setUpdateCourse(res.data.courses));
+                            dispatch(teacher.actions.setUpdateLesson(res.data.lessons));
+                            dispatch(teacher.actions.setUpdateContent(res.data.content));
+                            setLoading(false);
+                        })
+                        .catch((error) => console.log(error));
                 })
                 .catch((error) => {
                     console.log(error);
                 });
         }
-    }, [slug, cartData]);
+    }, []);
     return (
         <div className={cx('wrap')}>
             {loading ? (
-                <UpdateLoading />
+                <Loading />
             ) : (
                 <div className={cx('cart-wrap')}>
                     <div className={cx('head-wrap')}>

@@ -9,14 +9,14 @@ import { faSquarePlus } from '@fortawesome/free-regular-svg-icons';
 
 const cx = classNames.bind(styles);
 
-function ProfileItem() {
+function ProfileItem({ data }) {
     const [toggleModal, setToggleModal] = useState(false);
 
     return (
         <>
             <div className={cx('item')} onClick={() => setToggleModal(true)}>
-                <h3 className={cx('item-label')}>Ho va Ten</h3>
-                <span className={cx('info')}>Le THanh Dat</span>
+                <h3 className={cx('item-label')}>{data.title}</h3>
+                <span className={cx('info')}>{data.data || 'Unset'}</span>
                 {/* <img className={cx('img')} src={imgs.unsetAvatar} /> */}
                 <span className={cx('icon')}>
                     <FontAwesomeIcon icon={faChevronRight} />
@@ -28,13 +28,13 @@ function ProfileItem() {
                     <p className={cx('modal-desc')}>
                         Tên sẽ được hiển thị trên trang cá nhân, trong các bình luận và bài viết của bạn.
                     </p>
-                    {/* <div className={cx('modal-form-group')}>
+                    <div className={cx('modal-form-group')}>
                         <label className={cx('modal-label')}>Ho va Ten</label>
                         <div className={cx('modal-input-wrap')}>
-                            <input className={cx('modal-input')} />
+                            <input className={cx('modal-input')} value={data.data} />
                         </div>
-                    </div> */}
-                    <div className={cx('modal-form-group')}>
+                    </div>
+                    {/* <div className={cx('modal-form-group')}>
                         <img src={imgs.unsetAvatar} className={cx('avatar')} />
                         <label htmlFor="avatar" className={cx('upload-wrap')}>
                             <span className={cx('upload-icon')}>
@@ -44,7 +44,7 @@ function ProfileItem() {
                         </label>
                         <input id="avatar" type="file" hidden />
                     </div>
-                    <button className={cx('btn')}>Save</button>
+                    <button className={cx('btn')}>Save</button> */}
                 </div>
             </Modal>
         </>

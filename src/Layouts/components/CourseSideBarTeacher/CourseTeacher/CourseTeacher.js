@@ -22,6 +22,9 @@ function CourseTeacher({ data, index }) {
 
     const lessonData = lessons.filter((item, index) => item.course_id === data.id);
 
+    const handleDeleteLesson = () => {
+        dispatch(teacher.actions.deleteCourse(data.id));
+    };
     return (
         <div className={cx('course-wrap', { show: showLesson })} key={index}>
             <div className={cx('course')} onClick={() => setShowLesson(!showLesson)}>
@@ -55,12 +58,7 @@ function CourseTeacher({ data, index }) {
                             </span>
                         </div>
                         {/* Delete */}
-                        <div
-                            className={cx('create-lesson-delete')}
-                            onClick={() => {
-                                dispatch(teacher.actions.deleteCourse(data.id));
-                            }}
-                        >
+                        <div className={cx('create-lesson-delete')} onClick={handleDeleteLesson}>
                             <span className={cx('create-icon')}>
                                 <FontAwesomeIcon icon={faSquarePlus} />
                             </span>

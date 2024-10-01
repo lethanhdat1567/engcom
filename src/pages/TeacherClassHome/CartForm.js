@@ -63,7 +63,8 @@ function CartForm({ states, setCartBanner, cartBanner }) {
                 </Form.Item>
                 <Form.Item label="Type">
                     <Select
-                        defaultValue={cartType}
+                        placeholder="-----Select your type-----"
+                        value={cartType !== null ? cartType : undefined} // Nếu cartType là null, không đặt giá trị
                         onChange={(value) => {
                             setCartType(value);
                         }}

@@ -12,10 +12,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 function CourseSidebarTeacher({ showNav, setShowNav }) {
-    const carts = useSelector((state) => state.teacher.carts);
     const courses = useSelector((state) => state.teacher.courses);
     const lessons = useSelector((state) => state.teacher.lessons);
-    const contents = useSelector((state) => state.teacher.content);
     const navigate = useNavigate();
     const { slug } = useParams();
     const [showCreate, setShowCreate] = useState(false);
@@ -23,14 +21,12 @@ function CourseSidebarTeacher({ showNav, setShowNav }) {
     const handleSave = () => {
         if (lessons.length !== 0) {
             if (slug) {
-                navigate('/class/1');
+                navigate(`/class/${slug}`);
             } else {
                 navigate('/create-class/courses');
             }
         }
     };
-
-    useEffect(() => {}, []);
 
     return (
         <div className={cx('navbar', { show: showNav })}>

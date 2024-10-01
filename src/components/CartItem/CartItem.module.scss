@@ -55,9 +55,23 @@
             .total {
                 font-size: 1.6rem;
                 font-weight: 600;
+                // color: var(--primary-color);
+                color: #000;
+            }
+            .total.sale {
                 color: var(--primary-color);
             }
         }
+    }
+    .private {
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: #4f4e4e;
+    }
+    .free {
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: var(--primary-color);
     }
     .footer {
         display: flex;

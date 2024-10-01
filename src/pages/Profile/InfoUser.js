@@ -1,48 +1,64 @@
 import classNames from 'classnames/bind';
 import styles from './Profile.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faUser } from '@fortawesome/free-solid-svg-icons';
+import {
+    faEnvelope,
+    faLocationDot,
+    faPhone,
+    faPlus,
+    faUser,
+    faVenusMars,
+} from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles);
 
 function InfoUser() {
+    const user = useSelector((state) => state.user.user);
+
+    const InfoData = [
+        {
+            title: 'Email',
+            data: user.email,
+            icon: faEnvelope,
+        },
+        {
+            title: 'Phone number',
+            data: user.phone_number,
+            icon: faPhone,
+        },
+        {
+            title: 'Address',
+            data: user.address,
+            icon: faLocationDot,
+        },
+        {
+            title: 'Gender',
+            data: user.sex,
+            icon: faVenusMars,
+        },
+    ];
     return (
         <div className={cx('wrapper')}>
             <h2 className={cx('info-title')}>Gioi thieu</h2>
             <ul className={cx('info-list')}>
-                <li className={cx('info-item')}>
-                    <span className={cx('info-icon')}>
-                        <FontAwesomeIcon icon={faUser} />
-                    </span>
-                    <p className={cx('desc-info')}>
-                        Thành viên của F8 - Học lập trình để đi làm từ 7 tháng trước
-                    </p>
-                </li>
-                <li className={cx('info-item')}>
-                    <span className={cx('info-icon')}>
-                        <FontAwesomeIcon icon={faUser} />
-                    </span>
-                    <p className={cx('desc-info')}>
-                        Thành viên của F8 - Học lập trình để đi làm từ 7 tháng trước
-                    </p>
-                </li>
-                <li className={cx('info-item')}>
-                    <span className={cx('info-icon')}>
-                        <FontAwesomeIcon icon={faUser} />
-                    </span>
-                    <p className={cx('desc-info')}>
-                        Thành viên của F8 - Học lập trình để đi làm từ 7 tháng trước
-                    </p>
-                </li>
-                <li className={cx('info-item')}>
-                    <span className={cx('info-icon')}>
-                        <FontAwesomeIcon icon={faUser} />
-                    </span>
-                    <p className={cx('desc-info')}>
-                        Thành viên của F8 - Học lập trình để đi làm từ 7 tháng trước
-                    </p>
-                </li>
+                {InfoData.map((item, index) => {
+                    return (
+                        <li className={cx('info-item')} key={index}>
+                            <div className={cx('head')}>
+                                <span className={cx('info-icon')}>
+                                    <FontAwesomeIcon icon={item.icon} className={cx('icon')} />:
+                                </span>
+                                {item.data ? (
+                                    <p className={cx('desc-info')}>{item.data}</p>
+                                ) : (
+                                    <span className={cx('unset')}>information not yet added</span>
+                                )}
+                            </div>
+                        </li>
+                    );
+                })}
                 <li className={cx('info-item')}>
                     <Link to={`${process.env.REACT_APP_ROOT}/edit-profile`} className={cx('info-edit')}>
                         <FontAwesomeIcon icon={faPlus} />

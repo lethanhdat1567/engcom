@@ -8,15 +8,25 @@ import { teacher } from '~/redux/reducer/TeacherSlice';
 import { validateIcon, validateText } from '~/utils/validateIcon';
 import { activeLesson } from '~/redux/reducer/ActiveLesson';
 import { requestDeleteVideo, requestUploadVideo } from '~/requestApi/requestUpload';
+import { useParams } from 'react-router-dom';
+import { deleteLesson } from '~/requestApi/requestLesson';
 const cx = classNames.bind(styles);
 
 function LessonTeacher({ data, index }) {
     const dispatch = useDispatch();
+    const slug = useParams();
     const currentLesson = useSelector((state) => state.activeLesson.lesson);
     const contents = useSelector((state) => state.teacher.content);
     const currentContent = contents.find((item) => item.lesson_id === data.id);
     const handleDelete = () => {
         if (currentContent) {
+            if (slug) {
+                deleteLesson(currentLesson.id)
+                    .then((res) => {
+                        console.log(res);
+                    })
+                    .catch((error) => console.log(error));
+            }
             if (currentContent.video) {
                 requestDeleteVideo({ url: currentContent.video });
             }

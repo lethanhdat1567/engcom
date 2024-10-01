@@ -5,16 +5,18 @@ import Tippy from '@tippyjs/react/headless';
 import { Link } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '~/firebase/config';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { usersSlice } from '~/redux/reducer/UserSlice';
 import { logoutRequest } from '~/requestApi/requestSocial';
 import { useState } from 'react';
 import Loading from '../Loading/Loading';
+import Img from '../Img';
 
 const cx = classNames.bind(styles);
 
 function ProfileHeader() {
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.user.user);
     const [loading, setLoading] = useState(false);
 
     const handleLogout = async () => {
@@ -40,10 +42,10 @@ function ProfileHeader() {
                     <div {...attrs} className={cx('profile-drop')}>
                         <Link>
                             <div className={cx('profile-info')}>
-                                <img className={cx('profile-avatar')} src={imgs.unsetAvatar} />
+                                <img className={cx('profile-avatar')} src={user.avatar} />
                                 <div className={cx('profile-user')}>
-                                    <h2 className={cx('profile-name')}>Le Thanh Dat</h2>
-                                    <h2 className={cx('profile-email')}>lethanhdat@gmail.com</h2>
+                                    <h2 className={cx('profile-name')}>{user.name}</h2>
+                                    <h2 className={cx('profile-email')}>{user.email}</h2>
                                 </div>
                             </div>
                         </Link>
@@ -111,7 +113,16 @@ function ProfileHeader() {
                 )}
             >
                 <div className={cx('avatar')}>
-                    <img className={cx('avatar-img')} src={imgs.unsetAvatar} />
+                    <Img
+                        className={cx('avatar-img')}
+                        src={
+                            user.avatar.includes('googleusercontent.com') ||
+                            user.avatar.includes('facebook.com')
+                                ? user.avatar
+                                : `${process.env.REACT_APP_BACKEND_UPLOAD}/${user.avatar}`
+                        }
+                        alt="User Avatar"
+                    />
                 </div>
             </Tippy>
         </li>

@@ -20,19 +20,19 @@ function TeacherClassCourse() {
 
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        if (slug) {
-            setLoading(true);
-            getCourse(slug)
-                .then((res) => {
-                    dispatch(teacher.actions.setUpdateCourse(res.data.courses));
-                    dispatch(teacher.actions.setUpdateLesson(res.data.lessons));
-                    dispatch(teacher.actions.setUpdateContent(res.data.content));
-                    setLoading(false);
-                })
-                .catch((error) => console.log(error));
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (slug) {
+    //         setLoading(true);
+    //         getCourse(slug)
+    //             .then((res) => {
+    //                 dispatch(teacher.actions.setUpdateCourse(res.data.courses));
+    //                 dispatch(teacher.actions.setUpdateLesson(res.data.lessons));
+    //                 dispatch(teacher.actions.setUpdateContent(res.data.content));
+    //                 setLoading(false);
+    //             })
+    //             .catch((error) => console.log(error));
+    //     }
+    // }, []);
 
     return slug ? (
         <div className={cx('wrap')}>

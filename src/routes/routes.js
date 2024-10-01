@@ -61,9 +61,11 @@ const studentPage = [
 const teacherPage = [
     { path: '/', element: TeacherHome },
     { path: '/community', element: Community },
+    { path: '/classes/all', element: Home },
     { path: '/classes/:slug', element: ClassMore },
     { path: '/blogs', element: Blogs },
     { path: '/blogs', element: Blogs },
+    { path: '/class/:slug', element: ClassDetail },
     { path: '/profile', element: Profile, layout: SingleLayout },
     { path: '/edit-profile', element: EditProfile, layout: null },
     { path: '/new-post', element: NewPost, layout: HeaderOnly },
@@ -71,11 +73,11 @@ const teacherPage = [
     { path: '/me/post', element: MyBlogs },
     { path: '/me/bookmark', element: Bookmark },
     // Update class
-    { path: '/class/:slug/', element: TeacherClassHome, layout: TeacherClassLayout },
-    { path: '/class/:slug/overview', element: TeacherClassOverView, layout: TeacherClassLayout },
-    { path: '/class/:slug/courses', element: TeacherClassCourse, layout: TeacherClassLayout },
-    { path: '/class/:slug/users', element: TeacherClassUser, layout: TeacherClassLayout },
-    { path: '/class/:slug/comments', element: TeacherClassComment, layout: TeacherClassLayout },
+    { path: '/own/:slug/', element: TeacherClassHome, layout: TeacherClassLayout },
+    { path: '/own/:slug/overview', element: TeacherClassOverView, layout: TeacherClassLayout },
+    { path: '/own/:slug/courses', element: TeacherClassCourse, layout: TeacherClassLayout },
+    { path: '/own/:slug/users', element: TeacherClassUser, layout: TeacherClassLayout },
+    { path: '/own/:slug/comments', element: TeacherClassComment, layout: TeacherClassLayout },
     // Create class
     { path: '/create-class', element: TeacherClassHome, layout: TeacherClassLayout },
     { path: '/create-class/overview', element: TeacherClassOverView, layout: TeacherClassLayout },

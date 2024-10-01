@@ -17,7 +17,7 @@ export const usersSlice = createSlice({
             localStorage.setItem('ACCESS_TOKEN', state.token);
         },
         getRefreshToken(state, action) {
-            state.token = action.payload;
+            state.refresh_token = action.payload;
             localStorage.setItem('REFRESH_TOKEN', state.token);
         },
         updateRole(state, action) {

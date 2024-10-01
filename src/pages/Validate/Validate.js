@@ -34,17 +34,19 @@ function Validate({ toggle, setToggle, field }) {
     };
     // Facebook
     const handleFbLogin = async () => {
-        setLoading(true);
+        setLoading(true); // Bắt đầu tải
         try {
             const result = await signInWithPopup(auth, fbProvider);
             const userValue = await postSocial(result);
+
+            console.log(userValue);
             dispatch(usersSlice.actions.getToken(userValue.data.access_token));
             dispatch(usersSlice.actions.getUser(userValue.data.user));
+
             setToggle(false);
             if (userValue.data.user.role_id === 1) {
                 navigate('/user/role');
             }
-            setLoading(false);
         } catch (error) {
             console.error('Error posting social:', error);
             handleError(error);
@@ -52,6 +54,7 @@ function Validate({ toggle, setToggle, field }) {
             setLoading(false);
         }
     };
+
     // Google
     const handleGGLogin = async () => {
         setLoading(true);
@@ -59,6 +62,8 @@ function Validate({ toggle, setToggle, field }) {
             const result = await signInWithPopup(auth, ggProvider);
 
             const userValue = await postSocial(result);
+            console.log(userValue);
+
             dispatch(usersSlice.actions.getUser(userValue.data.user));
             dispatch(usersSlice.actions.getToken(userValue.data.access_token));
             dispatch(usersSlice.actions.getRefreshToken(userValue.data.refresh_token));

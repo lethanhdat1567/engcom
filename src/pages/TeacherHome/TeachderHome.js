@@ -9,12 +9,12 @@ import { useEffect, useState } from 'react';
 import { getClasses } from '~/requestApi/requestClass';
 import { useSelector } from 'react-redux';
 import CartLoading from '~/components/Loading/CartLoading/CartLoading';
+import { useParams } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 function TeacherHome() {
     const user = useSelector((state) => state.user.user);
-
     const [Cartsdata, setCartsData] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -127,7 +127,7 @@ function TeacherHome() {
                             {Cartsdata.map((item, index) => {
                                 return (
                                     <div className="col" key={index}>
-                                        <CartItem data={item} />
+                                        <CartItem create data={item} />
                                     </div>
                                 );
                             })}

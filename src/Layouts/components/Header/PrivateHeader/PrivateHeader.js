@@ -4,14 +4,16 @@ import Classes from './Classes';
 import HeaderAlert from '~/components/HeaderAlert/HeaderAlert';
 import ProfileHeader from '~/components/ProfileHeader/ProfileHeader';
 import Note from '~/components/Note/Note';
+import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles);
 
 function PrivateHeader() {
+    const user = useSelector((state) => state.user.user);
     return (
         <div className={cx('private-wrap')}>
             <ul className={cx('list')}>
-                <Classes />
+                {user.role_id === 2 && <Classes />}
                 <Note />
                 <HeaderAlert />
                 <ProfileHeader />
