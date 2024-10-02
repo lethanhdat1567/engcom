@@ -21,43 +21,43 @@ function CartItem({ data, create = false }) {
             setRegisModal(true);
         }
     };
-    console.log(cartInfo);
-
-    return (
-        <>
-            <div className={cx('wrap')} onClick={handleOpenModal}>
-                <Link
-                    to={
-                        cartItem.id && create
-                            ? `${process.env.REACT_APP_ROOT}/own/${cartItem.id}`
-                            : `${process.env.REACT_APP_ROOT}/class/${cartItem.id}`
-                    }
-                    className={cx('banner')}
-                >
-                    <img
-                        src={
-                            cartItem.thumbnail
-                                ? `${process.env.REACT_APP_BACKEND_UPLOAD}/${cartItem.thumbnail}`
-                                : imgs.NoImg
+    if (cartItem) {
+        return (
+            <>
+                <div className={cx('wrap')} onClick={handleOpenModal}>
+                    <Link
+                        to={
+                            cartItem.id && create
+                                ? `${process.env.REACT_APP_ROOT}/own/${cartItem.id}`
+                                : `${process.env.REACT_APP_ROOT}/class/${cartItem.id}`
                         }
-                        className={cx('img')}
-                    />
-                </Link>
-                <div className={cx('info')}>
-                    <Link to={cartItem.id && `${process.env.REACT_APP_ROOT}/class/${cartItem.id}`}>
-                        <h3 className={cx('title')}>{cartItem.name}</h3>
+                        className={cx('banner')}
+                    >
+                        <img
+                            src={
+                                cartItem.thumbnail
+                                    ? `${process.env.REACT_APP_BACKEND_UPLOAD}/${cartItem.thumbnail}`
+                                    : imgs.NoImg
+                            }
+                            className={cx('img')}
+                        />
                     </Link>
-                    <InfoCart data={cartItem} />
-                    <div className={cx('footer')}>
-                        {cartInfo.map((item, index) => {
-                            return <InfoItem data={item} key={index} />;
-                        })}
+                    <div className={cx('info')}>
+                        <Link to={cartItem.id && `${process.env.REACT_APP_ROOT}/class/${cartItem.id}`}>
+                            <h3 className={cx('title')}>{cartItem.name}</h3>
+                        </Link>
+                        <InfoCart data={cartItem} />
+                        <div className={cx('footer')}>
+                            {cartInfo.map((item, index) => {
+                                return <InfoItem data={item} key={index} />;
+                            })}
+                        </div>
                     </div>
                 </div>
-            </div>
-            {regisModal && <Validate toggle={regisModal} setToggle={setRegisModal} field="Register" />}
-        </>
-    );
+                {regisModal && <Validate toggle={regisModal} setToggle={setRegisModal} field="Register" />}
+            </>
+        );
+    }
 }
 
 export default CartItem;

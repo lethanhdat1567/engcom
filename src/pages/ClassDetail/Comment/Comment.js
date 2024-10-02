@@ -6,6 +6,7 @@ import CommentItem from '~/components/CommentItem/CommentItem';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getComment, insertComment } from '~/requestApi/requestComment';
+import Img from '~/components/Img';
 
 const cx = classNames.bind(styles);
 
@@ -81,7 +82,7 @@ function Comment() {
             <h2 className={cx('com-title')}>{comments.length} comments</h2>
             <div className={cx('comment')}>
                 <div className={cx('com-head')}>
-                    <img className={cx('com-avatar')} src={imgs.unsetAvatar} />
+                    <Img src={user.avatar || ''} className={cx('com-avatar')} />
                     <div className={cx('com-input-wrap', { active: isComment })}>
                         <input
                             ref={commentRef}

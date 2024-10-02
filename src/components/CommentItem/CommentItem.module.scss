@@ -1,3 +1,4 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
 .item {
     display: flex;
     align-items: flex-start;
@@ -9,6 +10,7 @@
     display: flex;
     align-items: flex-start;
     gap: 10px;
+    flex: 1;
     .avatar {
         width: 50px;
         height: 50px;
@@ -17,6 +19,7 @@
     }
     .user {
         display: flex;
+        width: 100%;
         flex-direction: column;
         gap: 10px;
     }
@@ -86,7 +89,9 @@
     font-weight: 500;
     cursor: pointer;
 }
-
+.res.expand {
+    margin-top: 20px;
+}
 .com-head {
     display: none;
     align-items: center;
@@ -105,6 +110,13 @@
 .com-input-wrap {
     position: relative;
     flex: 1;
+    width: 500px;
+    @include abs.screen(lg) {
+        width: 400px;
+    }
+    @include abs.screen(sm) {
+        width: 100%;
+    }
     .com-input {
         padding-bottom: 10px;
         width: 100%;
@@ -152,7 +164,9 @@
         }
     }
 }
-
+.res-body {
+    margin: 10px 0px;
+}
 @keyframes fadeIn {
     0% {
         opacity: 0;

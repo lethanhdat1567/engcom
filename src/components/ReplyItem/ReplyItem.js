@@ -4,34 +4,63 @@ import imgs from '~/assets/Image';
 import Tippy from '@tippyjs/react/headless';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical, faTrash } from '@fortawesome/free-solid-svg-icons';
+import moment from 'moment';
+import Img from '../Img';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { deleteComment, getResponseComment } from '~/requestApi/requestComment';
 
 const cx = classNames.bind(styles);
 
-function ReplyItem() {
+function ReplyItem({ data, setResponses, commentParent }) {
+    const [isDelete, setIsDelete] = useState(false);
+    const user = useSelector((state) => state.user.user);
+    const handleTime = () => {
+        const timeString = data.updated_at;
+        const timeAgo = moment(timeString).fromNow();
+
+        return timeAgo;
+    };
+
+    const handleDelete = () => {
+        setIsDelete(false);
+        deleteComment(data.id).then((res) => {
+            const class_id = res.data.class_id;
+
+            getResponseComment(class_id)
+                .then((res) => {
+                    const resData = res.data;
+
+                    const resValues = resData.filter((resItem) => {
+                        return resItem.parent_id == commentParent;
+                    });
+
+                    setResponses(resValues);
+                })
+                .catch((error) => console.log(error));
+        });
+    };
+
     return (
         <div className={cx('item')}>
             <div className={cx('info-wrap')}>
-                <img className={cx('avatar')} src={imgs.unsetAvatar} />
+                <Img src={data.user.avatar || ''} className={cx('avatar')} />
                 <div className={cx('user')}>
                     <h2 className={cx('user-name')}>
-                        Datlethanh <span className={cx('timer')}>3 months ago</span>
+                        {data.user.name} <span className={cx('timer')}>{handleTime()}</span>
                     </h2>
-                    <p className={cx('content')}>
-                        Xin chao, co ai o day khongXin chao, co ai o day khong ?Xin chao, co ai o day khong
-                        ?Xin chao, co ai o day khong ?Xin chao, co ai o day khong ?Xin chao, co ai o day khong
-                        ?Xin chao, co ai o day khong ?Xin chao, co ai o day khong ?Xin chao, co ai o day khong
-                        ? ?
-                    </p>
+                    <p className={cx('content')}>{data.content}</p>
                 </div>
             </div>
             <Tippy
                 interactive
                 placement="bottom-end"
-                trigger="click"
+                visible={isDelete}
+                onClickOutside={() => setIsDelete(false)}
                 render={(attrs) => (
                     <div {...attrs} className={cx('drop-wrap')}>
                         <ul className={cx('drop-list')}>
-                            <li className={cx('item')}>
+                            <li className={cx('item')} onClick={handleDelete}>
                                 <span>
                                     <FontAwesomeIcon icon={faTrash} />
                                 </span>
@@ -41,9 +70,11 @@ function ReplyItem() {
                     </div>
                 )}
             >
-                <span className={cx('setting')}>
-                    <FontAwesomeIcon icon={faEllipsisVertical} />
-                </span>
+                {user.id === data.user.id && (
+                    <span className={cx('setting')} onClick={() => setIsDelete(true)}>
+                        <FontAwesomeIcon icon={faEllipsisVertical} />
+                    </span>
+                )}
             </Tippy>
         </div>
     );

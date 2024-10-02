@@ -17,3 +17,9 @@ export const deleteComment = async (id) => {
 
     return result.data;
 };
+
+export const getResponseComment = async (class_id) => {
+    const result = await request.get(`engcom/comment-res/${class_id}`);
+
+    return result.data;
+};
