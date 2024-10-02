@@ -10,10 +10,20 @@ function extractContent(htmlString) {
         return curr.innerText.length > prev.innerText.length ? curr : prev;
     }, paragraphs[0]);
 
-    // Extract the first image in any paragraph
-    const firstImage = tempDiv.querySelector('p img') ? tempDiv.querySelector('p img').src : null;
+    // Function to get the first image that starts with "https://"
+    const getImage = (selector) => {
+        const img = tempDiv.querySelector(selector);
+        return img && img.src.startsWith('http://') ? img.src : null;
+    };
+
+    // Extract the first image from any <p> tag
+    const firstImage = getImage('p img');
+
+    // Extract the banner image (if any) from <p> tag
+    const bannerImage = firstImage; // This will be the same as firstImage
 
     return {
+        banner: bannerImage,
         firstImage,
         content: mostTextParagraph ? mostTextParagraph.innerText : '',
     };

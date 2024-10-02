@@ -12,6 +12,8 @@ import PublicHeader from './PublicHeader/PublicHeader';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshToken } from '~/requestApi/requestToken';
 import { usersSlice } from '~/redux/reducer/UserSlice';
+import { getSubscribe } from '~/requestApi/requestSubscribe';
+import { subscribeClass } from '~/redux/reducer/SubscribeSlice';
 
 const cx = classNames.bind(styles);
 
@@ -40,7 +42,17 @@ function Header() {
 
         return () => clearInterval(interval);
     }, [refresh_token, dispatch]);
-
+    useEffect(() => {
+        if (user) {
+            getSubscribe(user.id)
+                .then((res) => {
+                    dispatch(subscribeClass.actions.getFree(res.data));
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    }, []);
     const showBackButton =
         location.pathname !== '/' && location.pathname !== '/community' && location.pathname !== '/blogs';
     return (

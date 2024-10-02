@@ -1,5 +1,18 @@
 .sub-btn {
     color: #fff !important;
+    opacity: 0.4;
+    cursor: not-allowed !important;
+    &:hover {
+        opacity: 0.4;
+    }
+}
+
+.sub-btn.active {
+    opacity: 1;
+    cursor: pointer !important;
+    &:hover {
+        opacity: 1;
+    }
 }
 .private-input {
     border: 1px solid #ccc;
@@ -45,4 +58,29 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+.private-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.error {
+    display: block;
+    color: red;
+    margin: 6px 0px;
+    font-size: 1.4rem;
+    animation: fadeIn ease 0.4s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
 }

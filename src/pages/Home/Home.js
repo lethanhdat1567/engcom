@@ -4,12 +4,8 @@ import styles from './Home.module.scss';
 import SliderBanner from './SliderBanner';
 import Classes from './Classes';
 import imgs from '~/assets/Image';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '~/firebase/config';
 import { useEffect, useState } from 'react';
 import { getAllClasses } from '~/requestApi/requestClass';
-import CartItem from '~/components/CartItem';
-import { Link } from 'react-router-dom';
 import { readAllBlogs } from '~/requestApi/requestBlog';
 import CartLoading from '~/components/Loading/CartLoading/CartLoading';
 import { useSelector } from 'react-redux';
@@ -195,11 +191,12 @@ function Home() {
         <>
             {/* <Loading /> */}
             <div className={cx('home')}>
-                {user.role_id === 2 && (
-                    <div className={cx('banner')}>
-                        <SliderBanner />
-                    </div>
-                )}
+                {user.role_id === 2 ||
+                    (!!user && (
+                        <div className={cx('banner')}>
+                            <SliderBanner />
+                        </div>
+                    ))}
                 <div className="container">
                     {loading ? (
                         <div className={cx('loading')}>

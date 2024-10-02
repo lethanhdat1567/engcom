@@ -61,6 +61,27 @@
     .footer {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        gap: 6px;
     }
+}
+.desc {
+    margin-top: 4px;
+    font-size: 1.5rem;
+    line-height: 1.6;
+    color: #505050;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* Giới hạn hiển thị 3 dòng */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.info-avatar {
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    object-fit: cover;
+}
+.name {
+    color: #666;
+    font-size: 1.4rem;
 }

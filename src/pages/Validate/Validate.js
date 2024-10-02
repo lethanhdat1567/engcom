@@ -62,7 +62,6 @@ function Validate({ toggle, setToggle, field }) {
             const result = await signInWithPopup(auth, ggProvider);
 
             const userValue = await postSocial(result);
-            console.log(userValue);
 
             dispatch(usersSlice.actions.getUser(userValue.data.user));
             dispatch(usersSlice.actions.getToken(userValue.data.access_token));

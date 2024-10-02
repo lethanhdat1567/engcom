@@ -15,7 +15,7 @@ function CartItem({ data, create = false }) {
     const user = useSelector((state) => state.user.user);
     const [regisModal, setRegisModal] = useState(false);
     const cartItem = data.class;
-    const cartInfo = data.info;
+    const cartInfo = data?.info;
     const handleOpenModal = () => {
         if (!user.role_id) {
             setRegisModal(true);
@@ -48,7 +48,7 @@ function CartItem({ data, create = false }) {
                         </Link>
                         <InfoCart data={cartItem} />
                         <div className={cx('footer')}>
-                            {cartInfo.map((item, index) => {
+                            {cartInfo?.map((item, index) => {
                                 return <InfoItem data={item} key={index} />;
                             })}
                         </div>

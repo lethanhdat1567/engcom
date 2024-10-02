@@ -4,9 +4,11 @@ import { ownData } from './reducer/OwnDataSlice';
 import { storeData } from './reducer/StoreSlice';
 import { teacher } from './reducer/TeacherSlice';
 import { activeLesson } from './reducer/ActiveLesson';
+import { subscribeClass } from './reducer/SubscribeSlice';
 const store = configureStore({
     reducer: {
         user: usersSlice.reducer,
+        subscribeClass: subscribeClass.reducer,
         teacher: teacher.reducer,
         ownData: ownData.reducer,
         storeData: storeData.reducer,

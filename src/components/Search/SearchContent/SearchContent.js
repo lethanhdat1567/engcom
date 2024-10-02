@@ -2,10 +2,13 @@ import classNames from 'classnames/bind';
 import styles from './SearchContent.module.scss';
 import Button from '~/components/Button';
 import AccountItem from '~/components/AccountItem';
+import ValidateData from './ValidateData';
 
 const cx = classNames.bind(styles);
 
 function SearchContent({ data }) {
+    console.log(data);
+
     return (
         <div className={cx('wrap')}>
             {data.children.length > 0 && (
@@ -17,9 +20,7 @@ function SearchContent({ data }) {
                         </Button>
                     </div>
                     <div className={cx('content')}>
-                        {data.children.map((item, index) => {
-                            return <AccountItem key={index} data={item} />;
-                        })}
+                        <ValidateData data={data} />
                     </div>
                 </>
             )}

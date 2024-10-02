@@ -17,8 +17,8 @@ function Profile() {
                     <Img
                         className={cx('avatar')}
                         src={
-                            user.avatar.includes('googleusercontent.com') ||
-                            user.avatar.includes('facebook.com')
+                            user.avatar?.includes('googleusercontent.com') ||
+                            user.avatar?.includes('facebook.com')
                                 ? user.avatar
                                 : `${process.env.REACT_APP_BACKEND_UPLOAD}/${user.avatar}`
                         }

@@ -38,6 +38,7 @@ const publicPage = [
     { path: '/community', element: Community },
     { path: '/classes/:slug', element: ClassMore },
     { path: '/user/role', element: Role },
+    { path: '/class/:slug', element: ClassDetail },
     { path: '*', element: NotFound, layout: null },
 ];
 

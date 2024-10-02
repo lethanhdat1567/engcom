@@ -55,12 +55,15 @@ function TeacherClassHome() {
     };
 
     const cartItem = {
-        name: titleCart,
-        icon: <FontAwesomeIcon className="fa-md" icon={faHome} />,
-        price: cartPrice,
-        total: cartTotal,
-        thumbnail: cartThumbnail,
-        type: cartType,
+        class: {
+            name: titleCart,
+            icon: <FontAwesomeIcon className="fa-md" icon={faHome} />,
+            price: cartPrice,
+            discount: cartDiscount,
+            total: cartTotal,
+            thumbnail: cartThumbnail,
+            type: cartType,
+        },
     };
     const handleSave = () => {
         if (validateCart()) {

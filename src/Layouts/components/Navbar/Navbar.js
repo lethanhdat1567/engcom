@@ -48,39 +48,39 @@ function Navbar() {
             to: `/blogs`,
         },
     ];
+
     return (
         <div className={cx('navbar')}>
             <ul className={cx('list')}>
-                {user.role_id === 2 &&
-                    navPublic.map((item, index) => {
-                        return (
-                            <NavLink
-                                to={item.to}
-                                key={index}
-                                className={(nav) => cx('item', { active: nav.isActive })}
-                            >
-                                <li className={cx('item-sub')}>
-                                    <span className={cx('icon')}>{item.icon}</span>
-                                    <p className={cx('desc')}>{item.title}</p>
-                                </li>
-                            </NavLink>
-                        );
-                    })}
+                {/* Hiển thị navPublic nếu user là rỗng hoặc user.role_id là 2 */}
+                {(Object.keys(user).length === 0 || user.role_id === 2) &&
+                    navPublic.map((item, index) => (
+                        <NavLink
+                            to={item.to}
+                            key={index}
+                            className={(nav) => cx('item', { active: nav.isActive })}
+                        >
+                            <li className={cx('item-sub')}>
+                                <span className={cx('icon')}>{item.icon}</span>
+                                <p className={cx('desc')}>{item.title}</p>
+                            </li>
+                        </NavLink>
+                    ))}
+
+                {/* Hiển thị navTeacher nếu user.role_id là 3 */}
                 {user.role_id === 3 &&
-                    navTeacher.map((item, index) => {
-                        return (
-                            <NavLink
-                                to={item.to}
-                                key={index}
-                                className={(nav) => cx('item', { active: nav.isActive })}
-                            >
-                                <li className={cx('item-sub')}>
-                                    <span className={cx('icon')}>{item.icon}</span>
-                                    <p className={cx('desc')}>{item.title}</p>
-                                </li>
-                            </NavLink>
-                        );
-                    })}
+                    navTeacher.map((item, index) => (
+                        <NavLink
+                            to={item.to}
+                            key={index}
+                            className={(nav) => cx('item', { active: nav.isActive })}
+                        >
+                            <li className={cx('item-sub')}>
+                                <span className={cx('icon')}>{item.icon}</span>
+                                <p className={cx('desc')}>{item.title}</p>
+                            </li>
+                        </NavLink>
+                    ))}
             </ul>
         </div>
     );

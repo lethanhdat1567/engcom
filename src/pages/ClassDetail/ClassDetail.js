@@ -43,7 +43,6 @@ function ClassDetail() {
                 return 'Error';
         }
     };
-    console.log(classData);
 
     return (
         <div className={cx('wrap')}>

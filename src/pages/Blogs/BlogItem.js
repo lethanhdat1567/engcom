@@ -10,12 +10,16 @@ import Tippy from '@tippyjs/react/headless';
 import Button from '~/components/Button';
 import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import extractContent from '~/utils/extractContent';
+import { handleTime } from '~/utils/handleTime';
+import { handleAvatar } from '~/utils/handleAvatar';
+import Img from '~/components/Img';
 
 const cx = classNames.bind(styles);
 
 function BlogItem({ data }) {
     const { blog, user } = data;
     const { firstImage, content } = extractContent(blog?.content);
+
     const ellipData = [
         {
             title: 'Chia se len Facebook',
@@ -33,7 +37,19 @@ function BlogItem({ data }) {
     return (
         <section className={cx('blog')}>
             <div className={cx('header')}>
-                <InfoItem data={user} large />
+                <Link to={`${process.env.REACT_APP_ROOT}/profile/${blog.user_id}`} className={cx('info')}>
+                    <Img
+                        className={cx('info-avatar')}
+                        src={
+                            user?.avatar?.includes('googleusercontent.com') ||
+                            user?.avatar?.includes('facebook.com')
+                                ? user.avatar
+                                : `${process.env.REACT_APP_BACKEND_UPLOAD}/${user.avatar}`
+                        }
+                        alt="User Avatar"
+                    />
+                    <span className={cx('info-name')}>{user.user}</span>
+                </Link>
                 <div className={cx('utils')}>
                     {/* <span className={cx('icon', 'fa-lg')}>
                         <FontAwesomeIcon icon={faBookmark} />
@@ -71,7 +87,7 @@ function BlogItem({ data }) {
             </div>
             <div className={cx('blog-banner')}>
                 <Link to={`${process.env.REACT_APP_ROOT}/blogs/${blog?.id}`}>
-                    <img className={cx('blog-img')} src={firstImage ? firstImage : imgs.profileBanner} />
+                    <img className={cx('blog-img')} src={firstImage ? firstImage : imgs.NoImg} />
                 </Link>
             </div>
             <div className={cx('body')}>
@@ -81,7 +97,7 @@ function BlogItem({ data }) {
                 <div dangerouslySetInnerHTML={{ __html: content }} className={cx('body-desc')}></div>
             </div>
             <div className={cx('footer')}>
-                <span className={cx('blog-info')}>3 months later</span>
+                <span className={cx('blog-info')}>{handleTime(data.updated_at)}</span>
                 <span className={cx('blog-info')}>4 minutes</span>
             </div>
         </section>

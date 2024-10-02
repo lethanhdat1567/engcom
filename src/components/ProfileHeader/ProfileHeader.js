@@ -31,6 +31,8 @@ function ProfileHeader() {
             console.error('Error signing out:', error);
         }
     };
+    console.log(user.avatar);
+
     return (
         <li className={cx('item')}>
             {loading && <Loading />}
