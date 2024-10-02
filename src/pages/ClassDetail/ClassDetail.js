@@ -9,6 +9,8 @@ import { useEffect, useState } from 'react';
 import { getDetailClass } from '~/requestApi/requestClass';
 import { useParams } from 'react-router-dom';
 import ClassDetailLoading from '~/components/Loading/ClassDetailLoading/ClassDetailLoading';
+import Img from '~/components/Img';
+import JoinClass from './JoinClass/JoinClass';
 
 const cx = classNames.bind(styles);
 
@@ -16,7 +18,6 @@ function ClassDetail() {
     const { slug } = useParams();
     const [loading, setLoading] = useState(false);
     const [classData, setClassData] = useState({});
-    const [comments, setComment] = useState([]);
     useEffect(() => {
         setLoading(true);
         getDetailClass(slug)
@@ -42,6 +43,8 @@ function ClassDetail() {
                 return 'Error';
         }
     };
+    console.log(classData);
+
     return (
         <div className={cx('wrap')}>
             {loading ? (
@@ -57,41 +60,16 @@ function ClassDetail() {
                     </div>
                     <div className={cx('col col-12 col-lg-4')}>
                         <div className={cx('info')}>
-                            <img className={cx('banner')} src={imgs.banner1} />
+                            <Img
+                                src={
+                                    classData.thumbnail
+                                        ? `${process.env.REACT_APP_BACKEND_UPLOAD}/${classData.thumbnail}`
+                                        : imgs.NoImg
+                                }
+                                className={cx('banner')}
+                            />
                             <span className={cx('costs')}>{validateType()} Class</span>
-                            <Button
-                                primary
-                                to={`${process.env.REACT_APP_ROOT}/course/1`}
-                                classNames={cx('sub-btn')}
-                            >
-                                Join class
-                            </Button>
-                            <ul className={cx('list')}>
-                                <li className={cx('item')}>
-                                    <span className={cx('icon')}>
-                                        <FontAwesomeIcon icon={faUser} />
-                                    </span>
-                                    <span className={cx('sub-desc')}>Trinh do co ban</span>
-                                </li>
-                                <li className={cx('item')}>
-                                    <span className={cx('icon')}>
-                                        <FontAwesomeIcon icon={faUser} />
-                                    </span>
-                                    <span className={cx('sub-desc')}>Trinh do co ban</span>
-                                </li>
-                                <li className={cx('item')}>
-                                    <span className={cx('icon')}>
-                                        <FontAwesomeIcon icon={faUser} />
-                                    </span>
-                                    <span className={cx('sub-desc')}>Trinh do co ban</span>
-                                </li>
-                                <li className={cx('item')}>
-                                    <span className={cx('icon')}>
-                                        <FontAwesomeIcon icon={faUser} />
-                                    </span>
-                                    <span className={cx('sub-desc')}>Trinh do co ban</span>
-                                </li>
-                            </ul>
+                            <JoinClass data={classData} />
                         </div>
                     </div>
                 </div>
