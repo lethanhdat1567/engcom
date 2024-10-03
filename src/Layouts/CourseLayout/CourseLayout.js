@@ -1,11 +1,10 @@
 import classNames from 'classnames/bind';
 import styles from './CourseLayout.module.scss';
 import HeaderCourse from '../components/HeaderCourse/HeaderCourse';
-import CourseFooter from '../components/CourseFooter/CourseFooter';
 import { useState } from 'react';
 import CourseSidebarTeacher from '../components/CourseSideBarTeacher/CourseSidebarTeacher';
 import { useSelector } from 'react-redux';
-import CourseSidebar from '../components/CourseSidebar/CourseSidebar';
+import CourseFooterCreate from '../components/CourseFooterCreate/CourseFooter';
 const cx = classNames.bind(styles);
 
 function CourseLayout({ children }) {
@@ -17,12 +16,10 @@ function CourseLayout({ children }) {
             {/* <HeaderCreateCourse /> */}
             <div className={cx('body')}>
                 <div className={cx('content', { full: !showNav })}>{children}</div>
-                {/* Student */}
-                {user.role_id === 2 && <CourseSidebar showNav={showNav} />}
                 {/* Teacher */}
                 {user.role_id === 3 && <CourseSidebarTeacher showNav={showNav} setShowNav={setShowNav} />}
             </div>
-            <CourseFooter showNav={showNav} setShowNav={setShowNav} />
+            <CourseFooterCreate showNav={showNav} setShowNav={setShowNav} />
         </div>
     );
 }

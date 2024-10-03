@@ -1,0 +1,69 @@
+@use '../../../components/GlobalStyles/abstracts/' as abs;
+.footer {
+    position: fixed;
+    bottom: 0;
+    height: 50px;
+    width: 100%;
+    backdrop-filter: blur(32px);
+    background-color: #191d1e;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 12px;
+    .unit {
+        font-size: 1.4rem;
+        color: hsla(0, 0%, 100%, 0.8);
+        @include abs.screen(md) {
+            display: none;
+        }
+    }
+    .lesson {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        .btn-wrap {
+            transition: ease 0.4s;
+            width: 160px;
+            padding: 8px 0;
+            display: flex;
+            gap: 4px;
+            color: #fff;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 10px; /* Áp dụng border-radius cho phần tử */
+            border: 2px solid transparent;
+            @include abs.screen(sm) {
+                width: 144px;
+            }
+            &:hover {
+                background: linear-gradient(#191d1e, #191d1e) padding-box,
+                    /* Nền của phần tử */ linear-gradient(141.34deg, #5ebbff 0%, #a174ff 91.11%) border-box; /* Gradient cho border */
+            }
+        }
+        .btn-wrap.outlined {
+            background: linear-gradient(#191d1e, #191d1e) padding-box,
+                /* Nền của phần tử */ linear-gradient(141.34deg, #5ebbff 0%, #a174ff 91.11%) border-box; /* Gradient cho border */
+            &:hover {
+                background: linear-gradient(141.34deg, #5ebbff 0%, #a174ff 91.11%) border-box;
+            }
+        }
+        .btn {
+            font-size: 1.6rem;
+            font-weight: 500;
+            background-color: transparent;
+            color: #fff;
+        }
+    }
+    .side-bar {
+        border-radius: 50%;
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #292d35;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+    }
+}

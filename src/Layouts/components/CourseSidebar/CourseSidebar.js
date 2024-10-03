@@ -1,19 +1,18 @@
 import classNames from 'classnames/bind';
 import styles from './CourseSidebar.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import Course from './Course';
+import CourseItem from './CourseItem/CourseItem';
 
 const cx = classNames.bind(styles);
 
-function CourseSidebar({ showNav }) {
+function CourseSidebar({ showNav, courseData }) {
     return (
         <div className={cx('navbar', { show: showNav })}>
             <div className={cx('heading')}>Unit process</div>
-            <Course />
-            <Course />
-            <Course />
-            <Course />
+            <div className={cx('body')}>
+                {courseData.map((item, index) => {
+                    return <CourseItem data={item} key={index} />;
+                })}
+            </div>
         </div>
     );
 }

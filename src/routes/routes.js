@@ -1,5 +1,6 @@
 import AdminLayout from '~/Layouts/AdminLayout/AdminLayout';
 import CourseLayout from '~/Layouts/CourseLayout/CourseLayout';
+import CourseStudent from '~/Layouts/CourseStudent/CourseStudent';
 import HeaderOnly from '~/Layouts/HeaderOnly/HeaderOnly';
 import NotFound from '~/Layouts/NotFound/NotFound';
 import SingleLayout from '~/Layouts/SingleLayout/SingleLayout';
@@ -23,7 +24,6 @@ import Profile from '~/pages/Profile/Profile';
 import Role from '~/pages/Role/Role';
 import TeacherClassComment from '~/pages/TeacherClassComment/TeacherClassComment';
 import TeacherClassCourse from '~/pages/TeacherClassCourse/TeacherClassCourse';
-import TeacherClassDesign from '~/pages/TeacherClassDesign/TeacherClassDesign';
 import TeacherClassHome from '~/pages/TeacherClassHome/TeacherClassHome';
 import TeacherClassOverView from '~/pages/TeacherClassOverView/TeacherClassOverView';
 import TeacherClassUser from '~/pages/TeacherClassUser/TeacherClassUSer';
@@ -56,7 +56,7 @@ const studentPage = [
     { path: '/me/post', element: MyBlogs },
     { path: '/me/bookmark', element: Bookmark },
     { path: '/class/:slug', element: ClassDetail },
-    { path: '/course/:slug', element: Course, layout: CourseLayout },
+    { path: '/course/:slug', element: CourseStudent, layout: null },
     { path: '*', element: NotFound, layout: null },
 ];
 const teacherPage = [

@@ -1,0 +1,55 @@
+.wrap {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #000;
+    transition: ease 0.4s;
+    gap: 10px;
+    &.active {
+        background-color: #1a1b1f;
+    }
+    &:hover {
+        background-color: #33343c;
+    }
+    .decor {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+    }
+    .main {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-around;
+        .title {
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+        .sub-title {
+            color: rgb(128, 139, 154);
+            font-weight: 400;
+            font-size: 1.2rem;
+        }
+    }
+    .check {
+        margin-left: auto;
+    }
+}
+.wrap.blocked {
+    opacity: 0.5;
+    cursor: default;
+    &:hover {
+        opacity: 0.5;
+        background-color: transparent;
+    }
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

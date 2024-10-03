@@ -1,0 +1,46 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
+.wrap {
+    height: 100vh;
+    .body {
+        margin-top: 50px;
+        min-height: calc(100vh - 50px);
+        display: flex;
+        padding: 20px;
+    }
+    .content {
+        width: 77%;
+        margin-bottom: 50px;
+        @include abs.screen(lg) {
+            margin-left: 0;
+            width: 100%;
+        }
+    }
+    .content.full {
+        width: 100%;
+    }
+}
+
+.nav-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 23%;
+    position: fixed;
+    top: 50px;
+    bottom: 50px;
+    right: 0;
+    overflow-y: auto;
+    background-color: #282933;
+    color: #fff;
+    transition: ease 0.4s;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+
+    @include abs.screen(lg) {
+        width: 300px;
+    }
+    @include abs.screen(md) {
+        width: 100%;
+    }
+}
