@@ -4,8 +4,6 @@ export const subscribeClass = createSlice({
     name: 'subscribeClass',
     initialState: {
         free: [],
-        cost: [],
-        private: [],
     },
     reducers: {
         getFree(state, action) {

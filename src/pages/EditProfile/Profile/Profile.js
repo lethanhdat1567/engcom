@@ -10,20 +10,36 @@ function Profile() {
 
     const InfoData = [
         {
+            title: 'Avatar',
+            type: 'upload',
+            name: 'avatar',
+            avatar: user.avatar,
+        },
+        {
             title: 'Name',
+            name: 'name',
             data: user.name,
         },
         {
             title: 'Email',
+            name: 'email',
             data: user.email,
         },
         {
             title: 'Phone Number',
+            name: 'phone_number',
             data: user.phone_number,
         },
         {
+            title: 'Address',
+            name: 'address',
+            data: user.address,
+        },
+        {
             title: 'Gender',
-            data: user.sex,
+            name: 'gender',
+            type: 'gender',
+            gender: user.sex,
         },
     ];
     return (

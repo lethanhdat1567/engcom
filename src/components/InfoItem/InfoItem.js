@@ -20,7 +20,7 @@ function InfoItem({ data, className, large = false }) {
                 </Link>
                 <div className={cx('wrap')}>
                     <FontAwesomeIcon icon={faUser} />
-                    <p className={cx('info')}>10</p>
+                    <p className={cx('info')}>{data.subscribe_count}</p>
                 </div>
                 <div className={cx('wrap')}>
                     <FontAwesomeIcon icon={faComment} />

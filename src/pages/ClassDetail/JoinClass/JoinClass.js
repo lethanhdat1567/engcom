@@ -10,6 +10,7 @@ import { validateFree } from '~/utils/validateSubscribe';
 import { checkPrivateClass, deleteSubscribe, insertSubscribe } from '~/requestApi/requestSubscribe';
 import { subscribeClass } from '~/redux/reducer/SubscribeSlice';
 import { useState } from 'react';
+import Validate from '~/pages/Validate';
 
 const cx = classNames.bind(styles);
 
@@ -21,30 +22,35 @@ function JoinClass({ data }) {
     const [privateValue, setPrivateValue] = useState('');
     const [allowSubmit, setAllowSubmit] = useState(false);
     const [privateError, setPrivateError] = useState(null);
+    const [regisModal, setRegisModal] = useState(false);
 
     // Handle free
     const handleSubFree = () => {
-        if (!validateFree(freeClass, user.id)) {
-            const values = {
-                class_id: data.id,
-                user_id: user.id,
-            };
-            insertSubscribe(values)
-                .then((res) => {
-                    dispatch(subscribeClass.actions.setFree(res.data));
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+        if (Object.keys(user).length === 0) {
+            setRegisModal(true);
         } else {
-            const currentSub = freeClass.find((item) => item.class_id === data.id);
-            deleteSubscribe(currentSub.id)
-                .then((res) => {
-                    dispatch(subscribeClass.actions.deleteFree(res.data.id));
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+            if (!validateFree(freeClass, user.id)) {
+                const values = {
+                    class_id: data.id,
+                    user_id: user.id,
+                };
+                insertSubscribe(values)
+                    .then((res) => {
+                        dispatch(subscribeClass.actions.setFree(res.data));
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            } else {
+                const currentSub = freeClass.find((item) => item.class_id === data.id);
+                deleteSubscribe(currentSub.id)
+                    .then((res) => {
+                        dispatch(subscribeClass.actions.deleteFree(res.data.id));
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
         }
     };
     // Handle private
@@ -61,19 +67,35 @@ function JoinClass({ data }) {
     };
 
     const handleSubmit = () => {
-        if (allowSubmit) {
-            const values = {
-                password: privateValue,
-            };
-            checkPrivateClass(values, data.id)
-                .then((res) => {
-                    console.log(res);
+        if (Object.keys(user).length === 0) {
+            setRegisModal(true);
+        } else {
+            if (allowSubmit) {
+                const values = {
+                    password: privateValue,
+                };
 
-                    setPrivateError(null); // Đặt lỗi thành null nếu thành công
-                })
-                .catch((error) => {
-                    setPrivateError(error.message); // Đảm bảo chỉ lấy message từ lỗi
-                });
+                checkPrivateClass(values, data.id)
+                    .then((res) => {
+                        const data = res.data;
+                        const values = {
+                            class_id: data.id,
+                            user_id: user.id,
+                        };
+
+                        insertSubscribe(values)
+                            .then((res) => {
+                                dispatch(subscribeClass.actions.setFree(res.data));
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            });
+                        setPrivateError(null);
+                    })
+                    .catch((error) => {
+                        setPrivateError(error.message);
+                    });
+            }
         }
     };
 
@@ -81,36 +103,54 @@ function JoinClass({ data }) {
         const typeCase = {
             public() {
                 return (
-                    <Button primary classNames={cx('sub-btn')} onClick={handleSubFree}>
-                        {validateFree(freeClass, user.id) ? 'Unsubscribe' : 'Subscribe'} class
-                    </Button>
+                    <>
+                        <Button primary classNames={cx('public-btn')} onClick={handleSubFree}>
+                            {validateFree(freeClass, user.id) ? 'Unsubscribe' : 'Subscribe'} class
+                        </Button>
+                        {regisModal && (
+                            <Validate toggle={regisModal} setToggle={setRegisModal} field="Register" />
+                        )}
+                    </>
                 );
             },
             private() {
                 return (
-                    <div className={cx('private-wrap')}>
-                        <div className={cx('wrap')}>
-                            <div className={cx('private-head')}>
-                                <span>
-                                    <FontAwesomeIcon icon={faLock} />
-                                </span>
-                                <span>Private class</span>
-                            </div>
-                            <Input.Password
-                                onChange={(e) => handlePrivateChange(e)}
-                                placeholder="Enter class password..."
-                                status={privateError ? 'error' : ''}
-                            />
-                            <span className={cx('error')}>{privateError}</span>
+                    <>
+                        <div className={cx('private-wrap')}>
+                            {!validateFree(freeClass, user.id) ? (
+                                <>
+                                    <div className={cx('wrap')}>
+                                        <div className={cx('private-head')}>
+                                            <span>
+                                                <FontAwesomeIcon icon={faLock} />
+                                            </span>
+                                            <span>Private class</span>
+                                        </div>
+                                        <Input.Password
+                                            onChange={(e) => handlePrivateChange(e)}
+                                            placeholder="Enter class password..."
+                                            status={privateError ? 'error' : ''}
+                                        />
+                                        <span className={cx('error')}>{privateError}</span>
+                                    </div>
+                                    <Button
+                                        primary
+                                        classNames={cx('sub-btn', { active: allowSubmit })}
+                                        onClick={handleSubmit}
+                                    >
+                                        Join class
+                                    </Button>
+                                </>
+                            ) : (
+                                <Button primary classNames={cx('private-join-btn')}>
+                                    Join class
+                                </Button>
+                            )}
                         </div>
-                        <Button
-                            primary
-                            classNames={cx('sub-btn', { active: allowSubmit })}
-                            onClick={handleSubmit}
-                        >
-                            Join class
-                        </Button>
-                    </div>
+                        {regisModal && (
+                            <Validate toggle={regisModal} setToggle={setRegisModal} field="Register" />
+                        )}
+                    </>
                 );
             },
             cost() {

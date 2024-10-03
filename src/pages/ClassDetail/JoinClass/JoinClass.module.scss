@@ -6,7 +6,12 @@
         opacity: 0.4;
     }
 }
-
+.public-btn {
+    color: #fff !important;
+}
+.private-join-btn {
+    color: #fff;
+}
 .sub-btn.active {
     opacity: 1;
     cursor: pointer !important;
