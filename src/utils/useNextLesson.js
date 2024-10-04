@@ -11,10 +11,10 @@ function useNextLesson() {
     const handleNextLesson = () => {
         const lesson_id = selectedLesson.id;
 
-        // Kiểm tra trạng thái của bài học hiện tại
+        // Check the current state of the lesson
         if (!selectedLesson.is_completed && !selectedLesson.is_in_progress) {
             console.log('Cannot proceed to the next lesson. Current lesson is not completed or in progress.');
-            return; // Không cho phép chuyển đến bài học tiếp theo
+            return; // Prevent proceeding to the next lesson
         }
 
         const currentCourse = courseData.find((course) =>
@@ -23,25 +23,29 @@ function useNextLesson() {
 
         const currentIndex = currentCourse.lessons.findIndex((lesson) => lesson.id === lesson_id);
 
-        // Gọi setProgressed cho lesson hiện tại
+        // Update progress for the current lesson
         const setProgressValue = validateProgress(user.id, currentCourse.id, lesson_id);
         dispatch(course.actions.setProgressed(setProgressValue));
 
-        // Chuyển sang bài học tiếp theo
+        // Move to the next lesson
         if (currentIndex < currentCourse.lessons.length - 1) {
             const nextLesson = currentCourse.lessons[currentIndex + 1];
             const updatedNextLesson = {
                 ...nextLesson,
-                is_in_progress: true,
-                is_completed: false,
+                is_in_progress: !nextLesson.is_completed, // Only set is_in_progress if the lesson is not completed
+                is_completed: nextLesson.is_completed, // Preserve the current completed state
             };
             dispatch(course.actions.setSelectedLesson(updatedNextLesson));
-            dispatch(
-                course.actions.setProgressing(validateProgress(user.id, currentCourse.id, nextLesson.id)),
-            );
+
+            // Update progress for the next lesson
+            if (!nextLesson.is_completed) {
+                dispatch(
+                    course.actions.setProgressing(validateProgress(user.id, currentCourse.id, nextLesson.id)),
+                );
+            }
             dispatch(course.actions.setActiveLessonID(nextLesson.id));
         } else {
-            // Chuyển sang khóa học tiếp theo
+            // Move to the next course
             const currentCourseIndex = courseData.findIndex((course) => course.id === currentCourse.id);
             if (currentCourseIndex < courseData.length - 1) {
                 const nextCourse = courseData[currentCourseIndex + 1];
@@ -49,17 +53,20 @@ function useNextLesson() {
                 dispatch(
                     course.actions.setSelectedLesson({
                         ...firstLesson,
-                        is_in_progress: true,
-                        is_completed: false,
+                        is_in_progress: !firstLesson.is_completed, // Only set is_in_progress if the lesson is not completed
+                        is_completed: firstLesson.is_completed, // Preserve the current completed state
                     }),
                 );
-                // Chỉ gọi setProgressing một lần
-                const setProgressValueForFirstLesson = validateProgress(
-                    user.id,
-                    nextCourse.id,
-                    firstLesson.id,
-                );
-                dispatch(course.actions.setProgressing(setProgressValueForFirstLesson));
+
+                // Update progress for the first lesson of the next course
+                if (!firstLesson.is_completed) {
+                    const setProgressValueForFirstLesson = validateProgress(
+                        user.id,
+                        nextCourse.id,
+                        firstLesson.id,
+                    );
+                    dispatch(course.actions.setProgressing(setProgressValueForFirstLesson));
+                }
                 dispatch(course.actions.setActiveLessonID(firstLesson.id));
             }
         }

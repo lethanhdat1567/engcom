@@ -10,6 +10,7 @@ const cx = classNames.bind(styles);
 
 function CourseItem({ data }) {
     const [showLesson, setShowLesson] = useState(false);
+
     return (
         <div className={cx('course-wrap')}>
             <div className={cx('course')} onClick={() => setShowLesson(!showLesson)}>

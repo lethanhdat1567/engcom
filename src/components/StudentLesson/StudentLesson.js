@@ -4,19 +4,31 @@ import { checked } from '~/assets/Icon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faLock } from '@fortawesome/free-solid-svg-icons';
 import { validateIcon, validateText } from '~/utils/validateIcon';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { course } from '~/redux/reducer/Course';
 
 const cx = classNames.bind(styles);
 
 function StudentLesson({ lesson, index }) {
     // redux
     const activeLessonID = useSelector((state) => state.course.activeLessonID);
+    const dispatch = useDispatch();
     // handle logic
     const isCompleted = lesson.is_completed;
     const isInProgress = lesson.is_in_progress;
     const isBlocked = !isCompleted && !isInProgress;
+
+    const handleClick = () => {
+        if (!isBlocked) {
+            dispatch(course.actions.setSelectedLesson(lesson));
+            dispatch(course.actions.setActiveLessonID(lesson.id));
+        }
+    };
     return (
-        <div className={cx('wrap', { blocked: isBlocked, active: activeLessonID === lesson.id })}>
+        <div
+            className={cx('wrap', { blocked: isBlocked, active: activeLessonID === lesson.id })}
+            onClick={handleClick}
+        >
             <span className={cx('decor')}>
                 <FontAwesomeIcon icon={validateIcon(lesson.type)} />
             </span>

@@ -1,11 +1,13 @@
 import classNames from 'classnames/bind';
 import styles from './LessonExercise.module.scss';
 import { useState } from 'react';
+import { Button, Flex } from 'antd';
 
 const cx = classNames.bind(styles);
 
 function LessonExercise({ data }) {
     const [choiceActive, setChoiceActive] = useState();
+
     return (
         <div className={cx('wrap')}>
             <h1 className={cx('title')}>{data.title}</h1>
@@ -28,6 +30,9 @@ function LessonExercise({ data }) {
                         );
                     })}
                 </ul>
+                <Flex justify="end" style={{ marginTop: '10px' }}>
+                    <Button type="primary">Answer</Button>
+                </Flex>
             </div>
         </div>
     );

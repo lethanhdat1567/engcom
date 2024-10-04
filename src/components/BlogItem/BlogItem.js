@@ -15,7 +15,6 @@ function CartItem({ data }) {
     const item = data.blog;
     const user = data.user;
     const { firstImage, content } = extractContent(item.content);
-    console.log(user);
 
     return (
         <div className={cx('wrap')}>

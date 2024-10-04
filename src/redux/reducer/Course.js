@@ -83,5 +83,8 @@ export const course = createSlice({
                 is_in_progress: true,
             };
         },
+        updateSelectedLesson(state, action) {
+            state.selectedLesson = action.payload;
+        },
     },
 });

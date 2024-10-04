@@ -10,16 +10,6 @@ const cx = classNames.bind(styles);
 
 function LessonText({ data }) {
     const textContent = data.content;
-    const user = useSelector((state) => state.user.user);
-    const dispatch = useDispatch();
-    const handleNextLesson = useNextLesson();
-
-    useEffect(() => {
-        // const setProgressValue = validateProgress(user.id, data.course_id, textContent.lesson_id);
-        // dispatch(course.actions.setProgressing(setProgressValue));
-        // dispatch(course.actions.setSelectedLesson(firstLesson));
-        // handleNextLesson();
-    }, []);
 
     return <div className={cx('content')} dangerouslySetInnerHTML={{ __html: textContent.text }}></div>;
 }

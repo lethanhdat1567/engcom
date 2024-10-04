@@ -31,6 +31,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            user-select: none;
             border-radius: 10px; /* Áp dụng border-radius cho phần tử */
             border: 2px solid transparent;
             @include abs.screen(sm) {

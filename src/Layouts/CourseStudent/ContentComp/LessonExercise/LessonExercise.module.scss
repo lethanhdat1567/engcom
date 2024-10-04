@@ -1,4 +1,10 @@
+@use '../../../../components/GlobalStyles/abstracts/' as abs;
+
 .wrap {
+    margin: 0px 100px;
+    @include abs.screen(lg) {
+        margin: 0;
+    }
     .title {
         margin: 40px 0px;
     }
