@@ -15,6 +15,8 @@ function CartItem({ data }) {
     const item = data.blog;
     const user = data.user;
     const { firstImage, content } = extractContent(item.content);
+    console.log(user);
+
     return (
         <div className={cx('wrap')}>
             <Link to={`${process.env.REACT_APP_ROOT}/class/1`} className={cx('banner')}>
@@ -27,10 +29,9 @@ function CartItem({ data }) {
                     <Img
                         className={cx('info-avatar')}
                         src={
-                            user?.avatar?.includes('googleusercontent.com') ||
-                            user?.avatar?.includes('facebook.com')
-                                ? user.avatar
-                                : `${process.env.REACT_APP_BACKEND_UPLOAD}/${user.avatar}`
+                            user.img?.includes('googleusercontent.com') || user.img?.includes('facebook.com')
+                                ? user.img
+                                : `${process.env.REACT_APP_BACKEND_UPLOAD}/${user.img}`
                         }
                         alt="User Avatar"
                     />

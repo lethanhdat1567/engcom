@@ -11,11 +11,13 @@ import { checkPrivateClass, deleteSubscribe, insertSubscribe } from '~/requestAp
 import { subscribeClass } from '~/redux/reducer/SubscribeSlice';
 import { useState } from 'react';
 import Validate from '~/pages/Validate';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 function JoinClass({ data }) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const user = useSelector((state) => state.user.user);
     const freeClass = useSelector((state) => state.subscribeClass.free);
 
@@ -37,6 +39,7 @@ function JoinClass({ data }) {
                 insertSubscribe(values)
                     .then((res) => {
                         dispatch(subscribeClass.actions.setFree(res.data));
+                        navigate(`/course/${data.id}`);
                     })
                     .catch((error) => {
                         console.log(error);

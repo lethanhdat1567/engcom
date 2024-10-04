@@ -8,6 +8,7 @@ import { useState } from 'react';
 import Validate from '~/pages/Validate';
 import { useSelector } from 'react-redux';
 import InfoCart from './InfoCart';
+import Img from '../Img';
 
 const cx = classNames.bind(styles);
 

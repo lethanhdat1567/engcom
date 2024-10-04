@@ -14,7 +14,16 @@ function InfoItem({ data, className, large = false }) {
             <div className={cx('wrap-body')}>
                 <Link>
                     <div className={cx('wrap', className)}>
-                        <Img src={`${data.user?.avatar}`} className={cx('img', { large })} />
+                        <Img
+                            className={cx('img')}
+                            src={
+                                data.user?.avatar.includes('googleusercontent.com') ||
+                                data.user?.avatar.includes('facebook.com')
+                                    ? data.user?.avatar
+                                    : `${process.env.REACT_APP_BACKEND_UPLOAD}/${data.user?.avatar}`
+                            }
+                            alt="User Avatar"
+                        />
                         <p className={cx('info')}>{data.user?.name}</p>
                     </div>
                 </Link>

@@ -26,8 +26,8 @@ function StudentLesson({ lesson, index }) {
                 </h5>
                 <span className={cx('sub-title')}>{validateText(lesson.type)}</span>
             </div>
-            {isCompleted && <span className={cx('check')}>{checked}</span>}
-            {!isInProgress && (
+            {isCompleted && !isInProgress ? <span className={cx('check')}>{checked}</span> : ''}
+            {isBlocked && (
                 <span className={cx('check')}>
                     <FontAwesomeIcon icon={faLock} />
                 </span>
