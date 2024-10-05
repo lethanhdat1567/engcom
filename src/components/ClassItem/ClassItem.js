@@ -6,34 +6,44 @@ import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-function ClassItem() {
-    const infoData = {
-        title: 'Le THanh Dat',
-        img: imgs.unsetAvatar,
-    };
-    return (
-        <div className={cx('wrap')}>
-            <Link to={`${process.env.REACT_APP_ROOT}/course/1`}>
-                <img className={cx('img')} src={imgs.banner1} />
-            </Link>
-            <div className={cx('info')}>
-                <Link to={`${process.env.REACT_APP_ROOT}/course/1`}>
-                    <span className={cx('title')}>HTML CSS PRML CSS PML CSS PML CSS PO</span>
+function ClassItem({ data }) {
+    if (data) {
+        const classItem = data.class;
+        const progressData = data.progress;
+        const infoData = data.info;
+        const progress = (progressData.current_lesson / progressData.total_lesson) * 100;
+
+        return (
+            <div className={cx('wrap')}>
+                <Link to={`${process.env.REACT_APP_ROOT}/class/${classItem.id}`}>
+                    <img
+                        className={cx('img')}
+                        src={
+                            classItem.thumbnail
+                                ? `${process.env.REACT_APP_BACKEND_UPLOAD}/${classItem.thumbnail}`
+                                : imgs.NoImg
+                        }
+                    />
                 </Link>
-                <InfoItem data={infoData} />
-                <div className={cx('process')}>
-                    <div
-                        style={{
-                            height: '100%',
-                            width: '50%',
-                            background: '#f05123',
-                            transition: 'ease 0.4s',
-                        }}
-                    ></div>
+                <div className={cx('info')}>
+                    <Link to={`${process.env.REACT_APP_ROOT}/class/${classItem.id}`}>
+                        <span className={cx('title')}>{classItem.name}</span>
+                    </Link>
+                    <InfoItem data={infoData} />
+                    <div className={cx('process')}>
+                        <div
+                            style={{
+                                height: '100%',
+                                width: `${progress}%`,
+                                background: '#f05123',
+                                transition: 'ease 0.4s',
+                            }}
+                        ></div>
+                    </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default ClassItem;

@@ -21,7 +21,7 @@ function useNextLesson() {
             course.lessons.some((lesson) => lesson.id === lesson_id),
         );
 
-        const currentIndex = currentCourse.lessons.findIndex((lesson) => lesson.id === lesson_id);
+        const currentIndex = currentCourse?.lessons.findIndex((lesson) => lesson.id === lesson_id);
 
         // Update progress for the current lesson
         const setProgressValue = validateProgress(user.id, currentCourse.id, lesson_id);

@@ -19,6 +19,35 @@
         opacity: 1;
     }
 }
+.unsub {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    min-width: 100px;
+    background-color: transparent;
+    padding: 9px 20px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    border-radius: 9999px;
+    cursor: pointer;
+    gap: 10px;
+    background-color: #434242;
+    opacity: 0.7;
+    color: #f1f1f1;
+    &:hover {
+        background-color: #313131;
+    }
+}
+.public-btn-un-sub {
+    padding: 20px;
+}
+.public-btn-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .private-input {
     border: 1px solid #ccc;
 }

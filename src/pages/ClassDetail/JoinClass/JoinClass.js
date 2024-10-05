@@ -11,13 +11,14 @@ import { checkPrivateClass, deleteSubscribe, insertSubscribe } from '~/requestAp
 import { subscribeClass } from '~/redux/reducer/SubscribeSlice';
 import { useState } from 'react';
 import Validate from '~/pages/Validate';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 function JoinClass({ data }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { slug } = useParams();
     const user = useSelector((state) => state.user.user);
     const freeClass = useSelector((state) => state.subscribeClass.free);
 
@@ -31,7 +32,7 @@ function JoinClass({ data }) {
         if (Object.keys(user).length === 0) {
             setRegisModal(true);
         } else {
-            if (!validateFree(freeClass, user.id)) {
+            if (!validateFree(freeClass, user.id, slug)) {
                 const values = {
                     class_id: data.id,
                     user_id: user.id,
@@ -45,16 +46,19 @@ function JoinClass({ data }) {
                         console.log(error);
                     });
             } else {
-                const currentSub = freeClass.find((item) => item.class_id === data.id);
-                deleteSubscribe(currentSub.id)
-                    .then((res) => {
-                        dispatch(subscribeClass.actions.deleteFree(res.data.id));
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
+                navigate(`/course/${data.id}`);
             }
         }
+    };
+    const handleUnsub = () => {
+        const currentSub = freeClass.find((item) => item.class_id === data.id);
+        deleteSubscribe(currentSub.id)
+            .then((res) => {
+                dispatch(subscribeClass.actions.deleteFree(res.data.id));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
     // Handle private
     const handlePrivateChange = (e) => {
@@ -107,9 +111,20 @@ function JoinClass({ data }) {
             public() {
                 return (
                     <>
-                        <Button primary classNames={cx('public-btn')} onClick={handleSubFree}>
-                            {validateFree(freeClass, user.id) ? 'Unsubscribe' : 'Subscribe'} class
-                        </Button>
+                        {validateFree(freeClass, user.id, slug) ? (
+                            <div className={cx('public-btn-wrap')}>
+                                <Button primary classNames={cx('public-btn-join')} onClick={handleSubFree}>
+                                    Join class
+                                </Button>
+                                <button className={cx('unsub')} onClick={handleUnsub}>
+                                    Unsubscribe class
+                                </button>
+                            </div>
+                        ) : (
+                            <Button primary classNames={cx('public-btn')} onClick={handleSubFree}>
+                                Subscribe class
+                            </Button>
+                        )}
                         {regisModal && (
                             <Validate toggle={regisModal} setToggle={setRegisModal} field="Register" />
                         )}

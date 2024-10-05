@@ -3,20 +3,33 @@ import styles from './PrivateHeader.module.scss';
 import Tippy from '@tippyjs/react/headless';
 import ClassItem from '~/components/ClassItem/ClassItem';
 import { Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getMyClass } from '~/requestApi/requestMyClass';
+import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles);
 
 function Classes() {
+    const user = useSelector((state) => state.user.user);
     const [isShow, setShow] = useState(false);
     const location = useLocation();
-
+    const [classesData, setClassesData] = useState([]);
     const handleClick = () => {
         if (location.pathname === '/my-class') {
             return;
         }
         setShow(true);
     };
+
+    useEffect(() => {
+        getMyClass(user.id)
+            .then((res) => {
+                setClassesData(res);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
     return (
         <li className={cx('item-classes')}>
@@ -39,12 +52,9 @@ function Classes() {
                             </Link>
                         </div>
                         <div className={cx('class-body')}>
-                            <ClassItem />
-                            <ClassItem />
-                            <ClassItem />
-                            <ClassItem />
-                            <ClassItem />
-                            <ClassItem />
+                            {classesData.map((item, index) => {
+                                return <ClassItem data={item} key={index} />;
+                            })}
                         </div>
                     </div>
                 )}

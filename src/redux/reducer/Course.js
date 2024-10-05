@@ -70,6 +70,9 @@ export const course = createSlice({
 
             state.progress.push(progressData);
         },
+        resetProgress(state, action) {
+            state.progress = [];
+        },
         // Active navbar
         setActiveLessonID(state, action) {
             state.activeLessonID = action.payload;
