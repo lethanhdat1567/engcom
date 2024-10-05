@@ -43,7 +43,7 @@ function MyBlogs() {
                         <div className={cx('list-wrap')}>
                             <ul className={cx('list')}>
                                 <li className={cx('item')}>
-                                    <Link className={cx('item-link')}>Ban nhap</Link>
+                                    <Link className={cx('item-link')}>Blog cua toi</Link>
                                 </li>
                             </ul>
                             <div className={cx('seperate')}></div>

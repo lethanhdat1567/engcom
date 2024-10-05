@@ -38,8 +38,6 @@ function CourseStudent({ children }) {
                 const firstLesson = res.data[0].lessons[0];
                 // Kiểm tra trạng thái của firstLesson
                 if (!firstLesson.is_completed && !firstLesson.is_in_progress) {
-                    console.log('test');
-
                     const updatedFirstLesson = {
                         ...firstLesson,
                         is_in_progress: true,
@@ -51,8 +49,6 @@ function CourseStudent({ children }) {
                     dispatch(course.actions.setActiveLessonID(firstLesson.id));
                     dispatch(course.actions.setSelectedLesson(firstLesson));
                 } else {
-                    console.log('alo');
-
                     dispatch(course.actions.setCourse(res.data));
                     dispatch(course.actions.setActiveLessonID(firstLesson.id));
                     dispatch(course.actions.setSelectedLesson(firstLesson));
@@ -67,7 +63,6 @@ function CourseStudent({ children }) {
 
     useEffect(() => {
         if (user && progressData.length > 0) {
-            console.log(progressData);
             insertProgress(user.id, progressData)
                 .then((res) => {
                     console.log('Progress saved:', res);

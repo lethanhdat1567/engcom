@@ -6,14 +6,19 @@ import imgs from '~/assets/Image';
 const cx = classNames.bind(styles);
 
 function ClassSearch({ data }) {
+    const classData = data.class;
     return (
         <Link to={`${process.env.REACT_APP_ROOT}/class/${data.class_id}`}>
             <div className={cx('wrap')}>
                 <img
-                    src={data.banner ? `${process.env.REACT_APP_BACKEND_UPLOAD}/${data.banner}` : imgs.NoImg}
+                    src={
+                        classData.thumbnail
+                            ? `${process.env.REACT_APP_BACKEND_UPLOAD}/${classData.thumbnail}`
+                            : imgs.NoImg
+                    }
                     className={cx('avatar')}
                 />
-                <p className={cx('desc')}>{data.title}</p>
+                <p className={cx('desc')}>{classData.title}</p>
             </div>
         </Link>
     );

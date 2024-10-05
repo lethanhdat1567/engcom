@@ -39,11 +39,42 @@
         }
         .item.active {
             border: 1px solid #678cff;
+            &.error {
+                border: 1px solid red;
+            }
+            &.correct {
+                border: 1px solid green;
+            }
         }
     }
     .subwrap {
         display: flex;
         justify-content: flex-end;
         margin-top: 20px;
+    }
+}
+.correct-alert,
+.error-alert {
+    font-size: 1.4rem;
+    font-weight: 600;
+    display: none;
+    &.active {
+        display: inline-block;
+        animation: fadeIn ease 0.4s;
+    }
+}
+.correct-alert {
+    color: green;
+}
+.error-alert {
+    color: red;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }

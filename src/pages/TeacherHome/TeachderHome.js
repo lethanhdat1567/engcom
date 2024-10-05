@@ -49,7 +49,7 @@ function TeacherHome() {
                                         <CartLoading />
                                     </div>
                                 ))}
-                            {Cartsdata.map((item, index) => {
+                            {Cartsdata?.map((item, index) => {
                                 return (
                                     <div className="col" key={index}>
                                         <CartItem create data={item} />

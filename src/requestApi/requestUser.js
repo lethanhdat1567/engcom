@@ -5,3 +5,9 @@ export const updateUser = async (value, user_id) => {
 
     return result.data;
 };
+
+export const getUser = async (user_id) => {
+    const result = await request.get(`engcom/customer/${user_id}`);
+
+    return result.data;
+};

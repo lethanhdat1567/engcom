@@ -18,7 +18,7 @@ function CartItem({ data }) {
 
     return (
         <div className={cx('wrap')}>
-            <Link to={`${process.env.REACT_APP_ROOT}/class/1`} className={cx('banner')}>
+            <Link to={`${process.env.REACT_APP_ROOT}/blogs/${item.id}`} className={cx('banner')}>
                 <img src={firstImage ? firstImage : imgs.NoImg} className={cx('img')} />
             </Link>
             <div className={cx('info')}>

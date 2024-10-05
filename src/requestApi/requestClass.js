@@ -7,7 +7,7 @@ export const createClass = async (values) => {
 };
 
 export const getClasses = async (user_id) => {
-    const result = await request.get(`engcom/own-class/${user_id}`);
+    const result = await request.get(`engcom/own-teacher/${user_id}`);
 
     return result.data;
 };

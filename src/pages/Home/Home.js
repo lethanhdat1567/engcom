@@ -44,17 +44,17 @@ function Home() {
                 console.log(error);
             });
     }, []);
+    console.log(user.role_id);
 
     return (
         <>
             {/* <Loading /> */}
             <div className={cx('home')}>
-                {user.role_id === 2 ||
-                    (Object.keys(user).length === 0 && (
-                        <div className={cx('banner')}>
-                            <SliderBanner />
-                        </div>
-                    ))}
+                {(user.role_id === 2 || Object.keys(user).length === 0) && (
+                    <div className={cx('banner')}>
+                        <SliderBanner />
+                    </div>
+                )}
                 <div className="container">
                     {loading ? (
                         <div className={cx('loading')}>

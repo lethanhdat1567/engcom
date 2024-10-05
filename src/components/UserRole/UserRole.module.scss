@@ -1,0 +1,9 @@
+.wrap {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    .title {
+        font-size: 1.6rem;
+        font-weight: 500;
+    }
+}

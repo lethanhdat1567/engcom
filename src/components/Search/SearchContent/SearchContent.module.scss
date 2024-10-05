@@ -13,6 +13,7 @@
             font-size: 1.4rem;
             font-weight: 400;
             color: var(--gray-color);
+            transition: ease 0.4s;
             &:hover {
                 color: var(--primary-color);
             }

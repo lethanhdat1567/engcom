@@ -22,6 +22,7 @@ import MyBlogs from '~/pages/MyBlogs/MyBlogs';
 import NewPost from '~/pages/NewPost/NewPost';
 import Profile from '~/pages/Profile/Profile';
 import Role from '~/pages/Role/Role';
+import SearchMore from '~/pages/SearchMore/SearchMore';
 import TeacherClassComment from '~/pages/TeacherClassComment/TeacherClassComment';
 import TeacherClassCourse from '~/pages/TeacherClassCourse/TeacherClassCourse';
 import TeacherClassHome from '~/pages/TeacherClassHome/TeacherClassHome';
@@ -48,10 +49,12 @@ const studentPage = [
     { path: '/blogs', element: Blogs },
     { path: '/blogs/:slug', element: BlogsDetail, layout: HeaderOnly },
     { path: '/profile', element: Profile, layout: SingleLayout },
+    { path: '/profile/:slug', element: Profile, layout: SingleLayout },
     { path: '/edit-profile', element: EditProfile, layout: null },
     { path: '/new-post', element: NewPost, layout: HeaderOnly },
     { path: '/post/:slug', element: UpdateBLog, layout: HeaderOnly },
     { path: '/my-class', element: Classes },
+    { path: '/search', element: SearchMore },
     { path: '/classes/:slug', element: ClassMore },
     { path: '/me/post', element: MyBlogs },
     { path: '/me/bookmark', element: Bookmark },

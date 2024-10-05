@@ -3,14 +3,15 @@ import styles from './ClassItemLarge.module.scss';
 import { Link } from 'react-router-dom';
 import InfoItem from '../InfoItem/InfoItem';
 import imgs from '~/assets/Image';
+import extractContent from '~/utils/extractContent';
 
 const cx = classNames.bind(styles);
 
-function ClassItemLarge() {
-    const infoItem = {
-        user: 'Le THanh Dat',
-        img: imgs.unsetAvatar,
-    };
+function ClassItemLarge({ data }) {
+    const classData = data.class;
+    const infoItem = data.info;
+
+    const { content } = extractContent(classData.description);
     return (
         <div className={cx('wrap')}>
             <Link className={cx('img-link')}>
@@ -19,12 +20,9 @@ function ClassItemLarge() {
             <div className={cx('info')}>
                 <div className={cx('wrap-info')}>
                     <h2 className={cx('title')}>
-                        <Link>Javascript pro</Link>
+                        <Link>{classData.name}</Link>
                     </h2>
-                    <p className={cx('desc')}>
-                        Từ cơ bản tới chuyên sâu, thực hành 8 dự án, hàng trăm bài tập, trang hỏi đáp riêng,
-                        cấp chứng chỉ sau khóa học và mua một lần học mãi mãi.
-                    </p>
+                    <div className={cx('desc')} dangerouslySetInnerHTML={{ __html: content }}></div>
                 </div>
                 <InfoItem data={infoItem} />
             </div>

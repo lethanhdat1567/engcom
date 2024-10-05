@@ -34,6 +34,7 @@ function BlogItem({ data }) {
             icon: <FontAwesomeIcon icon={faTwitter} />,
         },
     ];
+
     return (
         <section className={cx('blog')}>
             <div className={cx('header')}>
@@ -41,10 +42,10 @@ function BlogItem({ data }) {
                     <Img
                         className={cx('info-avatar')}
                         src={
-                            user?.avatar?.includes('googleusercontent.com') ||
-                            user?.avatar?.includes('facebook.com')
-                                ? user.avatar
-                                : `${process.env.REACT_APP_BACKEND_UPLOAD}/${user.avatar}`
+                            user?.img?.includes('googleusercontent.com') ||
+                            user?.img?.includes('facebook.com')
+                                ? user.img
+                                : `${process.env.REACT_APP_BACKEND_UPLOAD}/${user.img}`
                         }
                         alt="User Avatar"
                     />
@@ -98,7 +99,6 @@ function BlogItem({ data }) {
             </div>
             <div className={cx('footer')}>
                 <span className={cx('blog-info')}>{handleTime(data.updated_at)}</span>
-                <span className={cx('blog-info')}>4 minutes</span>
             </div>
         </section>
     );

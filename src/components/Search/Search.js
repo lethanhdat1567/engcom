@@ -107,7 +107,14 @@ function Search() {
                             {searchData.length > 0 && (
                                 <div className={cx('search-content')}>
                                     {searchData.map((item, index) => {
-                                        return <SearchContent key={index} data={item} />;
+                                        return (
+                                            <SearchContent
+                                                searchValue={searchValue}
+                                                setShowSearch={setShowSearch}
+                                                key={index}
+                                                data={item}
+                                            />
+                                        );
                                     })}
                                 </div>
                             )}
