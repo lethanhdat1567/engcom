@@ -37,16 +37,15 @@
             @include abs.screen(sm) {
                 width: 144px;
             }
-            &:hover {
-                background: linear-gradient(#191d1e, #191d1e) padding-box,
-                    /* Nền của phần tử */ linear-gradient(141.34deg, #5ebbff 0%, #a174ff 91.11%) border-box; /* Gradient cho border */
-            }
         }
         .btn-wrap.outlined {
             background: linear-gradient(#191d1e, #191d1e) padding-box,
                 /* Nền của phần tử */ linear-gradient(141.34deg, #5ebbff 0%, #a174ff 91.11%) border-box; /* Gradient cho border */
+        }
+        .btn-wrap.active {
+            background: linear-gradient(141.34deg, #5ebbff 0%, #a174ff 91.11%) border-box;
             &:hover {
-                background: linear-gradient(141.34deg, #5ebbff 0%, #a174ff 91.11%) border-box;
+                opacity: 0.7;
             }
         }
         .btn {
@@ -54,6 +53,13 @@
             font-weight: 500;
             background-color: transparent;
             color: #fff;
+        }
+        .btn-prev {
+            &:hover {
+                border: 2px solid transparent;
+                background: linear-gradient(#191d1e, #191d1e) padding-box,
+                    /* Nền của phần tử */ linear-gradient(141.34deg, #5ebbff 0%, #a174ff 91.11%) border-box; /* Gradient cho border */
+            }
         }
     }
     .side-bar {

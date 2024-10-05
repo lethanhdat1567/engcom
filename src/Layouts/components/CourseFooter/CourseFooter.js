@@ -4,35 +4,38 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { courseBack, sideBar } from '~/assets/Icon';
 import { useSelector } from 'react-redux';
-import useNextLesson from '~/utils/useNextLesson';
-import usePrevLesson from '~/utils/usePrevLesson';
+import useCourseUtils from '~/utils/useCourseUtils';
 
 const cx = classNames.bind(styles);
 
 function CourseFooter({ setShowNav, showNav }) {
     const currentLesson = useSelector((state) => state.course.selectedLesson);
-    const nextLesson = useNextLesson();
-    const prevLesson = usePrevLesson();
+    const { handleNextLesson, handlePrevLesson } = useCourseUtils();
 
-    const handleNextLesson = () => {
-        nextLesson();
+    const handleNext = () => {
+        if (currentLesson.is_completed) {
+            handleNextLesson();
+        }
     };
 
-    const handlePrevLesson = () => {
-        prevLesson();
+    const handlePrev = () => {
+        handlePrevLesson();
     };
 
     return (
         <footer className={cx('footer')}>
             <span className={cx('unit')}>{currentLesson?.name}</span>
             <div className={cx('lesson')}>
-                <div className={cx('btn-wrap')} onClick={handlePrevLesson}>
+                <div className={cx('btn-wrap', 'btn-prev')} onClick={handlePrev}>
                     <span className={cx('btn-icon')}>
                         <FontAwesomeIcon icon={faArrowLeft} />
                     </span>
                     <button className={cx('btn')}>Previous lesson</button>
                 </div>
-                <div className={cx('btn-wrap', 'outlined')} onClick={handleNextLesson}>
+                <div
+                    className={cx('btn-wrap', 'outlined', { active: currentLesson?.is_completed })}
+                    onClick={handleNext}
+                >
                     <button className={cx('btn')}>Next lesson</button>
                     <span className={cx('btn-icon')}>
                         <FontAwesomeIcon icon={faArrowRight} />

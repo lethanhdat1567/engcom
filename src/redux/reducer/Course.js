@@ -4,7 +4,7 @@ export const course = createSlice({
     name: 'course',
     initialState: {
         course: [],
-        progress: [],
+        progress: [], // progress là một mảng
         activeLessonID: null,
         selectedLesson: null,
     },
@@ -15,63 +15,72 @@ export const course = createSlice({
         },
         // Progress
         setProgressing(state, action) {
-            const progressData = {
-                ...action.payload,
-                is_in_progress: true,
-                is_completed: false,
-            };
+            const lesson_id = action.payload.id;
+            const course_id = action.payload.course_id;
 
-            state.progress.push(progressData);
-            state.course = state.course.map((item) => {
-                return {
-                    ...item,
-                    lessons: item.lessons.map((lesson) => {
-                        if (lesson.id == action.payload.lesson_id) {
-                            return {
-                                ...lesson,
-                                is_in_progress: true,
-                                is_completed: false,
-                            };
-                        }
-                        return lesson;
-                    }),
-                };
+            // Tìm bài học và cập nhật trạng thái
+            state.course.forEach((item) => {
+                item.lessons.forEach((lesson) => {
+                    if (lesson.id === lesson_id) {
+                        lesson.is_in_progress = true;
+                        lesson.is_completed = false;
+                    }
+                });
             });
+
+            // Thêm vào mảng progress nếu chưa có
+            const existingProgressIndex = state.progress.findIndex(
+                (progress) => progress.id === lesson_id && progress.course_id === course_id,
+            );
+            if (existingProgressIndex === -1) {
+                state.progress.push({
+                    id: lesson_id, // Sử dụng id thay vì lesson_id
+                    course_id, // Thêm course_id vào progress
+                    is_in_progress: true,
+                    is_completed: false,
+                });
+            }
         },
+
         setProgressed(state, action) {
-            // Kiểm tra nếu lesson đã hoàn thành
-            const lessonId = action.payload.lesson_id;
-            // Cập nhật trạng thái lesson trong course
-            state.course = state.course.map((item) => {
-                return {
-                    ...item,
-                    lessons: item.lessons.map((lesson) => {
-                        if (lesson.id === lessonId) {
-                            return {
-                                ...lesson,
-                                is_completed: true,
-                                is_in_progress: false,
-                            };
-                        }
-                        return lesson;
-                    }),
-                };
+            const lessonId = action.payload.id;
+            const course_id = action.payload.course_id; // Lấy course_id từ payload
+
+            // Cập nhật trạng thái bài học
+            state.course.forEach((item) => {
+                item.lessons.forEach((lesson) => {
+                    if (lesson.id === lessonId) {
+                        lesson.is_completed = true;
+                        lesson.is_in_progress = false;
+                    }
+                });
             });
 
-            // Cập nhật progress: xóa phần tử progressing nếu có
-            state.progress = state.progress.filter((progressItem) => progressItem.lesson_id !== lessonId);
-
-            // Thêm phần tử mới vào progress với trạng thái đã hoàn thành
-            const progressData = {
-                ...action.payload,
-                is_in_progress: false,
-                is_completed: true,
-            };
-
-            state.progress.push(progressData);
+            // Cập nhật mảng progress
+            const existingProgressIndex = state.progress.findIndex(
+                (progress) => progress.id === lessonId && progress.course_id === course_id,
+            );
+            if (existingProgressIndex !== -1) {
+                // Cập nhật nếu đã tồn tại
+                state.progress[existingProgressIndex] = {
+                    id: lessonId, // Sử dụng id
+                    course_id, // Thêm course_id vào progress
+                    is_in_progress: false,
+                    is_completed: true,
+                };
+            } else {
+                // Nếu không có trong progress, thêm mới
+                state.progress.push({
+                    id: lessonId, // Sử dụng id
+                    course_id, // Thêm course_id vào progress
+                    is_in_progress: false,
+                    is_completed: true,
+                });
+            }
         },
-        resetProgress(state, action) {
-            state.progress = [];
+
+        resetProgress(state) {
+            state.progress = []; // Đặt lại progress thành mảng rỗng
         },
         // Active navbar
         setActiveLessonID(state, action) {
@@ -79,12 +88,7 @@ export const course = createSlice({
         },
         // Selected lesson
         setSelectedLesson(state, action) {
-            const lesson = action.payload;
-            state.selectedLesson = {
-                ...lesson,
-                is_completed: false,
-                is_in_progress: true,
-            };
+            state.selectedLesson = action.payload;
         },
         updateSelectedLesson(state, action) {
             state.selectedLesson = action.payload;

@@ -44,7 +44,6 @@ function Home() {
                 console.log(error);
             });
     }, []);
-    console.log(user.role_id);
 
     return (
         <>

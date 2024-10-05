@@ -13,8 +13,6 @@ export const getDetailCourse = async (id) => {
 };
 
 export const insertProgress = async (user_id, values) => {
-    console.log(values);
-
     const result = await request.put(`engcom/progress/${user_id}`, values);
 
     return result;

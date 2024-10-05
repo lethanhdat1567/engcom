@@ -14,17 +14,19 @@ import CourseFooter from '../components/CourseFooter/CourseFooter';
 import { validateProgress } from '~/utils/validateProgress';
 import request from '~/utils/request';
 import { insertProgress } from '~/requestApi/requestCourse';
+import useCourseUtils from '~/utils/useCourseUtils';
 const cx = classNames.bind(styles);
 
 function CourseStudent({ children }) {
     const { slug } = useParams();
+    const { filterFirst } = useCourseUtils();
+
     // Redux
     const courseData = useSelector((state) => state.course.course);
     const progressData = useSelector((state) => state.course.progress);
     const user = useSelector((state) => state.user.user);
     const selectedLesson = useSelector((state) => state.course.selectedLesson);
     const dispatch = useDispatch();
-    const location = useLocation();
     // hooks
     const [loading, setLoading] = useState(false);
     const [showNav, setShowNav] = useState(true);
@@ -35,24 +37,7 @@ function CourseStudent({ children }) {
         setLoading(true);
         getCourseStudent(slug, user.id)
             .then((res) => {
-                const firstLesson = res.data[0].lessons[0];
-                // Kiểm tra trạng thái của firstLesson
-                if (!firstLesson.is_completed && !firstLesson.is_in_progress) {
-                    const updatedFirstLesson = {
-                        ...firstLesson,
-                        is_in_progress: true,
-                    };
-                    res.data[0].lessons[0] = updatedFirstLesson;
-                    const setProgressValue = validateProgress(user.id, res.data[0].id, firstLesson.id);
-                    dispatch(course.actions.setProgressing(setProgressValue));
-                    dispatch(course.actions.setCourse(res.data));
-                    dispatch(course.actions.setActiveLessonID(firstLesson.id));
-                    dispatch(course.actions.setSelectedLesson(firstLesson));
-                } else {
-                    dispatch(course.actions.setCourse(res.data));
-                    dispatch(course.actions.setActiveLessonID(firstLesson.id));
-                    dispatch(course.actions.setSelectedLesson(firstLesson));
-                }
+                filterFirst(res.data);
                 setLoading(false);
             })
             .catch((error) => {

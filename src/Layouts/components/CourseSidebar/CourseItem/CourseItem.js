@@ -2,14 +2,22 @@ import classNames from 'classnames/bind';
 import styles from './CourseItem.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Lesson from '../Lesson/Lesson';
 import StudentLesson from '~/components/StudentLesson/StudentLesson';
+import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles);
 
 function CourseItem({ data }) {
+    const selectedLesson = useSelector((state) => state.course.selectedLesson);
     const [showLesson, setShowLesson] = useState(false);
+
+    useEffect(() => {
+        if (data.id === selectedLesson.course_id) {
+            setShowLesson(true);
+        }
+    }, [selectedLesson]);
 
     return (
         <div className={cx('course-wrap')}>

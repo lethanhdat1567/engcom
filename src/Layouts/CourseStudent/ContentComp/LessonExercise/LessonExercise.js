@@ -3,10 +3,12 @@ import styles from './LessonExercise.module.scss';
 import { useState } from 'react';
 import { Button, Flex } from 'antd';
 import confetti from 'canvas-confetti';
+import useCourseUtils from '~/utils/useCourseUtils';
 
 const cx = classNames.bind(styles);
 
 function LessonExercise({ data }) {
+    const { handleDoneLesson } = useCourseUtils();
     const [choiceActive, setChoiceActive] = useState();
     const [currentChoice, setCurrentChoice] = useState();
     const [isWrong, setIsWrong] = useState(false);
@@ -23,6 +25,7 @@ function LessonExercise({ data }) {
             if (currentChoice.is_correct) {
                 setIsWrong(false);
                 setIsCorrect(true);
+                handleDoneLesson();
                 confetti({
                     particleCount: 100,
                     spread: 70,

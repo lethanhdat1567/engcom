@@ -1,20 +1,18 @@
 import classNames from 'classnames/bind';
 import styles from './LessonVideo.module.scss';
 import ReactPlayer from 'react-player';
-import { useDispatch, useSelector } from 'react-redux';
-import { course } from '~/redux/reducer/Course';
-import { validateProgress } from '~/utils/validateProgress';
-import useNextLesson from '~/utils/useNextLesson';
+import { useSelector } from 'react-redux';
+import useCourseUtils from '~/utils/useCourseUtils';
 
 const cx = classNames.bind(styles);
 
 function LessonVideo({ data }) {
     const videoContent = data.content;
+    const { handleDoneLesson } = useCourseUtils();
     const user = useSelector((state) => state.user.user);
-    const handleNextLesson = useNextLesson();
 
     const handleEnd = () => {
-        handleNextLesson();
+        handleDoneLesson();
     };
     if (videoContent) {
         return (
