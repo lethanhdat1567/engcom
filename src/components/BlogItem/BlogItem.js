@@ -14,12 +14,19 @@ const cx = classNames.bind(styles);
 function CartItem({ data }) {
     const item = data.blog;
     const user = data.user;
-    const { firstImage, content } = extractContent(item.content);
+    const { content } = extractContent(item.content);
 
     return (
         <div className={cx('wrap')}>
             <Link to={`${process.env.REACT_APP_ROOT}/blogs/${item.id}`} className={cx('banner')}>
-                <img src={firstImage ? firstImage : imgs.NoImg} className={cx('img')} />
+                <img
+                    src={
+                        item.thumbnail
+                            ? `${process.env.REACT_APP_BACKEND_UPLOAD}/${item.thumbnail}`
+                            : imgs.NoImg
+                    }
+                    className={cx('img')}
+                />
             </Link>
             <div className={cx('info')}>
                 <h3 className={cx('title')}>{item.title}</h3>

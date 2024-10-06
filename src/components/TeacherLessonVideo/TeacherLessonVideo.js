@@ -67,9 +67,7 @@ function TeacherLessonVideo({ data }) {
                         <div className="col">
                             <CreateVideo utils={utils} />
                         </div>
-                        <div className="col">
-                            <CreateDesc utils={utils} />
-                        </div>
+                        <div className="col">{videoValue && <CreateDesc utils={utils} />}</div>
                     </div>
                 </>
             )}

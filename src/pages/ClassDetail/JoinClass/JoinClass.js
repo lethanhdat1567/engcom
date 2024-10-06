@@ -60,24 +60,6 @@ function JoinClass({ data }) {
                 console.log(error);
             });
     };
-    // Handle private
-    const handlePrivateChange = (e) => {
-        setPrivateError(null);
-        const value = e.target.value;
-        if (value) {
-            setPrivateValue(value);
-            setAllowSubmit(true);
-        } else {
-            setPrivateValue('');
-            setAllowSubmit(false);
-        }
-    };
-    const handleJoinPrivate = () => {
-        console.log('test');
-
-        navigate(`/course/${data.id}`);
-    };
-
     const handleSubmit = () => {
         if (Object.keys(user).length === 0) {
             setRegisModal(true);
@@ -111,6 +93,25 @@ function JoinClass({ data }) {
             }
         }
     };
+    // Handle private
+    const handlePrivateChange = (e) => {
+        setPrivateError(null);
+        const value = e.target.value;
+        if (value) {
+            setPrivateValue(value);
+            setAllowSubmit(true);
+        } else {
+            setPrivateValue('');
+            setAllowSubmit(false);
+        }
+    };
+    const handleJoinPrivate = () => {
+        console.log('test');
+
+        navigate(`/course/${data.id}`);
+    };
+    // Handle cost
+    const handleCostBuy = () => {};
 
     if (data.type && user.id !== data.user_id) {
         const typeCase = {
@@ -195,9 +196,19 @@ function JoinClass({ data }) {
                                 <span className={cx('discount')}>{data.discount}%</span>
                             </div>
                         )}
-                        <span className={cx('total', { sale: data.discount })}>1000$</span>
+                        <span className={cx('total', { sale: data.discount })}>
+                            {priceTrander(data.total)}
+                        </span>
 
-                        <Button primary>Buy class</Button>
+                        {validateFree(freeClass, user.id, slug) ? (
+                            <Button primary classNames={cx('public-btn-join')} onClick={handleSubFree}>
+                                Join class
+                            </Button>
+                        ) : (
+                            <Button primary onClick={handleCostBuy}>
+                                Buy class
+                            </Button>
+                        )}
                     </div>
                 );
             },

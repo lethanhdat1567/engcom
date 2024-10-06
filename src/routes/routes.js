@@ -20,6 +20,7 @@ import Home from '~/pages/Home';
 import HomeAdmin from '~/pages/HomeAdmin/HomeAdmin';
 import MyBlogs from '~/pages/MyBlogs/MyBlogs';
 import NewPost from '~/pages/NewPost/NewPost';
+import Payment from '~/pages/Payment/Payment';
 import Profile from '~/pages/Profile/Profile';
 import Role from '~/pages/Role/Role';
 import SearchMore from '~/pages/SearchMore/SearchMore';
@@ -59,6 +60,7 @@ const studentPage = [
     { path: '/me/post', element: MyBlogs },
     { path: '/me/bookmark', element: Bookmark },
     { path: '/class/:slug', element: ClassDetail },
+    { path: '/payment/:slug', element: Payment, layout: HeaderOnly },
     { path: '/course/:slug', element: CourseStudent, layout: null },
     { path: '*', element: NotFound, layout: null },
 ];

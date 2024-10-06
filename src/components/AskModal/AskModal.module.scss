@@ -1,0 +1,58 @@
+.wrap {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    background-color: #282933;
+    z-index: 999999;
+    padding: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transition: ease 0.4s;
+    &.active {
+        left: 0;
+        visibility: visible;
+        opacity: 1;
+    }
+}
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    .title {
+        font-size: 2rem;
+        font-weight: 500;
+        color: #fff;
+        flex: 1;
+        text-align: center;
+    }
+    .close {
+        color: #4864c9;
+        cursor: pointer;
+    }
+}
+.body {
+    .ask {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .ask-input {
+            flex: 1;
+            background-color: transparent;
+            border-bottom: 1px solid #ccc;
+            color: #fff;
+            padding-bottom: 8px;
+            &::placeholder {
+                color: #fff;
+            }
+        }
+    }
+}
