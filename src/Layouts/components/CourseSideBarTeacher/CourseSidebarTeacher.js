@@ -21,7 +21,7 @@ function CourseSidebarTeacher({ showNav, setShowNav }) {
     const handleSave = () => {
         if (lessons.length !== 0) {
             if (slug) {
-                navigate(`/class/${slug}`);
+                navigate(`/own/${slug}`);
             } else {
                 navigate('/create-class/courses');
             }

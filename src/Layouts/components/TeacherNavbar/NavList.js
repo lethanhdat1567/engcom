@@ -11,8 +11,11 @@ const cx = classNames.bind(styles);
 function NavList({ item }) {
     const [active, setActive] = useState(true);
     const slug = useParams();
+    const cartDataRedux = useSelector((state) => state.teacher.carts);
+    const coursesDataRedux = useSelector((state) => state.teacher.courses);
     const cartData = useSelector((state) => state.teacher.carts);
     const courses = useSelector((state) => state.teacher.courses);
+
     return (
         <li className={cx('item-wrap')}>
             <div className={cx('item-main')} onClick={() => setActive(!active)}>
@@ -32,7 +35,6 @@ function NavList({ item }) {
                     } else if (childItem.title === 'Courses') {
                         store = courses; // Đây là mảng
                     }
-
                     return (
                         <li key={index}>
                             <NavLink
@@ -42,21 +44,32 @@ function NavList({ item }) {
                             >
                                 <span className={cx('item-icon-sub')}>{childItem.icon}</span>
                                 <span className={cx('item-link')}>{childItem.title}</span>
-                                {childItem.title === 'Your class' &&
+                                {/* {childItem.title === 'Your class' &&
                                     !slug &&
                                     Object.keys(store).length === 0 && (
                                         <span style={{ color: 'red' }} className={cx('null-alert')}>
                                             <FontAwesomeIcon icon={faXmark} />
                                         </span>
-                                    )}
-                                {childItem.title === 'Courses' &&
+                                    )} */}
+                                {/* {childItem.title === 'Courses' &&
                                     !slug &&
                                     Array.isArray(store) &&
-                                    store.length === 0 && (
+                                    courses.length === 0 && (
+                                        <span style={{ color: 'red' }} className={cx('null-alert')}>
+                                            <FontAwesomeIcon icon={faXmark} />
+                                        </span>
+                                    )} */}
+                                {childItem.title === 'Your class' &&
+                                    Object.keys(cartDataRedux).length === 0 && (
                                         <span style={{ color: 'red' }} className={cx('null-alert')}>
                                             <FontAwesomeIcon icon={faXmark} />
                                         </span>
                                     )}
+                                {childItem.title === 'Courses' && courses.length === 0 && (
+                                    <span style={{ color: 'red' }} className={cx('null-alert')}>
+                                        <FontAwesomeIcon icon={faXmark} />
+                                    </span>
+                                )}
                             </NavLink>
                         </li>
                     );

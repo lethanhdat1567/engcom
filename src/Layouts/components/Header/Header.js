@@ -55,8 +55,6 @@ function Header() {
                 });
             getSaveBlog(user.id)
                 .then((res) => {
-                    console.log(res.data);
-
                     dispatch(ownData.actions.getSaveBlog(res.data));
                 })
                 .catch((error) => {

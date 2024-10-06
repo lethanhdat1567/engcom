@@ -22,7 +22,7 @@ function ClassDetail() {
         setLoading(true);
         getDetailClass(slug)
             .then((res) => {
-                setClassData(res.data);
+                setClassData(res.data.class);
                 setLoading(false);
             })
             .catch((error) => {

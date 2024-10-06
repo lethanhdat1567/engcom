@@ -78,12 +78,12 @@ function TeacherNavbar({ showNav, setShowNav }) {
                 {
                     title: 'Your class',
                     icon: <FontAwesomeIcon className="fa-md" icon={faHome} />,
-                    to: `class/${slug}`,
+                    to: `own/${slug}`,
                 },
                 {
                     title: 'Courses',
                     icon: <FontAwesomeIcon className="fa-md" icon={faBook} />,
-                    to: `class/${slug}/courses`,
+                    to: `own/${slug}/courses`,
                 },
             ],
         },
@@ -94,17 +94,17 @@ function TeacherNavbar({ showNav, setShowNav }) {
                 {
                     title: 'OverView',
                     icon: <FontAwesomeIcon className="fa-md" icon={faEye} />,
-                    to: `class/${slug}/overview`,
+                    to: `own/${slug}/overview`,
                 },
                 {
                     title: 'Users',
                     icon: <FontAwesomeIcon className="fa-md" icon={faUsersLine} />,
-                    to: `class/${slug}/users`,
+                    to: `own/${slug}/users`,
                 },
                 {
                     title: 'All comments',
                     icon: <FontAwesomeIcon className="fa-md" icon={faComment} />,
-                    to: `class/${slug}/comments`,
+                    to: `own/${slug}/comments`,
                 },
             ],
         },

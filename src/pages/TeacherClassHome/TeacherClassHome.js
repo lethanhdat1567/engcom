@@ -22,6 +22,7 @@ function TeacherClassHome() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const cartData = useSelector((state) => state.teacher.carts);
+    const coursesData = useSelector((state) => state.teacher.courses);
     const { slug } = useParams();
     const user = useSelector((state) => state.user.user);
     // Data
@@ -36,7 +37,10 @@ function TeacherClassHome() {
     const [cartThumbnail, setCartThumbnail] = useState(cartData?.thumbnail || '');
     const cartId = useId();
     const validateCart = () => {
-        return titleCart !== '' && cartType !== null;
+        if (titleCart && cartType) {
+            return true;
+        }
+        return false;
     };
 
     const states = {
@@ -53,7 +57,6 @@ function TeacherClassHome() {
         cartType,
         setCartType,
     };
-
     const cartItem = {
         class: {
             name: titleCart,
@@ -71,16 +74,16 @@ function TeacherClassHome() {
                 id: cartId || '',
                 user_id: user.id || '',
                 name: titleCart || '',
-                price: cartPrice || '',
-                discount: cartDiscount || '',
-                total: cartTotal || '',
+                price: cartPrice || 0,
+                discount: cartDiscount || 0,
+                total: cartTotal || 0,
                 password: cartPassword || '',
                 thumbnail: cartThumbnail || '',
                 description: descValue || '',
                 type: cartType || '',
             };
             dispatch(teacher.actions.setCart(values));
-            slug ? navigate(`/class/${slug}/courses`) : navigate('/create-class/courses');
+            slug ? navigate(`/own/${slug}/courses`) : navigate('/create-class/courses');
         }
     };
 
@@ -109,11 +112,11 @@ function TeacherClassHome() {
         setCartThumbnail(cartData.thumbnail);
     }, [cartData]);
     useEffect(() => {
-        if (slug) {
+        if (slug && Object.keys(cartData).length === 0) {
             setLoading(true);
             getDetailClass(slug)
                 .then((res) => {
-                    const cart = res.data;
+                    const cart = res.data.class;
                     dispatch(teacher.actions.setCart(cart));
                     getCourse(slug)
                         .then((res) => {
@@ -127,6 +130,7 @@ function TeacherClassHome() {
                 .catch((error) => {
                     console.log(error);
                 });
+        } else if (slug && Object.keys(cartData).length > 0) {
         }
     }, []);
     return (
@@ -137,7 +141,7 @@ function TeacherClassHome() {
                 <div className={cx('cart-wrap')}>
                     <div className={cx('head-wrap')}>
                         <h1 className={cx('cart-title')}>Your cart class</h1>
-                        <Button disable={validateCart() ? false : true} save onClick={handleSave}>
+                        <Button disable={!validateCart()} save onClick={handleSave}>
                             Save
                         </Button>
                     </div>

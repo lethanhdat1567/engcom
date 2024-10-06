@@ -3,12 +3,28 @@ import styles from './TeacherClassUser.module.scss';
 import { Space, Table, Tag } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { getUserClass } from '~/requestApi/requestClass';
 
 const cx = classNames.bind(styles);
 
 function TeacherClassUser() {
+    const { slug } = useParams();
+    const [usersData, setUsersData] = useState();
     const columns = [
+        {
+            title: 'Avatar',
+            dataIndex: 'avatar',
+            key: 'avatar',
+            render: (avatar) => (
+                <img
+                    src={`${process.env.REACT_APP_BACKEND_UPLOAD}/${avatar}`}
+                    alt="User Avatar"
+                    className={cx('avatar')}
+                />
+            ),
+        },
         {
             title: 'Name',
             dataIndex: 'name',
@@ -16,32 +32,16 @@ function TeacherClassUser() {
             render: (text) => <a>{text}</a>,
         },
         {
-            title: 'Age',
-            dataIndex: 'age',
-            key: 'age',
+            title: 'Email',
+            dataIndex: 'email',
+            key: 'email',
         },
         {
-            title: 'Address',
-            dataIndex: 'address',
-            key: 'address',
+            title: 'Progress',
+            dataIndex: 'progress',
+            key: 'progress',
         },
-        {
-            title: 'Status',
-            key: 'status',
-            dataIndex: 'status',
-            render: (_, { status }) => (
-                <>
-                    {status.map((tag) => {
-                        let color = tag === 'done' ? 'green' : 'red';
-                        return (
-                            <Tag color={color} key={tag}>
-                                {tag.toUpperCase()}
-                            </Tag>
-                        );
-                    })}
-                </>
-            ),
-        },
+
         {
             title: 'Utils',
             key: 'action',
@@ -57,31 +57,21 @@ function TeacherClassUser() {
             ),
         },
     ];
-    const data = [
-        {
-            key: '1',
-            name: 'John Brown',
-            age: 32,
-            address: 'New York No. 1 Lake Park',
-            status: ['done'],
-        },
-        {
-            key: '2',
-            name: 'Jim Green',
-            age: 42,
-            address: 'London No. 1 Lake Park',
-            status: ['incompleted'],
-        },
-        {
-            key: '3',
-            name: 'Joe Black',
-            age: 32,
-            address: 'Sydney No. 1 Lake Park',
-            status: ['done'],
-        },
-    ];
+    useEffect(() => {
+        getUserClass(slug)
+            .then((res) => {
+                const dataWithKeys = res.data.map((user, index) => ({
+                    ...user,
+                    key: user.id || index,
+                }));
+                setUsersData(dataWithKeys);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
-    return <Table scroll={{ x: 1000 }} dataSource={data} columns={columns} className={cx('table')} />;
+    return <Table scroll={{ x: 1000 }} dataSource={usersData} columns={columns} className={cx('table')} />;
 }
 
 export default TeacherClassUser;

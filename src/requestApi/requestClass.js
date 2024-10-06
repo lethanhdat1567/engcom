@@ -41,3 +41,9 @@ export const getMoreClass = async (type) => {
 
     return result.data;
 };
+
+export const getUserClass = async (class_id) => {
+    const result = await request.get(`engcom/own-teacher/user/${class_id}`);
+
+    return result.data;
+};
