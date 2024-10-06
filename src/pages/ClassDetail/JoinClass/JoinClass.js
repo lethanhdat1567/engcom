@@ -72,6 +72,11 @@ function JoinClass({ data }) {
             setAllowSubmit(false);
         }
     };
+    const handleJoinPrivate = () => {
+        console.log('test');
+
+        navigate(`/course/${data.id}`);
+    };
 
     const handleSubmit = () => {
         if (Object.keys(user).length === 0) {
@@ -93,6 +98,7 @@ function JoinClass({ data }) {
                         insertSubscribe(values)
                             .then((res) => {
                                 dispatch(subscribeClass.actions.setFree(res.data));
+                                navigate(`/course/${data.id}`);
                             })
                             .catch((error) => {
                                 console.log(error);
@@ -135,7 +141,7 @@ function JoinClass({ data }) {
                 return (
                     <>
                         <div className={cx('private-wrap')}>
-                            {!validateFree(freeClass, user.id) ? (
+                            {!validateFree(freeClass, user.id, slug) ? (
                                 <>
                                     <div className={cx('wrap')}>
                                         <div className={cx('private-head')}>
@@ -160,9 +166,18 @@ function JoinClass({ data }) {
                                     </Button>
                                 </>
                             ) : (
-                                <Button primary classNames={cx('private-join-btn')}>
-                                    Join class
-                                </Button>
+                                <div className={cx('public-btn-wrap')}>
+                                    <Button
+                                        primary
+                                        classNames={cx('private-join-btn')}
+                                        onClick={handleJoinPrivate}
+                                    >
+                                        Join class
+                                    </Button>
+                                    <button className={cx('unsub')} onClick={handleUnsub}>
+                                        Unsubscribe class
+                                    </button>
+                                </div>
                             )}
                         </div>
                         {regisModal && (

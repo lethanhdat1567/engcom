@@ -9,6 +9,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ownData } from '~/redux/reducer/OwnDataSlice';
 import Loading from '~/components/Loading/Loading';
 import { storeData } from '~/redux/reducer/StoreSlice';
+import UploadBanner from '../NewPost/UploadBanner';
 
 const cx = classNames.bind(styles);
 
@@ -21,13 +22,13 @@ const editorConfig = {
 function UpdateBLog() {
     const user = useSelector((state) => state.user.user);
     const { slug } = useParams();
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [isMounted, setIsMounted] = useState(false);
     const [blogId, setBlogId] = useState();
     const [titleValue, setTitleValue] = useState('');
     const [editorContent, setEditorContent] = useState('');
+    const [thumbnailValue, setThumbnalValue] = useState('');
     const editor = useRef(null);
 
     const handleExport = async () => {
@@ -35,12 +36,11 @@ function UpdateBLog() {
         const values = {
             title: titleValue,
             content: editorContent,
+            thumbnail: thumbnailValue,
         };
-        console.log(values);
 
         try {
             const res = await updateBlog(blogId, values);
-            dispatch(ownData.actions.updateBlogs(res.data));
             setLoading(false);
             navigate('/me/post');
         } catch (error) {
@@ -56,7 +56,9 @@ function UpdateBLog() {
                 setTitleValue(res.data.title);
                 setEditorContent(res.data.content);
                 setBlogId(res.data.id);
+                setThumbnalValue(res.data.thumbnail);
                 setLoading(false);
+                console.log(res.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -77,6 +79,7 @@ function UpdateBLog() {
                     Export
                 </Button>
             </div>
+            <UploadBanner setThumnailValue={setThumbnalValue} thumbnailValue={thumbnailValue} />
             <div className={cx('content')}>
                 <div className={cx('design')}>
                     <JoditEditor

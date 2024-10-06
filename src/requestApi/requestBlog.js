@@ -33,3 +33,21 @@ export const readAllBlogs = async () => {
 
     return result.data;
 };
+
+export const getSaveBlog = async (user_id) => {
+    const result = await request.get(`engcom/save-blogs/${user_id}`);
+
+    return result.data;
+};
+
+export const insertSaveBlog = async (user_id, blog_id) => {
+    const result = await request.put(`engcom/save-blogs/${user_id}/${blog_id}`);
+
+    return result.data;
+};
+
+export const deleteSaveBlog = async (user_id, blog_id) => {
+    const result = await request.delete(`engcom/save-blogs/${user_id}/${blog_id}`);
+
+    return result.data;
+};

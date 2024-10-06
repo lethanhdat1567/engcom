@@ -64,7 +64,7 @@ function ProfileItem({ data }) {
 
             if (data.type === 'upload') {
                 const formData = new FormData();
-                formData.append('file', uploadValue); // Thêm file vào FormData
+                formData.append('file', uploadValue);
 
                 request
                     .post(`engcom/avatar/${user.id}`, formData, {

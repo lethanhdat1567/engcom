@@ -4,9 +4,10 @@ export const ownData = createSlice({
     name: 'ownData',
     initialState: {
         notes: null,
-        blogs: null,
+        saveBlogs: [],
     },
     reducers: {
+        // Note
         getNotes(state, action) {
             state.notes = action.payload;
         },
@@ -23,25 +24,15 @@ export const ownData = createSlice({
             const newNotes = state.notes.filter((item) => item.id !== action.payload.id);
             state.notes = newNotes;
         },
-        getBlogs(state, action) {
-            state.blogs = action.payload;
+        // Savve Blogs
+        getSaveBlog(state, action) {
+            state.saveBlogs = action.payload;
         },
-        setBlogs(state, action) {
-            if (state.blogs) {
-                state.blogs.push(action.payload);
-            } else {
-                state.blogs = [action.payload];
-            }
+        setSaveBlog(state, action) {
+            state.saveBlogs.push(action.payload);
         },
-        updateBlogs(state, action) {
-            const stateIndex = state.blogs.findIndex((item) => item.id === action.payload.id);
-            if (stateIndex !== -1) {
-                state.blogs[stateIndex] = { ...state.blogs[stateIndex], ...action.payload };
-            }
-        },
-        deleteBlogs(state, action) {
-            const newBlogs = state.blogs.filter((item) => item.id !== action.payload.id);
-            state.blogs = newBlogs;
+        deleteSaveBlogs(state, action) {
+            state.saveBlogs = state.saveBlogs.filter((blog) => blog.id !== action.payload);
         },
     },
 });

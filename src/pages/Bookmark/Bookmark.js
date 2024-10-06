@@ -4,32 +4,31 @@ import { Link } from 'react-router-dom';
 import MyBlogsItem from '~/components/MyBlogsItem/MyBlogsItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { readListBlog } from '~/requestApi/requestBlog';
+import { getSaveBlog, readListBlog } from '~/requestApi/requestBlog';
 import { ownData } from '~/redux/reducer/OwnDataSlice';
 import SkeletonLoading from '~/components/Loading/SkeletonLoading';
 
 const cx = classNames.bind(styles);
 
 function Bookmark() {
-    const dispatch = useDispatch();
-    const blogItems = useSelector((state) => state.ownData.blogs);
     const user = useSelector((state) => state.user.user);
     const [loading, setLoading] = useState(false);
-    useEffect(() => {
-        if (!blogItems) {
-            setLoading(true);
-            readListBlog(user.id)
-                .then((res) => {
-                    dispatch(ownData.actions.getBlogs(res.data));
-                    setLoading(false);
-                })
-                .catch((error) => {
-                    console.log(error);
+    const [saveBlogs, setSaveBlogs] = useState([]);
+    const [deleting, setDeleting] = useState(false);
 
-                    setLoading(false);
-                });
-        }
+    useEffect(() => {
+        setLoading(true);
+        getSaveBlog(user.id)
+            .then((res) => {
+                setLoading(false);
+                setSaveBlogs(res.data);
+            })
+            .catch((error) => {
+                setLoading(false);
+                console.log(error);
+            });
     }, []);
+
     return (
         <div className={cx('wrap')}>
             <div className={cx('header-wrap')}>
@@ -49,8 +48,18 @@ function Bookmark() {
                                 {loading ? (
                                     <SkeletonLoading height={100} margin={10} count={3} />
                                 ) : (
-                                    blogItems?.map((item, index) => {
-                                        return <MyBlogsItem data={item} key={index} />;
+                                    saveBlogs.map((item, index) => {
+                                        return (
+                                            <MyBlogsItem
+                                                setBlogItems={setSaveBlogs}
+                                                blogItems={saveBlogs}
+                                                type={'save'}
+                                                data={item}
+                                                key={index}
+                                                deleting={deleting}
+                                                setDeleting={setDeleting}
+                                            />
+                                        );
                                     })
                                 )}
                             </div>

@@ -14,6 +14,8 @@ import { refreshToken } from '~/requestApi/requestToken';
 import { usersSlice } from '~/redux/reducer/UserSlice';
 import { getSubscribe } from '~/requestApi/requestSubscribe';
 import { subscribeClass } from '~/redux/reducer/SubscribeSlice';
+import { getSaveBlog } from '~/requestApi/requestBlog';
+import { ownData } from '~/redux/reducer/OwnDataSlice';
 
 const cx = classNames.bind(styles);
 
@@ -47,6 +49,15 @@ function Header() {
             getSubscribe(user.id)
                 .then((res) => {
                     dispatch(subscribeClass.actions.getFree(res.data));
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            getSaveBlog(user.id)
+                .then((res) => {
+                    console.log(res.data);
+
+                    dispatch(ownData.actions.getSaveBlog(res.data));
                 })
                 .catch((error) => {
                     console.log(error);

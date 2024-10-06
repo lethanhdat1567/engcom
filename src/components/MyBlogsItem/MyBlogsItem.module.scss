@@ -28,6 +28,10 @@
             background-color: #ccc;
         }
     }
+    &.delete {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
 }
 
 // Dropdown

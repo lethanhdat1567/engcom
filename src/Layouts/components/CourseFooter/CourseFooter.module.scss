@@ -11,6 +11,7 @@
     justify-content: space-between;
     padding: 0px 12px;
     .unit {
+        min-width: 100px;
         font-size: 1.4rem;
         color: hsla(0, 0%, 100%, 0.8);
         @include abs.screen(md) {

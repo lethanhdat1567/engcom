@@ -12,24 +12,20 @@ import SkeletonLoading from '~/components/Loading/SkeletonLoading';
 const cx = classNames.bind(styles);
 
 function MyBlogs() {
-    const dispatch = useDispatch();
-    const blogItems = useSelector((state) => state.ownData.blogs);
+    const [blogItems, setBlogItems] = useState([]);
     const user = useSelector((state) => state.user.user);
     const [loading, setLoading] = useState(false);
     useEffect(() => {
-        if (!blogItems) {
-            setLoading(true);
-            readListBlog(user.id)
-                .then((res) => {
-                    dispatch(ownData.actions.getBlogs(res.data));
-                    setLoading(false);
-                })
-                .catch((error) => {
-                    console.log(error);
-
-                    setLoading(false);
-                });
-        }
+        setLoading(true);
+        readListBlog(user.id)
+            .then((res) => {
+                setBlogItems(res.data);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.log(error);
+                setLoading(false);
+            });
     }, []);
 
     return (
@@ -53,7 +49,14 @@ function MyBlogs() {
                                 <SkeletonLoading height={100} margin={10} count={3} />
                             ) : (
                                 blogItems?.map((item, index) => {
-                                    return <MyBlogsItem data={item} key={index} />;
+                                    return (
+                                        <MyBlogsItem
+                                            setBlogItems={setBlogItems}
+                                            blogItems={blogItems}
+                                            data={item}
+                                            key={index}
+                                        />
+                                    );
                                 })
                             )}
                         </div>

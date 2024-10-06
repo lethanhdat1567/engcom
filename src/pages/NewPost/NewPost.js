@@ -4,12 +4,11 @@ import './DesignPost.scss';
 import JoditEditor from 'jodit-react';
 import { useRef, useState } from 'react';
 import Button from '~/components/Button';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { createBlog } from '~/requestApi/requestBlog';
 import { useNavigate } from 'react-router-dom';
-import { ownData } from '~/redux/reducer/OwnDataSlice';
 import Loading from '~/components/Loading/Loading';
-import { storeData } from '~/redux/reducer/StoreSlice';
+import UploadBanner from './UploadBanner';
 
 const cx = classNames.bind(styles);
 
@@ -20,10 +19,10 @@ const editorConfig = {
 };
 function NewPost() {
     const user = useSelector((state) => state.user.user);
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [titleValue, setTitleValue] = useState('');
+    const [thumbnailValue, setThumnailValue] = useState('');
     const [editorContent, setEditorContent] = useState('');
     const editor = useRef(null);
 
@@ -32,12 +31,12 @@ function NewPost() {
         const values = {
             user_id: user.id,
             title: titleValue,
+            thumbnail: thumbnailValue,
             content: `${editorContent}`,
         };
 
         try {
             const res = await createBlog(values);
-            dispatch(ownData.actions.setBlogs(res.data));
             setLoading(false);
             navigate('/me/post');
         } catch (error) {
@@ -58,6 +57,7 @@ function NewPost() {
                     Export
                 </Button>
             </div>
+            <UploadBanner setThumnailValue={setThumnailValue} thumbnailValue={thumbnailValue} />
             <div className={cx('content')}>
                 <div className={cx('design')}>
                     <JoditEditor
