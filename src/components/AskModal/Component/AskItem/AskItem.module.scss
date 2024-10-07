@@ -30,3 +30,37 @@
         font-weight: 500;
     }
 }
+.item-wrap {
+    margin: 20px 0px;
+}
+.info-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.options {
+    cursor: pointer;
+    padding: 10px;
+}
+.drop-list {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #423f3f;
+    white-space: nowrap;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.item {
+    color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    gap: 10px;
+    cursor: pointer;
+    transition: ease 0.4s;
+    &:hover {
+        background-color: #d4d6d8;
+    }
+}

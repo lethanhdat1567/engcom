@@ -17,7 +17,7 @@ import { insertProgress } from '~/requestApi/requestCourse';
 import useCourseUtils from '~/utils/useCourseUtils';
 const cx = classNames.bind(styles);
 
-function CourseStudent({ children }) {
+function CourseStudent() {
     const { slug } = useParams();
     const { filterFirst } = useCourseUtils();
 

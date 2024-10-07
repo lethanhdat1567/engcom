@@ -1,5 +1,6 @@
 .wrap {
     position: fixed;
+    overflow-y: scroll;
     left: -100%;
     top: 0;
     bottom: 0;
@@ -38,6 +39,12 @@
         display: flex;
         align-items: center;
         gap: 10px;
+        .ask-content {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
         .avatar {
             width: 40px;
             height: 40px;
@@ -52,6 +59,20 @@
             padding-bottom: 8px;
             &::placeholder {
                 color: #fff;
+            }
+        }
+        .com-submit {
+            background-color: #ccc;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 999px;
+            font-size: 1.6rem;
+            font-weight: 500;
+            cursor: default;
+            &.active {
+                background-color: #7baeff;
+                color: #fff;
+                cursor: pointer;
             }
         }
     }

@@ -15,7 +15,7 @@ function LessonVideo({ data }) {
     const handleEnd = () => {
         handleDoneLesson();
     };
-    if (videoContent.length > 0) {
+    if (Object.keys(videoContent).length > 0) {
         return (
             <>
                 {videoContent.video ? (

@@ -5,7 +5,7 @@ import { faArrowLeft, faArrowRight, faQuestion } from '@fortawesome/free-solid-s
 import { courseBack, sideBar } from '~/assets/Icon';
 import { useSelector } from 'react-redux';
 import useCourseUtils from '~/utils/useCourseUtils';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AskModal from '~/components/AskModal/AskModal';
 
 const cx = classNames.bind(styles);
