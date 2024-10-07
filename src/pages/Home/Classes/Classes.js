@@ -20,7 +20,7 @@ function Classes({ data, title, type, to }) {
                     to={
                         type === 'blog'
                             ? `${process.env.REACT_APP_ROOT}/${to}`
-                            : `${process.env.REACT_APP_ROOT}/classes/${to}`
+                            : `${process.env.REACT_APP_ROOT}/classes/all`
                     }
                     className={cx('link')}
                 >

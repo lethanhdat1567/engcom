@@ -8,6 +8,7 @@ import HeaderCreateCourse from '../components/HeaderCreateCourse.js/HeaderCreate
 import { useDispatch, useSelector } from 'react-redux';
 import { teacher } from '~/redux/reducer/TeacherSlice';
 import { activeLesson } from '~/redux/reducer/ActiveLesson';
+import { useParams } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -17,17 +18,20 @@ function TeacherClassLayout({ children }) {
     const dispatch = useDispatch();
     const [showNav, setShowNav] = useState(true);
     const [isMount, setIsMount] = useState(false);
+    const { slug } = useParams();
 
     useEffect(() => {
         setIsMount(true);
-
-        return () => {
-            if ((isMount && Object.keys(carts).length > 0) || courses.length > 0) {
-                dispatch(teacher.actions.resetState());
-                dispatch(activeLesson.actions.deleteActiveLesson());
-            }
-        };
-    }, [carts]);
+        if (!slug) {
+            dispatch(teacher.actions.resetState());
+        }
+        // return () => {
+        //     if ((isMount && !slug && Object.keys(carts).length > 0) || courses.length > 0) {
+        //         dispatch(teacher.actions.resetState());
+        //         dispatch(activeLesson.actions.deleteActiveLesson());
+        //     }
+        // };
+    }, []);
 
     return (
         <div className={cx('wrap')}>

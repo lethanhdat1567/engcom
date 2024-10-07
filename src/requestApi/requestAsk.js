@@ -17,3 +17,9 @@ export const deleteAsk = async (id) => {
 
     return result.data;
 };
+
+export const getReply = async (lesson_id) => {
+    const result = await request.get(`engcom/ask/reply/${lesson_id}`);
+
+    return result.data;
+};

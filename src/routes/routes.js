@@ -56,7 +56,7 @@ const studentPage = [
     { path: '/post/:slug', element: UpdateBLog, layout: HeaderOnly },
     { path: '/my-class', element: Classes },
     { path: '/search', element: SearchMore },
-    { path: '/classes/:slug', element: ClassMore },
+    { path: '/classes/all', element: ClassMore },
     { path: '/me/post', element: MyBlogs },
     { path: '/me/bookmark', element: Bookmark },
     { path: '/class/:slug', element: ClassDetail },

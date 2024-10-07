@@ -47,7 +47,6 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 18px;
             .price {
                 font-size: 1.4rem;
                 text-decoration: line-through;
@@ -78,4 +77,23 @@
         align-items: center;
         justify-content: space-between;
     }
+}
+.info-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.info-type-wrap {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.info-type {
+    font-size: 1.2rem;
+}
+.info-img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
 }

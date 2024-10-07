@@ -10,12 +10,14 @@ import Img from '~/components/Img';
 import { useSelector } from 'react-redux';
 import Tippy from '@tippyjs/react/headless';
 import { deleteAsk } from '~/requestApi/requestAsk';
+import { handleTime } from '~/utils/handleTime';
 const cx = classNames.bind(styles);
 
 function Item({ userData, askDataItem, utils }) {
     const user = useSelector((state) => state.user.user);
     const [reply, setReply] = useState(false);
     const [showDelete, setShowDelete] = useState(false);
+    const [replyData, setReplyData] = useState([]);
     const { askData, setAskData } = utils;
     const handleDelete = () => {
         setShowDelete(false);
@@ -26,6 +28,7 @@ function Item({ userData, askDataItem, utils }) {
             })
             .catch((error) => console.log(error));
     };
+
     return (
         <div className={cx('item-wrap')}>
             <div className={cx('info-wrap')}>
@@ -41,6 +44,7 @@ function Item({ userData, askDataItem, utils }) {
                         alt="User Avatar"
                     />
                     <span className={cx('info-name')}>{userData.name}</span>
+                    <span className={cx('info-timer')}>{handleTime(askDataItem.created_at)}</span>
                 </div>
                 <Tippy
                     interactive
@@ -53,7 +57,7 @@ function Item({ userData, askDataItem, utils }) {
                             </span>
                         </div>
                     )}
-                    placement="left"
+                    placement="bottom"
                 >
                     <div
                         className={cx('options', { active: user.id === userData.user_id })}
@@ -67,9 +71,17 @@ function Item({ userData, askDataItem, utils }) {
             <span className={cx('reply-btn')} onClick={() => setReply(true)}>
                 Reply
             </span>
-            {reply && <FormReply reply={reply} setReply={setReply} />}
+            {reply && (
+                <FormReply
+                    replyData={replyData}
+                    setReplyData={setReplyData}
+                    parentComment={askDataItem}
+                    reply={reply}
+                    setReply={setReply}
+                />
+            )}
             <div className={cx('reply-wrap')}>
-                <ReplyItem />
+                <ReplyItem replyData={replyData} setReplyData={setReplyData} askDataItem={askDataItem} />
             </div>
         </div>
     );

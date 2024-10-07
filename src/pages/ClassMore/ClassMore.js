@@ -1,52 +1,47 @@
 import classNames from 'classnames/bind';
 import styles from './ClassMore.module.scss';
-import CartItem from '~/components/CartItem';
-import imgs from '~/assets/Image';
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { getMoreClass } from '~/requestApi/requestClass';
-import CartLoading from '~/components/Loading/CartLoading/CartLoading';
+import { Flex, Select } from 'antd';
+import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 
 function ClassMore() {
-    const { slug } = useParams();
-    const [cartsData, setCartsData] = useState([]);
-    const [loading, setLoading] = useState([]);
-    useEffect(() => {
-        setLoading(true);
-        getMoreClass(slug)
-            .then((res) => {
-                setLoading(false);
-                setCartsData(res.data);
-            })
-            .catch((error) => {
-                console.log(error);
-                setLoading(false);
-            });
-    }, [slug]);
-
+    const [activeNav, setActiveNav] = useState(0);
+    const navItems = ['All class', 'Public class', 'Private class'];
     return (
         <div className={cx('wrap')}>
-            <h2 className={cx('title')}>All Classes</h2>
-            <p className={cx('desc')}>
-                These're quality paid classes from teachers on the English Community site.
-            </p>
+            <nav className={cx('nav')}>
+                <ul className={cx('list')}>
+                    {navItems.map((item, index) => {
+                        return (
+                            <li
+                                className={cx('item', { active: activeNav === index })}
+                                key={index}
+                                onClick={() => setActiveNav(index)}
+                            >
+                                {item}
+                            </li>
+                        );
+                    })}
+                </ul>
+                <Flex gap={10}>
+                    <Select defaultValue="all" className={cx('options')}>
+                        <Select.Option value="all">All class</Select.Option>
+                        <Select.Option value="math">Math class</Select.Option>
+                        <Select.Option value="physic">Physic class</Select.Option>
+                        <Select.Option value="english">English class</Select.Option>
+                        <Select.Option value="other">Other type class</Select.Option>
+                    </Select>
+                    <Select defaultValue="population" className={cx('filter')}>
+                        <Select.Option value="population">Population</Select.Option>
+                        <Select.Option value="newest">Newest</Select.Option>
+                        <Select.Option value="lastest">Lastest</Select.Option>
+                    </Select>
+                </Flex>
+            </nav>
             <div className={cx('body')}>
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-5">
-                    {loading
-                        ? Array.from({ length: 4 }).map((_, index) => {
-                              return (
-                                  <div className="col" key={index}>
-                                      <CartLoading />
-                                  </div>
-                              );
-                          })
-                        : cartsData.map((item, index) => (
-                              <div className={'col'} key={index}>
-                                  <CartItem data={item} />
-                              </div>
-                          ))}
+                    <div>sdasds</div>
                 </div>
             </div>
         </div>

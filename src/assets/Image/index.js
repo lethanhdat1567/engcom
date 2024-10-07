@@ -11,6 +11,7 @@ const imgs = {
     videoTest: require('./video/videoTest.mp4'),
     notFound: require('./imgs/notFound.png'),
     loading: require('./imgs/loading.gif'),
+    typeClassEnglish: require('./imgs/typeClassEnglish.png'),
 };
 
 export default imgs;

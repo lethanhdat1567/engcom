@@ -9,19 +9,7 @@ import { requestDeleteUpload, requestUploadCart } from '~/requestApi/requestUplo
 const cx = classNames.bind(styles);
 
 function CartForm({ states, setCartBanner, cartBanner }) {
-    const {
-        cartPrice,
-        titleCart,
-        cartDiscount,
-        setTitleCart,
-        setCartPrice,
-        setCartDiscount,
-        setCartTotal,
-        cartPassword,
-        setCartPassword,
-        cartType,
-        setCartType,
-    } = states;
+    const { titleCart, setTitleCart, cartPassword, setCartPassword, cartType, setCartType } = states;
     const props = {
         name: 'file',
         action: `${process.env.REACT_APP_BACKEND_API}engcom/upload-cart`,
@@ -45,12 +33,6 @@ function CartForm({ states, setCartBanner, cartBanner }) {
         },
     };
 
-    useEffect(() => {
-        const discountAmount = cartPrice * (cartDiscount / 100);
-        const totalFl = cartPrice - discountAmount;
-        const total = Math.round(totalFl);
-        setCartTotal(total);
-    }, [cartPrice, cartDiscount]);
     return (
         <div className={cx('form')}>
             <Form layout="vertical">
@@ -70,37 +52,8 @@ function CartForm({ states, setCartBanner, cartBanner }) {
                         }}
                     >
                         <Select.Option value="public">Public class</Select.Option>
-                        <Select.Option value="cost">Cost class</Select.Option>
                         <Select.Option value="private">Private class</Select.Option>
                     </Select>
-                    {cartType === 'cost' && (
-                        <Form.Item label="Set your price">
-                            <Row gutter={[16, 16]}>
-                                <Col span={24}>
-                                    <Input
-                                        type="number"
-                                        value={cartPrice}
-                                        placeholder="your price..."
-                                        onChange={(e) => {
-                                            const value = Math.max(0, e.target.value);
-                                            setCartPrice(value);
-                                        }}
-                                    />
-                                </Col>
-                                <Col span={24}>
-                                    <Input
-                                        value={cartDiscount}
-                                        type="number"
-                                        placeholder="your discount..."
-                                        onChange={(e) => {
-                                            const value = Math.max(0, e.target.value);
-                                            setCartDiscount(value);
-                                        }}
-                                    />
-                                </Col>
-                            </Row>
-                        </Form.Item>
-                    )}
                     {cartType === 'private' && (
                         <Form.Item label="Set your password">
                             <Row gutter={[16, 16]}>

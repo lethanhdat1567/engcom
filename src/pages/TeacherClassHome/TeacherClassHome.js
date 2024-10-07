@@ -28,9 +28,6 @@ function TeacherClassHome() {
     // Data
     const [loading, setLoading] = useState(false);
     const [titleCart, setTitleCart] = useState(cartData?.name || '');
-    const [cartPrice, setCartPrice] = useState(cartData?.price || 0);
-    const [cartDiscount, setCartDiscount] = useState(cartData?.discount || 0);
-    const [cartTotal, setCartTotal] = useState(cartData?.total || 0);
     const [cartPassword, setCartPassword] = useState(cartData?.password || '');
     const [descValue, setDescValue] = useState(cartData?.description || '');
     const [cartType, setCartType] = useState(cartData?.type || '');
@@ -46,12 +43,6 @@ function TeacherClassHome() {
     const states = {
         titleCart,
         setTitleCart,
-        cartPrice,
-        setCartPrice,
-        cartDiscount,
-        setCartDiscount,
-        cartTotal,
-        setCartTotal,
         cartPassword,
         setCartPassword,
         cartType,
@@ -61,9 +52,6 @@ function TeacherClassHome() {
         class: {
             name: titleCart,
             icon: <FontAwesomeIcon className="fa-md" icon={faHome} />,
-            price: cartPrice,
-            discount: cartDiscount,
-            total: cartTotal,
             thumbnail: cartThumbnail,
             type: cartType,
         },
@@ -74,9 +62,6 @@ function TeacherClassHome() {
                 id: cartId || '',
                 user_id: user.id || '',
                 name: titleCart || '',
-                price: cartPrice || 0,
-                discount: cartDiscount || 0,
-                total: cartTotal || 0,
                 password: cartPassword || '',
                 thumbnail: cartThumbnail || '',
                 description: descValue || '',
@@ -89,23 +74,11 @@ function TeacherClassHome() {
 
     useEffect(() => {
         if (cartType === 'public') {
-            setCartPrice(0);
-            setCartDiscount(0);
-            setCartTotal(0);
             setCartPassword('');
-        } else if (cartType === 'cost') {
-            setCartPassword('');
-        } else {
-            setCartPrice(0);
-            setCartDiscount(0);
-            setCartTotal(0);
         }
     }, [cartType]);
     useEffect(() => {
         setTitleCart(cartData.name);
-        setCartPrice(cartData.price);
-        setCartDiscount(cartData.discount);
-        setCartTotal(cartData.total);
         setCartPassword(cartData.password);
         setDescValue(cartData.description);
         setCartType(cartData.type);

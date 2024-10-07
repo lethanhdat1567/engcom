@@ -71,10 +71,19 @@ function Home() {
                         </div>
                     ) : (
                         <div className={cx('content')}>
-                            <Classes data={cartsCost.slice(0, 4)} title="COST CLASSES" to="cost" />
-                            <Classes data={cartsPrivate.slice(0, 4)} title="PRIVATE CLASSES" to="private" />
-                            <Classes data={cartsPublic.slice(0, 4)} title="PUBLIC CLASSES" to="public" />
-                            <Classes data={blogsData.slice(0, 4)} title="BLOGS" type="blog" to="blogs" />
+                            {cartsPrivate.length > 0 && (
+                                <Classes
+                                    data={cartsPrivate.slice(0, 4)}
+                                    title="PRIVATE CLASSES"
+                                    to="private"
+                                />
+                            )}
+                            {cartsPublic.length > 0 && (
+                                <Classes data={cartsPublic.slice(0, 4)} title="PUBLIC CLASSES" to="public" />
+                            )}
+                            {blogsData.length > 0 && (
+                                <Classes data={blogsData.slice(0, 4)} title="BLOGS" type="blog" to="blogs" />
+                            )}
                         </div>
                     )}
                 </div>
