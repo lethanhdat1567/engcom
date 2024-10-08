@@ -32,6 +32,7 @@ function TeacherClassHome() {
     const [descValue, setDescValue] = useState(cartData?.description || '');
     const [cartType, setCartType] = useState(cartData?.type || '');
     const [cartThumbnail, setCartThumbnail] = useState(cartData?.thumbnail || '');
+    const [cartSubject, setCartSubject] = useState(cartData?.subject || '');
     const cartId = useId();
     const validateCart = () => {
         if (titleCart && cartType) {
@@ -47,6 +48,8 @@ function TeacherClassHome() {
         setCartPassword,
         cartType,
         setCartType,
+        cartSubject,
+        setCartSubject,
     };
     const cartItem = {
         class: {
@@ -66,6 +69,7 @@ function TeacherClassHome() {
                 thumbnail: cartThumbnail || '',
                 description: descValue || '',
                 type: cartType || '',
+                subject: cartSubject || '',
             };
             dispatch(teacher.actions.setCart(values));
             slug ? navigate(`/own/${slug}/courses`) : navigate('/create-class/courses');
@@ -83,6 +87,7 @@ function TeacherClassHome() {
         setDescValue(cartData.description);
         setCartType(cartData.type);
         setCartThumbnail(cartData.thumbnail);
+        setCartSubject(cartData.subject);
     }, [cartData]);
     useEffect(() => {
         if (slug && Object.keys(cartData).length === 0) {

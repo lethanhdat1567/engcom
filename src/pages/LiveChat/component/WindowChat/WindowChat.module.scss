@@ -1,0 +1,95 @@
+.wrap {
+    padding: 10px;
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+        border-bottom: 1px solid #ccc;
+        .head-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            .head-title {
+                font-size: 2rem;
+                font-weight: 500;
+                color: #000;
+            }
+            .head-sub {
+                font-size: 1.6rem;
+                font-weight: 400;
+            }
+        }
+        .invite-wrap {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            cursor: pointer;
+        }
+    }
+    .body {
+        height: calc(100vh - 110px);
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        .send-wrap {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            &:focus-within {
+                border: 1px solid #000;
+            }
+            .send-input-wrap {
+                flex: 1;
+                height: 100%;
+                margin-bottom: 0px;
+            }
+            .send-submit {
+                height: 100%;
+                padding: 4px 15px;
+                font-size: 1.6rem;
+                font-weight: 400;
+                background-color: rgb(77, 160, 228);
+                color: #fff;
+                &:hover {
+                    opacity: 0.7;
+                }
+            }
+        }
+    }
+}
+.avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.message {
+    margin: 10px 0px;
+
+    .message-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        .message-info-head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            .user-name {
+                font-size: 1.8rem;
+                font-weight: 500;
+            }
+            .timmer {
+                font-size: 1.4rem;
+                font-weight: 400;
+                color: #696868;
+            }
+        }
+    }
+    .content {
+        margin-left: 42px;
+        margin-top: 4px;
+        font-size: 1.6rem;
+        font-weight: 400;
+    }
+}

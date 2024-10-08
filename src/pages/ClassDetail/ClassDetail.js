@@ -33,8 +33,6 @@ function ClassDetail() {
 
     const validateType = () => {
         switch (classData.type) {
-            case 'cost':
-                return 'Cost';
             case 'private':
                 return 'Private';
             case 'public':

@@ -9,7 +9,16 @@ import { requestDeleteUpload, requestUploadCart } from '~/requestApi/requestUplo
 const cx = classNames.bind(styles);
 
 function CartForm({ states, setCartBanner, cartBanner }) {
-    const { titleCart, setTitleCart, cartPassword, setCartPassword, cartType, setCartType } = states;
+    const {
+        titleCart,
+        setTitleCart,
+        cartPassword,
+        setCartPassword,
+        cartType,
+        setCartType,
+        cartSubject,
+        setCartSubject,
+    } = states;
     const props = {
         name: 'file',
         action: `${process.env.REACT_APP_BACKEND_API}engcom/upload-cart`,
@@ -68,6 +77,20 @@ function CartForm({ states, setCartBanner, cartBanner }) {
                             </Row>
                         </Form.Item>
                     )}
+                </Form.Item>
+                <Form.Item label="Subject">
+                    <Select
+                        placeholder="-----Select your subject-----"
+                        value={cartSubject !== null ? cartSubject : undefined}
+                        onChange={(value) => {
+                            setCartSubject(value);
+                        }}
+                    >
+                        <Select.Option value="math">Math class</Select.Option>
+                        <Select.Option value="physic">Physic class</Select.Option>
+                        <Select.Option value="english">English class</Select.Option>
+                        <Select.Option value="other">Other type class</Select.Option>
+                    </Select>
                 </Form.Item>
                 <Form.Item>
                     <Upload {...props}>

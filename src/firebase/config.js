@@ -1,8 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
-import 'firebase/firestore';
+import { getAuth, connectAuthEmulator } from 'firebase/auth';
+import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
 
 const firebaseConfig = {
     apiKey: 'AIzaSyCWaOMj2CIzqLa-oyrkGqsxeXDBL1Ox3jg',
@@ -18,7 +17,15 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-const auth = getAuth();
-const db = getFirestore();
+const auth = getAuth(app); // Truyền app vào getAuth
+const db = getFirestore(app); // Truyền app vào getFirestore
+
+// Kết nối với Firebase Emulator cho Authentication
+connectAuthEmulator(auth, 'http://localhost:9099');
+
+// Kết nối với Firestore Emulator nếu đang chạy trên localhost
+if (window.location.hostname === 'localhost') {
+    connectFirestoreEmulator(db, 'localhost', 8080);
+}
 
 export { auth, db };

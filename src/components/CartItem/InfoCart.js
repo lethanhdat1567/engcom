@@ -8,6 +8,21 @@ import imgs from '~/assets/Image';
 const cx = classNames.bind(styles);
 
 function InfoCart({ data }) {
+    const typeData = ['typeClassMath', 'typeClassPhysic', 'typeClassEnglish', 'typeClassOther'];
+
+    const validateType = (type) => {
+        switch (type) {
+            case 'math':
+                return 0;
+            case 'physic':
+                return 1;
+            case 'english':
+                return 2;
+            default:
+                return 3;
+        }
+    };
+
     return (
         <div className={cx('info-wrap')}>
             {data.type === 'public' && (
@@ -27,7 +42,7 @@ function InfoCart({ data }) {
                 </div>
             )}
             <div className={cx('info-type-wrap')}>
-                <img src={imgs.typeClassEnglish} className={cx('info-img')} />
+                <img src={imgs[typeData[validateType(data.subject)]]} className={cx('info-img')} />
             </div>
         </div>
     );

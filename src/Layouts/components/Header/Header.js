@@ -16,6 +16,8 @@ import { getSubscribe } from '~/requestApi/requestSubscribe';
 import { subscribeClass } from '~/redux/reducer/SubscribeSlice';
 import { getSaveBlog } from '~/requestApi/requestBlog';
 import { ownData } from '~/redux/reducer/OwnDataSlice';
+import { teacher } from '~/redux/reducer/TeacherSlice';
+import { activeLesson } from '~/redux/reducer/ActiveLesson';
 
 const cx = classNames.bind(styles);
 
@@ -61,6 +63,10 @@ function Header() {
                     console.log(error);
                 });
         }
+    }, []);
+    useEffect(() => {
+        dispatch(teacher.actions.resetState());
+        dispatch(activeLesson.actions.deleteActiveLesson());
     }, []);
     const showBackButton =
         location.pathname !== '/' && location.pathname !== '/community' && location.pathname !== '/blogs';

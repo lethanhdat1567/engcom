@@ -1,0 +1,38 @@
+.side-bar {
+    background-color: #3f0e40;
+    color: white;
+    height: 100vh;
+}
+.info-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(82, 38, 83);
+    padding: 10px;
+    .user-wrap {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        .user-name {
+            color: #fff;
+            font-size: 1.8rem;
+            font-weight: 400;
+        }
+    }
+}
+.room-list {
+    color: #fff !important;
+    display: flex;
+    flex-direction: column;
+    .room-item {
+        display: block;
+        padding: 6px;
+        font-size: 1.6rem;
+        font-weight: 500;
+        transition: ease 0.3s;
+        color: #ccc;
+        &:hover {
+            background-color: #4e0a50;
+        }
+    }
+}

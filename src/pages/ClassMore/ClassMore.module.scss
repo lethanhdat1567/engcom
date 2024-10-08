@@ -1,14 +1,22 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
 .nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 0 auto;
+    @include abs.screen(md) {
+        flex-direction: column-reverse;
+    }
     .list {
         display: flex;
         align-items: center;
         gap: 20px;
         margin: 0;
         padding: 0;
+        @include abs.screen(md) {
+            width: 100%;
+            justify-content: space-between;
+        }
         .item {
             position: relative;
             cursor: pointer;
@@ -16,6 +24,13 @@
             font-weight: 500;
             padding: 14px;
             color: #8c8989;
+            @include abs.screen(lg) {
+                font-size: 1.6rem;
+                font-weight: 400;
+            }
+            @include abs.screen(sm) {
+                font-size: 1.4rem;
+            }
             &::after {
                 content: '';
                 position: absolute;
@@ -38,11 +53,28 @@
     }
     .options {
         width: 200px;
+        @include abs.screen(md) {
+            width: 250px;
+        }
+        @include abs.screen(sm) {
+            width: 180px;
+        }
     }
 }
 .body {
     border-top: 1px solid #ccc;
+    padding: 10px;
 }
 .filter {
     width: 120px;
+    @include abs.screen(md) {
+        width: 250px;
+    }
+    @include abs.screen(sm) {
+        width: 180px;
+    }
+}
+.filter-wrap {
+    display: flex;
+    align-items: center;
 }

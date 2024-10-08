@@ -18,6 +18,7 @@ import Course from '~/pages/Course/Course';
 import EditProfile from '~/pages/EditProfile/EditProfile';
 import Home from '~/pages/Home';
 import HomeAdmin from '~/pages/HomeAdmin/HomeAdmin';
+import LiveChat from '~/pages/LiveChat/LiveChat';
 import MyBlogs from '~/pages/MyBlogs/MyBlogs';
 import NewPost from '~/pages/NewPost/NewPost';
 import Payment from '~/pages/Payment/Payment';
@@ -47,6 +48,7 @@ const publicPage = [
 const studentPage = [
     { path: '/', element: Home },
     { path: '/community', element: Community },
+    { path: '/community/chat', element: LiveChat, layout: null },
     { path: '/blogs', element: Blogs },
     { path: '/blogs/:slug', element: BlogsDetail, layout: HeaderOnly },
     { path: '/profile', element: Profile, layout: SingleLayout },
@@ -76,6 +78,7 @@ const teacherPage = [
     { path: '/edit-profile', element: EditProfile, layout: null },
     { path: '/new-post', element: NewPost, layout: HeaderOnly },
     { path: '/course/:slug', element: Course, layout: CourseLayout },
+    { path: '/blogs/:slug', element: BlogsDetail, layout: HeaderOnly },
     { path: '/me/post', element: MyBlogs },
     { path: '/me/bookmark', element: Bookmark },
     // Update class

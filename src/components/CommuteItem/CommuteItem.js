@@ -18,7 +18,7 @@ function CommuItem({ data }) {
                 </Link>
             </div>
             <Button primary classNames={cx('btn')}>
-                More detail
+                Explore
             </Button>
         </div>
     );

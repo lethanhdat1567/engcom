@@ -12,6 +12,11 @@ const imgs = {
     notFound: require('./imgs/notFound.png'),
     loading: require('./imgs/loading.gif'),
     typeClassEnglish: require('./imgs/typeClassEnglish.png'),
+    typeClassMath: require('./imgs/typeClassMath.png'),
+    typeClassPhysic: require('./imgs/typeClassPhysic.png'),
+    typeClassOther: require('./imgs/typeClassOther.png'),
+    liveChat: require('./imgs/e7bf1f06-988d-4121-a602-9a03fa911143.gif'),
+    newFeed: require('./imgs/new-feed.gif'),
 };
 
 export default imgs;

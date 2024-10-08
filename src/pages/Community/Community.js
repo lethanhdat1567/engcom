@@ -8,15 +8,15 @@ const cx = classNames.bind(styles);
 function Community() {
     const communityData = [
         {
-            title: 'Lo trinh hoc font-end',
-            desc: ' Lập trình viên Front-end là người xây dựng ra giao diện websites. Trong phần này F8 sẽ chia sẻ cho bạn lộ trình để trở thành lập trình viên Front-end nhé.',
-            img: imgs.banner1,
+            title: 'Live chat',
+            desc: 'The Real-Time Chat feature enables users to communicate instantly with one another within the community. This functionality allows for seamless interaction, fostering a sense of connection and engagement among members',
+            img: imgs.liveChat,
             to: '/test',
         },
         {
-            title: 'Lo trinh hoc font-end',
-            desc: ' Lập trình viên Front-end là người xây dựng ra giao diện websites. Trong phần này F8 sẽ chia sẻ cho bạn lộ trình để trở thành lập trình viên Front-end nhé.',
-            img: imgs.banner1,
+            title: 'Education News Feed',
+            desc: 'The Learning Bulletin serves as a centralized hub for announcements, updates, and important information relevant to the community. It provides users with easy access to the latest educational resources, events, and opportunities',
+            img: imgs.newFeed,
             to: '/test',
         },
         {

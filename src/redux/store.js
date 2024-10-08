@@ -6,6 +6,7 @@ import { teacher } from './reducer/TeacherSlice';
 import { activeLesson } from './reducer/ActiveLesson';
 import { subscribeClass } from './reducer/SubscribeSlice';
 import { course } from './reducer/Course';
+import { rooms } from './reducer/RoomsSlice';
 const store = configureStore({
     reducer: {
         user: usersSlice.reducer,
@@ -15,6 +16,7 @@ const store = configureStore({
         storeData: storeData.reducer,
         activeLesson: activeLesson.reducer,
         course: course.reducer,
+        rooms: rooms.reducer,
     },
 });
 
