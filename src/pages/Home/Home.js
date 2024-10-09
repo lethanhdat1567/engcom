@@ -25,9 +25,8 @@ function Home() {
         setLoading(true);
         getAllClasses()
             .then((res) => {
-                setCartsCost([...res.data.cost]);
-                setCartPrivate([...res.data.private]);
-                setCartPublic([...res.data.public]);
+                setCartPrivate([...res.private]);
+                setCartPublic([...res.public]);
 
                 readAllBlogs()
                     .then((res) => {
@@ -72,17 +71,13 @@ function Home() {
                     ) : (
                         <div className={cx('content')}>
                             {cartsPrivate.length > 0 && (
-                                <Classes
-                                    data={cartsPrivate.slice(0, 4)}
-                                    title="PRIVATE CLASSES"
-                                    to="private"
-                                />
+                                <Classes data={cartsPrivate} title="PRIVATE CLASSES" to="private" />
                             )}
                             {cartsPublic.length > 0 && (
-                                <Classes data={cartsPublic.slice(0, 4)} title="PUBLIC CLASSES" to="public" />
+                                <Classes data={cartsPublic} title="PUBLIC CLASSES" to="public" />
                             )}
                             {blogsData.length > 0 && (
-                                <Classes data={blogsData.slice(0, 4)} title="BLOGS" type="blog" to="blogs" />
+                                <Classes data={blogsData} title="BLOGS" type="blog" to="blogs" />
                             )}
                         </div>
                     )}

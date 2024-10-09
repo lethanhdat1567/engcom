@@ -3,7 +3,7 @@ import styles from './Sidebar.module.scss';
 import { Button, Collapse, Typography } from 'antd';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { faPlusSquare, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useFirestore from '~/hooks/useFirestore';
@@ -79,6 +79,7 @@ function RoomList({ selectedRoomID, setSelectedRoomID }) {
                     </div>
                 </PanelStyle>
             </Collapse>
+
             <ModalCreateRoom isCreateRoom={isCreateRoom} setIsCreateRoom={setIsCreateRoom} />
         </>
     );

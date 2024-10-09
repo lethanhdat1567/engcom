@@ -31,7 +31,7 @@ export const deleteClass = async (class_id) => {
 };
 
 export const getAllClasses = async () => {
-    const result = await request.get('engcom/class');
+    const result = await request.get('engcom/topRate');
 
     return result.data;
 };
@@ -44,6 +44,18 @@ export const getMoreClass = async (type) => {
 
 export const getUserClass = async (class_id) => {
     const result = await request.get(`engcom/own-teacher/user/${class_id}`);
+
+    return result.data;
+};
+
+export const getFilterClass = async (class_type, type, filter) => {
+    const result = await request.get(`engcom/filterData`, {
+        params: {
+            class: class_type,
+            type,
+            filter,
+        },
+    });
 
     return result.data;
 };

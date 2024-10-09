@@ -11,7 +11,7 @@ function Community() {
             title: 'Live chat',
             desc: 'The Real-Time Chat feature enables users to communicate instantly with one another within the community. This functionality allows for seamless interaction, fostering a sense of connection and engagement among members',
             img: imgs.liveChat,
-            to: '/test',
+            to: '/chat',
         },
         {
             title: 'Education News Feed',

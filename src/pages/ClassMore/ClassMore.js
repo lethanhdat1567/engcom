@@ -3,14 +3,17 @@ import styles from './ClassMore.module.scss';
 import { Flex, Select } from 'antd';
 import { useEffect, useState } from 'react';
 import CartLoading from '~/components/Loading/CartLoading/CartLoading';
+import { getFilterClass } from '~/requestApi/requestClass';
+import CartItem from '~/components/CartItem';
 
 const cx = classNames.bind(styles);
 
 function ClassMore() {
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [activeNav, setActiveNav] = useState(0);
     const [typeValue, setTypeValue] = useState('all');
     const [filterValue, setFilterValue] = useState('all');
+    const [classesData, setClassesData] = useState([]);
     const navItems = [
         {
             title: 'All class',
@@ -30,8 +33,16 @@ function ClassMore() {
         const classValue = navItems[activeNav].name;
         const type = typeValue;
         const filter = filterValue;
-
-        console.log({ classValue, type, filter });
+        setLoading(true);
+        getFilterClass(classValue, type, filter)
+            .then((res) => {
+                setClassesData(res);
+                setLoading(false);
+            })
+            .catch((error) => {
+                setClassesData([]);
+                setLoading(false);
+            });
     }, [filterValue, typeValue, activeNav]);
 
     return (
@@ -76,17 +87,21 @@ function ClassMore() {
             </nav>
             <div className={cx('body')}>
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-5">
-                    {loading ? (
-                        Array.from({ length: 8 }).map((_, index) => {
-                            return (
-                                <div className="col" key={index}>
-                                    <CartLoading />
-                                </div>
-                            );
-                        })
-                    ) : (
-                        <div>sdasds</div>
-                    )}
+                    {loading
+                        ? Array.from({ length: 8 }).map((_, index) => {
+                              return (
+                                  <div className="col" key={index}>
+                                      <CartLoading />
+                                  </div>
+                              );
+                          })
+                        : classesData.map((item, index) => {
+                              return (
+                                  <div className="col" key={index}>
+                                      <CartItem data={item} />
+                                  </div>
+                              );
+                          })}
                 </div>
             </div>
         </div>

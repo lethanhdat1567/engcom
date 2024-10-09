@@ -7,16 +7,27 @@ import { useState } from 'react';
 const cx = classNames.bind(styles);
 
 function LiveChat() {
-    const [selectedRoomID, setSelectedRoomID] = useState({});
+    const [selectedRoomID, setSelectedRoomID] = useState();
+    const [isShowNav, setIsShowNav] = useState(false);
 
     return (
         <div className={cx('wrap')}>
             <div className="row g-0">
                 <div className="col-3">
-                    <Sidebar setSelectedRoomID={setSelectedRoomID} selectedRoomID={selectedRoomID} />
+                    <Sidebar
+                        isShowNav={isShowNav}
+                        setIsShowNav={setIsShowNav}
+                        setSelectedRoomID={setSelectedRoomID}
+                        selectedRoomID={selectedRoomID}
+                    />
                 </div>
-                <div className="col-9">
-                    <WindowChat setSelectedRoomID={setSelectedRoomID} selectedRoomID={selectedRoomID} />
+                <div className="col-12 col-md-9">
+                    <WindowChat
+                        isShowNav={isShowNav}
+                        setIsShowNav={setIsShowNav}
+                        setSelectedRoomID={setSelectedRoomID}
+                        selectedRoomID={selectedRoomID}
+                    />
                 </div>
             </div>
         </div>

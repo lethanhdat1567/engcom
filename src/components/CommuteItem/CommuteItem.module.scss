@@ -41,6 +41,7 @@
 }
 .btn {
     width: 160px;
+    color: #fff !important;
     @include abs.screen(sm) {
         width: 100%;
     }
