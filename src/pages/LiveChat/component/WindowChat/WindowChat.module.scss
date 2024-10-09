@@ -33,7 +33,6 @@
         }
     }
     .body {
-        position: relative;
         height: calc(100vh - 70px);
         display: flex;
         flex-direction: column;
@@ -77,9 +76,9 @@
     object-fit: cover;
 }
 .messages {
-    height: calc(100vh - 122px);
-    overflow-y: auto; /* Sử dụng auto để có thể cuộn khi cần */
-    position: absolute;
+    // height: calc(100vh - 122px);
+    max-height: 100%;
+    overflow-y: auto;
     left: 0;
     right: 0;
     bottom: 50px;

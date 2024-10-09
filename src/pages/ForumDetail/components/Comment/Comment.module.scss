@@ -1,0 +1,90 @@
+.wrap {
+    width: 100%;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
+    .heaad {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 20px;
+        .comment-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .comment-input {
+            width: 100%;
+            padding: 6px 0px;
+            transition: ease 0.4s;
+            border-bottom: 1px solid transparent;
+            &:focus {
+                border-bottom: 1.5px solid #ccc;
+            }
+        }
+        .comment-wrap {
+            flex: 1;
+        }
+    }
+    .heart-wrap {
+        cursor: pointer;
+        padding: 0px 20px;
+    }
+}
+.option {
+    margin-left: auto;
+    padding: 10px 6px 10px 10px;
+    cursor: pointer;
+}
+.drop-item {
+    color: red;
+    font-size: 1.4rem;
+    width: 100%;
+    cursor: pointer;
+    padding: 10px;
+    transition: ease 0.4s;
+    &:hover {
+        background-color: #f0ecec;
+    }
+}
+.body {
+    .comment-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+        .avatar {
+            flex-shrink: 0;
+        }
+        .comment-item-content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            .comment-item-content-title {
+                font-size: 1.6rem;
+                font-weight: 500;
+            }
+            .comment-item-content-timmer {
+                font-size: 1.4rem;
+                font-weight: 400;
+                color: #636161;
+            }
+        }
+        .desc {
+            font-size: 1.6rem;
+            font-weight: 400;
+            line-height: 25px;
+        }
+    }
+}
+
+.dropdown {
+    background-color: #fff;
+    border: 1.5px solid #ccc;
+    border-radius: 20px;
+    padding: 10px 0px;
+    overflow: hidden;
+}

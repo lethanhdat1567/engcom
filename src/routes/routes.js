@@ -16,8 +16,10 @@ import ClassMore from '~/pages/ClassMore/ClassMore';
 import Community from '~/pages/Community';
 import Course from '~/pages/Course/Course';
 import EditProfile from '~/pages/EditProfile/EditProfile';
+import ForumDetail from '~/pages/ForumDetail/ForumDetail';
 import Home from '~/pages/Home';
 import HomeAdmin from '~/pages/HomeAdmin/HomeAdmin';
+import Forum from '~/pages/LiveChat/Forum/Forum';
 import LiveChat from '~/pages/LiveChat/LiveChat';
 import MyBlogs from '~/pages/MyBlogs/MyBlogs';
 import NewPost from '~/pages/NewPost/NewPost';
@@ -49,6 +51,8 @@ const studentPage = [
     { path: '/', element: Home },
     { path: '/community', element: Community },
     { path: '/community/chat', element: LiveChat, layout: null },
+    { path: '/community/forum', element: Forum, layout: null },
+    { path: '/community/forum/:slug', element: ForumDetail, layout: null },
     { path: '/blogs', element: Blogs },
     { path: '/blogs/:slug', element: BlogsDetail, layout: HeaderOnly },
     { path: '/profile', element: Profile, layout: SingleLayout },

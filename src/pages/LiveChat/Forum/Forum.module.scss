@@ -1,0 +1,15 @@
+.wrap {
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: #fafafa;
+    display: flex;
+    align-items: flex-start;
+
+    .forum {
+        width: 640px;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        background-color: transparent;
+        min-height: 100vh;
+    }
+}

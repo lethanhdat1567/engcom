@@ -14,21 +14,21 @@ function Community() {
             to: '/chat',
         },
         {
-            title: 'Education News Feed',
-            desc: 'The Learning Bulletin serves as a centralized hub for announcements, updates, and important information relevant to the community. It provides users with easy access to the latest educational resources, events, and opportunities',
+            title: 'Educational Forum',
+            desc: 'Join our vibrant community where students and educators come together to discuss various subjects, exchange knowledge, and support each other in the learning journey. Whether you are seeking help with homework, exploring new topics, or sharing resources, our forum is the perfect place for collaborative learning!',
             img: imgs.newFeed,
+            to: '/forum',
+        },
+        {
+            title: 'Top Contributors',
+            desc: 'Top Contributors (Outstanding Educators): This section highlights teachers who have made significant contributions to the community. It ranks educators based on their engagement, resources shared, and positive impact on students, encouraging excellence and collaboration within the educational environment.',
+            img: imgs.rank,
             to: '/test',
         },
         {
-            title: 'Lo trinh hoc font-end',
-            desc: ' Lập trình viên Front-end là người xây dựng ra giao diện websites. Trong phần này F8 sẽ chia sẻ cho bạn lộ trình để trở thành lập trình viên Front-end nhé.',
-            img: imgs.banner1,
-            to: '/test',
-        },
-        {
-            title: 'Lo trinh hoc font-end',
-            desc: ' Lập trình viên Front-end là người xây dựng ra giao diện websites. Trong phần này F8 sẽ chia sẻ cho bạn lộ trình để trở thành lập trình viên Front-end nhé.',
-            img: imgs.banner1,
+            title: 'Meeting Rooms',
+            desc: 'Meeting Rooms: This feature allows users to host and participate in online meetings. Members can discuss, share ideas, and collaborate in real-time, enhancing connectivity and interaction within the community.',
+            img: imgs.meeting,
             to: '/test',
         },
     ];
@@ -36,8 +36,10 @@ function Community() {
         <div className={cx('wrap')}>
             <h1 className={cx('title')}>Community</h1>
             <p className={cx('desc')}>
-                Để bắt đầu một cách thuận lợi, bạn nên tập trung vào một lộ trình học. Ví dụ: Để đi làm với vị
-                trí "Lập trình viên Front-end" bạn nên tập trung vào lộ trình "Front-end".
+                A community is a group of individuals who share common interests, goals, or values, engaging
+                in discussions, collaborations, and support. It provides a space for members to connect, share
+                knowledge, and contribute to a collective purpose, fostering a sense of belonging and
+                empowerment.
             </p>
             <div className={cx('row row-cols-1 row-cols-lg-2 g-5')}>
                 {communityData.map((item, index) => {

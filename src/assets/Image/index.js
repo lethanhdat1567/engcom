@@ -17,6 +17,8 @@ const imgs = {
     typeClassOther: require('./imgs/typeClassOther.png'),
     liveChat: require('./imgs/e7bf1f06-988d-4121-a602-9a03fa911143.gif'),
     newFeed: require('./imgs/new-feed.gif'),
+    rank: require('./imgs/rank.gif'),
+    meeting: require('./imgs/Meeting.gif'),
 };
 
 export default imgs;

@@ -24,9 +24,13 @@
             padding-bottom: 14px;
         }
         .desc {
+            height: 135px;
             margin: 0;
             font-size: 1.4rem;
             line-height: 1.6;
+            @include abs.screen(md) {
+                height: 100%;
+            }
         }
     }
 }
