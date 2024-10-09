@@ -56,3 +56,26 @@
         object-fit: cover;
     }
 }
+.option {
+    margin-left: auto;
+    padding: 10px 6px 10px 10px;
+    cursor: pointer;
+}
+.drop-item {
+    color: red;
+    font-size: 1.4rem;
+    width: 100%;
+    cursor: pointer;
+    padding: 10px;
+    transition: ease 0.4s;
+    &:hover {
+        background-color: #f0ecec;
+    }
+}
+.dropdown {
+    background-color: #fff;
+    border: 1.5px solid #ccc;
+    border-radius: 20px;
+    padding: 10px 0px;
+    overflow: hidden;
+}

@@ -10,11 +10,11 @@ function ProfileForum() {
     return (
         <div className={cx('wrap')}>
             <div className={cx('header')}>
+                <Avatar size="large">A</Avatar>
                 <div className={cx('info-user')}>
                     <span className={cx('name')}>Le Thanh Dat</span>
                     <UserRole type={2} />
                 </div>
-                <Avatar size="large">A</Avatar>
             </div>
             <div className={cx('body')}>
                 <PostItem />
