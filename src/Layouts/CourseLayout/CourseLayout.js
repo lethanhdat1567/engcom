@@ -13,10 +13,8 @@ function CourseLayout({ children }) {
     return (
         <div className={cx('wrap')}>
             <HeaderCourse />
-            {/* <HeaderCreateCourse /> */}
             <div className={cx('body')}>
                 <div className={cx('content', { full: !showNav })}>{children}</div>
-                {/* Teacher */}
                 {user.role_id === 3 && <CourseSidebarTeacher showNav={showNav} setShowNav={setShowNav} />}
             </div>
             <CourseFooterCreate showNav={showNav} setShowNav={setShowNav} />

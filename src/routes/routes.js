@@ -1,3 +1,4 @@
+import { DefaultLayout } from '~/Layouts';
 import AdminLayout from '~/Layouts/AdminLayout/AdminLayout';
 import CourseLayout from '~/Layouts/CourseLayout/CourseLayout';
 import CourseStudent from '~/Layouts/CourseStudent/CourseStudent';
@@ -25,6 +26,7 @@ import MyBlogs from '~/pages/MyBlogs/MyBlogs';
 import NewPost from '~/pages/NewPost/NewPost';
 import Payment from '~/pages/Payment/Payment';
 import Profile from '~/pages/Profile/Profile';
+import Rank from '~/pages/Rank/Rank';
 import Role from '~/pages/Role/Role';
 import SearchMore from '~/pages/SearchMore/SearchMore';
 import TeacherClassComment from '~/pages/TeacherClassComment/TeacherClassComment';
@@ -53,6 +55,7 @@ const studentPage = [
     { path: '/community/chat', element: LiveChat, layout: null },
     { path: '/community/forum', element: Forum, layout: null },
     { path: '/community/forum/:slug', element: ForumDetail, layout: null },
+    { path: '/community/rank', element: Rank, layout: HeaderOnly },
     { path: '/blogs', element: Blogs },
     { path: '/blogs/:slug', element: BlogsDetail, layout: HeaderOnly },
     { path: '/profile', element: Profile, layout: SingleLayout },

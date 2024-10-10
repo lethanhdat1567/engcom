@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import styles from './Navbar.module.scss';
+import styles from './NavMobile.module.scss';
 import { home, homeActive } from '~/assets/Icon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-function Navbar({ activeIndex, setActiveIndex }) {
+function NavMobile({ activeIndex, setActiveIndex }) {
     const navData = [
         {
             icon: home,
@@ -20,13 +20,12 @@ function Navbar({ activeIndex, setActiveIndex }) {
             activeIcon: <FontAwesomeIcon icon={userSolid} style={{ width: '100%' }} className="fa-xl" />,
         },
     ];
-
     return (
         <div className={cx('nav-wrap')}>
             <nav className={cx('navbar')}>
-                <span className={cx('logo')}>
-                    <FontAwesomeIcon icon={faBookOpenReader} className="fa-xl" />
-                </span>
+                <Link to={`${process.env.REACT_APP_ROOT}/community`} className={cx('out-nav')}>
+                    <FontAwesomeIcon icon={faRightFromBracket} />
+                </Link>
                 <ul className={cx('list')}>
                     {navData.map((item, index) => {
                         return (
@@ -35,19 +34,14 @@ function Navbar({ activeIndex, setActiveIndex }) {
                                 key={index}
                                 onClick={() => setActiveIndex(index)}
                             >
-                                <span className={cx('icon')}>
-                                    {activeIndex === index ? item.activeIcon : item.icon}
-                                </span>
+                                <span className={cx('icon')}>{item.icon}</span>
                             </li>
                         );
                     })}
                 </ul>
-                <Link to={`${process.env.REACT_APP_ROOT}/community`} className={cx('out-nav')}>
-                    <FontAwesomeIcon icon={faRightFromBracket} />
-                </Link>
             </nav>
         </div>
     );
 }
 
-export default Navbar;
+export default NavMobile;

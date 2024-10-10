@@ -1,0 +1,106 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
+.wrap {
+    width: 1000px;
+    margin: 0 auto;
+    @include abs.screen(lg) {
+        width: 100%;
+    }
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        margin-top: 20px;
+    }
+}
+.body {
+    margin-top: 20px;
+}
+.rank-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+    padding: 20px;
+    @include abs.screen(md) {
+        gap: 50px;
+    }
+    @include abs.screen(sm) {
+        gap: 20px;
+    }
+    .img-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 120px;
+        height: 120px;
+        padding: 0.4em;
+        position: relative;
+        background: linear-gradient(180deg, #ffd900, #b45264 93.68%);
+        border-radius: 50%;
+        @include abs.screen(md) {
+            width: 100px;
+            height: 100px;
+        }
+        &.second {
+            transform: translateY(10px);
+        }
+    }
+
+    .img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Đảm bảo ảnh được bao phủ hoàn toàn */
+        border-radius: 50%; /* Để giữ hình tròn cho ảnh */
+    }
+    .decor {
+        position: absolute;
+        top: -10px;
+        width: 30px;
+        height: 30px;
+        right: -10px;
+    }
+}
+.user-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    .info-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+    .name {
+        font-size: 1.6rem;
+        font-weight: 500;
+    }
+}
+
+.table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: separate; /* Ngăn cách các ô */
+    border-spacing: 0 20px; /* Khoảng cách giữa các hàng */
+    .item-wrap {
+        position: relative;
+        &.head {
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                right: 0;
+                width: 100%;
+                height: 2px;
+                background-color: #000;
+            }
+        }
+    }
+    .item {
+        text-align: center;
+    }
+}
+.select-wrap {
+    width: 150px;
+}

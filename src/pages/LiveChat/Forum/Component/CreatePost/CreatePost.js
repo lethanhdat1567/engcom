@@ -8,12 +8,14 @@ import { faFileVideo, faImage } from '@fortawesome/free-regular-svg-icons';
 import ImageItem from '../ImageItem/ImageItem';
 import { SwiperSlide, Swiper } from 'swiper/react';
 import { useSelector } from 'react-redux';
+import { createPost } from '~/requestApi/requestPost';
+import request from '~/utils/request';
 
 const cx = classNames.bind(styles);
 
 function CreatePost() {
     const [showCreatePost, setShowCreatePost] = useState(false);
-    const [imageValues, setImageValues] = useState([]);
+    const [imageValues, setImageValues] = useState();
     const [imageUrls, setImageUrls] = useState([]);
     const [contentValue, setContentValue] = useState('');
     const user = useSelector((state) => state.user.user);
@@ -21,26 +23,38 @@ function CreatePost() {
     const handleCancle = () => {
         setShowCreatePost(false);
     };
-
     const handleSubmit = () => {
-        if (contentValue.trim()) {
-            const value = {
+        if (contentValue.trim() || imageValues.length > 0) {
+            const values = {
                 user_id: user.id,
                 content: contentValue,
-                images: imageValues,
+                thumbnails: imageValues,
             };
-            console.log(value);
-            setContentValue('');
-            setImageValues([]);
-            setImageUrls([]);
-            setShowCreatePost(false);
+            request
+                .post(`engcom/fakeThreads`, values, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                })
+                .then((res) => {
+                    setContentValue('');
+                    setImageUrls([]);
+                    setImageValues([]);
+                    setShowCreatePost(false);
+                })
+                .catch((error) => {
+                    setContentValue('');
+                    setImageUrls([]);
+                    setImageValues([]);
+                    setShowCreatePost(false);
+                });
         }
     };
 
     const handleUpdateImg = (e) => {
         const imageFiles = Array.from(e.target.files);
         if (imageFiles.length > 0) {
-            setImageValues(imageFiles);
+            setImageValues(e.target.files);
             const newVideosUrl = imageFiles.map((item) => URL.createObjectURL(item));
             setImageUrls((prev) => [...prev, ...newVideosUrl]);
         }
@@ -80,10 +94,10 @@ function CreatePost() {
                             placeholder="Type something..."
                             rows={1}
                             style={{
-                                border: 'none', // Bỏ border
-                                resize: 'none', // Không cho phép kéo thả kích thước
-                                width: '100%', // Chiều rộng 100%
-                                outline: 'none', // Bỏ outline khi focus
+                                border: 'none',
+                                resize: 'none',
+                                width: '100%',
+                                outline: 'none',
                             }}
                             value={contentValue}
                             onChange={(e) => setContentValue(e.target.value)}

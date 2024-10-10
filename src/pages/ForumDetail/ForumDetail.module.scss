@@ -1,3 +1,5 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
+
 .wrap {
     width: 640px;
     margin: 0 auto;
@@ -10,6 +12,10 @@
     padding: 10px;
     margin-top: 10px;
     border-radius: 16px;
+    padding-bottom: 20px;
+    @include abs.screen(md) {
+        width: 90%;
+    }
     .back {
         width: 25px;
         height: 25px;
@@ -66,4 +72,17 @@
     border-radius: 20px;
     padding: 10px 0px;
     overflow: hidden;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 0px 0px 10px;
+    .footer-wrap {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+    }
 }

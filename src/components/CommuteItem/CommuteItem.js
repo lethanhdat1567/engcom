@@ -6,8 +6,6 @@ import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 function CommuItem({ data }) {
-    console.log(data.to);
-
     return (
         <div className={cx('wrap')}>
             <div className={cx('header')}>

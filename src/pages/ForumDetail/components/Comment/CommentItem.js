@@ -4,42 +4,65 @@ import { Avatar } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
+import { handleAvatar } from '~/utils/handleAvatar';
+import { handleTime } from '~/utils/handleTime';
+import { deleteCommentPost } from '~/requestApi/requestPost';
+import { error } from 'jodit/esm/core/helpers';
+import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 
-function CommentItem() {
-    return (
-        <div className={cx('comment-item')}>
-            <Avatar className={cx('avatar')}>A</Avatar>
-            <div className={cx('comment-item-content-wrap')}>
-                <div className={cx('comment-item-content')}>
-                    <span className={cx('comment-item-content-title')}>Le thanh dat</span>
-                    <span className={cx('comment-item-content-timmer')}>3 months ago</span>
-                    <Tippy
-                        interactive
-                        trigger="click"
-                        placement="bottom"
-                        render={(attrs) => (
-                            <div {...attrs} className={cx('dropdown')}>
-                                <span className={cx('drop-item')}>
-                                    <FontAwesomeIcon icon={faTrash} style={{ marginRight: '4px' }} />
-                                    Delete
-                                </span>
-                            </div>
-                        )}
-                    >
-                        <span className={cx('option')}>
-                            <FontAwesomeIcon icon={faEllipsisVertical} />
+function CommentItem({ comment, setCommentPost }) {
+    const [isShowDelete, setIsShowDelete] = useState(false);
+
+    const handleDelete = () => {
+        setIsShowDelete(false);
+        deleteCommentPost(comment.comment_id)
+            .then((res) => {
+                const comment_id = res.data.id;
+                setCommentPost((prev) => {
+                    return prev.filter((comment) => comment.comment_id !== comment_id);
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+                setIsShowDelete(false);
+            });
+    };
+    if (Object.keys(comment).length > 0) {
+        return (
+            <div className={cx('comment-item')}>
+                <Avatar className={cx('avatar')} src={handleAvatar(comment.commenter_avatar)} />
+                <div className={cx('comment-item-content-wrap')}>
+                    <div className={cx('comment-item-content')}>
+                        <span className={cx('comment-item-content-title')}>{comment.commenter_name}</span>
+                        <span className={cx('comment-item-content-timmer')}>
+                            {handleTime(comment.comment_created_at)}
                         </span>
-                    </Tippy>
+                        <Tippy
+                            interactive
+                            visible={isShowDelete}
+                            onClickOutside={() => setIsShowDelete(false)}
+                            placement="bottom"
+                            render={(attrs) => (
+                                <div {...attrs} className={cx('dropdown')}>
+                                    <span className={cx('drop-item')} onClick={handleDelete}>
+                                        <FontAwesomeIcon icon={faTrash} style={{ marginRight: '4px' }} />
+                                        Delete
+                                    </span>
+                                </div>
+                            )}
+                        >
+                            <span className={cx('option')} onClick={() => setIsShowDelete(true)}>
+                                <FontAwesomeIcon icon={faEllipsisVertical} />
+                            </span>
+                        </Tippy>
+                    </div>
+                    <p className={cx('desc')}>{comment.comment_content}</p>
                 </div>
-                <p className={cx('desc')}>
-                    Andy’s looks like a turkey. But Ryan’s was Probably the best out of the lot. Also what are
-                    they using to “draw” with?
-                </p>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default CommentItem;

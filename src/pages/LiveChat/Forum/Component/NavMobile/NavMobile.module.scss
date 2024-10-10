@@ -1,17 +1,20 @@
 @use '../../../../../components/GlobalStyles/abstracts/' as abs;
+
 .nav-wrap {
     background-color: transparent;
-    width: 76px;
-    height: 100vh;
+    width: 100%;
     padding: 10px;
     position: fixed;
     left: 0;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 999;
+    display: none;
     @include abs.screen(md) {
-        display: none;
+        display: block;
     }
     .navbar {
         display: flex;
-        flex-direction: column;
         align-items: center;
         height: 100%;
     }
@@ -20,9 +23,7 @@
         padding: 0;
         margin: 0;
         display: flex;
-        flex-direction: column;
         align-items: center;
-        margin-top: 50px;
         flex: 1;
         gap: 10px;
         .item {
@@ -61,7 +62,7 @@
     background-color: #e3e2e2;
     width: 40px;
     height: 40px;
-    margin-bottom: 20px;
+    margin-right: 10px;
     cursor: pointer;
     &:hover {
         background-color: #ccc;

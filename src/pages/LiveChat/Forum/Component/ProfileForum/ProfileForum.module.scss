@@ -1,3 +1,4 @@
+@use '../../../../../components/GlobalStyles/abstracts/' as abs;
 .wrap {
     display: flex;
     flex-direction: column;
@@ -9,6 +10,10 @@
     margin-top: 10px;
     padding: 10px;
     border-radius: 20px;
+    @include abs.screen(md) {
+        width: 90%;
+        margin-bottom: 100px;
+    }
 }
 .header {
     width: 100%;

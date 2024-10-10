@@ -6,33 +6,27 @@ import imgs from '~/assets/Image';
 
 const cx = classNames.bind(styles);
 
-function Slider() {
-    return (
-        <div className={cx('slider')}>
-            <Swiper
-                className={cx('slider')}
-                spaceBetween={10}
-                slidesPerView="auto"
-                autoplay={{ delay: 5000 }}
-            >
-                <SwiperSlide>
-                    <div className={cx('banner')}>
-                        <img src={imgs.meeting} className={cx('img')} />
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className={cx('banner')}>
-                        <img src={imgs.meeting} className={cx('img')} />
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className={cx('banner')}>
-                        <img src={imgs.meeting} className={cx('img')} />
-                    </div>
-                </SwiperSlide>
-            </Swiper>
-        </div>
-    );
+function Slider({ images }) {
+    if (images.length > 0) {
+        return (
+            <div className={cx('slider')}>
+                <Swiper className="slider" spaceBetween={10} slidesPerView="auto" autoplay={{ delay: 5000 }}>
+                    {images.map((item, index) => {
+                        return (
+                            <SwiperSlide style={{ width: '224px' }} key={index}>
+                                <div className={cx('banner')}>
+                                    <img
+                                        src={`${process.env.REACT_APP_BACKEND_UPLOAD}/${item}`}
+                                        className={cx('img')}
+                                    />
+                                </div>
+                            </SwiperSlide>
+                        );
+                    })}
+                </Swiper>
+            </div>
+        );
+    }
 }
 
 export default Slider;

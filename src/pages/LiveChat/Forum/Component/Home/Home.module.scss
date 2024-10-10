@@ -1,3 +1,5 @@
+@use '../../../../../components/GlobalStyles/abstracts/' as abs;
+
 .wrap {
     width: 640px;
     margin: 0 auto;
@@ -7,6 +9,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    @include abs.screen(lg) {
+        width: 500px;
+    }
+    @include abs.screen(sm) {
+        width: 90%;
+        margin: 0 auto;
+    }
     .title {
         font-size: 1.6rem;
         font-weight: 500;

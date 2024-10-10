@@ -23,7 +23,7 @@ function Community() {
             title: 'Top Contributors',
             desc: 'Top Contributors (Outstanding Educators): This section highlights teachers who have made significant contributions to the community. It ranks educators based on their engagement, resources shared, and positive impact on students, encouraging excellence and collaboration within the educational environment.',
             img: imgs.rank,
-            to: '/test',
+            to: '/rank',
         },
         {
             title: 'Meeting Rooms',
