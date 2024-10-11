@@ -64,8 +64,8 @@ export const deleteLikePost = async (like_id) => {
     return result.data;
 };
 
-export const inserLikePost = async () => {
-    const result = await request.post(`engcom/likepost`);
+export const inserLikePost = async (value) => {
+    const result = await request.post(`engcom/likepost`, value);
 
     return result.data;
 };

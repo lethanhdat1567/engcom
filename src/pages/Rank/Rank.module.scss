@@ -61,11 +61,30 @@
         right: -10px;
     }
 }
+.load {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+.load-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    @include abs.screen(sm) {
+        width: 80px;
+        height: 80px;
+    }
+}
 .user-wrap {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
+    &.user {
+        justify-content: flex-start;
+    }
     .info-wrap {
         display: flex;
         flex-direction: column;
@@ -76,12 +95,16 @@
         font-weight: 500;
     }
 }
-
+.avatar {
+    @include abs.screen(sm) {
+        display: none;
+    }
+}
 .table {
     width: 100%;
     margin: 0 auto;
     border-collapse: separate; /* Ngăn cách các ô */
-    border-spacing: 0 20px; /* Khoảng cách giữa các hàng */
+    border-spacing: 16px 20px; /* Khoảng cách giữa các hàng */
     .item-wrap {
         position: relative;
         &.head {
@@ -98,6 +121,9 @@
         }
     }
     .item {
+        &.user {
+            text-align: start;
+        }
         text-align: center;
     }
 }

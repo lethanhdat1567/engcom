@@ -7,20 +7,25 @@ import { useSelector } from 'react-redux';
 import { handleAvatar } from '~/utils/handleAvatar';
 import { useEffect, useState } from 'react';
 import { getProfilePost } from '~/requestApi/requestPost';
+import ForumItemLoading from '~/components/Loading/ForumItemLoading/ForumItemLoading';
 
 const cx = classNames.bind(styles);
 
 function ProfileForum() {
     const user = useSelector((state) => state.user.user);
     const [postValues, setPostValues] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        setLoading(true);
         getProfilePost(user.id)
             .then((res) => {
                 setPostValues(res.data);
+                setLoading(false);
             })
             .catch((error) => {
                 console.log(error);
+                setLoading(false);
             });
     }, []);
 
@@ -34,16 +39,20 @@ function ProfileForum() {
                 </div>
             </div>
             <div className={cx('body')}>
-                {postValues.map((item, index) => {
-                    return (
+                {loading ? (
+                    Array.from({ length: 3 }).map((_, index) => <ForumItemLoading key={index} />)
+                ) : postValues.length > 0 ? (
+                    postValues.map((item, index) => (
                         <PostItem
                             post={item}
                             key={index}
                             setPostValues={setPostValues}
                             postValues={postValues}
                         />
-                    );
-                })}
+                    ))
+                ) : (
+                    <span className={cx('sub')}>You don't have any posts yet</span>
+                )}
             </div>
         </div>
     );

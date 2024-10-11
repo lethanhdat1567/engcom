@@ -17,13 +17,11 @@ function Forum() {
         window.scrollTo(0, 0);
     }, [activeIndex]);
     return (
-        <>
-            <div className={cx('wrap')}>
-                <Navbar activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
-                <NavMobile activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
-                {compData[activeIndex]}
-            </div>
-        </>
+        <div className={cx('wrap')}>
+            <Navbar activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
+            <NavMobile activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
+            {compData[activeIndex]}
+        </div>
     );
 }
 

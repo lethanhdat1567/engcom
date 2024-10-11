@@ -10,6 +10,7 @@ import { SwiperSlide, Swiper } from 'swiper/react';
 import { useSelector } from 'react-redux';
 import { createPost } from '~/requestApi/requestPost';
 import request from '~/utils/request';
+import { handleAvatar } from '~/utils/handleAvatar';
 
 const cx = classNames.bind(styles);
 
@@ -63,7 +64,7 @@ function CreatePost() {
     return (
         <>
             <div className={cx('wrap')} onClick={() => setShowCreatePost(true)}>
-                <Avatar size="medium">A</Avatar>
+                <Avatar size="medium" src={handleAvatar(user.avatar)} />
                 <div className={cx('decor')}>Create a post...</div>
             </div>
             <Modal
@@ -85,9 +86,7 @@ function CreatePost() {
                 ]}
             >
                 <div className={cx('modal')}>
-                    <Avatar size="medium" style={{ flexShrink: 0 }}>
-                        A
-                    </Avatar>
+                    <Avatar size="medium" style={{ flexShrink: 0 }} src={handleAvatar(user.avatar)} />
                     <div className={cx('modal-body')}>
                         <span className={cx('modal-name')}>Le Thanh Dat</span>
                         <TextareaAutosize

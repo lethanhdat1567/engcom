@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { insertCommentPost } from '~/requestApi/requestPost';
+import { handleAvatar } from '~/utils/handleAvatar';
 
 const cx = classNames.bind(styles);
 
@@ -47,9 +48,7 @@ function Comment({ commentPost, setCommentPost }) {
         <div className={cx('wrap')}>
             <div className={cx('heaad')}>
                 <div className={cx('comment-wrap')}>
-                    <Avatar size="medium" style={{ flexShrink: 0 }}>
-                        A
-                    </Avatar>
+                    <Avatar src={handleAvatar(user.avatar)} size="medium" style={{ flexShrink: 0 }} />
                     <input
                         placeholder="write your comment..."
                         className={cx('comment-input')}

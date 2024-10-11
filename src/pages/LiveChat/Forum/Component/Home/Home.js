@@ -7,6 +7,7 @@ import { getAllLikePost, getAllPost } from '~/requestApi/requestPost';
 import { useDispatch, useSelector } from 'react-redux';
 import { error } from 'jodit/esm/core/helpers';
 import { post_like } from '~/redux/reducer/postLike';
+import ForumItemLoading from '~/components/Loading/ForumItemLoading/ForumItemLoading';
 
 const cx = classNames.bind(styles);
 
@@ -14,17 +15,21 @@ function Home() {
     const user = useSelector((state) => state.user.user);
     const dispatch = useDispatch();
     const [postValues, setPostValues] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        setLoading(true);
         getAllLikePost()
             .then((res) => {
                 dispatch(post_like.actions.getLiked(res.data));
                 getAllPost(user.id)
                     .then((res) => {
+                        setLoading(false);
                         setPostValues(res.data);
                     })
                     .catch((error) => {
                         console.log(error);
+                        setLoading(false);
                     });
             })
             .catch((error) => {
@@ -35,10 +40,18 @@ function Home() {
         <div className={cx('wrap')}>
             <h1 className={cx('title')}>Home</h1>
             <div className={cx('body')}>
-                <CreatePost />
-                {postValues.map((item, index) => {
-                    return <PostItem post={item} key={index} />;
-                })}
+                {loading ? (
+                    Array.from({ length: 3 }).map((_, index) => {
+                        return <ForumItemLoading key={index} />;
+                    })
+                ) : (
+                    <>
+                        <CreatePost />
+                        {postValues.map((item, index) => {
+                            return <PostItem post={item} key={index} />;
+                        })}
+                    </>
+                )}
             </div>
         </div>
     );

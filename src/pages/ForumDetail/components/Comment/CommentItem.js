@@ -9,10 +9,12 @@ import { handleTime } from '~/utils/handleTime';
 import { deleteCommentPost } from '~/requestApi/requestPost';
 import { error } from 'jodit/esm/core/helpers';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles);
 
 function CommentItem({ comment, setCommentPost }) {
+    const user = useSelector((state) => state.user.user);
     const [isShowDelete, setIsShowDelete] = useState(false);
 
     const handleDelete = () => {
@@ -39,24 +41,26 @@ function CommentItem({ comment, setCommentPost }) {
                         <span className={cx('comment-item-content-timmer')}>
                             {handleTime(comment.comment_created_at)}
                         </span>
-                        <Tippy
-                            interactive
-                            visible={isShowDelete}
-                            onClickOutside={() => setIsShowDelete(false)}
-                            placement="bottom"
-                            render={(attrs) => (
-                                <div {...attrs} className={cx('dropdown')}>
-                                    <span className={cx('drop-item')} onClick={handleDelete}>
-                                        <FontAwesomeIcon icon={faTrash} style={{ marginRight: '4px' }} />
-                                        Delete
-                                    </span>
-                                </div>
-                            )}
-                        >
-                            <span className={cx('option')} onClick={() => setIsShowDelete(true)}>
-                                <FontAwesomeIcon icon={faEllipsisVertical} />
-                            </span>
-                        </Tippy>
+                        {comment.commenter_user_id === user.id && (
+                            <Tippy
+                                interactive
+                                visible={isShowDelete}
+                                onClickOutside={() => setIsShowDelete(false)}
+                                placement="bottom"
+                                render={(attrs) => (
+                                    <div {...attrs} className={cx('dropdown')}>
+                                        <span className={cx('drop-item')} onClick={handleDelete}>
+                                            <FontAwesomeIcon icon={faTrash} style={{ marginRight: '4px' }} />
+                                            Delete
+                                        </span>
+                                    </div>
+                                )}
+                            >
+                                <span className={cx('option')} onClick={() => setIsShowDelete(true)}>
+                                    <FontAwesomeIcon icon={faEllipsisVertical} />
+                                </span>
+                            </Tippy>
+                        )}
                     </div>
                     <p className={cx('desc')}>{comment.comment_content}</p>
                 </div>

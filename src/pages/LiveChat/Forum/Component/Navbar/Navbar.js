@@ -24,9 +24,9 @@ function Navbar({ activeIndex, setActiveIndex }) {
     return (
         <div className={cx('nav-wrap')}>
             <nav className={cx('navbar')}>
-                <span className={cx('logo')}>
+                <Link to={'/'} className={cx('logo')}>
                     <FontAwesomeIcon icon={faBookOpenReader} className="fa-xl" />
-                </span>
+                </Link>
                 <ul className={cx('list')}>
                     {navData.map((item, index) => {
                         return (
