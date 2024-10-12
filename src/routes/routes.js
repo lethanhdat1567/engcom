@@ -38,6 +38,9 @@ import TeacherCourse from '~/pages/TeacherCourse/TeacherCourse';
 import TeacherHome from '~/pages/TeacherHome/TeachderHome';
 import UpdateBLog from '~/pages/UpdateBlog/UpdateBlog';
 import UserAdmin from '~/pages/UserAdmin/UserAdmin';
+import VideoCall from '~/pages/VideoCall/VideoCall';
+import ZoomDetail from '~/pages/ZoomDetail/ZoomDetail';
+import ZoomMeeting from '~/pages/ZoomMeeting/ZoomMeeting';
 
 const publicPage = [
     { path: '/', element: Home },
@@ -56,6 +59,9 @@ const studentPage = [
     { path: '/community/forum', element: Forum, layout: null },
     { path: '/community/forum/:slug', element: ForumDetail, layout: null },
     { path: '/community/rank', element: Rank, layout: HeaderOnly },
+    { path: '/community/meeting', element: ZoomMeeting, layout: null },
+    { path: '/community/meeting/join', element: ZoomDetail, layout: null },
+    { path: '/community/meeting/:slug', element: VideoCall, layout: null },
     { path: '/blogs', element: Blogs },
     { path: '/blogs/:slug', element: BlogsDetail, layout: HeaderOnly },
     { path: '/profile', element: Profile, layout: SingleLayout },

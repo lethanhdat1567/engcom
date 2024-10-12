@@ -29,7 +29,7 @@ function Community() {
             title: 'Meeting Rooms',
             desc: 'Meeting Rooms: This feature allows users to host and participate in online meetings. Members can discuss, share ideas, and collaborate in real-time, enhancing connectivity and interaction within the community.',
             img: imgs.meeting,
-            to: '/test',
+            to: '/meeting',
         },
     ];
     return (

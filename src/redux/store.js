@@ -8,6 +8,7 @@ import { subscribeClass } from './reducer/SubscribeSlice';
 import { course } from './reducer/Course';
 import { rooms } from './reducer/RoomsSlice';
 import { post_like } from './reducer/postLike';
+import { zoom } from './reducer/ZoomSlice';
 const store = configureStore({
     reducer: {
         user: usersSlice.reducer,
@@ -19,6 +20,7 @@ const store = configureStore({
         course: course.reducer,
         rooms: rooms.reducer,
         post_like: post_like.reducer,
+        zoom: zoom.reducer,
     },
 });
 

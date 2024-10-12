@@ -1,0 +1,67 @@
+.wrap {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    .back-wrap {
+        z-index: 99;
+        cursor: pointer;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        font-size: 2rem;
+        font-weight: 400;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        .back-icon {
+            transition: ease 0.4s;
+        }
+        &:hover {
+            .back-icon {
+                transform: translateX(-2px);
+            }
+        }
+        .back-text {
+            font-size: 1.8rem;
+            font-weight: 500;
+        }
+    }
+    .zoom_id-wrap {
+        cursor: grab;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        top: 20px;
+        right: 20px;
+        height: 50px;
+        overflow: hidden;
+        background-color: #272539;
+        border: 1px solid #ccc;
+        color: #d9dade;
+        padding: 0px 10px;
+        border-radius: 10px;
+        .icon {
+            background-color: #424155;
+            padding: 10px;
+            cursor: pointer;
+        }
+    }
+    .room-id-btn {
+        cursor: pointer;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        overflow: hidden;
+        padding: 10px;
+        display: block;
+        background-color: #272539;
+        border: 1px solid #ccc;
+        color: #d9dade;
+        border-radius: 10px;
+    }
+}

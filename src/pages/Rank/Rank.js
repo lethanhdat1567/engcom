@@ -52,7 +52,7 @@ function Rank() {
         return () => {
             cancelAnimationFrame(animationFrameId); // Dừng hiệu ứng khi unmount
         };
-    }, []);
+    }, [loading]);
 
     useEffect(() => {
         setLoading(true);

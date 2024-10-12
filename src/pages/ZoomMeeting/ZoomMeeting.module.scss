@@ -1,0 +1,15 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
+
+.wrap {
+    background-color: #f6f8fc;
+}
+.body {
+    height: calc(100vh - 66px);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include abs.screen(md) {
+        padding: 0px 16px;
+    }
+}

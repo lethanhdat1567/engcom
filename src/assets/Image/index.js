@@ -19,6 +19,9 @@ const imgs = {
     newFeed: require('./imgs/new-feed.gif'),
     rank: require('./imgs/rank.gif'),
     meeting: require('./imgs/Meeting.gif'),
+    create_meeting: require('./imgs/create-meeting.png'),
+    join_meeting: require('./imgs/join.png'),
+    validate_zoom: require('./imgs/validateZoom.gif'),
 };
 
 export default imgs;
