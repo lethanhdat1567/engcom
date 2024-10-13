@@ -8,40 +8,40 @@ import { useEffect, useState } from 'react';
 import { getAllClasses } from '~/requestApi/requestClass';
 import { readAllBlogs } from '~/requestApi/requestBlog';
 import CartLoading from '~/components/Loading/CartLoading/CartLoading';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { storeData } from '~/redux/reducer/StoreSlice';
 
 const cx = classNames.bind(styles);
 
 function Home() {
     const user = useSelector((state) => state.user.user);
+    const classes = useSelector((state) => state.storeData.classes);
+    const blogs = useSelector((state) => state.storeData.blogs);
+    const dispatch = useDispatch();
 
-    const [cartsCost, setCartsCost] = useState([]);
-    const [cartsPrivate, setCartPrivate] = useState([]);
-    const [cartsPublic, setCartPublic] = useState([]);
-    const [blogsData, setBlogsData] = useState([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        setLoading(true);
-        getAllClasses()
-            .then((res) => {
-                setCartPrivate([...res.private]);
-                setCartPublic([...res.public]);
-
-                readAllBlogs()
-                    .then((res) => {
-                        setLoading(false);
-                        setBlogsData(res.data);
-                    })
-                    .catch((error) => {
-                        setLoading(false);
-                        console.log(error);
-                    });
-            })
-            .catch((error) => {
-                setLoading(false);
-                console.log(error);
-            });
+        if (Object.keys(classes).length === 0) {
+            setLoading(true);
+            getAllClasses()
+                .then((res) => {
+                    dispatch(storeData.actions.getClasses(res));
+                    readAllBlogs()
+                        .then((res) => {
+                            setLoading(false);
+                            dispatch(storeData.actions.getBlogs(res.data));
+                        })
+                        .catch((error) => {
+                            setLoading(false);
+                            console.log(error);
+                        });
+                })
+                .catch((error) => {
+                    setLoading(false);
+                    console.log(error);
+                });
+        }
     }, []);
 
     return (
@@ -70,14 +70,14 @@ function Home() {
                         </div>
                     ) : (
                         <div className={cx('content')}>
-                            {cartsPrivate.length > 0 && (
-                                <Classes data={cartsPrivate} title="PRIVATE CLASSES" to="private" />
+                            {classes?.private?.length > 0 && (
+                                <Classes data={classes?.private} title="PRIVATE CLASSES" to="private" />
                             )}
-                            {cartsPublic.length > 0 && (
-                                <Classes data={cartsPublic} title="PUBLIC CLASSES" to="public" />
+                            {classes?.public?.length > 0 && (
+                                <Classes data={classes?.public} title="PUBLIC CLASSES" to="public" />
                             )}
-                            {blogsData.length > 0 && (
-                                <Classes data={blogsData} title="BLOGS" type="blog" to="blogs" />
+                            {blogs?.length > 0 && (
+                                <Classes data={blogs.slice(0, 4)} title="BLOGS" type="blog" to="blogs" />
                             )}
                         </div>
                     )}

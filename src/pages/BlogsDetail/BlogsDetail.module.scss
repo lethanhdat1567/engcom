@@ -3,6 +3,8 @@
     word-break: break-word; /* Breaks long words */
     overflow-wrap: break-word; /* Ensures words will wrap onto the next line */
     white-space: normal; /* Allows text to wrap normally */
+    width: min(1000px, 100%);
+    margin: 0 auto;
 }
 .title {
     margin: 10px 0px;

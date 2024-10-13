@@ -25,7 +25,7 @@ function ReplyItem({ replyData, setReplyData, askDataItem }) {
             .catch((error) => {
                 setReplyData([]);
             });
-    }, [replyData]);
+    }, []);
 
     return (
         <div className={cx('wrap')}>

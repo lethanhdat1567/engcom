@@ -10,20 +10,23 @@ import BlogLoading from '~/components/Loading/BlogLoading/BlogLoading';
 const cx = classNames.bind(styles);
 
 function Blogs() {
-    const [blogsData, setBlogsData] = useState([]);
     const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+    const blogsData = useSelector((state) => state.storeData.blogs);
 
     useEffect(() => {
-        setLoading(true);
-        readAllBlogs()
-            .then((res) => {
-                setBlogsData(res.data);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.log(error);
-                setLoading(false);
-            });
+        if (blogsData?.length === 0) {
+            setLoading(true);
+            readAllBlogs()
+                .then((res) => {
+                    setLoading(false);
+                    dispatch(storeData.actions.getBlogs(res.data));
+                })
+                .catch((error) => {
+                    console.log(error);
+                    setLoading(false);
+                });
+        }
     }, []);
 
     return (

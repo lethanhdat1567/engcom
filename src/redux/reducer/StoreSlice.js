@@ -3,9 +3,15 @@ import { createSlice } from '@reduxjs/toolkit';
 export const storeData = createSlice({
     name: 'storeData',
     initialState: {
-        blogs: null,
+        blogs: [],
+        classes: [],
     },
     reducers: {
+        // Classes
+        getClasses(state, action) {
+            state.classes = action.payload;
+        },
+        // Blogs
         getBlogs(state, action) {
             state.blogs = action.payload;
         },

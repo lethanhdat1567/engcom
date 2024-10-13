@@ -17,8 +17,8 @@ function InfoItem({ data, className, large = false }) {
                         <Img
                             className={cx('img')}
                             src={
-                                data.user?.avatar.includes('googleusercontent.com') ||
-                                data.user?.avatar.includes('facebook.com')
+                                data.user?.avatar?.includes('googleusercontent.com') ||
+                                data.user?.avatar?.includes('facebook.com')
                                     ? data.user?.avatar
                                     : `${process.env.REACT_APP_BACKEND_UPLOAD}/${data.user?.avatar}`
                             }

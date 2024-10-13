@@ -94,18 +94,24 @@ function Rank() {
                     </div>
                 ) : (
                     <>
-                        <div className={cx('img-wrap', 'second')}>
-                            <img className={cx('img')} src={handleAvatar(rankValues[2].avatar)} />
-                            <span className={cx('decor')}>{kink}</span>
-                        </div>
-                        <div className={cx('img-wrap')}>
-                            <img className={cx('img')} src={handleAvatar(rankValues[0].avatar)} />
-                            <span className={cx('decor')}>{kink}</span>
-                        </div>
-                        <div className={cx('img-wrap', 'second')}>
-                            <img className={cx('img')} src={handleAvatar(rankValues[3].avatar)} />
-                            <span className={cx('decor')}>{kink}</span>
-                        </div>
+                        {rankValues[2] && (
+                            <div className={cx('img-wrap', 'second')}>
+                                <img className={cx('img')} src={handleAvatar(rankValues[2]?.avatar)} />
+                                <span className={cx('decor')}>{kink}</span>
+                            </div>
+                        )}
+                        {rankValues[0] && (
+                            <div className={cx('img-wrap')}>
+                                <img className={cx('img')} src={handleAvatar(rankValues[0]?.avatar)} />
+                                <span className={cx('decor')}>{kink}</span>
+                            </div>
+                        )}
+                        {rankValues[3] && (
+                            <div className={cx('img-wrap', 'second')}>
+                                <img className={cx('img')} src={handleAvatar(rankValues[3]?.avatar)} />
+                                <span className={cx('decor')}>{kink}</span>
+                            </div>
+                        )}
                     </>
                 )}
             </div>

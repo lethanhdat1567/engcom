@@ -71,7 +71,6 @@ function useCourseUtils() {
         handleDoneLesson() {
             if (selectedLesson.is_in_progress && !selectedLesson.is_completed) {
                 // Đánh dấu bài học hiện tại là đã hoàn thành
-
                 dispatch(course.actions.setProgressed(selectedLesson));
 
                 // Cập nhật selectedLesson với trạng thái mới
@@ -96,29 +95,45 @@ function useCourseUtils() {
 
                     // Cập nhật trạng thái cho bài học tiếp theo
                     dispatch(course.actions.setProgressing(nextLesson));
+                } else {
+                    // Nếu đã đến bài học cuối cùng, kiểm tra xem có khóa học tiếp theo không
+                    const currentCourseIndex = courses.findIndex((course) => course.id === currentCourse.id);
+                    const nextCourseIndex = currentCourseIndex + 1;
+
+                    if (nextCourseIndex < courses.length) {
+                        const nextCourse = courses[nextCourseIndex];
+                        const firstLessonOfNextCourse = nextCourse.lessons[0];
+
+                        // Cập nhật trạng thái cho bài học đầu tiên của khóa học tiếp theo
+                        dispatch(course.actions.setProgressing(firstLessonOfNextCourse));
+                    } else {
+                        console.log('Đã hoàn thành tất cả bài học.');
+                    }
                 }
             }
         },
         handleNextLesson() {
-            // Lấy khóa học hiện tại
             const currentCourse = courses.find((courseItem) => courseItem.id === selectedLesson.course_id);
-
-            // Tìm chỉ số của bài học hiện tại
             const currentLessonIndex = currentCourse.lessons.findIndex(
                 (lesson) => lesson.id === selectedLesson.id,
             );
-
-            // Tính chỉ số của bài học tiếp theo
             const nextLessonIndex = currentLessonIndex + 1;
 
             if (nextLessonIndex < currentCourse.lessons.length) {
                 const nextLesson = currentCourse.lessons[nextLessonIndex];
-
-                // Cập nhật trạng thái cho bài học tiếp theo
                 dispatch(course.actions.setActiveLessonID(nextLesson.id));
                 dispatch(course.actions.setSelectedLesson(nextLesson));
             } else {
-                console.log('Đã đến bài học cuối cùng.');
+                const currentCourseIndex = courses.findIndex((course) => course.id === currentCourse.id);
+                const nextCourseIndex = currentCourseIndex + 1;
+
+                if (nextCourseIndex < courses.length) {
+                    const nextCourse = courses[nextCourseIndex];
+                    dispatch(course.actions.setActiveLessonID(nextCourse.lessons[0].id));
+                    dispatch(course.actions.setSelectedLesson(nextCourse.lessons[0]));
+                } else {
+                    console.log('Đã đến bài học cuối cùng của tất cả các khóa học.');
+                }
             }
         },
         handlePrevLesson() {

@@ -9,6 +9,8 @@ import { createBlog } from '~/requestApi/requestBlog';
 import { useNavigate } from 'react-router-dom';
 import Loading from '~/components/Loading/Loading';
 import UploadBanner from './UploadBanner';
+import { Bounce, toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const cx = classNames.bind(styles);
 
@@ -34,7 +36,6 @@ function NewPost() {
             thumbnail: thumbnailValue,
             content: `${editorContent}`,
         };
-
         try {
             const res = await createBlog(values);
             setLoading(false);

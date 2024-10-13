@@ -22,7 +22,7 @@ function TeacherLessonText({ data }) {
             const values = {
                 id,
                 lesson_id: lesson.id,
-                content: descValue,
+                text: descValue,
             };
             dispatch(teacher.actions.setContent(values));
         }
@@ -40,7 +40,7 @@ function TeacherLessonText({ data }) {
                             Update
                         </Button>
                     </Flex>
-                    <div className={cx('content')} dangerouslySetInnerHTML={{ __html: data.content }}></div>
+                    <div className={cx('content')} dangerouslySetInnerHTML={{ __html: data.text }}></div>
                 </>
             ) : (
                 // Create

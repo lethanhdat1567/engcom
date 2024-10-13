@@ -57,6 +57,7 @@ function TeacherClassHome() {
             icon: <FontAwesomeIcon className="fa-md" icon={faHome} />,
             thumbnail: cartThumbnail,
             type: cartType,
+            subject: cartSubject,
         },
     };
     const handleSave = () => {
@@ -95,9 +96,11 @@ function TeacherClassHome() {
             getDetailClass(slug)
                 .then((res) => {
                     const cart = res.data.class;
+
                     dispatch(teacher.actions.setCart(cart));
                     getCourse(slug)
                         .then((res) => {
+                            console.log(res.data);
                             dispatch(teacher.actions.setUpdateCourse(res.data.courses));
                             dispatch(teacher.actions.setUpdateLesson(res.data.lessons));
                             dispatch(teacher.actions.setUpdateContent(res.data.content));
@@ -111,6 +114,7 @@ function TeacherClassHome() {
         } else if (slug && Object.keys(cartData).length > 0) {
         }
     }, []);
+
     return (
         <div className={cx('wrap')}>
             {loading ? (

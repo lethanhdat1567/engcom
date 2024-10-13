@@ -10,13 +10,13 @@ const cx = classNames.bind(styles);
 
 function UpdateLesson({ data, setIsUpdate }) {
     const dispatch = useDispatch();
-    const [contentValue, setContentValue] = useState(data.content);
+    const [contentValue, setContentValue] = useState(data.text);
 
     const handleSave = () => {
         const values = {
             id: data.id,
             lesson_id: data.lesson_id,
-            content: contentValue,
+            text: contentValue,
         };
         dispatch(teacher.actions.updateContent(values));
         setIsUpdate(false);

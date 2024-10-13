@@ -18,6 +18,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ownData } from '~/redux/reducer/OwnDataSlice';
 import { validateSaveBlog } from '~/utils/validateSaveBlog';
 import { useState } from 'react';
+import { Bounce, toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const cx = classNames.bind(styles);
 
@@ -83,56 +85,58 @@ function BlogItem({ data }) {
                     />
                     <span className={cx('info-name')}>{user.user}</span>
                 </Link>
-                <div className={cx('utils')}>
-                    {validateSaveBlog(saveBlogs, guest.id, blog.id) ? (
-                        loading ? (
+                {blog.user_id !== guest.id && (
+                    <div className={cx('utils')}>
+                        {validateSaveBlog(saveBlogs, guest.id, blog.id) ? (
+                            loading ? (
+                                <FontAwesomeIcon
+                                    icon={faSpinner}
+                                    className="fa-solid fa-spinner fa-spin-pulse fa-spin-reverse"
+                                />
+                            ) : (
+                                <span className={cx('icon', 'fa-lg')} onClick={handleUnSave}>
+                                    <FontAwesomeIcon icon={faBookmark} />
+                                </span>
+                            )
+                        ) : loading ? (
                             <FontAwesomeIcon
                                 icon={faSpinner}
                                 className="fa-solid fa-spinner fa-spin-pulse fa-spin-reverse"
                             />
                         ) : (
-                            <span className={cx('icon', 'fa-lg')} onClick={handleUnSave}>
-                                <FontAwesomeIcon icon={faBookmark} />
+                            <span className={cx('icon', 'fa-lg')} onClick={handleSaveBlog}>
+                                <FontAwesomeIcon icon={bookmarkRegular} />
                             </span>
-                        )
-                    ) : loading ? (
-                        <FontAwesomeIcon
-                            icon={faSpinner}
-                            className="fa-solid fa-spinner fa-spin-pulse fa-spin-reverse"
-                        />
-                    ) : (
-                        <span className={cx('icon', 'fa-lg')} onClick={handleSaveBlog}>
-                            <FontAwesomeIcon icon={bookmarkRegular} />
-                        </span>
-                    )}
+                        )}
 
-                    <Tippy
-                        interactive
-                        placement="bottom-end"
-                        trigger="click"
-                        render={(attrs) => {
-                            return (
-                                <div {...attrs}>
-                                    <ul className={cx('ellip-list')}>
-                                        {ellipData.map((item, index) => {
-                                            return (
-                                                <li className={cx('ellip-item')} key={index}>
-                                                    <Button leftIcon={item.icon} key={index}>
-                                                        {item.title}
-                                                    </Button>
-                                                </li>
-                                            );
-                                        })}
-                                    </ul>
-                                </div>
-                            );
-                        }}
-                    >
-                        <span className={cx('icon', 'fa-lg')}>
-                            <FontAwesomeIcon icon={faEllipsis} />
-                        </span>
-                    </Tippy>
-                </div>
+                        <Tippy
+                            interactive
+                            placement="bottom-end"
+                            trigger="click"
+                            render={(attrs) => {
+                                return (
+                                    <div {...attrs}>
+                                        <ul className={cx('ellip-list')}>
+                                            {ellipData.map((item, index) => {
+                                                return (
+                                                    <li className={cx('ellip-item')} key={index}>
+                                                        <Button leftIcon={item.icon} key={index}>
+                                                            {item.title}
+                                                        </Button>
+                                                    </li>
+                                                );
+                                            })}
+                                        </ul>
+                                    </div>
+                                );
+                            }}
+                        >
+                            <span className={cx('icon', 'fa-lg')}>
+                                <FontAwesomeIcon icon={faEllipsis} />
+                            </span>
+                        </Tippy>
+                    </div>
+                )}
             </div>
             <div className={cx('blog-banner')}>
                 <Link to={`${process.env.REACT_APP_ROOT}/blogs/${blog?.id}`}>
