@@ -1,3 +1,5 @@
+@use '../../../components/GlobalStyles/abstracts/' as abs;
+
 .wrap-content {
     display: flex;
     flex-direction: column;
@@ -9,6 +11,9 @@
     font-size: 2.4rem;
     font-weight: 600;
     margin-bottom: 0px;
+    @include abs.screen(sm) {
+        font-size: 2rem;
+    }
 }
 .head-wrap {
     display: flex;

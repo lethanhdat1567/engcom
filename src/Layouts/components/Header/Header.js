@@ -68,29 +68,12 @@ function Header() {
         dispatch(teacher.actions.resetState());
         dispatch(activeLesson.actions.deleteActiveLesson());
     }, []);
-    const showBackButton =
-        location.pathname !== '/' && location.pathname !== '/community' && location.pathname !== '/blogs';
+
     return (
         <>
             <header className={cx('header')}>
                 <div className={cx('wrap')}>
-                    {showBackButton ? (
-                        <>
-                            <div className={cx('logo')}>
-                                <Logo />
-                            </div>
-                            <div className={cx('back-wrap')} onClick={() => navigate(-1)}>
-                                <span className={cx('icon')}>
-                                    <span className={cx('font-icon')}>
-                                        <FontAwesomeIcon icon={faChevronLeft} className="fa-lg" />
-                                    </span>
-                                    <span className={cx('back-desc')}>Back</span>
-                                </span>
-                            </div>
-                        </>
-                    ) : (
-                        <Logo />
-                    )}
+                    <Logo />
                 </div>
                 <Search />
                 {user.id && user.role_id ? (

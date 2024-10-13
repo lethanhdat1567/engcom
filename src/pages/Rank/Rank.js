@@ -130,7 +130,7 @@ function Rank() {
                             <Select
                                 defaultValue={typeFilter}
                                 onChange={(value) => setTypeFilter(value)}
-                                className={cx('select-wrap')}
+                                className="select-wrap"
                             >
                                 <Select.Option value="subcribe">Most Subcriber</Select.Option>
                                 <Select.Option value="class">Most Classes</Select.Option>

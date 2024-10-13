@@ -37,7 +37,7 @@ function ProfileItem({ data }) {
             // Tạo URL preview
             file.preview = URL.createObjectURL(file);
             setCloneAvatar(file);
-
+            setAdopt(false);
             // Reset input file
             e.target.value = null;
         } else {
@@ -65,6 +65,7 @@ function ProfileItem({ data }) {
             if (data.type === 'upload') {
                 const formData = new FormData();
                 formData.append('file', uploadValue);
+                console.log(formData);
 
                 request
                     .post(`engcom/avatar/${user.id}`, formData, {

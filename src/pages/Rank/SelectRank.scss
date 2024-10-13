@@ -1,7 +1,10 @@
-.ant-select-selector {
-    color: #fff !important;
-    background: linear-gradient(141deg, #21a2ff, #8951ff 73.36%) !important;
-}
-.ant-select-arrow {
-    color: #fff !important;
+.select-wrap {
+    width: 150px;
+    .ant-select-selector {
+        color: #fff !important;
+        background: linear-gradient(141deg, #21a2ff, #8951ff 73.36%) !important;
+    }
+    .ant-select-arrow {
+        color: #fff !important;
+    }
 }

@@ -18,8 +18,10 @@ function ProfileHeader() {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.user);
     const [loading, setLoading] = useState(false);
+    const [showDropdown, setShowDropdown] = useState(false);
 
     const handleLogout = async () => {
+        setShowDropdown(false);
         setLoading(true);
         try {
             await signOut(auth);
@@ -37,7 +39,7 @@ function ProfileHeader() {
             {loading && <Loading />}
             <Tippy
                 interactive
-                trigger="click"
+                visible={showDropdown}
                 placement="bottom-end"
                 render={(attrs) => (
                     <div {...attrs} className={cx('profile-drop')}>
@@ -61,7 +63,7 @@ function ProfileHeader() {
                         </Link>
                         <hr />
                         <ul className={cx('profile-list')}>
-                            <li className={cx('profile-item')}>
+                            <li className={cx('profile-item')} onClick={() => setShowDropdown(false)}>
                                 <Link
                                     to={`${process.env.REACT_APP_ROOT}/profile`}
                                     className={cx('profile-item-link')}
@@ -73,7 +75,7 @@ function ProfileHeader() {
                         <div className={cx('response')}>
                             <hr />
                             <ul className={cx('profile-list')}>
-                                <li className={cx('profile-item')}>
+                                <li className={cx('profile-item')} onClick={() => setShowDropdown(false)}>
                                     <Link
                                         to={`${process.env.REACT_APP_ROOT}/profile`}
                                         className={cx('profile-item-link')}
@@ -85,7 +87,7 @@ function ProfileHeader() {
                         </div>
                         <hr />
                         <ul className={cx('profile-list')}>
-                            <li className={cx('profile-item')}>
+                            <li className={cx('profile-item')} onClick={() => setShowDropdown(false)}>
                                 <Link
                                     to={`${process.env.REACT_APP_ROOT}/new-post`}
                                     className={cx('profile-item-link')}
@@ -93,7 +95,7 @@ function ProfileHeader() {
                                     Viet Blogs
                                 </Link>
                             </li>
-                            <li className={cx('profile-item')}>
+                            <li className={cx('profile-item')} onClick={() => setShowDropdown(false)}>
                                 <Link
                                     to={`${process.env.REACT_APP_ROOT}/me/post`}
                                     className={cx('profile-item-link')}
@@ -101,7 +103,7 @@ function ProfileHeader() {
                                     Bai viet cua toi
                                 </Link>
                             </li>
-                            <li className={cx('profile-item')}>
+                            <li className={cx('profile-item')} onClick={() => setShowDropdown(false)}>
                                 <Link
                                     to={`${process.env.REACT_APP_ROOT}/me/bookmark`}
                                     className={cx('profile-item-link')}
@@ -112,7 +114,7 @@ function ProfileHeader() {
                         </ul>
                         <hr />
                         <ul className={cx('profile-list')}>
-                            <li className={cx('profile-item')}>
+                            <li className={cx('profile-item')} onClick={() => setShowDropdown(false)}>
                                 <Link className={cx('profile-item-link')}>Cai dat</Link>
                             </li>
                             <li className={cx('profile-item')} onClick={handleLogout}>
@@ -122,7 +124,7 @@ function ProfileHeader() {
                     </div>
                 )}
             >
-                <div className={cx('avatar')}>
+                <div className={cx('avatar')} onClick={() => setShowDropdown(true)}>
                     <Img
                         className={cx('avatar-img')}
                         src={

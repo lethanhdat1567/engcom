@@ -28,6 +28,12 @@
             margin: 0;
             font-size: 1.4rem;
             line-height: 1.6;
+            @include abs.screen(xl) {
+                height: 200px;
+            }
+            @include abs.screen(lg) {
+                height: 135px;
+            }
             @include abs.screen(md) {
                 height: 100%;
             }

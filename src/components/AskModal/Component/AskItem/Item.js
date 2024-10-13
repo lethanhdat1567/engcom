@@ -28,7 +28,6 @@ function Item({ userData, askDataItem, utils }) {
             })
             .catch((error) => console.log(error));
     };
-
     return (
         <div className={cx('item-wrap')}>
             <div className={cx('info-wrap')}>
