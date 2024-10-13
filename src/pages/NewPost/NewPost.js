@@ -11,6 +11,7 @@ import Loading from '~/components/Loading/Loading';
 import UploadBanner from './UploadBanner';
 import { Bounce, toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { toastify } from '~/utils/toast';
 
 const cx = classNames.bind(styles);
 
@@ -40,6 +41,7 @@ function NewPost() {
             const res = await createBlog(values);
             setLoading(false);
             navigate('/me/post');
+            toastify('Create blog success', 'success', 2000, 'top-right');
         } catch (error) {
             console.error('Error details:', error.response ? error.response.data : error.message);
         }

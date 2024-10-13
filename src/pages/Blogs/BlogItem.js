@@ -18,8 +18,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ownData } from '~/redux/reducer/OwnDataSlice';
 import { validateSaveBlog } from '~/utils/validateSaveBlog';
 import { useState } from 'react';
-import { Bounce, toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { toastify } from '~/utils/toast';
 
 const cx = classNames.bind(styles);
 
@@ -51,6 +51,7 @@ function BlogItem({ data }) {
             .then((res) => {
                 dispatch(ownData.actions.setSaveBlog(res.data));
                 setLoading(false);
+                toastify('blog saved', 'success');
             })
             .catch((error) => {
                 console.log(error);
@@ -63,6 +64,7 @@ function BlogItem({ data }) {
             .then((res) => {
                 dispatch(ownData.actions.deleteSaveBlogs(res.data.id));
                 setLoading(false);
+                toastify('blog deleted', 'success');
             })
             .catch((error) => {
                 console.log(error);

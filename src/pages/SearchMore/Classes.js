@@ -15,7 +15,7 @@ function Classes({ classData }) {
                 </div>
             );
         } else {
-            return <div>Not found {classData.type}</div>;
+            return <div className={cx('not-found')}>Not found {classData.type}</div>;
         }
     }
 }

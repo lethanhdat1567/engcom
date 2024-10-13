@@ -3,10 +3,8 @@ import styles from './MyBlogs.module.scss';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { readListBlog } from '~/requestApi/requestBlog';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import MyBlogsItem from '~/components/MyBlogsItem/MyBlogsItem';
-import { ownData } from '~/redux/reducer/OwnDataSlice';
-import Loading from '~/components/Loading/Loading';
 import SkeletonLoading from '~/components/Loading/SkeletonLoading';
 
 const cx = classNames.bind(styles);

@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { deleteBlog, deleteSaveBlog } from '~/requestApi/requestBlog';
 import { useDispatch, useSelector } from 'react-redux';
 import { ownData } from '~/redux/reducer/OwnDataSlice';
+import { toastify } from '~/utils/toast';
 
 const cx = classNames.bind(styles);
 
@@ -23,6 +24,7 @@ function MyBlogsItem({ data, setBlogItems, blogItems, type, deleting, setDeletin
                 const deletedBlog = res.data;
                 const newBlogsData = blogItems.filter((item) => item.id !== deletedBlog.id);
                 setBlogItems(newBlogsData);
+                toastify('Blog deleted', 'success', 2000, 'top-right');
             })
             .catch((error) => {
                 console.log(error);
@@ -40,6 +42,7 @@ function MyBlogsItem({ data, setBlogItems, blogItems, type, deleting, setDeletin
                     });
                     setBlogItems(newBlogs);
                     setDeleting(false);
+                    toastify('Blog deleted', 'success', 2000, 'top-right');
                 })
                 .catch((error) => {
                     console.log(error);

@@ -38,7 +38,7 @@ function User({ userData }) {
                 </div>
             );
         } else {
-            return <div>Not found {userData.type}</div>;
+            return <div className={cx('not-found')}>Not found {userData.type}</div>;
         }
     }
 }

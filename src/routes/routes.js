@@ -58,7 +58,7 @@ const studentPage = [
     { path: '/community/chat', element: LiveChat, layout: null },
     { path: '/community/forum', element: Forum, layout: null },
     { path: '/community/forum/:slug', element: ForumDetail, layout: null },
-    { path: '/community/rank', element: Rank, layout: HeaderOnly },
+    { path: '/community/rank', element: Rank, layout: null },
     { path: '/community/meeting', element: ZoomMeeting, layout: null },
     { path: '/community/meeting/join', element: ZoomDetail, layout: null },
     { path: '/community/meeting/:slug', element: VideoCall, layout: null },

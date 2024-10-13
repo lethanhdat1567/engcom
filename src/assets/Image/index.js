@@ -22,6 +22,8 @@ const imgs = {
     create_meeting: require('./imgs/create-meeting.png'),
     join_meeting: require('./imgs/join.png'),
     validate_zoom: require('./imgs/validateZoom.gif'),
+    decor_rank: require('./imgs/decor-rank.png'),
+    decor_rank_2: require('./imgs/decor-rank-2.png'),
 };
 
 export default imgs;
