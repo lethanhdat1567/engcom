@@ -71,7 +71,7 @@ export const teacher = createSlice({
         updateContent(state, action) {
             const stateIndex = state.content.findIndex((item) => item.id === action.payload.id);
             if (stateIndex !== -1) {
-                state.content[stateIndex] = { ...state.lessons[stateIndex], ...action.payload };
+                state.content[stateIndex] = { ...state.content[stateIndex], ...action.payload };
             }
         },
         deleteContent(state, action) {

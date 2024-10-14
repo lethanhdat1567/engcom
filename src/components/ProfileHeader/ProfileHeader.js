@@ -11,10 +11,12 @@ import { logoutRequest } from '~/requestApi/requestSocial';
 import { useState } from 'react';
 import Loading from '../Loading/Loading';
 import Img from '../Img';
+import { refreshToken } from '~/requestApi/requestToken';
 
 const cx = classNames.bind(styles);
 
 function ProfileHeader() {
+    const refresh_token = useSelector((state) => state.user.refresh_token);
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.user);
     const [loading, setLoading] = useState(false);
@@ -31,6 +33,13 @@ function ProfileHeader() {
         } catch (error) {
             setLoading(false);
             console.error('Error signing out:', error);
+            refreshToken(refresh_token)
+                .then((res) => {
+                    dispatch(usersSlice.actions.getToken(res.data.access_token));
+                    dispatch(usersSlice.actions.getRefreshToken(res.data.refresh_token));
+                    console.log('test');
+                })
+                .catch((error) => console.log(error));
         }
     };
 
@@ -39,6 +48,7 @@ function ProfileHeader() {
             {loading && <Loading />}
             <Tippy
                 interactive
+                onClickOutside={() => setShowDropdown(false)}
                 visible={showDropdown}
                 placement="bottom-end"
                 render={(attrs) => (

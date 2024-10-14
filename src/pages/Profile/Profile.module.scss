@@ -9,6 +9,9 @@
     background: top center / cover no-repeat;
     background-image: url('../../assets/Image/imgs/profileBanner.png');
     position: relative;
+    @include abs.screen(md) {
+        margin-top: 0;
+    }
 }
 .user-banner {
     position: absolute;
@@ -44,8 +47,18 @@
         font-size: 2.8rem;
         font-weight: 700;
         margin-left: 16px;
-        margin-bottom: 16px;
+        margin-bottom: 10px;
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: flex;
+        justify-content: flex-start;
+        @include abs.screen(md) {
+            margin-bottom: 20px;
+            margin-left: 0;
+            font-size: 1.8rem;
+            align-items: center;
+        }
     }
 }
 

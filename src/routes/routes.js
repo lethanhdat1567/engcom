@@ -45,10 +45,13 @@ import ZoomMeeting from '~/pages/ZoomMeeting/ZoomMeeting';
 const publicPage = [
     { path: '/', element: Home },
     { path: '/blogs', element: Blogs },
+    { path: '/blogs/:slug', element: BlogsDetail, layout: HeaderOnly },
     { path: '/community', element: Community },
     { path: '/classes/:slug', element: ClassMore },
     { path: '/user/role', element: Role },
     { path: '/class/:slug', element: ClassDetail },
+    { path: '/search', element: SearchMore },
+    { path: '/profile/:slug', element: Profile, layout: SingleLayout },
     { path: '*', element: NotFound, layout: null },
 ];
 
@@ -82,9 +85,7 @@ const studentPage = [
 const teacherPage = [
     { path: '/', element: TeacherHome },
     { path: '/community', element: Community },
-    { path: '/classes/all', element: Home },
-    { path: '/classes/:slug', element: ClassMore },
-    { path: '/blogs', element: Blogs },
+    { path: '/classes/all', element: ClassMore },
     { path: '/blogs', element: Blogs },
     { path: '/class/:slug', element: ClassDetail },
     { path: '/profile', element: Profile, layout: SingleLayout },

@@ -36,7 +36,6 @@ function Header() {
             if (token) {
                 refreshToken(refresh_token)
                     .then((res) => {
-                        // Cập nhật token sau khi nhận được phản hồi
                         dispatch(usersSlice.actions.getToken(res.data.access_token));
                         dispatch(usersSlice.actions.getRefreshToken(res.data.refresh_token));
                     })

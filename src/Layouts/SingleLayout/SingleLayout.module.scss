@@ -1,3 +1,4 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
 .content {
     margin-top: 66px;
     min-height: 100vh;
@@ -5,5 +6,11 @@
         margin-top: 18px;
         max-width: 1100px;
         margin: 0 auto;
+    }
+    .nav-mobile {
+        display: none;
+        @include abs.screen(md) {
+            display: block;
+        }
     }
 }

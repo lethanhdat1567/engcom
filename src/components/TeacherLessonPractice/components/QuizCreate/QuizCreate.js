@@ -61,9 +61,16 @@ function QuizCreate() {
 
     return (
         <div className={cx('wrap')}>
-            <Button type="primary" style={{ marginBottom: '10px' }} onClick={handleSave}>
-                Export
-            </Button>
+            <Flex justify="end">
+                <Button
+                    type="primary"
+                    style={{ marginBottom: '10px' }}
+                    onClick={handleSave}
+                    disabled={correctAnswerIndex === null || correctAnswerIndex === undefined}
+                >
+                    Export
+                </Button>
+            </Flex>
             <Form>
                 <Form.Item>
                     <Input onChange={(e) => setTitle(e.target.value)} placeholder="Title..." />

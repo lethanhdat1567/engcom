@@ -1,17 +1,17 @@
 import classNames from 'classnames/bind';
 import styles from './HeaderSingle.module.scss';
-import Logo from '~/components/Logo/Logo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookOpenReader, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import PrivateHeader from '../Header/PrivateHeader/PrivateHeader';
 import HeaderAlert from '~/components/HeaderAlert/HeaderAlert';
 import ProfileHeader from '~/components/ProfileHeader/ProfileHeader';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles);
 
 function HeaderSingle({ transparent }) {
     const navigate = useNavigate();
+    const user = useSelector((state) => state.user.user);
 
     return (
         <div
@@ -31,10 +31,12 @@ function HeaderSingle({ transparent }) {
                     </span>
                 </div>
             </div>
-            <div className={cx('right')}>
-                <HeaderAlert />
-                <ProfileHeader />
-            </div>
+            {Object.keys(user).length > 0 && (
+                <div className={cx('right')}>
+                    <HeaderAlert />
+                    <ProfileHeader />
+                </div>
+            )}
         </div>
     );
 }

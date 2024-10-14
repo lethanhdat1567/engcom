@@ -10,7 +10,7 @@ import UpdateLesson from './UpdateLesson';
 const cx = classNames.bind(styles);
 
 function TeacherLessonText({ data }) {
-    const [descValue, setDescValue] = useState('');
+    const [descValue, setDescValue] = useState(data?.text || '');
     const [isUpdate, setIsUpdate] = useState(false);
     const id = useId();
     const lesson = useSelector((state) => state.activeLesson.lesson);
@@ -47,7 +47,7 @@ function TeacherLessonText({ data }) {
                 <div className={cx('create')}>
                     <Flex justify="end">
                         <Button type="primary" className={cx('btn')} onClick={handleSave}>
-                            Export
+                            Save
                         </Button>
                     </Flex>
                     <JoditEditor config={{ height: 600 }} onBlur={(content) => setDescValue(content)} />

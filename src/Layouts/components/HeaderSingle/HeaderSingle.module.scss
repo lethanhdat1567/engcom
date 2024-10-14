@@ -21,6 +21,15 @@
     align-items: center;
     gap: 20px;
 }
+.public-right {
+    display: flex;
+    align-items: center;
+    width: 200px;
+}
+.btn-wrap {
+    display: flex;
+    align-items: center;
+}
 .back-wrap {
     .icon {
         cursor: pointer;

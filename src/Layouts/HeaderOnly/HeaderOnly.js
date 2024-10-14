@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './HeaderOnly.module.scss';
 import Logo from '~/components/Logo/Logo';
 import HeaderSingle from '../components/HeaderSingle/HeaderSingle';
+import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles);
 

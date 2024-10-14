@@ -100,7 +100,6 @@ function TeacherClassHome() {
                     dispatch(teacher.actions.setCart(cart));
                     getCourse(slug)
                         .then((res) => {
-                            console.log(res.data);
                             dispatch(teacher.actions.setUpdateCourse(res.data.courses));
                             dispatch(teacher.actions.setUpdateLesson(res.data.lessons));
                             dispatch(teacher.actions.setUpdateContent(res.data.content));
@@ -111,7 +110,6 @@ function TeacherClassHome() {
                 .catch((error) => {
                     console.log(error);
                 });
-        } else if (slug && Object.keys(cartData).length > 0) {
         }
     }, []);
 

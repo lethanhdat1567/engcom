@@ -1,6 +1,6 @@
 import { Slide, toast } from 'react-toastify';
 
-export const toastify = (message, type, timer = 2000, position = 'bottom-right') => {
+export const toastify = (message, type = 'success', timer = 2000, position = 'bottom-right') => {
     toast[type](message, {
         position: position,
         autoClose: timer,
@@ -11,5 +11,5 @@ export const toastify = (message, type, timer = 2000, position = 'bottom-right')
         progress: undefined,
         theme: 'light',
         transition: Slide,
-    })();
+    });
 };

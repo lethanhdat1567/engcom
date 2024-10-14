@@ -103,7 +103,7 @@ function Rank() {
                         <div className={cx('rank-wrap')}>
                             {rankValues[1] && (
                                 <div className={cx('img-wrap', 'second')}>
-                                    <img className={cx('img')} src={handleAvatar(rankValues[2]?.avatar)} />
+                                    <img className={cx('img')} src={handleAvatar(rankValues[1]?.avatar)} />
                                     <span className={cx('decor')}>{kink}</span>
                                 </div>
                             )}
@@ -115,7 +115,7 @@ function Rank() {
                             )}
                             {rankValues[2] && (
                                 <div className={cx('img-wrap', 'second')}>
-                                    <img className={cx('img')} src={handleAvatar(rankValues[3]?.avatar)} />
+                                    <img className={cx('img')} src={handleAvatar(rankValues[2]?.avatar)} />
                                     <span className={cx('decor')}>{kink}</span>
                                 </div>
                             )}

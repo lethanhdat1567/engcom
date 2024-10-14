@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './LessonVideo.module.scss';
-import ReactPlayer from 'react-player';
+import ReactPlayer from 'react-player/youtube';
 import { useSelector } from 'react-redux';
 import useCourseUtils from '~/utils/useCourseUtils';
 import NoContenLoading from '~/components/Loading/NoContentLoading/NoContenLoading';
@@ -25,8 +25,8 @@ function LessonVideo({ data }) {
                                 <div className={cx('banner')}>
                                     <div className={cx('video')}>
                                         <ReactPlayer
-                                            url={`${process.env.REACT_APP_BACKEND_UPLOAD}/videos/${videoContent.video}`} // Đường dẫn đến video
-                                            controls={true} // Hiển thị các điều khiển video
+                                            url="https://www.youtube.com/watch?v=RDpcHAGZ0XI&t=19541s"
+                                            controls={true}
                                             onEnded={handleEnd}
                                             width="100%"
                                             height="100%"

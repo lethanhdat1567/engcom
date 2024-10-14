@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getMyClass } from '~/requestApi/requestMyClass';
 import { getUser } from '~/requestApi/requestUser';
+import UserRole from '~/components/UserRole/UserRole';
 
 const cx = classNames.bind(styles);
 
@@ -61,7 +62,10 @@ function Profile() {
                                 }
                                 alt="User Avatar"
                             />
-                            <div className={cx('name')}>{userData?.name}</div>
+                            <div className={cx('name')}>
+                                {userData?.name}
+                                <UserRole type={3} />
+                            </div>
                         </div>
                     </div>
                 ) : (
@@ -77,7 +81,12 @@ function Profile() {
                                 }
                                 alt="User Avatar"
                             />
-                            <div className={cx('name')}>{user.name}</div>
+                            <div className={cx('name')}>
+                                <span>{user.name}</span>
+                                <span>
+                                    <UserRole type={3} />
+                                </span>
+                            </div>
                         </div>
                     </div>
                 )}
@@ -88,7 +97,7 @@ function Profile() {
                         </div>
                         <div className="col col-12 col-lg-8">
                             <div className={cx('wrapper')}>
-                                <h2 className={cx('info-title')}>Your classes</h2>
+                                <h2 className={cx('info-title')}>Join classes</h2>
                                 {classesData.map((item, index) => {
                                     return <ClassItemLarge data={item} key={index} />;
                                 })}

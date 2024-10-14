@@ -150,12 +150,21 @@ function useCourseUtils() {
 
             if (prevLessonIndex >= 0) {
                 const prevLesson = currentCourse.lessons[prevLessonIndex];
-
-                // Cập nhật bài học trước đó mà không thay đổi trạng thái progress
                 dispatch(course.actions.setActiveLessonID(prevLesson.id));
                 dispatch(course.actions.setSelectedLesson(prevLesson));
             } else {
-                console.log('Đã đến bài học đầu tiên.');
+                const currentCourseIndex = courses.findIndex((course) => course.id === currentCourse.id);
+                const prevCourseIndex = currentCourseIndex - 1;
+
+                if (prevCourseIndex >= 0) {
+                    const prevCourse = courses[prevCourseIndex];
+                    const lastLessonInPrevCourse = prevCourse.lessons[prevCourse.lessons.length - 1];
+
+                    dispatch(course.actions.setActiveLessonID(lastLessonInPrevCourse.id));
+                    dispatch(course.actions.setSelectedLesson(lastLessonInPrevCourse));
+                } else {
+                    console.log('Đã đến bài học đầu tiên của tất cả các khóa học.');
+                }
             }
         },
     };
