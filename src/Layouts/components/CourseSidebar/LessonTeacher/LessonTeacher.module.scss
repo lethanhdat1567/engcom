@@ -44,6 +44,22 @@
         }
     }
 }
+
+.alert-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .alert-desc {
+        font-size: 1.6rem;
+        font-weight: 500;
+    }
+}
+.custom-modal-title {
+    font-size: 1.8rem;
+    color: #ff0000;
+    font-weight: bold;
+}
+
 @keyframes fadeIn {
     0% {
         opacity: 0;

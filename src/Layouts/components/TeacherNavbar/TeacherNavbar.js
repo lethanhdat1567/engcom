@@ -36,7 +36,7 @@ function TeacherNavbar({ showNav, setShowNav }) {
     const cartsCreate = useSelector((state) => state.teacher.carts);
     const coursesCreate = useSelector((state) => state.teacher.courses);
     const lessonsCreate = useSelector((state) => state.teacher.lessons);
-    const contentsCreate = useSelector((state) => state.teacher.content);
+    const contentsCreate = useSelector((state) => state.teacher.contents);
 
     const [showModal, setShowModal] = useState(false);
     const [isDelete, setIsDelete] = useState(false);
@@ -83,7 +83,7 @@ function TeacherNavbar({ showNav, setShowNav }) {
                 {
                     title: 'Courses',
                     icon: <FontAwesomeIcon className="fa-md" icon={faBook} />,
-                    to: `own/${slug}/courses`,
+                    to: `class/${slug}/course`,
                 },
             ],
         },
@@ -109,7 +109,7 @@ function TeacherNavbar({ showNav, setShowNav }) {
             ],
         },
     ];
-    const contents = useSelector((state) => state.teacher.content);
+    const contents = useSelector((state) => state.teacher.contents);
     const handleClick = () => {
         // Create
         if (Object.keys(cartsCreate).length > 0 && coursesCreate.length > 0 && !slug) {

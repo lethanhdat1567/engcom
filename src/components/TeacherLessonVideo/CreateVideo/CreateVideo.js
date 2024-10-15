@@ -11,7 +11,6 @@ const cx = classNames.bind(styles);
 
 function CreateVideo({ utils }) {
     const { videoValue, setVideoValue } = utils;
-    console.log(videoValue);
     const [inputValue, setInputValue] = useState(videoValue || '');
 
     const isValidYouTubeURL = (url) => {
@@ -60,7 +59,7 @@ function CreateVideo({ utils }) {
                                     style={{ color: 'red', padding: '0px 2px' }}
                                 >
                                     YouTube
-                                </a>{' '}
+                                </a>
                                 video you want to upload and paste it into the form below. Thank you!
                             </Typography.Text>
                         </Col>

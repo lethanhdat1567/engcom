@@ -8,31 +8,83 @@ import CreateLesson from './Lesson/CreateLesson';
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
 import { teacher } from '~/redux/reducer/TeacherSlice';
+import { useParams } from 'react-router-dom';
+import { insertCourseUpdate, updateCourseUpdate } from '~/requestApi/requestUpdateClass';
 
 const cx = classNames.bind(styles);
 
 function CreateCourse({ setShowCreate, data }) {
+    const slug = useParams();
     const dispatch = useDispatch();
     const courseId = useId();
-    const [courseValue, setCourseValue] = useState(data?.title || '');
+    const [courseValue, setCourseValue] = useState(data?.name || '');
+    const [loading, setLoading] = useState(false);
+
     const handleSave = () => {
-        // Update
-        if (data) {
-            const values = {
-                id: data.id,
-                title: courseValue,
-            };
-            dispatch(teacher.actions.updateCourse(values));
-            setShowCreate(false);
+        // Update class
+        if (Object.keys(slug).length > 0) {
+            if (data) {
+                if (Number(data.id)) {
+                    console.log(data);
+                    const values = {
+                        class_id: data.class_id,
+                        name: courseValue,
+                    };
+                    updateCourseUpdate(data.id, values)
+                        .then((res) => {
+                            console.log(res);
+                            dispatch(teacher.actions.updateCourse(res.data));
+                            setShowCreate(false);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                } else {
+                    const values = {
+                        id: data.id,
+                        name: courseValue,
+                    };
+                    dispatch(teacher.actions.updateCourse(values));
+                    setShowCreate(false);
+                }
+            }
+            // Create
+            else {
+                const values = {
+                    class_id: slug.slug,
+                    name: courseValue,
+                };
+                insertCourseUpdate(values)
+                    .then((res) => {
+                        console.log(res);
+                        dispatch(teacher.actions.setCourse(res.data));
+                        setShowCreate(false);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
         }
-        // Create
+        // Create class
         else {
-            const values = {
-                id: courseId,
-                name: courseValue,
-            };
-            dispatch(teacher.actions.setCourse(values));
-            setShowCreate(false);
+            // Update
+            if (data) {
+                const values = {
+                    id: data.id,
+                    name: courseValue,
+                };
+                dispatch(teacher.actions.updateCourse(values));
+                setShowCreate(false);
+            }
+            // Create
+            else {
+                const values = {
+                    id: courseId,
+                    name: courseValue,
+                };
+                dispatch(teacher.actions.setCourse(values));
+                setShowCreate(false);
+            }
         }
     };
     return (

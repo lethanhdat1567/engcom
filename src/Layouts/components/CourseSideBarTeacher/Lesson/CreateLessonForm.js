@@ -18,6 +18,7 @@ import { memo, useId, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { teacher } from '~/redux/reducer/TeacherSlice';
 import { Select } from 'antd';
+import { insertLessonUpdate } from '~/requestApi/requestUpdateClass';
 
 const cx = classNames.bind(styles);
 
@@ -70,16 +71,36 @@ function CreateLessonForm({ showCreateLesson, setShowCreateLesson, course_id }) 
 
     const handleSubmit = () => {
         if (titleValue) {
-            const values = {
-                id: uuidv4(),
-                course_id: course_id,
-                type: typeValue,
-                name: titleValue,
-            };
-            setTitleValue('');
-            setTypeValue(0);
-            dispatch(teacher.actions.setLesson(values));
-            setShowCreateLesson(false);
+            if (Number(course_id)) {
+                console.log('FETCH CREATE LESSON');
+                const values = {
+                    name: titleValue,
+                    type: typeValue,
+                    course_id: course_id,
+                };
+                insertLessonUpdate(values)
+                    .then((res) => {
+                        console.log(res.data);
+                        dispatch(teacher.actions.setLesson(res.data));
+                        setShowCreateLesson(false);
+                        setTitleValue('');
+                        setTypeValue(0);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            } else {
+                const values = {
+                    id: uuidv4(),
+                    course_id: course_id,
+                    type: typeValue,
+                    name: titleValue,
+                };
+                setTitleValue('');
+                setTypeValue(0);
+                dispatch(teacher.actions.setLesson(values));
+                setShowCreateLesson(false);
+            }
         } else {
             setShowCreateLesson(false);
             setTitleValue('');

@@ -5,21 +5,49 @@ import JoditEditor from 'jodit-react';
 import { Button, Flex } from 'antd';
 import { useDispatch } from 'react-redux';
 import { teacher } from '~/redux/reducer/TeacherSlice';
+import { useParams } from 'react-router-dom';
+import { createContentUpdate, updateContentUpdate } from '~/requestApi/requestUpdateClass';
 
 const cx = classNames.bind(styles);
 
 function UpdateLesson({ data, setIsUpdate }) {
     const dispatch = useDispatch();
     const [contentValue, setContentValue] = useState(data.text);
+    const slug = useParams();
 
     const handleSave = () => {
-        const values = {
-            id: data.id,
-            lesson_id: data.lesson_id,
-            text: contentValue,
-        };
-        dispatch(teacher.actions.updateContent(values));
-        setIsUpdate(false);
+        if (Object.keys(slug).length > 0) {
+            if (Number(data?.id)) {
+                const newValues = {
+                    text: contentValue,
+                    title: '',
+                };
+                updateContentUpdate(data.lesson_id, newValues)
+                    .then((res) => {
+                        dispatch(teacher.actions.updateContent({ ...newValues, id: data.id }));
+                        setIsUpdate(false);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            } else {
+                const values = {
+                    id: data.id,
+                    lesson_id: data.lesson_id,
+                    text: contentValue,
+                };
+                dispatch(teacher.actions.updateContent(values));
+                setIsUpdate(false);
+            }
+        } else {
+            const values = {
+                id: data.id,
+                lesson_id: data.lesson_id,
+                text: contentValue,
+            };
+            dispatch(teacher.actions.updateContent(values));
+            setIsUpdate(false);
+        }
     };
     return (
         <div className={cx('create')}>

@@ -6,7 +6,7 @@ export const teacher = createSlice({
         carts: {},
         courses: [],
         lessons: [],
-        content: [],
+        contents: [],
     },
     reducers: {
         // carts
@@ -63,29 +63,29 @@ export const teacher = createSlice({
         },
         // Lesson content
         setUpdateContent(state, action) {
-            state.content = action.payload;
+            state.contents = action.payload;
         },
         setContent(state, action) {
-            state.content.push(action.payload);
+            state.contents.push(action.payload);
         },
         updateContent(state, action) {
-            const stateIndex = state.content.findIndex((item) => item.id === action.payload.id);
+            const stateIndex = state.contents.findIndex((item) => item.id === action.payload.id);
             if (stateIndex !== -1) {
-                state.content[stateIndex] = { ...state.content[stateIndex], ...action.payload };
+                state.contents[stateIndex] = { ...state.contents[stateIndex], ...action.payload };
             }
         },
         deleteContent(state, action) {
-            const newCourse = state.content.filter((item) => item.id !== action.payload);
-            state.content = newCourse;
+            const newCourse = state.contents.filter((item) => item.id !== action.payload);
+            state.contents = newCourse;
         },
         deleteAllContent(state, action) {
-            state.content = [];
+            state.contents = [];
         },
         resetState(state) {
             state.carts = {};
             state.courses = [];
             state.lessons = [];
-            state.content = [];
+            state.contents = [];
         },
     },
 });

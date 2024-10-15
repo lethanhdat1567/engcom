@@ -9,8 +9,8 @@ const cx = classNames.bind(styles);
 
 function TeacherCourse() {
     const activeLesson = useSelector((state) => state.activeLesson.lesson);
-    const lessonContents = useSelector((state) => state.teacher.content);
-    const data = lessonContents.find((item) => {
+    const lessonContents = useSelector((state) => state.teacher.contents);
+    const data = lessonContents?.find((item) => {
         return item.lesson_id === activeLesson.id;
     });
 

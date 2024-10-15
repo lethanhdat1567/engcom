@@ -7,6 +7,8 @@ import Button from '../Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { teacher } from '~/redux/reducer/TeacherSlice';
 import ReactPlayer from 'react-player/youtube';
+import { createContentUpdate, updateContentUpdate } from '~/requestApi/requestUpdateClass';
+import { useParams } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -14,11 +16,13 @@ function TeacherLessonVideo({ data }) {
     const id = useId();
     const lesson = useSelector((state) => state.activeLesson.lesson);
     const dispatch = useDispatch();
+    const { slug } = useParams();
 
     // Khởi tạo isUpdate là false
-    const [isUpdate, setIsUpdate] = useState(!data?.id); // Thiết lập isUpdate dựa trên data.id
-    const [videoValue, setVideoValue] = useState(data?.video || '');
-    const [descValue, setDescValue] = useState(data?.content || '');
+    const [isUpdate, setIsUpdate] = useState(data !== undefined);
+
+    const [videoValue, setVideoValue] = useState(data?.title || '');
+    const [descValue, setDescValue] = useState(data?.text || '');
 
     const utils = {
         videoValue,
@@ -26,27 +30,77 @@ function TeacherLessonVideo({ data }) {
         descValue,
         setDescValue,
     };
-
-    const handleSave = () => {
-        const values = {
-            id: data?.id || id,
-            lesson_id: lesson.id,
-            video: videoValue,
-            content: descValue,
-        };
-
-        if (data?.id) {
-            dispatch(teacher.actions.updateContent(values));
+    useEffect(() => {
+        if (data) {
+            setIsUpdate(false);
+            setDescValue(data.text);
+            setVideoValue(data.title);
         } else {
-            dispatch(teacher.actions.setContent(values));
+            setDescValue('');
+            setVideoValue('');
+            setIsUpdate(true);
         }
-
-        // Chuyển sang chế độ xem
-        setIsUpdate(false);
+    }, [data]);
+    const handleSave = () => {
+        if (slug) {
+            const values = {
+                id: data?.id || id,
+                lesson_id: lesson.id,
+                title: videoValue,
+                text: descValue,
+            };
+            if (data?.id) {
+                if (Number(data.id)) {
+                    const newValues = {
+                        text: descValue,
+                        title: videoValue,
+                    };
+                    updateContentUpdate(lesson.id, newValues)
+                        .then((res) => {
+                            dispatch(teacher.actions.updateContent(res.data));
+                            setIsUpdate(false);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                } else {
+                    dispatch(teacher.actions.updateContent(values));
+                    setIsUpdate(false);
+                }
+            } else {
+                const newValues = {
+                    text: descValue,
+                    title: videoValue,
+                    lesson_id: lesson.id,
+                };
+                createContentUpdate(newValues)
+                    .then((res) => {
+                        console.log(res.data);
+                        dispatch(teacher.actions.setContent(values));
+                        setIsUpdate(false);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
+        } else {
+            const values = {
+                id: data?.id || id,
+                lesson_id: lesson.id,
+                title: videoValue,
+                text: descValue,
+            };
+            if (data?.id) {
+                dispatch(teacher.actions.updateContent(values));
+                setIsUpdate(false);
+            } else {
+                dispatch(teacher.actions.setContent(values));
+                setIsUpdate(false);
+            }
+        }
     };
 
     const handleUpdate = () => {
-        // Chuyển sang chế độ chỉnh sửa
         setIsUpdate(true);
     };
 
@@ -80,7 +134,7 @@ function TeacherLessonVideo({ data }) {
                             <div className={cx('banner')}>
                                 <div className={cx('video')}>
                                     <ReactPlayer
-                                        url={data?.video}
+                                        url={data?.title}
                                         controls={true}
                                         width="100%"
                                         height="100%"
@@ -90,7 +144,7 @@ function TeacherLessonVideo({ data }) {
                             </div>
                         </div>
                     </div>
-                    <div className={cx('desc')} dangerouslySetInnerHTML={{ __html: data?.content }}></div>
+                    <div className={cx('desc')} dangerouslySetInnerHTML={{ __html: data?.text }}></div>
                 </>
             )}
         </div>

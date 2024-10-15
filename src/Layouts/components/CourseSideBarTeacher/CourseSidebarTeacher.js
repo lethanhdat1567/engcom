@@ -49,7 +49,7 @@ function CourseSidebarTeacher({ showNav, setShowNav }) {
             })}
             <div className={cx('save-course-wrap', { block: lessons.length === 0 })} onClick={handleSave}>
                 <button className={cx('save-course')} style={{ background: 'blue' }}>
-                    Save Course
+                    {slug ? 'Back' : 'Save'}
                 </button>
             </div>
         </div>

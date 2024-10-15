@@ -41,7 +41,7 @@ function QuizCreate() {
             id,
             lesson_id: lesson.id,
             title: title,
-            content: desc,
+            text: desc,
             questions: questions,
         };
         dispatch(teacher.actions.setContent(values));
