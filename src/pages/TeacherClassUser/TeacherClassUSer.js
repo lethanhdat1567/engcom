@@ -6,12 +6,14 @@ import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getUserClass } from '~/requestApi/requestClass';
+import Skeleton from 'react-loading-skeleton';
 
 const cx = classNames.bind(styles);
 
 function TeacherClassUser() {
     const { slug } = useParams();
     const [usersData, setUsersData] = useState();
+    const [loading, setLoading] = useState(false);
     const columns = [
         {
             title: 'Avatar',
@@ -58,6 +60,7 @@ function TeacherClassUser() {
         },
     ];
     useEffect(() => {
+        setLoading(true);
         getUserClass(slug)
             .then((res) => {
                 const dataWithKeys = res.data.map((user, index) => ({
@@ -65,13 +68,19 @@ function TeacherClassUser() {
                     key: user.id || index,
                 }));
                 setUsersData(dataWithKeys);
+                setLoading(false);
             })
             .catch((error) => {
                 console.log(error);
+                setLoading(false);
             });
     }, []);
 
-    return <Table scroll={{ x: 1000 }} dataSource={usersData} columns={columns} className={cx('table')} />;
+    return loading ? (
+        <Skeleton height={300} />
+    ) : (
+        <Table scroll={{ x: 1000 }} dataSource={usersData} columns={columns} className={cx('table')} />
+    );
 }
 
 export default TeacherClassUser;

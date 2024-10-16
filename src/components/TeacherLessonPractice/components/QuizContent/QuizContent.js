@@ -6,7 +6,6 @@ const cx = classNames.bind(styles);
 
 function QuizContent({ data }) {
     const [choiceActive, setChoiceActive] = useState();
-    console.log(data);
 
     return (
         <div className={cx('wrap')}>

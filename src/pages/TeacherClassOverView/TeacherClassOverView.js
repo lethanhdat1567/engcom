@@ -9,14 +9,15 @@ import CourseItem from '~/components/CourseItem/CourseItem';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getDetailClass } from '~/requestApi/requestClass';
+import Skeleton from 'react-loading-skeleton';
+import CartLoading from '~/components/Loading/CartLoading/CartLoading';
 
 const cx = classNames.bind(styles);
 
 function TeacherClassOverView() {
     const { slug } = useParams();
-    const cartData = useSelector((state) => state.teacher.carts);
-    const courses = useSelector((state) => state.teacher.courses);
     const [classData, setClassData] = useState([]);
+    const [loading, setLoading] = useState(false);
     const AnaData = [
         {
             title: 'Users',
@@ -37,38 +38,48 @@ function TeacherClassOverView() {
     ];
 
     useEffect(() => {
+        setLoading(true);
         getDetailClass(slug)
             .then((res) => {
+                setLoading(false);
                 setClassData(res.data);
             })
             .catch((error) => {
+                setLoading(false);
                 console.log(error);
             });
     }, []);
-    console.log(classData);
 
     return (
         <div className={cx('wrap')}>
-            <div className="row row-cols-1 row-cols-md-2 g-5">
-                {AnaData.map((item, index) => {
-                    return (
-                        <div className="col" key={index}>
-                            <AnalystItem item={item} />
-                        </div>
-                    );
-                })}
-            </div>
-            <h1 className={cx('title')}>Your class cart</h1>
-            <div className={cx('cart-wrap')}>
-                <CartItem data={classData} />
-            </div>
-            <div className={cx('desc-wrap')}>
-                <h2 className={cx('desc-title')}>Your description</h2>
-                <div
-                    className={cx('desc')}
-                    dangerouslySetInnerHTML={{ __html: classData?.class?.description }}
-                ></div>
-            </div>
+            {loading ? (
+                <div className={cx('loading-wrap')}>
+                    <Skeleton height={50} count={8} style={{ margin: '10px 0px' }} />
+                </div>
+            ) : (
+                <>
+                    <div className="row row-cols-1 row-cols-md-2 g-5">
+                        {AnaData.map((item, index) => {
+                            return (
+                                <div className="col" key={index}>
+                                    <AnalystItem item={item} />
+                                </div>
+                            );
+                        })}
+                    </div>
+                    <h1 className={cx('title')}>Your class cart</h1>
+                    <div className={cx('cart-wrap')}>
+                        <CartItem data={classData} />
+                    </div>
+                    <div className={cx('desc-wrap')}>
+                        <h2 className={cx('desc-title')}>Your description</h2>
+                        <div
+                            className={cx('desc')}
+                            dangerouslySetInnerHTML={{ __html: classData?.class?.description }}
+                        ></div>
+                    </div>
+                </>
+            )}
         </div>
     );
 }

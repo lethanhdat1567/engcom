@@ -11,6 +11,7 @@ import {
     faCircleXmark,
     faFileLines,
     faPlay,
+    faSpinner,
 } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
 import { faLeanpub } from '@fortawesome/free-brands-svg-icons';
@@ -19,6 +20,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { teacher } from '~/redux/reducer/TeacherSlice';
 import { Select } from 'antd';
 import { insertLessonUpdate } from '~/requestApi/requestUpdateClass';
+import { toastify } from '~/utils/toast';
 
 const cx = classNames.bind(styles);
 
@@ -26,6 +28,7 @@ function CreateLessonForm({ showCreateLesson, setShowCreateLesson, course_id }) 
     const dispatch = useDispatch();
     const [titleValue, setTitleValue] = useState('');
     const [typeValue, setTypeValue] = useState(0);
+    const [createLessonLoading, setCreateLessonLoading] = useState(false);
     const lessonType = [
         {
             value: 0,
@@ -72,7 +75,7 @@ function CreateLessonForm({ showCreateLesson, setShowCreateLesson, course_id }) 
     const handleSubmit = () => {
         if (titleValue) {
             if (Number(course_id)) {
-                console.log('FETCH CREATE LESSON');
+                setCreateLessonLoading(true);
                 const values = {
                     name: titleValue,
                     type: typeValue,
@@ -80,14 +83,15 @@ function CreateLessonForm({ showCreateLesson, setShowCreateLesson, course_id }) 
                 };
                 insertLessonUpdate(values)
                     .then((res) => {
-                        console.log(res.data);
+                        setCreateLessonLoading(false);
                         dispatch(teacher.actions.setLesson(res.data));
                         setShowCreateLesson(false);
                         setTitleValue('');
                         setTypeValue(0);
                     })
                     .catch((error) => {
-                        console.log(error);
+                        setCreateLessonLoading(false);
+                        toastify('Create lesson faild', 'error', 2000, 'top-right');
                     });
             } else {
                 const values = {
@@ -133,10 +137,14 @@ function CreateLessonForm({ showCreateLesson, setShowCreateLesson, course_id }) 
                 </div>
             </div>
             <span className={cx('course-icon')} onClick={handleSubmit}>
-                <FontAwesomeIcon
-                    icon={titleValue ? faCircleCheck : faCircleXmark}
-                    style={{ color: titleValue ? 'green' : 'red' }}
-                />
+                {createLessonLoading ? (
+                    <FontAwesomeIcon icon={faSpinner} className="fa-solid fa-spinner fa-spin-pulse" />
+                ) : (
+                    <FontAwesomeIcon
+                        icon={titleValue ? faCircleCheck : faCircleXmark}
+                        style={{ color: titleValue ? 'green' : 'red' }}
+                    />
+                )}
             </span>
         </div>
     );

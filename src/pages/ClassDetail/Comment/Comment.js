@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getComment, insertComment } from '~/requestApi/requestComment';
 import Img from '~/components/Img';
+import Skeleton from 'react-loading-skeleton';
 
 const cx = classNames.bind(styles);
 
@@ -17,6 +18,7 @@ function Comment() {
     const [isAdopt, setIsAdopt] = useState(false);
     const [valueComment, setValueComment] = useState('');
     const [comments, setComments] = useState([]);
+    const [loading, setLoading] = useState(false);
     const commentRef = useRef();
 
     const handleChange = (e) => {
@@ -37,11 +39,14 @@ function Comment() {
     };
 
     useEffect(() => {
+        setLoading(true);
         getComment(slug)
             .then((res) => {
+                setLoading(false);
                 setComments(res.data);
             })
             .catch((error) => {
+                setLoading(false);
                 console.log(error);
             });
     }, []);
@@ -79,35 +84,44 @@ function Comment() {
     };
     return (
         <div className={cx('comment-wrap')}>
-            <h2 className={cx('com-title')}>{comments.length} comments</h2>
-            <div className={cx('comment')}>
-                <div className={cx('com-head')}>
-                    <Img src={user.avatar || ''} className={cx('com-avatar')} />
-                    <div className={cx('com-input-wrap', { active: isComment })}>
-                        <input
-                            ref={commentRef}
-                            className={cx('com-input')}
-                            placeholder="Write comment..."
-                            value={valueComment}
-                            onFocus={() => setIsComment(true)}
-                            onChange={handleChange}
-                        />
-                        <div className={cx('com-utils')}>
-                            <button className={cx('com-cancle')} onClick={handleCancle}>
-                                Cancle
-                            </button>
-                            <button className={cx('com-submit', { active: isAdopt })} onClick={handleSubmit}>
-                                Comment
-                            </button>
+            {loading ? (
+                <Skeleton height={50} count={8} style={{ margin: '10px 0px' }} />
+            ) : (
+                <>
+                    <h2 className={cx('com-title')}>{comments.length} comments</h2>
+                    <div className={cx('comment')}>
+                        <div className={cx('com-head')}>
+                            <Img src={user.avatar || ''} className={cx('com-avatar')} />
+                            <div className={cx('com-input-wrap', { active: isComment })}>
+                                <input
+                                    ref={commentRef}
+                                    className={cx('com-input')}
+                                    placeholder="Write comment..."
+                                    value={valueComment}
+                                    onFocus={() => setIsComment(true)}
+                                    onChange={handleChange}
+                                />
+                                <div className={cx('com-utils')}>
+                                    <button className={cx('com-cancle')} onClick={handleCancle}>
+                                        Cancle
+                                    </button>
+                                    <button
+                                        className={cx('com-submit', { active: isAdopt })}
+                                        onClick={handleSubmit}
+                                    >
+                                        Comment
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={cx('comment-body')}>
+                            {comments.map((item, index) => {
+                                return <CommentItem setComments={setComments} item={item} key={index} />;
+                            })}
                         </div>
                     </div>
-                </div>
-                <div className={cx('comment-body')}>
-                    {comments.map((item, index) => {
-                        return <CommentItem setComments={setComments} item={item} key={index} />;
-                    })}
-                </div>
-            </div>
+                </>
+            )}
         </div>
     );
 }

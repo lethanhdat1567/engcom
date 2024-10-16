@@ -10,22 +10,21 @@ const cx = classNames.bind(styles);
 function LessonVideo({ data }) {
     const videoContent = data.content;
     const { handleDoneLesson } = useCourseUtils();
-    const user = useSelector((state) => state.user.user);
-
     const handleEnd = () => {
         handleDoneLesson();
     };
+
     if (Object.keys(videoContent).length > 0) {
         return (
             <>
-                {videoContent.video ? (
+                {videoContent?.title ? (
                     <>
                         <div className={cx('bg-video')}>
                             <div className={cx('video-wrap')}>
                                 <div className={cx('banner')}>
                                     <div className={cx('video')}>
                                         <ReactPlayer
-                                            url="https://www.youtube.com/watch?v=RDpcHAGZ0XI&t=19541s"
+                                            url={videoContent.title}
                                             controls={true}
                                             onEnded={handleEnd}
                                             width="100%"
@@ -38,7 +37,7 @@ function LessonVideo({ data }) {
                         </div>
                         <div
                             className={cx('desc')}
-                            dangerouslySetInnerHTML={{ __html: videoContent.content }}
+                            dangerouslySetInnerHTML={{ __html: videoContent.text }}
                         ></div>
                     </>
                 ) : (

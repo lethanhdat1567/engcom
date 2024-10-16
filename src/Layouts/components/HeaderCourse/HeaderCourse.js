@@ -4,12 +4,9 @@ import Logo from '~/components/Logo/Logo';
 import Note from '~/components/Note/Note';
 import ProfileCourse from '~/components/ProfileCourse/ProfileCourse';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Modal from '~/components/Modal/Modal';
-import { useState } from 'react';
-import { Button, Flex } from 'antd';
 
 const cx = classNames.bind(styles);
 
@@ -22,11 +19,12 @@ function HeaderCourse() {
     return (
         <div className={cx('wrap')}>
             <div className={cx('left')}>
-                {user.role_id !== 3 && (
-                    <div className={cx('icon-back')} onClick={handleBack}>
-                        <FontAwesomeIcon icon={faChevronLeft} className="fa-xl" />
-                    </div>
-                )}
+                <div className={cx('back-wrap')} onClick={handleBack}>
+                    <span className={cx('back-icon')}>
+                        <FontAwesomeIcon icon={faChevronLeft} />
+                    </span>
+                    <span className={cx('back-text')}>Back</span>
+                </div>
                 <Logo white />
             </div>
             <div className={cx('right')}>

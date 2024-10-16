@@ -1,0 +1,17 @@
+.wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 10px 0px;
+    border-bottom: 1px solid #ccc;
+    .decor {
+        margin-right: 10px;
+        font-size: 2rem;
+        font-weight: 500;
+        color: red;
+    }
+    .img {
+        width: 100%;
+    }
+}

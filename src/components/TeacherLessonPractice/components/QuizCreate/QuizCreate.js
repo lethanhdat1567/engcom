@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { teacher } from '~/redux/reducer/TeacherSlice';
 import { useParams } from 'react-router-dom';
 import { createContentUpdate } from '~/requestApi/requestUpdateClass';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 const MemoizedJoditEditor = memo(JoditEditor);
@@ -26,6 +27,7 @@ function QuizCreate() {
     const [questionData, setQuestionData] = useState([]);
     const [questionValue, setQuestionValue] = useState('');
     const [correctAnswerIndex, setCorrectAnswerIndex] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const config = useMemo(
         () => ({
@@ -38,6 +40,7 @@ function QuizCreate() {
 
     const handleSave = () => {
         if (slug) {
+            setLoading(true);
             const questions = questionData.map((item, index) => {
                 return { text: item, is_correct: index === correctAnswerIndex ? 1 : 0 };
             });
@@ -49,9 +52,11 @@ function QuizCreate() {
             };
             createContentUpdate(insertValues)
                 .then((res) => {
+                    setLoading(false);
                     dispatch(teacher.actions.setContent(insertValues));
                 })
                 .catch((error) => {
+                    setLoading(false);
                     console.log(error);
                 });
         } else {
@@ -90,7 +95,11 @@ function QuizCreate() {
                     onClick={handleSave}
                     disabled={correctAnswerIndex === null || correctAnswerIndex === undefined}
                 >
-                    Export
+                    {loading ? (
+                        <FontAwesomeIcon icon={faSpinner} className="fa-solid fa-spinner fa-spin-pulse" />
+                    ) : (
+                        'Save'
+                    )}
                 </Button>
             </Flex>
             <Form>

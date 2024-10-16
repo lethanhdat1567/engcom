@@ -6,8 +6,6 @@ import QuizContent from './components/QuizContent/QuizContent';
 const cx = classNames.bind(styles);
 
 function TeacherLessonPractice({ data }) {
-    console.log(data);
-
     return (
         <div className={cx('wrap')}>
             {data ? (

@@ -1,8 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './TeacherClassHome.module.scss';
-import AnalystItem from './AnalystItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faHome, faMoneyBill1, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 import CartItem from '~/components/CartItem';
 import CartForm from './CartForm';
 import { useEffect, useId, useState } from 'react';
@@ -11,11 +10,12 @@ import Button from '~/components/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { teacher } from '~/redux/reducer/TeacherSlice';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getClasses, getDetailClass, updateClass } from '~/requestApi/requestClass';
-import UpdateLoading from '~/components/Loading/UpdateLoading/UpdateLoading';
+import { getDetailClass, updateClass } from '~/requestApi/requestClass';
 import { getCourse } from '~/requestApi/requestCourse';
 import Loading from '~/components/Loading/Loading';
 import { toastify } from '~/utils/toast';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 
 const cx = classNames.bind(styles);
 
@@ -25,8 +25,6 @@ function TeacherClassHome() {
     const cartData = useSelector((state) => state.teacher.carts);
     const { slug } = useParams();
     const user = useSelector((state) => state.user.user);
-    // Data
-
     const [loading, setLoading] = useState(false);
     const [titleCart, setTitleCart] = useState(cartData?.name || '');
     const [cartPassword, setCartPassword] = useState(cartData?.password || '');
@@ -34,6 +32,7 @@ function TeacherClassHome() {
     const [cartType, setCartType] = useState(cartData?.type || '');
     const [cartThumbnail, setCartThumbnail] = useState(cartData?.thumbnail || '');
     const [cartSubject, setCartSubject] = useState(cartData?.subject || '');
+    const [showTippy, setShowTippy] = useState(true);
     const cartId = useId();
     const validateCart = () => {
         if (titleCart && cartType) {
@@ -64,6 +63,7 @@ function TeacherClassHome() {
     const handleSave = () => {
         if (validateCart()) {
             if (slug) {
+                setLoading(true);
                 const values = {
                     user_id: user.id,
                     name: titleCart,
@@ -73,33 +73,30 @@ function TeacherClassHome() {
                     type: cartType,
                     subject: cartSubject,
                 };
-                console.log(values);
                 updateClass(values, slug)
                     .then((res) => {
                         console.log(res);
                         setLoading(false);
-                        navigate('/');
                         toastify('Update class success', 'success', 2000, 'top-right');
                     })
                     .catch((error) => {
                         setLoading(false);
-                        // navigate('/');
-                        // toastify('Update class success', 'success', 2000, 'top-right');
+                        toastify('Update class success', 'success', 2000, 'top-right');
                     });
+            } else {
+                const values = {
+                    id: cartId || '',
+                    user_id: user.id || '',
+                    name: titleCart || '',
+                    password: cartPassword || '',
+                    thumbnail: cartThumbnail || '',
+                    description: descValue || '',
+                    type: cartType || '',
+                    subject: cartSubject || '',
+                };
+                dispatch(teacher.actions.setCart(values));
+                slug ? navigate(`/own/${slug}/courses`) : navigate('/create-class/courses');
             }
-        } else {
-            const values = {
-                id: cartId || '',
-                user_id: user.id || '',
-                name: titleCart || '',
-                password: cartPassword || '',
-                thumbnail: cartThumbnail || '',
-                description: descValue || '',
-                type: cartType || '',
-                subject: cartSubject || '',
-            };
-            dispatch(teacher.actions.setCart(values));
-            slug ? navigate(`/own/${slug}/courses`) : navigate('/create-class/courses');
         }
     };
 
@@ -122,19 +119,12 @@ function TeacherClassHome() {
             getDetailClass(slug)
                 .then((res) => {
                     const cart = res.data.class;
-
                     dispatch(teacher.actions.setCart(cart));
-                    getCourse(slug)
-                        .then((res) => {
-                            dispatch(teacher.actions.setUpdateCourse(res.data.courses));
-                            dispatch(teacher.actions.setUpdateLesson(res.data.lessons));
-                            dispatch(teacher.actions.setUpdateContent(res.data.content));
-                            setLoading(false);
-                        })
-                        .catch((error) => console.log(error));
+                    setLoading(false);
                 })
                 .catch((error) => {
                     console.log(error);
+                    setLoading(false);
                 });
         }
     }, []);
@@ -147,9 +137,18 @@ function TeacherClassHome() {
                 <div className={cx('cart-wrap')}>
                     <div className={cx('head-wrap')}>
                         <h1 className={cx('cart-title')}>Your cart class</h1>
-                        <Button disable={!validateCart()} save onClick={handleSave}>
-                            {slug ? 'Update' : 'Save'}
-                        </Button>
+                        <Tippy
+                            visible={showTippy}
+                            onClickOutside={() => setShowTippy(false)}
+                            content="remember to save here :)"
+                            placement="bottom"
+                        >
+                            <span>
+                                <Button disable={!validateCart()} save onClick={handleSave}>
+                                    {slug ? 'Update' : 'Save'}
+                                </Button>
+                            </span>
+                        </Tippy>
                     </div>
                     <div className="row g-5">
                         <div className="col-12 col-sm-6 col-md-4">

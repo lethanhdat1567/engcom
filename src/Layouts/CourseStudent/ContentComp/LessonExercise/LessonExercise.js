@@ -49,11 +49,13 @@ function LessonExercise({ data }) {
             }
         }
     };
+    console.log(data);
+
     return (
         <div className={cx('wrap')}>
             <h1 className={cx('title')}>{data.title}</h1>
             <div className={cx('content')}>
-                <div className={cx('desc')} dangerouslySetInnerHTML={{ __html: data.content }}></div>
+                <div className={cx('desc')} dangerouslySetInnerHTML={{ __html: data.text }}></div>
             </div>
             <div className={cx('choices')}>
                 <p className={cx('choices-sub')}>Chọn câu trả lời đúng.</p>
@@ -70,7 +72,7 @@ function LessonExercise({ data }) {
                                 key={index}
                                 onClick={() => handleChoice(item, index)}
                             >
-                                {`${letter}. ${item.name}`}
+                                {`${letter}. ${item.text}`}
                             </li>
                         );
                     })}

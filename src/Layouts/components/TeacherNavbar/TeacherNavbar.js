@@ -15,7 +15,7 @@ import { edit, view } from '~/assets/Icon';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '~/components/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Modal from '~/components/Modal/Modal';
 import { Flex } from 'antd';
 import { requestDeleteUpload, requestDeleteVideo } from '~/requestApi/requestUpload';
@@ -24,6 +24,7 @@ import Loading from '~/components/Loading/Loading';
 import { createClass, deleteClass, updateClass } from '~/requestApi/requestClass';
 import { activeLesson } from '~/redux/reducer/ActiveLesson';
 import { faLess } from '@fortawesome/free-brands-svg-icons';
+import { getCourse } from '~/requestApi/requestCourse';
 
 const cx = classNames.bind(styles);
 
@@ -54,18 +55,7 @@ function TeacherNavbar({ showNav, setShowNav }) {
                 {
                     title: 'Courses',
                     icon: <FontAwesomeIcon className="fa-md" icon={faBook} />,
-                    to: 'create-class/courses',
-                },
-            ],
-        },
-        {
-            title: 'View',
-            icon: view,
-            children: [
-                {
-                    title: 'OverView',
-                    icon: <FontAwesomeIcon className="fa-md" icon={faEye} />,
-                    to: 'create-class/overview',
+                    to: 'class/course',
                 },
             ],
         },
@@ -138,11 +128,12 @@ function TeacherNavbar({ showNav, setShowNav }) {
         setIsDelete(true);
     };
     const handleCancle = () => {
-        if (Object.keys(cartsCreate).length > 0 || coursesCreate.length > 0) {
+        if (!slug) {
             setShowModal(true);
             return;
+        } else {
+            navigate('/');
         }
-        navigate('/');
     };
 
     const handleAdopt = () => {
@@ -186,6 +177,7 @@ function TeacherNavbar({ showNav, setShowNav }) {
             navigate('/');
         }
     };
+
     return (
         <>
             {loading && <Loading />}
@@ -222,7 +214,7 @@ function TeacherNavbar({ showNav, setShowNav }) {
                     </Button>
                 )}
                 <Button classNames={cx('cancle-btn')} onClick={handleCancle}>
-                    {slug ? 'Back' : 'Cancle class'}
+                    {slug ? 'Back to home' : 'Cancle class'}
                 </Button>
             </div>
             <Modal toggle={showModal} setToggle={setShowModal}>

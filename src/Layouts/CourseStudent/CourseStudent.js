@@ -37,6 +37,8 @@ function CourseStudent() {
         setLoading(true);
         getCourseStudent(slug, user.id)
             .then((res) => {
+                console.log(res);
+
                 filterFirst(res.data);
                 setLoading(false);
             })

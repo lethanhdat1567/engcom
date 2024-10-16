@@ -1,14 +1,9 @@
 import classNames from 'classnames/bind';
 import styles from './TeacherClassLayout.module.scss';
 import HeaderCourse from '../components/HeaderCourse/HeaderCourse';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import TeacherNavbar from '../components/TeacherNavbar/TeacherNavbar';
 import TeacherFooter from '../components/TeacherFooter/TeacherFooter';
-import HeaderCreateCourse from '../components/HeaderCreateCourse.js/HeaderCreateCourse';
-import { useDispatch, useSelector } from 'react-redux';
-import { teacher } from '~/redux/reducer/TeacherSlice';
-import { activeLesson } from '~/redux/reducer/ActiveLesson';
-import { useParams } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 

@@ -5,11 +5,12 @@ import { useId, useState } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import CreateLesson from './Lesson/CreateLesson';
-import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
+import { faFloppyDisk, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
 import { teacher } from '~/redux/reducer/TeacherSlice';
 import { useParams } from 'react-router-dom';
 import { insertCourseUpdate, updateCourseUpdate } from '~/requestApi/requestUpdateClass';
+import { toastify } from '~/utils/toast';
 
 const cx = classNames.bind(styles);
 
@@ -18,14 +19,14 @@ function CreateCourse({ setShowCreate, data }) {
     const dispatch = useDispatch();
     const courseId = useId();
     const [courseValue, setCourseValue] = useState(data?.name || '');
-    const [loading, setLoading] = useState(false);
+    const [createCourseLoading, setCreateCourseLoading] = useState(false);
 
     const handleSave = () => {
         // Update class
         if (Object.keys(slug).length > 0) {
             if (data) {
                 if (Number(data.id)) {
-                    console.log(data);
+                    setCreateCourseLoading(true);
                     const values = {
                         class_id: data.class_id,
                         name: courseValue,
@@ -35,9 +36,11 @@ function CreateCourse({ setShowCreate, data }) {
                             console.log(res);
                             dispatch(teacher.actions.updateCourse(res.data));
                             setShowCreate(false);
+                            setCreateCourseLoading(false);
                         })
                         .catch((error) => {
-                            console.log(error);
+                            toastify('Create course false', 'error', 2000, 'top-right');
+                            setCreateCourseLoading(false);
                         });
                 } else {
                     const values = {
@@ -50,17 +53,19 @@ function CreateCourse({ setShowCreate, data }) {
             }
             // Create
             else {
+                setCreateCourseLoading(true);
                 const values = {
                     class_id: slug.slug,
                     name: courseValue,
                 };
                 insertCourseUpdate(values)
                     .then((res) => {
-                        console.log(res);
+                        setCreateCourseLoading(false);
                         dispatch(teacher.actions.setCourse(res.data));
                         setShowCreate(false);
                     })
                     .catch((error) => {
+                        setCreateCourseLoading(false);
                         console.log(error);
                     });
             }
@@ -101,13 +106,18 @@ function CreateCourse({ setShowCreate, data }) {
                     </div>
                     <span className={cx('quantity')}>-/- lesson</span>
                 </div>
-                {courseValue && (
-                    <Tippy content="Create course">
-                        <span className={cx('course-icon')} onClick={handleSave}>
-                            <FontAwesomeIcon icon={faFloppyDisk} style={{ color: 'green' }} />
+                {courseValue &&
+                    (createCourseLoading ? (
+                        <span className={cx('course-icon')}>
+                            <FontAwesomeIcon icon={faSpinner} className="fa-solid fa-spinner fa-spin-pulse" />
                         </span>
-                    </Tippy>
-                )}
+                    ) : (
+                        <Tippy content="Create course">
+                            <span className={cx('course-icon')} onClick={handleSave}>
+                                <FontAwesomeIcon icon={faFloppyDisk} style={{ color: 'green' }} />
+                            </span>
+                        </Tippy>
+                    ))}
             </div>
         </div>
     );

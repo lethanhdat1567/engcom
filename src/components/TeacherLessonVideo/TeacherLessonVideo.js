@@ -9,6 +9,7 @@ import { teacher } from '~/redux/reducer/TeacherSlice';
 import ReactPlayer from 'react-player/youtube';
 import { createContentUpdate, updateContentUpdate } from '~/requestApi/requestUpdateClass';
 import { useParams } from 'react-router-dom';
+import UpdateLoading from '../Loading/UpdateLoading/UpdateLoading';
 
 const cx = classNames.bind(styles);
 
@@ -19,8 +20,8 @@ function TeacherLessonVideo({ data }) {
     const { slug } = useParams();
 
     // Khởi tạo isUpdate là false
+    const [updateContentLoading, setUpdateContentLoading] = useState(false);
     const [isUpdate, setIsUpdate] = useState(data !== undefined);
-
     const [videoValue, setVideoValue] = useState(data?.title || '');
     const [descValue, setDescValue] = useState(data?.text || '');
 
@@ -51,23 +52,40 @@ function TeacherLessonVideo({ data }) {
             };
             if (data?.id) {
                 if (Number(data.id)) {
+                    setUpdateContentLoading(true);
                     const newValues = {
                         text: descValue,
                         title: videoValue,
                     };
                     updateContentUpdate(lesson.id, newValues)
                         .then((res) => {
+                            setUpdateContentLoading(false);
                             dispatch(teacher.actions.updateContent(res.data));
                             setIsUpdate(false);
                         })
                         .catch((error) => {
+                            setUpdateContentLoading(false);
                             console.log(error);
                         });
                 } else {
-                    dispatch(teacher.actions.updateContent(values));
-                    setIsUpdate(false);
+                    const newValues = {
+                        text: descValue,
+                        title: videoValue,
+                        lesson_id: lesson.id,
+                    };
+                    createContentUpdate(newValues)
+                        .then((res) => {
+                            setUpdateContentLoading(false);
+                            dispatch(teacher.actions.updateContent(res.data));
+                            setIsUpdate(false);
+                        })
+                        .catch((error) => {
+                            setUpdateContentLoading(false);
+                            console.log(error);
+                        });
                 }
             } else {
+                setUpdateContentLoading(true);
                 const newValues = {
                     text: descValue,
                     title: videoValue,
@@ -76,10 +94,12 @@ function TeacherLessonVideo({ data }) {
                 createContentUpdate(newValues)
                     .then((res) => {
                         console.log(res.data);
-                        dispatch(teacher.actions.setContent(values));
+                        setUpdateContentLoading(false);
+                        dispatch(teacher.actions.setContent(res.data));
                         setIsUpdate(false);
                     })
                     .catch((error) => {
+                        setUpdateContentLoading(false);
                         console.log(error);
                     });
             }
@@ -107,21 +127,27 @@ function TeacherLessonVideo({ data }) {
     return (
         <div className={cx('wrap')}>
             {isUpdate ? (
-                <>
-                    <div className={cx('btn-wrap')}>
-                        <Button disable={!videoValue} save onClick={handleSave}>
-                            Save
-                        </Button>
+                updateContentLoading ? (
+                    <div className={cx('loading-wrap')}>
+                        <UpdateLoading />
                     </div>
-                    <div className="row row-cols-1 g-5">
-                        <div className="col">
-                            <CreateVideo utils={utils} />
+                ) : (
+                    <>
+                        <div className={cx('btn-wrap')}>
+                            <Button disable={!videoValue} save onClick={handleSave}>
+                                Save
+                            </Button>
                         </div>
-                        <div className="col">
-                            <CreateDesc utils={utils} />
+                        <div className="row row-cols-1 g-5">
+                            <div className="col">
+                                <CreateVideo utils={utils} />
+                            </div>
+                            <div className="col">
+                                <CreateDesc utils={utils} />
+                            </div>
                         </div>
-                    </div>
-                </>
+                    </>
+                )
             ) : (
                 <>
                     <div className={cx('btn-wrap')}>

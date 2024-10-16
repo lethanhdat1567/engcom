@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './LessonTeacher.module.scss';
 import { checked } from '~/assets/Icon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faCircleXmark, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faCircleXmark, faSpinner, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { teacher } from '~/redux/reducer/TeacherSlice';
 import { validateIcon, validateText } from '~/utils/validateIcon';
@@ -11,7 +11,8 @@ import { requestDeleteVideo, requestUploadVideo } from '~/requestApi/requestUplo
 import { useParams } from 'react-router-dom';
 import { deleteLesson } from '~/requestApi/requestLesson';
 import { useState } from 'react';
-import { Modal } from 'antd';
+import { Button, Modal } from 'antd';
+import { toastify } from '~/utils/toast';
 const cx = classNames.bind(styles);
 
 function LessonTeacher({ data, index }) {
@@ -21,12 +22,15 @@ function LessonTeacher({ data, index }) {
     const contents = useSelector((state) => state.teacher.contents);
     const currentContent = contents.find((item) => item.lesson_id === data.id);
     const [showAlertModal, setShowAlertModal] = useState(false);
+    const [deleteLessonLoading, setDeleteLessonLoading] = useState(false);
 
     const handleDelete = () => {
         if (Number(data.id)) {
             if (slug) {
+                setDeleteLessonLoading(true);
                 deleteLesson(data.id)
                     .then((res) => {
+                        setDeleteLessonLoading(false);
                         if (currentContent) {
                             dispatch(teacher.actions.deleteContent(currentContent.id));
                         }
@@ -34,7 +38,11 @@ function LessonTeacher({ data, index }) {
                         dispatch(activeLesson.actions.deleteActiveLesson());
                         setShowAlertModal(false);
                     })
-                    .catch((error) => console.log(error));
+                    .catch((error) => {
+                        console.log(error);
+                        toastify('Delete lesson fail', 'error', 2000, 'top-right');
+                        setDeleteLessonLoading(false);
+                    });
             }
         } else {
             dispatch(teacher.actions.deleteLesson(data.id));
@@ -65,8 +73,19 @@ function LessonTeacher({ data, index }) {
             <Modal
                 title={<div className={cx('custom-modal-title')}>Warning</div>}
                 open={showAlertModal}
-                onOk={handleDelete}
                 onCancel={() => setShowAlertModal(false)}
+                footer={[
+                    <Button key="cancel" onClick={() => setShowAlertModal(false)}>
+                        Cancle
+                    </Button>,
+                    <Button key="confirm" type="primary" onClick={handleDelete}>
+                        {deleteLessonLoading ? (
+                            <FontAwesomeIcon icon={faSpinner} className="fa-solid fa-spinner fa-spin-pulse" />
+                        ) : (
+                            'Delete'
+                        )}
+                    </Button>,
+                ]}
             >
                 <div className={cx('alert-wrap')}>
                     <span className={cx('alert-icon')}>
@@ -76,7 +95,7 @@ function LessonTeacher({ data, index }) {
                             className="fa-xl"
                         />
                     </span>
-                    <span className={cx('alert-desc')}>Du lieu cua ban se mat het!</span>
+                    <span className={cx('alert-desc')}>Dữ liệu của bạn sẽ mất hết!</span>
                 </div>
             </Modal>
         </>

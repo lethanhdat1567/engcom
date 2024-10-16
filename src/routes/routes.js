@@ -91,7 +91,6 @@ const teacherPage = [
     { path: '/profile', element: Profile, layout: SingleLayout },
     { path: '/edit-profile', element: EditProfile, layout: null },
     { path: '/new-post', element: NewPost, layout: HeaderOnly },
-    { path: '/course/:slug', element: Course, layout: CourseLayout },
     { path: '/blogs/:slug', element: BlogsDetail, layout: HeaderOnly },
     { path: '/me/post', element: MyBlogs },
     { path: '/me/bookmark', element: Bookmark },
@@ -103,10 +102,7 @@ const teacherPage = [
     { path: '/own/:slug/comments', element: TeacherClassComment, layout: TeacherClassLayout },
     // Create class
     { path: '/create-class', element: TeacherClassHome, layout: TeacherClassLayout },
-    { path: '/create-class/overview', element: TeacherClassOverView, layout: TeacherClassLayout },
     { path: '/create-class/courses', element: TeacherClassCourse, layout: TeacherClassLayout },
-    { path: '/create-class/users', element: TeacherClassUser, layout: TeacherClassLayout },
-    { path: '/create-class/comments', element: TeacherClassComment, layout: TeacherClassLayout },
     // Update course
     { path: '/class/:slug/course', element: TeacherCourse, layout: CourseLayout },
     // Create course

@@ -4,18 +4,15 @@ import CourseItem from '~/components/CourseItem/CourseItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquarePlus } from '@fortawesome/free-regular-svg-icons';
 import { Link, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from 'react';
-import { getCourse } from '~/requestApi/requestCourse';
-import { teacher } from '~/redux/reducer/TeacherSlice';
+import { useState } from 'react';
 import UpdateLoading from '~/components/Loading/UpdateLoading/UpdateLoading';
 
 const cx = classNames.bind(styles);
 
 function TeacherClassCourse() {
     const { slug } = useParams();
-    const dispatch = useDispatch();
     const courses = useSelector((state) => state.teacher.courses);
 
     const [loading, setLoading] = useState(false);

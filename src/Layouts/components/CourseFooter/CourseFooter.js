@@ -5,8 +5,9 @@ import { faArrowLeft, faArrowRight, faQuestion } from '@fortawesome/free-solid-s
 import { courseBack, sideBar } from '~/assets/Icon';
 import { useSelector } from 'react-redux';
 import useCourseUtils from '~/utils/useCourseUtils';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import AskModal from '~/components/AskModal/AskModal';
+import Tippy from '@tippyjs/react';
 
 const cx = classNames.bind(styles);
 
@@ -14,10 +15,13 @@ function CourseFooter({ setShowNav, showNav }) {
     const currentLesson = useSelector((state) => state.course.selectedLesson);
     const { handleNextLesson, handlePrevLesson } = useCourseUtils();
     const [askModal, setAskModal] = useState(false);
+    const [showTippy, setShowTippy] = useState(false);
 
     const handleNext = () => {
         if (currentLesson.is_completed) {
             handleNextLesson();
+        } else {
+            setShowTippy(true);
         }
     };
 
@@ -38,15 +42,21 @@ function CourseFooter({ setShowNav, showNav }) {
                         </span>
                         <button className={cx('btn')}>Previous lesson</button>
                     </div>
-                    <div
-                        className={cx('btn-wrap', 'outlined', { active: currentLesson?.is_completed })}
-                        onClick={handleNext}
+                    <Tippy
+                        visible={showTippy}
+                        onClickOutside={() => setShowTippy(false)}
+                        content="Your need to done your lesson"
                     >
-                        <button className={cx('btn')}>Next lesson</button>
-                        <span className={cx('btn-icon')}>
-                            <FontAwesomeIcon icon={faArrowRight} />
-                        </span>
-                    </div>
+                        <div
+                            className={cx('btn-wrap', 'outlined', { active: currentLesson?.is_completed })}
+                            onClick={handleNext}
+                        >
+                            <button className={cx('btn')}>Next lesson</button>
+                            <span className={cx('btn-icon')}>
+                                <FontAwesomeIcon icon={faArrowRight} />
+                            </span>
+                        </div>
+                    </Tippy>
                 </div>
                 <div className={cx('side-bar')} onClick={() => setShowNav(!showNav)}>
                     <span className={cx('side-bar-icon')}>{showNav ? courseBack : sideBar}</span>

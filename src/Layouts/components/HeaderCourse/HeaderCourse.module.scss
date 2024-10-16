@@ -39,3 +39,22 @@
         }
     }
 }
+.back-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    color: #fff;
+    border: 1px solid #4b4b4b;
+    border-radius: 10px;
+    margin-right: 10px;
+    padding: 10px;
+    .back-icon {
+        transition: ease 0.3s;
+    }
+    &:hover {
+        .back-icon {
+            transform: translateX(-2px);
+        }
+    }
+}

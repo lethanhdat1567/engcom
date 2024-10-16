@@ -7,6 +7,7 @@ const cx = classNames.bind(styles);
 
 function LessonText({ data }) {
     const textContent = data.content;
+    console.log(data);
 
     const { handleDoneLesson } = useCourseUtils();
 

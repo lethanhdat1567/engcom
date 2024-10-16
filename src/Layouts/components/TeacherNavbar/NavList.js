@@ -10,9 +10,8 @@ const cx = classNames.bind(styles);
 
 function NavList({ item }) {
     const [active, setActive] = useState(true);
-    const slug = useParams();
+    const { slug } = useParams();
     const cartDataRedux = useSelector((state) => state.teacher.carts);
-    const coursesDataRedux = useSelector((state) => state.teacher.courses);
     const cartData = useSelector((state) => state.teacher.carts);
     const courses = useSelector((state) => state.teacher.courses);
 
@@ -44,28 +43,14 @@ function NavList({ item }) {
                             >
                                 <span className={cx('item-icon-sub')}>{childItem.icon}</span>
                                 <span className={cx('item-link')}>{childItem.title}</span>
-                                {/* {childItem.title === 'Your class' &&
-                                    !slug &&
-                                    Object.keys(store).length === 0 && (
-                                        <span style={{ color: 'red' }} className={cx('null-alert')}>
-                                            <FontAwesomeIcon icon={faXmark} />
-                                        </span>
-                                    )} */}
-                                {/* {childItem.title === 'Courses' &&
-                                    !slug &&
-                                    Array.isArray(store) &&
-                                    courses.length === 0 && (
-                                        <span style={{ color: 'red' }} className={cx('null-alert')}>
-                                            <FontAwesomeIcon icon={faXmark} />
-                                        </span>
-                                    )} */}
-                                {childItem.title === 'Your class' &&
+                                {!slug &&
+                                    childItem.title === 'Your class' &&
                                     Object.keys(cartDataRedux).length === 0 && (
                                         <span style={{ color: 'red' }} className={cx('null-alert')}>
                                             <FontAwesomeIcon icon={faXmark} />
                                         </span>
                                     )}
-                                {childItem.title === 'Courses' && courses.length === 0 && (
+                                {!slug && childItem.title === 'Courses' && courses.length === 0 && (
                                     <span style={{ color: 'red' }} className={cx('null-alert')}>
                                         <FontAwesomeIcon icon={faXmark} />
                                     </span>
