@@ -131,26 +131,6 @@ function TeacherNavbar({ showNav, setShowNav }) {
                     setLoading(false);
                     console.log(error);
                 });
-            // Update
-        } else if (Object.keys(cartsCreate).length > 0 && coursesCreate.length > 0 && slug) {
-            setLoading(true);
-            const values = {
-                carts: cartsCreate,
-                courses: coursesCreate,
-                lessons: lessonsCreate,
-                contents: contentsCreate,
-            };
-
-            updateClass(values, slug)
-                .then((res) => {
-                    console.log(res);
-                    setLoading(false);
-                    navigate('/');
-                })
-                .catch((error) => {
-                    console.error(error);
-                    setLoading(false);
-                });
         }
     };
     const handleDeleteCart = () => {
@@ -225,20 +205,24 @@ function TeacherNavbar({ showNav, setShowNav }) {
                               return <NavList item={item} key={index} />;
                           })}
                 </ul>
-                <Button
-                    classNames={cx('export-btn')}
-                    onClick={handleClick}
-                    disable={Object.keys(cartsCreate)?.length > 0 && coursesCreate?.length > 0 ? false : true}
-                >
-                    {slug ? 'Update class' : 'Export class'}
-                </Button>
+                {!slug && (
+                    <Button
+                        classNames={cx('export-btn')}
+                        onClick={handleClick}
+                        disable={
+                            Object.keys(cartsCreate)?.length > 0 && coursesCreate?.length > 0 ? false : true
+                        }
+                    >
+                        Export class
+                    </Button>
+                )}
                 {slug && (
                     <Button classNames={cx('delete-btn')} onClick={handleDeleteCart}>
                         Delete Cart
                     </Button>
                 )}
                 <Button classNames={cx('cancle-btn')} onClick={handleCancle}>
-                    {slug ? 'Cancle update' : 'Cancle class'}
+                    {slug ? 'Back' : 'Cancle class'}
                 </Button>
             </div>
             <Modal toggle={showModal} setToggle={setShowModal}>

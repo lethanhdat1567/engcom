@@ -38,15 +38,18 @@ function CourseTeacher({ data, index }) {
                 deleteCourseUpdate(data.id)
                     .then((res) => {
                         dispatch(teacher.actions.deleteCourse(data.id));
+                        showAlertModal(false);
                     })
                     .catch((error) => {
                         console.log(error);
                     });
             } else {
                 dispatch(teacher.actions.deleteCourse(data.id));
+                showAlertModal(false);
             }
         } else {
             dispatch(teacher.actions.deleteCourse(data.id));
+            showAlertModal(false);
         }
     };
     return (

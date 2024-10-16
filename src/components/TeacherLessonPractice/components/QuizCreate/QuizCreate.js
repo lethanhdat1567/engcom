@@ -8,6 +8,8 @@ import { faSquarePlus } from '@fortawesome/free-regular-svg-icons';
 import { memo, useId, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { teacher } from '~/redux/reducer/TeacherSlice';
+import { useParams } from 'react-router-dom';
+import { createContentUpdate } from '~/requestApi/requestUpdateClass';
 
 const cx = classNames.bind(styles);
 const MemoizedJoditEditor = memo(JoditEditor);
@@ -16,6 +18,7 @@ function QuizCreate() {
     const id = useId();
     const lesson = useSelector((state) => state.activeLesson.lesson);
     const dispatch = useDispatch();
+    const { slug } = useParams();
 
     const [questionInput, setQuestionInput] = useState(false);
     const [title, setTitle] = useState('');
@@ -34,17 +37,36 @@ function QuizCreate() {
     );
 
     const handleSave = () => {
-        const questions = questionData.map((item, index) => {
-            return { name: item, is_correct: index === correctAnswerIndex ? 1 : 0 };
-        });
-        const values = {
-            id,
-            lesson_id: lesson.id,
-            title: title,
-            text: desc,
-            questions: questions,
-        };
-        dispatch(teacher.actions.setContent(values));
+        if (slug) {
+            const questions = questionData.map((item, index) => {
+                return { text: item, is_correct: index === correctAnswerIndex ? 1 : 0 };
+            });
+            const insertValues = {
+                lesson_id: lesson.id,
+                title: title,
+                text: desc,
+                questions,
+            };
+            createContentUpdate(insertValues)
+                .then((res) => {
+                    dispatch(teacher.actions.setContent(insertValues));
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        } else {
+            const questions = questionData.map((item, index) => {
+                return { text: item, is_correct: index === correctAnswerIndex ? 1 : 0 };
+            });
+            const values = {
+                id,
+                lesson_id: lesson.id,
+                title: title,
+                text: desc,
+                questions: questions,
+            };
+            dispatch(teacher.actions.setContent(values));
+        }
     };
 
     function handleAdd() {

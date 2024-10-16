@@ -13,7 +13,6 @@ import { useParams } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 function TeacherClassLayout({ children }) {
-    const dispatch = useDispatch();
     const [showNav, setShowNav] = useState(true);
 
     return (

@@ -37,7 +37,6 @@ function TeacherLessonText({ data }) {
                 };
                 createContentUpdate(values)
                     .then((res) => {
-                        console.log(res.data);
                         dispatch(teacher.actions.updateContent(res.data));
                     })
                     .catch((error) => {

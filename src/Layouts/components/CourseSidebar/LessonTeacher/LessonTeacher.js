@@ -21,7 +21,6 @@ function LessonTeacher({ data, index }) {
     const contents = useSelector((state) => state.teacher.contents);
     const currentContent = contents.find((item) => item.lesson_id === data.id);
     const [showAlertModal, setShowAlertModal] = useState(false);
-    console.log(data);
 
     const handleDelete = () => {
         if (Number(data.id)) {
@@ -33,12 +32,14 @@ function LessonTeacher({ data, index }) {
                         }
                         dispatch(teacher.actions.deleteLesson(data.id));
                         dispatch(activeLesson.actions.deleteActiveLesson());
+                        setShowAlertModal(false);
                     })
                     .catch((error) => console.log(error));
             }
         } else {
             dispatch(teacher.actions.deleteLesson(data.id));
             dispatch(activeLesson.actions.deleteActiveLesson());
+            setShowAlertModal(false);
         }
     };
 

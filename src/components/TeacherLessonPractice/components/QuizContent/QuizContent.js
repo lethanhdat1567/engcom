@@ -12,7 +12,7 @@ function QuizContent({ data }) {
         <div className={cx('wrap')}>
             <h1 className={cx('title')}>{data?.title}</h1>
             <div className={cx('content')}>
-                <div className={cx('desc')} dangerouslySetInnerHTML={{ __html: data?.content }}></div>
+                <div className={cx('desc')} dangerouslySetInnerHTML={{ __html: data?.text }}></div>
             </div>
             <div className={cx('choices')}>
                 <p className={cx('choices-sub')}>Chọn câu trả lời đúng.</p>
@@ -21,11 +21,14 @@ function QuizContent({ data }) {
                         const letter = String.fromCharCode(65 + index);
                         return (
                             <li
-                                className={cx('item', { active: index === choiceActive })}
+                                className={cx('item', {
+                                    active: index === choiceActive,
+                                    correct: item.is_correct,
+                                })}
                                 key={index}
                                 onClick={() => setChoiceActive(index)}
                             >
-                                {`${letter}. ${item.name}`}
+                                {`${letter}. ${item.text}`}
                             </li>
                         );
                     })}

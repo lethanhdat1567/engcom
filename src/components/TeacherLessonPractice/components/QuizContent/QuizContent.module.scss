@@ -34,6 +34,9 @@
         .item.active {
             border: 1px solid #678cff;
         }
+        .item.correct {
+            border: 1px solid green;
+        }
     }
     .subwrap {
         display: flex;

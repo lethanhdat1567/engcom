@@ -11,10 +11,11 @@ import Button from '~/components/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { teacher } from '~/redux/reducer/TeacherSlice';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getClasses, getDetailClass } from '~/requestApi/requestClass';
+import { getClasses, getDetailClass, updateClass } from '~/requestApi/requestClass';
 import UpdateLoading from '~/components/Loading/UpdateLoading/UpdateLoading';
 import { getCourse } from '~/requestApi/requestCourse';
 import Loading from '~/components/Loading/Loading';
+import { toastify } from '~/utils/toast';
 
 const cx = classNames.bind(styles);
 
@@ -22,10 +23,10 @@ function TeacherClassHome() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const cartData = useSelector((state) => state.teacher.carts);
-    const coursesData = useSelector((state) => state.teacher.courses);
     const { slug } = useParams();
     const user = useSelector((state) => state.user.user);
     // Data
+
     const [loading, setLoading] = useState(false);
     const [titleCart, setTitleCart] = useState(cartData?.name || '');
     const [cartPassword, setCartPassword] = useState(cartData?.password || '');
@@ -62,6 +63,31 @@ function TeacherClassHome() {
     };
     const handleSave = () => {
         if (validateCart()) {
+            if (slug) {
+                const values = {
+                    user_id: user.id,
+                    name: titleCart,
+                    description: descValue,
+                    password: cartPassword,
+                    thumbnail: cartThumbnail,
+                    type: cartType,
+                    subject: cartSubject,
+                };
+                console.log(values);
+                updateClass(values, slug)
+                    .then((res) => {
+                        console.log(res);
+                        setLoading(false);
+                        navigate('/');
+                        toastify('Update class success', 'success', 2000, 'top-right');
+                    })
+                    .catch((error) => {
+                        setLoading(false);
+                        // navigate('/');
+                        // toastify('Update class success', 'success', 2000, 'top-right');
+                    });
+            }
+        } else {
             const values = {
                 id: cartId || '',
                 user_id: user.id || '',
@@ -122,7 +148,7 @@ function TeacherClassHome() {
                     <div className={cx('head-wrap')}>
                         <h1 className={cx('cart-title')}>Your cart class</h1>
                         <Button disable={!validateCart()} save onClick={handleSave}>
-                            Save
+                            {slug ? 'Update' : 'Save'}
                         </Button>
                     </div>
                     <div className="row g-5">
@@ -149,5 +175,4 @@ function TeacherClassHome() {
         </div>
     );
 }
-
 export default TeacherClassHome;
