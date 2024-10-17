@@ -22,6 +22,7 @@
             font-weight: 600;
             font-size: 1.6rem;
             margin: 0px;
+            cursor: pointer;
         }
         .utils {
             display: none;
@@ -35,6 +36,7 @@
     }
     .desc-wrap {
         word-wrap: break-word;
+        cursor: pointer;
     }
 }
 .wrap:hover {

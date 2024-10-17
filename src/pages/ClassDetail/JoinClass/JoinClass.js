@@ -3,7 +3,7 @@ import styles from './JoinClass.module.scss';
 import Button from '~/components/Button';
 import { Flex, Input } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLock } from '@fortawesome/free-solid-svg-icons';
+import { faLock, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import priceTrander from '~/utils/priceTranfer';
 import { useDispatch, useSelector } from 'react-redux';
 import { validateFree } from '~/utils/validateSubscribe';
@@ -26,6 +26,7 @@ function JoinClass({ data }) {
     const [allowSubmit, setAllowSubmit] = useState(false);
     const [privateError, setPrivateError] = useState(null);
     const [regisModal, setRegisModal] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     // Handle free
     const handleSubFree = () => {
@@ -37,12 +38,15 @@ function JoinClass({ data }) {
                     class_id: data.id,
                     user_id: user.id,
                 };
+                setLoading(true);
                 insertSubscribe(values)
                     .then((res) => {
+                        setLoading(false);
                         dispatch(subscribeClass.actions.setFree(res.data));
                         navigate(`/course/${data.id}`);
                     })
                     .catch((error) => {
+                        setLoading(false);
                         console.log(error);
                     });
             } else {
@@ -52,11 +56,14 @@ function JoinClass({ data }) {
     };
     const handleUnsub = () => {
         const currentSub = freeClass.find((item) => item.class_id === data.id);
+        setLoading(true);
         deleteSubscribe(currentSub.id)
             .then((res) => {
+                setLoading(false);
                 dispatch(subscribeClass.actions.deleteFree(res.data.id));
             })
             .catch((error) => {
+                setLoading(false);
                 console.log(error);
             });
     };
@@ -68,7 +75,7 @@ function JoinClass({ data }) {
                 const values = {
                     password: privateValue,
                 };
-
+                setLoading(true);
                 checkPrivateClass(values, data.id)
                     .then((res) => {
                         const data = res.data;
@@ -79,10 +86,12 @@ function JoinClass({ data }) {
 
                         insertSubscribe(values)
                             .then((res) => {
+                                setLoading(false);
                                 dispatch(subscribeClass.actions.setFree(res.data));
                                 navigate(`/course/${data.id}`);
                             })
                             .catch((error) => {
+                                setLoading(false);
                                 console.log(error);
                             });
                         setPrivateError(null);
@@ -124,12 +133,26 @@ function JoinClass({ data }) {
                                     Join class
                                 </Button>
                                 <button className={cx('unsub')} onClick={handleUnsub}>
-                                    Unsubscribe class
+                                    {loading ? (
+                                        <FontAwesomeIcon
+                                            icon={faSpinner}
+                                            className="fa-solid fa-spinner fa-spin-pulse"
+                                        />
+                                    ) : (
+                                        'Unsubscribe class'
+                                    )}
                                 </button>
                             </div>
                         ) : (
                             <Button primary classNames={cx('public-btn')} onClick={handleSubFree}>
-                                Subscribe class
+                                {loading ? (
+                                    <FontAwesomeIcon
+                                        icon={faSpinner}
+                                        className="fa-solid fa-spinner fa-spin-pulse"
+                                    />
+                                ) : (
+                                    'Subscribe class'
+                                )}
                             </Button>
                         )}
                         {regisModal && (

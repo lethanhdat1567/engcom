@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './ProfileItem.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight, faPlus, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import Modal from '~/components/Modal/Modal';
 import { useEffect, useRef, useState } from 'react';
 import imgs from '~/assets/Image';
@@ -26,6 +26,7 @@ function ProfileItem({ data }) {
     const [genderValue, setGenderValue] = useState(data.gender || '');
     const [uploadAdopt, setUploadAdopt] = useState(true);
     const [cloneAvatar, setCloneAvatar] = useState();
+    const [loading, setLoading] = useState(false);
 
     // Upload
     const handleUpload = (e) => {
@@ -65,8 +66,7 @@ function ProfileItem({ data }) {
             if (data.type === 'upload') {
                 const formData = new FormData();
                 formData.append('file', uploadValue);
-                console.log(formData);
-
+                setLoading(true);
                 request
                     .post(`engcom/avatar/${user.id}`, formData, {
                         headers: {
@@ -76,8 +76,10 @@ function ProfileItem({ data }) {
                     .then((res) => {
                         dispatch(usersSlice.actions.getUser(res.data.data));
                         setToggleModal(false);
+                        setLoading(false);
                     })
                     .catch((error) => {
+                        setLoading(false);
                         console.log(error);
                     });
             } else {
@@ -86,12 +88,15 @@ function ProfileItem({ data }) {
                 } else {
                     value = { [data.name]: inputValue };
                 }
+                setLoading(true);
                 updateUser(value, user.id)
                     .then((res) => {
+                        setLoading(false);
                         dispatch(usersSlice.actions.getUser(res.data));
                         setToggleModal(false);
                     })
                     .catch((error) => {
+                        setLoading(false);
                         console.log(error);
                     });
             }
@@ -123,13 +128,15 @@ function ProfileItem({ data }) {
             <div className={cx('item')} onClick={() => setToggleModal(true)}>
                 <h3 className={cx('item-label')}>{data.title}</h3>
                 {data.type === 'upload' ? (
-                    <Img
+                    <img
                         className={cx('img')}
                         src={
-                            user.avatar?.includes('googleusercontent.com') ||
-                            user.avatar?.includes('facebook.com')
-                                ? user.avatar
-                                : `${process.env.REACT_APP_BACKEND_UPLOAD}/${user.avatar}`
+                            data.avatar
+                                ? data.avatar?.includes('googleusercontent.com') ||
+                                  data.avatar?.includes('facebook.com')
+                                    ? data.avatar
+                                    : `${process.env.REACT_APP_BACKEND_UPLOAD}/${data.avatar}`
+                                : imgs.unsetAvatar
                         }
                         alt="User Avatar"
                     />
@@ -164,7 +171,14 @@ function ProfileItem({ data }) {
                                 className={cx('btn-upload', { adopt: uploadAdopt })}
                                 onClick={handleSubmit}
                             >
-                                Save
+                                {loading ? (
+                                    <FontAwesomeIcon
+                                        icon={faSpinner}
+                                        className="fa-solid fa-spinner fa-spin-pulse"
+                                    />
+                                ) : (
+                                    'Save'
+                                )}
                             </button>
                         </>
                     ) : (
@@ -200,7 +214,14 @@ function ProfileItem({ data }) {
                                 )}
                             </div>
                             <button className={cx('btn')} onClick={handleSubmit}>
-                                Save
+                                {loading ? (
+                                    <FontAwesomeIcon
+                                        icon={faSpinner}
+                                        className="fa-solid fa-spinner fa-spin-pulse"
+                                    />
+                                ) : (
+                                    'Save'
+                                )}
                             </button>
                         </>
                     )}

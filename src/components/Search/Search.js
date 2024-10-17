@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 import imgs from '~/assets/Image';
 import useDebounce from '~/hooks/useDebounce';
 import { requestSearch } from '~/requestApi/requestSearch';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -35,6 +36,7 @@ function Search() {
     const [loading, setLoading] = useState(true);
     const inputRef = useRef(null);
     const [searchData, setSearchData] = useState([]);
+    const navigate = useNavigate();
 
     const debounceValue = useDebounce(searchValue, 500);
     const handleChange = (e) => {
@@ -134,6 +136,12 @@ function Search() {
                         value={searchValue}
                         onChange={(e) => handleChange(e)}
                         onClick={handleDropdown}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                navigate(`/search?q=${searchValue}&type=more`);
+                                setShowSearch(false);
+                            }
+                        }}
                     />
                     {searchValue && (
                         <span className={cx('btn-sub')} onClick={handleClear}>

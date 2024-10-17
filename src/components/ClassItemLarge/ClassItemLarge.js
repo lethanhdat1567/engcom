@@ -10,17 +10,28 @@ const cx = classNames.bind(styles);
 function ClassItemLarge({ data }) {
     const classData = data.class;
     const infoItem = data.info;
+    console.log(classData.thumbnail);
 
     const { content } = extractContent(classData.description);
+
     return (
         <div className={cx('wrap')}>
-            <Link className={cx('img-link')}>
-                <img className={cx('img')} src={imgs.profileBanner} />
+            <Link className={cx('img-link')} to={`${process.env.REACT_APP_ROOT}/class/${classData.class_id}`}>
+                <img
+                    className={cx('img')}
+                    src={
+                        classData.thumbnail
+                            ? `${process.env.REACT_APP_BACKEND_UPLOAD}/${classData.thumbnail}`
+                            : imgs.NoImg
+                    }
+                />
             </Link>
             <div className={cx('info')}>
                 <div className={cx('wrap-info')}>
                     <h2 className={cx('title')}>
-                        <Link>{classData.name}</Link>
+                        <Link to={`${process.env.REACT_APP_ROOT}/class/${classData.class_id}`}>
+                            {classData.title}
+                        </Link>
                     </h2>
                     <div className={cx('desc')} dangerouslySetInnerHTML={{ __html: content }}></div>
                 </div>

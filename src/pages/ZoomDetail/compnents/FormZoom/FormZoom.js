@@ -11,6 +11,8 @@ import { zoom } from '~/redux/reducer/ZoomSlice';
 import { error } from 'jodit/esm/core/helpers';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '~/firebase/config';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
@@ -21,13 +23,17 @@ function FormZoom() {
     const [form] = useForm();
     const [formValue, setFormValue] = useState();
     const [errorMessage, setErrorMessage] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async () => {
+        setLoading(true);
         try {
             const values = await form.validateFields();
             setFormValue(values);
+            setLoading(false);
         } catch (errorInfo) {
             console.log('Validation Failed:', errorInfo);
+            setLoading(false);
         }
     };
 
@@ -126,7 +132,14 @@ function FormZoom() {
                                     Cancle
                                 </Button>
                                 <Button type="primary" onClick={handleSubmit}>
-                                    Join class
+                                    {loading ? (
+                                        <FontAwesomeIcon
+                                            icon={faSpinner}
+                                            className="fa-solid fa-spinner fa-spin-pulse"
+                                        />
+                                    ) : (
+                                        'Join class'
+                                    )}
                                 </Button>
                             </Flex>
                         </div>

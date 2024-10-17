@@ -14,7 +14,7 @@ function Classes({ data, title, type, to }) {
             <div className={cx('head-wrap')}>
                 <div className={cx('wrap')}>
                     <h2 className={cx('cost')}>{title}</h2>
-                    <span className={cx('sub')}>(Top rate)</span>
+                    {type !== 'blog' && <span className={cx('sub')}>(Top rate)</span>}
                 </div>
                 <Link
                     to={

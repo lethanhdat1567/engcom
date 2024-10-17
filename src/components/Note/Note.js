@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import UpdateNote from './UpdateNote/UpdateNote';
 import { ownData } from '~/redux/reducer/OwnDataSlice';
 import SkeletonLoading from '../Loading/SkeletonLoading';
+import NoteModal from './NoteModal/NoteModal';
 
 const cx = classNames.bind(styles);
 
@@ -26,6 +27,8 @@ function Note({ white = false }) {
     const [showCreateNote, setShowCreateNote] = useState(false);
     const [showUpdate, setShowUpdate] = useState(false);
     const [updateValues, setUpdateValues] = useState({});
+    const [showModal, setShowModal] = useState(false);
+    const [activeNote, setActiveNote] = useState({});
 
     // Midlewate
     const utilsNote = {
@@ -83,7 +86,15 @@ function Note({ white = false }) {
                             <SkeletonLoading dark count={5} height={70} margin={6} />
                         ) : (
                             noteItems?.map((item, index) => {
-                                return <NoteItem utils={utilsNote} data={item} key={index} />;
+                                return (
+                                    <NoteItem
+                                        setActiveNote={setActiveNote}
+                                        setShowModal={setShowModal}
+                                        utils={utilsNote}
+                                        data={item}
+                                        key={index}
+                                    />
+                                );
                             })
                         )}
                     </div>
@@ -99,6 +110,7 @@ function Note({ white = false }) {
                 utils={utilsNote}
             />
             <div className={cx('over-lay', { show: showUpdate })} onClick={() => setShowUpdate(false)}></div>
+            <NoteModal showModal={showModal} setShowModal={setShowModal} activeNote={activeNote} />
         </>
     );
 }

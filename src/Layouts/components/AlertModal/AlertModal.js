@@ -7,10 +7,14 @@ import AlertItem from './components/AlertItem/AlertItem';
 const cx = classNames.bind(styles);
 
 function AlertModal({ showNav, setShowNav }) {
+    const handleClose = () => {
+        setShowNav(false);
+        localStorage.setItem('ALERT', 'true');
+    };
     return (
         <div className={cx('modal', { active: showNav })}>
             <div className={cx('content')}>
-                <div className={cx('close-wrap')} onClick={() => setShowNav(false)}>
+                <div className={cx('close-wrap')} onClick={handleClose}>
                     <span className={cx('close-btn')}>
                         <FontAwesomeIcon icon={faXmark} className="fa-lg" />
                     </span>

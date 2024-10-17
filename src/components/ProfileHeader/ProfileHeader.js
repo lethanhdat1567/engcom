@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './ProfileHeader.module.scss';
 import imgs from '~/assets/Image';
 import Tippy from '@tippyjs/react/headless';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '~/firebase/config';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,6 +18,7 @@ const cx = classNames.bind(styles);
 function ProfileHeader() {
     const refresh_token = useSelector((state) => state.user.refresh_token);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const user = useSelector((state) => state.user.user);
     const [loading, setLoading] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
@@ -30,6 +31,7 @@ function ProfileHeader() {
             await logoutRequest();
             dispatch(usersSlice.actions.logoutUser());
             setLoading(false);
+            navigate('/');
         } catch (error) {
             setLoading(false);
             console.error('Error signing out:', error);
@@ -37,7 +39,6 @@ function ProfileHeader() {
                 .then((res) => {
                     dispatch(usersSlice.actions.getToken(res.data.access_token));
                     dispatch(usersSlice.actions.getRefreshToken(res.data.refresh_token));
-                    console.log('test');
                 })
                 .catch((error) => console.log(error));
         }

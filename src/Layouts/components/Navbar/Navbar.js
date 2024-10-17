@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { alert } from '~/assets/Icon';
 import AlertModal from '../AlertModal/AlertModal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -57,6 +57,13 @@ function Navbar() {
         },
     ];
     const [showNav, setShowNav] = useState(false);
+
+    useEffect(() => {
+        const alert = JSON.parse(localStorage.getItem('ALERT'));
+        if (!alert) {
+            setShowNav(true);
+        }
+    }, []);
 
     return (
         <>

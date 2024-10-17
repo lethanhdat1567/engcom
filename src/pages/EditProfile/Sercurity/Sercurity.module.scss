@@ -1,3 +1,4 @@
+@use '../../../components/GlobalStyles/abstracts/' as abs;
 .cart-wrap {
     border-radius: 10px;
     background: #fff;
@@ -48,8 +49,9 @@
     object-fit: cover;
 }
 .info {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 400;
+    color: #7b7575;
 }
 .upload-wrap {
     display: flex;
@@ -60,4 +62,90 @@
     background-color: #fff;
     margin-top: 20px;
     cursor: pointer;
+}
+
+.modal-wrap {
+    width: 420px;
+    @include abs.screen(md) {
+        width: 100%;
+    }
+    .modal-title {
+        font-size: 2.4rem;
+    }
+    .modal-desc {
+        margin-top: 8px;
+        font-size: 1.5rem;
+        opacity: 0.9;
+        margin-bottom: 20px;
+    }
+    .modal-form-group {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 30px;
+        .modal-label {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin: 10px 0 10px 8px;
+            display: block;
+        }
+        .modal-input-wrap {
+            position: relative;
+            background: #fff;
+            border: 1.5px solid #dee3e9;
+            border-radius: 44px;
+            overflow: hidden;
+            height: 44px;
+            display: flex;
+            &:focus-within {
+                border: 1px solid #1dbfaf;
+            }
+        }
+        .modal-input {
+            display: block;
+            width: 100%;
+            padding: 12px 42px 12px 20px;
+            border: none;
+            outline: none;
+            font-size: 1.4rem;
+            background-color: transparent;
+        }
+    }
+    .btn {
+        color: #fff;
+        background-color: #1dbfaf;
+        border: none;
+        width: 100%;
+        padding: 10px 0px;
+        border-radius: 999px;
+        overflow: hidden;
+        &.adopt {
+            cursor: not-allowed;
+            opacity: 0.4;
+            &:hover {
+                opacity: 0.4;
+            }
+        }
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+    .btn-upload {
+        color: #fff;
+        background-color: #1dbfaf;
+        border: none;
+        width: 100%;
+        padding: 10px 0px;
+        border-radius: 999px;
+        overflow: hidden;
+        &.adopt {
+            cursor: not-allowed;
+            opacity: 0.4;
+            &:hover {
+                opacity: 0.4;
+            }
+        }
+        &:hover {
+            opacity: 0.7;
+        }
+    }
 }
