@@ -100,6 +100,7 @@ function Comment() {
                                     value={valueComment}
                                     onFocus={() => setIsComment(true)}
                                     onChange={handleChange}
+                                    onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                                 />
                                 <div className={cx('com-utils')}>
                                     <button className={cx('com-cancle')} onClick={handleCancle}>

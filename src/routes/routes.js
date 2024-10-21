@@ -1,4 +1,3 @@
-import { DefaultLayout } from '~/Layouts';
 import AdminLayout from '~/Layouts/AdminLayout/AdminLayout';
 import CourseLayout from '~/Layouts/CourseLayout/CourseLayout';
 import CourseStudent from '~/Layouts/CourseStudent/CourseStudent';

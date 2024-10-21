@@ -43,26 +43,28 @@ function Item({ reply, askData, setAskData }) {
                     <span className={cx('info-name')}>{user.name}</span>
                     <span className={cx('info-timer')}>{handleTime(ask.created_at)}</span>
                 </div>
-                <Tippy
-                    interactive
-                    visible={showDelete}
-                    onClickOutside={() => setShowDelete(false)}
-                    render={(attrs) => (
-                        <div {...attrs} className={cx('drop-list')}>
-                            <span className={cx('drop-item')} onClick={handleDelete}>
-                                <FontAwesomeIcon icon={faTrash} style={{ color: 'red' }} /> Delete
-                            </span>
-                        </div>
-                    )}
-                    placement="bottom"
-                >
-                    <div
-                        className={cx('options', { active: user.id === user.user_id })}
-                        onClick={() => setShowDelete(!showDelete)}
+                {ask.user_id === user.id && (
+                    <Tippy
+                        interactive
+                        visible={showDelete}
+                        onClickOutside={() => setShowDelete(false)}
+                        render={(attrs) => (
+                            <div {...attrs} className={cx('drop-list')}>
+                                <span className={cx('drop-item')} onClick={handleDelete}>
+                                    <FontAwesomeIcon icon={faTrash} style={{ color: 'red' }} /> Delete
+                                </span>
+                            </div>
+                        )}
+                        placement="bottom"
                     >
-                        <FontAwesomeIcon icon={faEllipsisVertical} />
-                    </div>
-                </Tippy>
+                        <div
+                            className={cx('options', { active: user.id === user.user_id })}
+                            onClick={() => setShowDelete(!showDelete)}
+                        >
+                            <FontAwesomeIcon icon={faEllipsisVertical} />
+                        </div>
+                    </Tippy>
+                )}
             </div>
             <div className={cx('content')}>{ask.content}</div>
         </div>

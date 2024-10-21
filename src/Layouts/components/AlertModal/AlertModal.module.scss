@@ -6,19 +6,19 @@
     height: 100vh;
     z-index: 9999;
     &.active {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .content {
         position: absolute;
-        animation: fadeIn ease 0.4s;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
+        animation: fadeIn ease 0.3s;
         z-index: 2;
         width: 60%;
         background-color: #fff;
         height: calc(100vh - 150px);
         overflow: hidden auto;
+        overscroll-behavior: contain;
         padding: 20px;
         border-radius: 16px;
         box-shadow: 0px 0px 11px 0px rgba(53, 48, 48, 0.75);
@@ -28,7 +28,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            position: fixed;
+            position: absolute;
             right: 10px;
             top: 10px;
             height: 40px;
@@ -55,9 +55,11 @@
 
 @keyframes fadeIn {
     0% {
+        transform: scale(0.6);
         opacity: 0;
     }
     100% {
         opacity: 1;
+        transform: scale(1);
     }
 }

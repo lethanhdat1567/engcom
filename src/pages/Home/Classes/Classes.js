@@ -1,8 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './Classes.module.scss';
 import CartItem from '~/components/CartItem';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import BlogItem from '~/components/BlogItem';
 
@@ -14,7 +12,9 @@ function Classes({ data, title, type, to }) {
             <div className={cx('head-wrap')}>
                 <div className={cx('wrap')}>
                     <h2 className={cx('cost')}>{title}</h2>
-                    {type !== 'blog' && <span className={cx('sub')}>(Top rate)</span>}
+                    {type !== 'blog' && title !== 'PRIVATE CLASSES' && (
+                        <span className={cx('sub')}>(Top rate)</span>
+                    )}
                 </div>
                 <Link
                     to={

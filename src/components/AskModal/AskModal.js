@@ -37,6 +37,8 @@ function AskModal({ setAskModal, askModal }) {
     };
     const handleComment = () => {
         if (questionAdopt) {
+            setInputQuestion('');
+            setQuestionAdopt(false);
             const values = {
                 user_id: user.id,
                 lesson_id: currentLesson.id,
@@ -45,8 +47,6 @@ function AskModal({ setAskModal, askModal }) {
             insertAsk(values)
                 .then((res) => {
                     setAskData((prev) => [...prev, res.data]);
-                    setInputQuestion('');
-                    setQuestionAdopt(false);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -96,6 +96,7 @@ function AskModal({ setAskModal, askModal }) {
                                 className={cx('ask-input')}
                                 placeholder="your question..."
                                 value={inputQuestion}
+                                onKeyDown={(e) => e.key === 'Enter' && handleComment()}
                             />
                         </div>
                         <button

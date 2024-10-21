@@ -16,6 +16,7 @@ import Loading from '~/components/Loading/Loading';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons';
+import VideoLoading from '~/components/Loading/VideoLoading/VideoLoading';
 
 const cx = classNames.bind(styles);
 
@@ -25,7 +26,7 @@ function Rank() {
     const [loading, setLoading] = useState(false);
 
     // Fireworks
-    const end = Date.now() + 5 * 1000; // 15 seconds
+    const end = Date.now() + 5 * 1000;
     const colors = ['#bb0000', '#ffffff'];
     let animationFrameId;
     useEffect(() => {
@@ -86,121 +87,112 @@ function Rank() {
 
     return (
         <div className={cx('wrap-all')}>
-            {loading ? (
-                <Loading />
-            ) : (
-                <>
-                    <Link to={`${process.env.REACT_APP_ROOT}/community`} className={cx('back-wrap')}>
-                        <span className={cx('back-icon')}>
-                            <FontAwesomeIcon icon={faChevronCircleLeft} />
-                        </span>
-                        <span className={cx('back-text')}>Back</span>
-                    </Link>
-                    <img src={imgs.decor_rank} className={cx('decor-1')} />
-                    <img src={imgs.decor_rank_2} className={cx('decor-2')} />
-                    <div className={cx('wrap')}>
-                        <h1 className={cx('title-head')}>Exceptional contributors</h1>
-                        <div className={cx('rank-wrap')}>
-                            {rankValues[1] && (
-                                <div className={cx('img-wrap', 'second')}>
-                                    <img className={cx('img')} src={handleAvatar(rankValues[1]?.avatar)} />
-                                    <span className={cx('decor')}>{kink}</span>
-                                </div>
-                            )}
-                            {rankValues[0] && (
-                                <div className={cx('img-wrap')}>
-                                    <img className={cx('img')} src={handleAvatar(rankValues[0]?.avatar)} />
-                                    <span className={cx('decor')}>{kink}</span>
-                                </div>
-                            )}
-                            {rankValues[2] && (
-                                <div className={cx('img-wrap', 'second')}>
-                                    <img className={cx('img')} src={handleAvatar(rankValues[2]?.avatar)} />
-                                    <span className={cx('decor')}>{kink}</span>
-                                </div>
-                            )}
-                        </div>
-                        <p className={cx('desc')}>
-                            Thank you to the teachers who have made the most contributions, as well as all the
-                            students and teachers who have been using this website. Wishing the community
-                            continued growth and the opportunity to learn many new things.
-                        </p>
-                        <div className={cx('header')}>
-                            <h1 className={cx('title')}>Top Contributors</h1>
-                            <Select
-                                defaultValue={typeFilter}
-                                onChange={(value) => setTypeFilter(value)}
-                                className="select-wrap"
-                            >
-                                <Select.Option value="subcribe">Most Subcriber</Select.Option>
-                                <Select.Option value="class">Most Classes</Select.Option>
-                            </Select>
-                        </div>
-
-                        <div className={cx('body')}>
-                            <div className={cx('body-head')}>
-                                <table className={cx('table')}>
-                                    <thead>
-                                        <tr className={cx('item-wrap', 'head')}>
-                                            <th className={cx('item', 'rank')} scope="col">
-                                                Rank
-                                            </th>
-                                            <th className={cx('item', 'rank', 'user')} scope="col">
-                                                User
-                                            </th>
-                                            <th className={cx('item', 'rank')} scope="col">
-                                                {typeFilter === 'subcribe'
-                                                    ? 'Subscribe number'
-                                                    : 'Classes number'}
-                                            </th>
-                                            <th className={cx('item', 'rank')} scope="col">
-                                                Date of Participation
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {rankValues?.map((item, index) => {
-                                            return (
-                                                <tr className={cx('item-wrap')} key={index}>
-                                                    <td className={cx('item')}>#{index + 1}</td>
-                                                    <td className={cx('item')}>
-                                                        <Link
-                                                            to={`${process.env.REACT_APP_ROOT}/profile/${item.user_id}`}
-                                                            className={cx('user-wrap', 'user')}
-                                                        >
-                                                            <Avatar
-                                                                className={cx('avatar')}
-                                                                src={handleAvatar(item.avatar)}
-                                                            />
-                                                            <div className={cx('info-wrap')}>
-                                                                <span className={cx('name')}>
-                                                                    {item.name}
-                                                                </span>
-                                                                <UserRole type={item.type} />
-                                                            </div>
-                                                        </Link>
-                                                    </td>
-                                                    <td className={cx('item')}>{item.rank_count}</td>
-                                                    <td className={cx('item')}>
-                                                        {new Date(item.created_at).toLocaleDateString(
-                                                            'vi-VN',
-                                                            {
-                                                                year: 'numeric',
-                                                                month: '2-digit',
-                                                                day: '2-digit',
-                                                            },
-                                                        )}
-                                                    </td>
-                                                </tr>
-                                            );
-                                        })}
-                                    </tbody>
-                                </table>
+            <>
+                <Link to={`${process.env.REACT_APP_ROOT}/community`} className={cx('back-wrap')}>
+                    <span className={cx('back-icon')}>
+                        <FontAwesomeIcon icon={faChevronCircleLeft} />
+                    </span>
+                    <span className={cx('back-text')}>Back</span>
+                </Link>
+                <img src={imgs.decor_rank} className={cx('decor-1')} />
+                <img src={imgs.decor_rank_2} className={cx('decor-2')} />
+                <div className={cx('wrap')}>
+                    <h1 className={cx('title-head')}>Exceptional contributors</h1>
+                    <div className={cx('rank-wrap')}>
+                        {rankValues[1] && (
+                            <div className={cx('img-wrap', 'second')}>
+                                <img className={cx('img')} src={handleAvatar(rankValues[1]?.avatar)} />
+                                <span className={cx('decor')}>{kink}</span>
                             </div>
+                        )}
+                        {rankValues[0] && (
+                            <div className={cx('img-wrap')}>
+                                <img className={cx('img')} src={handleAvatar(rankValues[0]?.avatar)} />
+                                <span className={cx('decor')}>{kink}</span>
+                            </div>
+                        )}
+                        {rankValues[2] && (
+                            <div className={cx('img-wrap', 'second')}>
+                                <img className={cx('img')} src={handleAvatar(rankValues[2]?.avatar)} />
+                                <span className={cx('decor')}>{kink}</span>
+                            </div>
+                        )}
+                    </div>
+                    <p className={cx('desc')}>
+                        Thank you to the teachers who have made the most contributions, as well as all the
+                        students and teachers who have been using this website. Wishing the community
+                        continued growth and the opportunity to learn many new things.
+                    </p>
+                    <div className={cx('header')}>
+                        <h1 className={cx('title')}>Top Contributors</h1>
+                        <Select
+                            defaultValue={typeFilter}
+                            onChange={(value) => setTypeFilter(value)}
+                            className="select-wrap"
+                        >
+                            <Select.Option value="subcribe">Most Subcriber</Select.Option>
+                            <Select.Option value="class">Most Classes</Select.Option>
+                        </Select>
+                    </div>
+
+                    <div className={cx('body')}>
+                        <div className={cx('body-head')}>
+                            <table className={cx('table')}>
+                                <thead>
+                                    <tr className={cx('item-wrap', 'head')}>
+                                        <th className={cx('item', 'rank')} scope="col">
+                                            Rank
+                                        </th>
+                                        <th className={cx('item', 'rank', 'user')} scope="col">
+                                            User
+                                        </th>
+                                        <th className={cx('item', 'rank')} scope="col">
+                                            {typeFilter === 'subcribe'
+                                                ? 'Subscribe number'
+                                                : 'Classes number'}
+                                        </th>
+                                        <th className={cx('item', 'rank')} scope="col">
+                                            Date of Participation
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {rankValues?.map((item, index) => {
+                                        return (
+                                            <tr className={cx('item-wrap')} key={index}>
+                                                <td className={cx('item')}>#{index + 1}</td>
+                                                <td className={cx('item')}>
+                                                    <Link
+                                                        to={`${process.env.REACT_APP_ROOT}/profile/${item.user_id}`}
+                                                        className={cx('user-wrap', 'user')}
+                                                    >
+                                                        <Avatar
+                                                            className={cx('avatar')}
+                                                            src={handleAvatar(item.avatar)}
+                                                        />
+                                                        <div className={cx('info-wrap')}>
+                                                            <span className={cx('name')}>{item.name}</span>
+                                                            <UserRole type={item.type} />
+                                                        </div>
+                                                    </Link>
+                                                </td>
+                                                <td className={cx('item')}>{item.rank_count}</td>
+                                                <td className={cx('item')}>
+                                                    {new Date(item.created_at).toLocaleDateString('vi-VN', {
+                                                        year: 'numeric',
+                                                        month: '2-digit',
+                                                        day: '2-digit',
+                                                    })}
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </>
-            )}
+                </div>
+            </>
         </div>
     );
 }

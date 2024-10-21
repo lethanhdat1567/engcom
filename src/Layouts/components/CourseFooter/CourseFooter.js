@@ -32,9 +32,11 @@ function CourseFooter({ setShowNav, showNav }) {
     return (
         <>
             <footer className={cx('footer')}>
-                <div className={cx('ask')} onClick={() => setAskModal(true)}>
-                    <FontAwesomeIcon icon={faQuestion} />
-                </div>
+                <Tippy content="Students question" placement="top-end">
+                    <div className={cx('ask')} onClick={() => setAskModal(true)}>
+                        <FontAwesomeIcon icon={faQuestion} />
+                    </div>
+                </Tippy>
                 <div className={cx('lesson')}>
                     <div className={cx('btn-wrap', 'btn-prev')} onClick={handlePrev}>
                         <span className={cx('btn-icon')}>

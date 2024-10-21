@@ -12,7 +12,6 @@ function AskItem({ utils }) {
             {askData.map((item, index) => {
                 const askData = item.ask;
                 const userData = item.user;
-
                 return <Item askDataItem={askData} userData={userData} key={index} utils={utils} />;
             })}
         </div>

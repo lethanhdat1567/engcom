@@ -58,6 +58,7 @@ function FormReply({ reply, setReply, parentComment, setReplyData }) {
                     placeholder="your question..."
                     onChange={(e) => handleChange(e)}
                     value={replyInput}
+                    onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                 />
             </div>
             <div className={cx('com-utils')}>

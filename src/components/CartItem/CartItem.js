@@ -1,14 +1,12 @@
 import classNames from 'classnames/bind';
 import styles from './CartItem.module.scss';
 import { Link } from 'react-router-dom';
-import priceTrander from '~/utils/priceTranfer';
 import InfoItem from '../InfoItem/InfoItem';
 import imgs from '~/assets/Image';
 import { useState } from 'react';
 import Validate from '~/pages/Validate';
 import { useSelector } from 'react-redux';
 import InfoCart from './InfoCart';
-import Img from '../Img';
 
 const cx = classNames.bind(styles);
 
@@ -22,6 +20,7 @@ function CartItem({ data, create = false }) {
             setRegisModal(true);
         }
     };
+
     if (cartItem) {
         return (
             <>

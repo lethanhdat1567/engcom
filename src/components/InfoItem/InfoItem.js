@@ -3,7 +3,6 @@ import styles from './InfoItem.module.scss';
 import { Link } from 'react-router-dom';
 import Img from '../Img';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUber } from '@fortawesome/free-brands-svg-icons';
 import { faComment, faUser } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);

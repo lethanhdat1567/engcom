@@ -4,7 +4,7 @@ import imgs from '~/assets/Image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faEllipsisVertical, faTrash } from '@fortawesome/free-solid-svg-icons';
 import FormReply from '../FormReply/FormReply';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import ReplyItem from '../ReplyItem/ReplyItem';
 import Img from '~/components/Img';
 import { useSelector } from 'react-redux';
@@ -28,6 +28,7 @@ function Item({ userData, askDataItem, utils }) {
             })
             .catch((error) => console.log(error));
     };
+
     return (
         <div className={cx('item-wrap')}>
             <div className={cx('info-wrap')}>
@@ -45,26 +46,28 @@ function Item({ userData, askDataItem, utils }) {
                     <span className={cx('info-name')}>{userData.name}</span>
                     <span className={cx('info-timer')}>{handleTime(askDataItem.created_at)}</span>
                 </div>
-                <Tippy
-                    interactive
-                    visible={showDelete}
-                    onClickOutside={() => setShowDelete(false)}
-                    render={(attrs) => (
-                        <div {...attrs} className={cx('drop-list')}>
-                            <span className={cx('item')} onClick={handleDelete}>
-                                <FontAwesomeIcon icon={faTrash} style={{ color: 'red' }} /> Delete
-                            </span>
-                        </div>
-                    )}
-                    placement="bottom"
-                >
-                    <div
-                        className={cx('options', { active: user.id === userData.user_id })}
-                        onClick={() => setShowDelete(!showDelete)}
+                {user.id === askDataItem.user_id && (
+                    <Tippy
+                        interactive
+                        visible={showDelete}
+                        onClickOutside={() => setShowDelete(false)}
+                        render={(attrs) => (
+                            <div {...attrs} className={cx('drop-list')}>
+                                <span className={cx('item')} onClick={handleDelete}>
+                                    <FontAwesomeIcon icon={faTrash} style={{ color: 'red' }} /> Delete
+                                </span>
+                            </div>
+                        )}
+                        placement="bottom"
                     >
-                        <FontAwesomeIcon icon={faEllipsisVertical} />
-                    </div>
-                </Tippy>
+                        <div
+                            className={cx('options', { active: user.id === userData.user_id })}
+                            onClick={() => setShowDelete(!showDelete)}
+                        >
+                            <FontAwesomeIcon icon={faEllipsisVertical} />
+                        </div>
+                    </Tippy>
+                )}
             </div>
             <div className={cx('content')}>{askDataItem.content}</div>
             <span className={cx('reply-btn')} onClick={() => setReply(true)}>
@@ -86,4 +89,4 @@ function Item({ userData, askDataItem, utils }) {
     );
 }
 
-export default Item;
+export default memo(Item);

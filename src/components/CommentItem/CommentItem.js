@@ -58,6 +58,7 @@ function CommentItem({ item, setComments }) {
                 console.log(error);
             });
     }, []);
+
     return (
         <div className={cx('item')}>
             <div className={cx('info-wrap')}>
