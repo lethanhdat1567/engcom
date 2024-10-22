@@ -11,11 +11,18 @@ function ClassCart({ data }) {
     const info = data.info;
     const progressData = data.progress;
     const progress = (progressData.current_lesson / progressData.total_lesson) * 100;
-    console.log(progressData);
 
     return (
         <div className={cx('wrap')}>
-            <Link to={`${process.env.REACT_APP_ROOT}/class/${classData.id}`} className={cx('banner')}>
+            <div className={cx('banner')}>
+                <div className={cx('continue-wrap')}>
+                    <Link
+                        to={`${process.env.REACT_APP_ROOT}/course/${classData.id}`}
+                        className={cx('continue')}
+                    >
+                        CONTINUE
+                    </Link>
+                </div>
                 <img
                     src={
                         classData.thumbnail
@@ -24,7 +31,7 @@ function ClassCart({ data }) {
                     }
                     className={cx('img')}
                 />
-            </Link>
+            </div>
             <div className={cx('info')}>
                 <Link to={`${process.env.REACT_APP_ROOT}/class/${classData.id}`}>
                     <h3 className={cx('title')}>{classData.name}</h3>

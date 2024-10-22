@@ -11,3 +11,37 @@
     font-size: 4rem;
     font-weight: 500;
 }
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 30px 0px;
+    .left {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            .name {
+                font-size: 2rem;
+                font-weight: 500;
+            }
+            .timer {
+                font-size: 1.6rem;
+                font-weight: 400;
+                color: #4f4a4a;
+            }
+        }
+    }
+    .utils {
+        cursor: pointer;
+    }
+}

@@ -15,7 +15,7 @@ import { edit, view } from '~/assets/Icon';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '~/components/Button';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Modal from '~/components/Modal/Modal';
 import { Flex } from 'antd';
 import { requestDeleteUpload, requestDeleteVideo } from '~/requestApi/requestUpload';
@@ -23,8 +23,7 @@ import { teacher } from '~/redux/reducer/TeacherSlice';
 import Loading from '~/components/Loading/Loading';
 import { createClass, deleteClass, updateClass } from '~/requestApi/requestClass';
 import { activeLesson } from '~/redux/reducer/ActiveLesson';
-import { faLess } from '@fortawesome/free-brands-svg-icons';
-import { getCourse } from '~/requestApi/requestCourse';
+import { toast } from '~/redux/reducer/Toast';
 
 const cx = classNames.bind(styles);
 
@@ -115,6 +114,7 @@ function TeacherNavbar({ showNav, setShowNav }) {
                     setLoading(false);
                     dispatch(teacher.actions.resetState());
                     dispatch(activeLesson.actions.deleteActiveLesson());
+                    dispatch(toast.actions.setToast(true));
                     navigate('/');
                 })
                 .catch((error) => {

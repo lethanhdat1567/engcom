@@ -15,6 +15,36 @@
         padding-top: 56.25%;
         object-fit: cover;
         overflow: hidden;
+        &:hover {
+            .continue-wrap {
+                background-color: rgba(0, 0, 0, 0.3);
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+        .continue-wrap {
+            z-index: 1;
+            position: absolute;
+            margin: auto;
+            opacity: 0;
+            inset: 0;
+            visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            transition: ease 0.3s;
+            .continue {
+                background-color: #fff;
+                padding: 12px 20px;
+                border-radius: 999px;
+                font-size: 1.6rem;
+                font-weight: 600;
+                color: #595555;
+                cursor: pointer;
+            }
+        }
         .img {
             position: absolute;
             top: 0;

@@ -1,4 +1,5 @@
 import AdminLayout from '~/Layouts/AdminLayout/AdminLayout';
+import Header from '~/Layouts/components/Header';
 import CourseLayout from '~/Layouts/CourseLayout/CourseLayout';
 import CourseStudent from '~/Layouts/CourseStudent/CourseStudent';
 import HeaderOnly from '~/Layouts/HeaderOnly/HeaderOnly';
@@ -79,7 +80,7 @@ const studentPage = [
     { path: '/class/:slug', element: ClassDetail },
     { path: '/payment/:slug', element: Payment, layout: HeaderOnly },
     { path: '/course/:slug', element: CourseStudent, layout: null },
-    { path: '*', element: NotFound, layout: null },
+    { path: '*', element: NotFound, layout: HeaderOnly },
 ];
 const teacherPage = [
     { path: '/', element: TeacherHome },

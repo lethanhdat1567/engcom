@@ -10,6 +10,7 @@ import { getClasses } from '~/requestApi/requestClass';
 import { useSelector } from 'react-redux';
 import CartLoading from '~/components/Loading/CartLoading/CartLoading';
 import { useParams } from 'react-router-dom';
+import AlertCreateModal from '~/components/AlertCreateModal/AlertCreateModal';
 
 const cx = classNames.bind(styles);
 
@@ -30,37 +31,41 @@ function TeacherHome() {
                 setLoading(false);
             });
     }, []);
+
     return (
-        <div className={cx('home')}>
-            <div className={cx('banner')}>
-                <SliderBanner />
-            </div>
-            <div className="container">
-                <div className={cx('content')}>
-                    <h1 className={cx('title')}>Your class</h1>
-                    <div className={cx('classes')}>
-                        <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-5">
-                            <div className="col">
-                                <EmptyCart />
+        <>
+            <div className={cx('home')}>
+                <div className={cx('banner')}>
+                    <SliderBanner />
+                </div>
+                <div className="container">
+                    <div className={cx('content')}>
+                        <h1 className={cx('title')}>Your class</h1>
+                        <div className={cx('classes')}>
+                            <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-5">
+                                <div className="col">
+                                    <EmptyCart />
+                                </div>
+                                {loading &&
+                                    Array.from({ length: 3 }).map((_, index) => (
+                                        <div className="col" key={index}>
+                                            <CartLoading />
+                                        </div>
+                                    ))}
+                                {Cartsdata?.map((item, index) => {
+                                    return (
+                                        <div className="col" key={index}>
+                                            <CartItem create data={item} />
+                                        </div>
+                                    );
+                                })}
                             </div>
-                            {loading &&
-                                Array.from({ length: 3 }).map((_, index) => (
-                                    <div className="col" key={index}>
-                                        <CartLoading />
-                                    </div>
-                                ))}
-                            {Cartsdata?.map((item, index) => {
-                                return (
-                                    <div className="col" key={index}>
-                                        <CartItem create data={item} />
-                                    </div>
-                                );
-                            })}
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <AlertCreateModal />
+        </>
     );
 }
 

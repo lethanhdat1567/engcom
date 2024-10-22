@@ -12,6 +12,7 @@ import { subscribeClass } from '~/redux/reducer/SubscribeSlice';
 import { useState } from 'react';
 import Validate from '~/pages/Validate';
 import { useNavigate, useParams } from 'react-router-dom';
+import { subToastify } from '~/utils/toast';
 
 const cx = classNames.bind(styles);
 
@@ -43,7 +44,7 @@ function JoinClass({ data }) {
                     .then((res) => {
                         setLoading(false);
                         dispatch(subscribeClass.actions.setFree(res.data));
-                        navigate(`/course/${data.id}`);
+                        subToastify('You have following the class!.');
                     })
                     .catch((error) => {
                         setLoading(false);
@@ -61,6 +62,7 @@ function JoinClass({ data }) {
             .then((res) => {
                 setLoading(false);
                 dispatch(subscribeClass.actions.deleteFree(res.data.id));
+                subToastify('You have unfollowed the class!.');
             })
             .catch((error) => {
                 setLoading(false);
@@ -97,6 +99,7 @@ function JoinClass({ data }) {
                         setPrivateError(null);
                     })
                     .catch((error) => {
+                        setLoading(false);
                         setPrivateError(error.message);
                     });
             }
@@ -115,12 +118,8 @@ function JoinClass({ data }) {
         }
     };
     const handleJoinPrivate = () => {
-        console.log('test');
-
         navigate(`/course/${data.id}`);
     };
-    // Handle cost
-    const handleCostBuy = () => {};
 
     if (data.type && user.id !== data.user_id) {
         const typeCase = {
@@ -178,6 +177,11 @@ function JoinClass({ data }) {
                                             onChange={(e) => handlePrivateChange(e)}
                                             placeholder="Enter class password..."
                                             status={privateError ? 'error' : ''}
+                                            onKeyDown={(e) => {
+                                                if (e.key === 'Enter') {
+                                                    handleSubmit();
+                                                }
+                                            }}
                                         />
                                         <span className={cx('error')}>{privateError}</span>
                                     </div>
@@ -186,7 +190,14 @@ function JoinClass({ data }) {
                                         classNames={cx('sub-btn', { active: allowSubmit })}
                                         onClick={handleSubmit}
                                     >
-                                        Join class
+                                        {loading ? (
+                                            <FontAwesomeIcon
+                                                icon={faSpinner}
+                                                className="fa-solid fa-spinner fa-spin-pulse"
+                                            />
+                                        ) : (
+                                            'Join class'
+                                        )}
                                     </Button>
                                 </>
                             ) : (
@@ -208,31 +219,6 @@ function JoinClass({ data }) {
                             <Validate toggle={regisModal} setToggle={setRegisModal} field="Register" />
                         )}
                     </>
-                );
-            },
-            cost() {
-                return (
-                    <div className={cx('public-wrap')}>
-                        {data.discount && (
-                            <div className={cx('public-head')}>
-                                <span className={cx('price')}>{priceTrander(data.price)}</span>
-                                <span className={cx('discount')}>{data.discount}%</span>
-                            </div>
-                        )}
-                        <span className={cx('total', { sale: data.discount })}>
-                            {priceTrander(data.total)}
-                        </span>
-
-                        {validateFree(freeClass, user.id, slug) ? (
-                            <Button primary classNames={cx('public-btn-join')} onClick={handleSubFree}>
-                                Join class
-                            </Button>
-                        ) : (
-                            <Button primary onClick={handleCostBuy}>
-                                Buy class
-                            </Button>
-                        )}
-                    </div>
                 );
             },
         };

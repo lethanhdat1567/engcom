@@ -1,0 +1,104 @@
+.modal {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    display: none;
+    &.active {
+        display: flex;
+    }
+    .content {
+        z-index: 2;
+        background-color: #fff;
+        margin: auto;
+        width: 500px;
+        height: calc(100vh - 250px);
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+        animation: fadeIn ease 0.3s;
+        .x-mart {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 2rem;
+            font-weight: 500;
+            background-color: #ccc;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+    }
+
+    .over-lay {
+        position: absolute;
+        z-index: 1;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+}
+
+.body {
+    overflow: hidden auto;
+    overscroll-behavior: contain;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .head {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        gap: 10px;
+        .alert {
+            font-size: 2rem;
+            color: #ffd200;
+            margin-bottom: 0;
+        }
+        .head-title {
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: #ffd200;
+        }
+    }
+    .img {
+        width: 300px;
+        height: 250px;
+        object-fit: contain;
+    }
+    .desc {
+        font-size: 1.6rem;
+        line-height: 20px;
+        font-weight: 400;
+        padding: 0px 10px;
+        text-align: center;
+    }
+    .footer {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        margin-top: auto;
+        padding: 10px;
+        text-align: end;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        visibility: visible;
+        transform: scale(0.7);
+    }
+    100% {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1);
+    }
+}

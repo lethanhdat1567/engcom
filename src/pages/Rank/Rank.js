@@ -156,37 +156,57 @@ function Rank() {
                                         </th>
                                     </tr>
                                 </thead>
+
                                 <tbody>
-                                    {rankValues?.map((item, index) => {
-                                        return (
-                                            <tr className={cx('item-wrap')} key={index}>
-                                                <td className={cx('item')}>#{index + 1}</td>
-                                                <td className={cx('item')}>
-                                                    <Link
-                                                        to={`${process.env.REACT_APP_ROOT}/profile/${item.user_id}`}
-                                                        className={cx('user-wrap', 'user')}
-                                                    >
-                                                        <Avatar
-                                                            className={cx('avatar')}
-                                                            src={handleAvatar(item.avatar)}
-                                                        />
-                                                        <div className={cx('info-wrap')}>
-                                                            <span className={cx('name')}>{item.name}</span>
-                                                            <UserRole type={item.type} />
-                                                        </div>
-                                                    </Link>
-                                                </td>
-                                                <td className={cx('item')}>{item.rank_count}</td>
-                                                <td className={cx('item')}>
-                                                    {new Date(item.created_at).toLocaleDateString('vi-VN', {
-                                                        year: 'numeric',
-                                                        month: '2-digit',
-                                                        day: '2-digit',
-                                                    })}
-                                                </td>
-                                            </tr>
-                                        );
-                                    })}
+                                    {loading ? (
+                                        <tr>
+                                            <td colSpan="4">
+                                                <Skeleton
+                                                    height={50}
+                                                    count={10}
+                                                    style={{ width: '100%', margin: '10px 0px' }}
+                                                />
+                                            </td>
+                                        </tr>
+                                    ) : (
+                                        <>
+                                            {rankValues?.map((item, index) => {
+                                                return (
+                                                    <tr className={cx('item-wrap')} key={index}>
+                                                        <td className={cx('item')}>#{index + 1}</td>
+                                                        <td className={cx('item')}>
+                                                            <Link
+                                                                to={`${process.env.REACT_APP_ROOT}/profile/${item.user_id}`}
+                                                                className={cx('user-wrap', 'user')}
+                                                            >
+                                                                <Avatar
+                                                                    className={cx('avatar')}
+                                                                    src={handleAvatar(item.avatar)}
+                                                                />
+                                                                <div className={cx('info-wrap')}>
+                                                                    <span className={cx('name')}>
+                                                                        {item.name}
+                                                                    </span>
+                                                                    <UserRole type={item.type} />
+                                                                </div>
+                                                            </Link>
+                                                        </td>
+                                                        <td className={cx('item')}>{item.rank_count}</td>
+                                                        <td className={cx('item')}>
+                                                            {new Date(item.created_at).toLocaleDateString(
+                                                                'vi-VN',
+                                                                {
+                                                                    year: 'numeric',
+                                                                    month: '2-digit',
+                                                                    day: '2-digit',
+                                                                },
+                                                            )}
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            })}
+                                        </>
+                                    )}
                                 </tbody>
                             </table>
                         </div>

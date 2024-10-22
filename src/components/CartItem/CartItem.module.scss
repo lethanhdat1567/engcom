@@ -4,6 +4,11 @@
     border-radius: 10px;
     overflow: hidden;
     transition: 0.2s;
+    position: relative;
+    &:hover.teacher {
+        box-shadow: 0 4px 8px #0000001a;
+        transform: translateY(0);
+    }
     &:hover {
         box-shadow: 0 4px 8px #0000001a;
         transform: translateY(-10px);
@@ -96,4 +101,19 @@
     width: 30px;
     height: 30px;
     object-fit: cover;
+}
+.alert-app {
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 4px 10px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: yellow;
+    color: #5e5959;
+    .alert-icon {
+        cursor: pointer;
+    }
 }

@@ -71,13 +71,21 @@ function Home() {
                     ) : (
                         <div className={cx('content')}>
                             {classes?.public?.length > 0 && (
-                                <Classes data={classes?.public} title="PUBLIC CLASSES" to="public" />
+                                <Classes
+                                    data={classes?.public.slice(0, 8)}
+                                    title="PUBLIC CLASSES"
+                                    to="public"
+                                />
                             )}
                             {classes?.private?.length > 0 && (
-                                <Classes data={classes?.private} title="PRIVATE CLASSES" to="private" />
+                                <Classes
+                                    data={classes?.private.slice(0, 8)}
+                                    title="PRIVATE CLASSES"
+                                    to="private"
+                                />
                             )}
                             {blogs?.length > 0 && (
-                                <Classes data={blogs.slice(0, 4)} title="BLOGS" type="blog" to="blogs" />
+                                <Classes data={blogs.slice(0, 8)} title="BLOGS" type="blog" to="blogs" />
                             )}
                         </div>
                     )}

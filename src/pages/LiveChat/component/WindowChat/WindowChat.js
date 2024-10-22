@@ -11,6 +11,7 @@ import Img from '~/components/Img';
 import ModalInvite from '../ModalInvite/ModalInvite';
 import { addDocument } from '~/firebase/service';
 import useFirestore from '~/hooks/useFirestore';
+import TextareaAutosize from 'react-textarea-autosize';
 
 const cx = classNames.bind(styles);
 
@@ -131,7 +132,7 @@ function WindowChat({ selectedRoomID, setSelectedRoomID, isShowNav, setIsShowNav
                             <FontAwesomeIcon icon={faBars} className="fa-lg" />
                         </button>
                         <Alert
-                            message="Hãy chọn phòng"
+                            message="Please choose your room"
                             type="info"
                             showIcon
                             style={{ margin: 5 }}
@@ -150,21 +151,28 @@ function WindowChat({ selectedRoomID, setSelectedRoomID, isShowNav, setIsShowNav
                         <Form>
                             <div className={cx('send-wrap')}>
                                 <Form.Item className={cx('send-input-wrap')}>
-                                    <Input
+                                    <TextareaAutosize
                                         variant={false}
                                         value={chatValue}
                                         autoComplete="off"
                                         className={cx('send-input')}
-                                        placeholder="Nhap tin nhan...."
+                                        placeholder="Your message...."
                                         onChange={(e) => handleChange(e)}
                                         onPressEnter={handleSubmit}
+                                        style={{
+                                            border: 'none',
+                                            resize: 'none',
+                                            width: '100%',
+                                            padding: '0px 10px',
+                                            outline: 'none',
+                                        }}
                                     />
                                 </Form.Item>
                                 <button
                                     className={cx('send-submit', { allow: allowSubmit })}
                                     onClick={handleSubmit}
                                 >
-                                    Gui
+                                    Send
                                 </button>
                             </div>
                         </Form>

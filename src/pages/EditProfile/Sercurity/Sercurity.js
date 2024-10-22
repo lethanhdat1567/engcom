@@ -13,7 +13,10 @@ function Sercurity() {
     const [ownPassword, setOwnPassword] = useState('');
     const [newPassowrd, setNewPassword] = useState('');
 
-    const handleSubmit = () => {};
+    const handleSubmit = () => {
+        console.log('own password: ', ownPassword);
+        console.log(('new password: ', newPassowrd));
+    };
 
     return (
         <>

@@ -47,3 +47,46 @@
 .design {
     min-height: 50vh;
 }
+.user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+    .name {
+        font-size: 1.6rem;
+        font-weight: 500;
+    }
+}
+.info-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-left: 2px solid #ccc;
+    padding-left: 10px;
+    .list {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+.item-sub {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .item-info {
+        display: block;
+        line-height: 20px;
+        font-size: 1.5rem;
+        font-weight: 500;
+    }
+}

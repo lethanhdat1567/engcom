@@ -11,7 +11,7 @@ function InfoItem({ data, className, large = false }) {
     if (data) {
         return (
             <div className={cx('wrap-body')}>
-                <Link>
+                <Link to={`${process.env.REACT_APP_ROOT}/profile/${data.user.user_id}`}>
                     <div className={cx('wrap', className)}>
                         <Img
                             className={cx('img')}

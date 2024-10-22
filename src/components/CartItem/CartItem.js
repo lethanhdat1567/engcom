@@ -5,26 +5,24 @@ import InfoItem from '../InfoItem/InfoItem';
 import imgs from '~/assets/Image';
 import { useState } from 'react';
 import Validate from '~/pages/Validate';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import InfoCart from './InfoCart';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
+import Tippy from '@tippyjs/react';
+import { toast } from '~/redux/reducer/Toast';
 
 const cx = classNames.bind(styles);
 
 function CartItem({ data, create = false }) {
-    const user = useSelector((state) => state.user.user);
-    const [regisModal, setRegisModal] = useState(false);
+    const dispatch = useDispatch();
     const cartItem = data.class;
     const cartInfo = data?.info;
-    const handleOpenModal = () => {
-        if (!user.role_id) {
-            setRegisModal(true);
-        }
-    };
 
     if (cartItem) {
         return (
             <>
-                <div className={cx('wrap')} onClick={handleOpenModal}>
+                <div className={cx('wrap', { teacher: cartItem.id && create })}>
                     <Link
                         to={
                             cartItem.id && create
@@ -52,9 +50,21 @@ function CartItem({ data, create = false }) {
                                 return <InfoItem data={item} key={index} />;
                             })}
                         </div>
+                        {cartItem.id && create && (
+                            <div className={cx('alert-app')}>
+                                <span className={cx('alert-desc')}>pending approval...</span>
+                                <Tippy content="More detail">
+                                    <span
+                                        className={cx('alert-icon')}
+                                        onClick={() => dispatch(toast.actions.setToast(true))}
+                                    >
+                                        <FontAwesomeIcon icon={faQuestionCircle} />
+                                    </span>
+                                </Tippy>
+                            </div>
+                        )}
                     </div>
                 </div>
-                {regisModal && <Validate toggle={regisModal} setToggle={setRegisModal} field="Register" />}
             </>
         );
     }

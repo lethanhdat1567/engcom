@@ -55,8 +55,9 @@ function RoomList({ selectedRoomID, setSelectedRoomID }) {
     return (
         <>
             <Collapse ghost defaultActiveKey={['1']}>
-                <PanelStyle key={1} header="Danh sach cac phong">
+                <PanelStyle key={1} header="Room lists">
                     <div className={cx('room-list')}>
+                        {roomsValue.length === 0 && <span className={cx('empty')}>Empty</span>}
                         {roomsValue.map((item) => {
                             return (
                                 <Typography.Link
@@ -74,7 +75,7 @@ function RoomList({ selectedRoomID, setSelectedRoomID }) {
                             onClick={() => setIsCreateRoom(true)}
                         >
                             <FontAwesomeIcon icon={faPlusSquare} />
-                            Them phong
+                            Add room
                         </Button>
                     </div>
                 </PanelStyle>
