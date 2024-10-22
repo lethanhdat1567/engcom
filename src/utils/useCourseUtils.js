@@ -5,6 +5,7 @@ function useCourseUtils() {
     const dispatch = useDispatch();
     const courses = useSelector((state) => state.course.course);
     const selectedLesson = useSelector((state) => state.course.selectedLesson);
+    const user = useSelector((state) => state.user.user);
 
     const courseUtils = {
         filterFirst(coursesData) {
@@ -25,7 +26,11 @@ function useCourseUtils() {
 
                     // Dispatch ID bài học hoạt động
                     dispatch(course.actions.setActiveLessonID(firstLesson.id));
-                    dispatch(course.actions.setProgressing(firstLesson));
+                    if (user.role_id !== 4) {
+                        console.log(firstLesson);
+
+                        dispatch(course.actions.setProgressing(firstLesson));
+                    }
 
                     // Cập nhật bài học đầu tiên trong danh sách lessons
                     const updatedLessons = coursesData[0].lessons.map((lessonItem, index) =>
@@ -94,7 +99,9 @@ function useCourseUtils() {
                     const nextLesson = currentCourse.lessons[nextLessonIndex];
 
                     // Cập nhật trạng thái cho bài học tiếp theo
-                    dispatch(course.actions.setProgressing(nextLesson));
+                    if (user.role_id !== 4) {
+                        dispatch(course.actions.setProgressing(nextLesson));
+                    }
                 } else {
                     // Nếu đã đến bài học cuối cùng, kiểm tra xem có khóa học tiếp theo không
                     const currentCourseIndex = courses.findIndex((course) => course.id === currentCourse.id);
@@ -105,7 +112,9 @@ function useCourseUtils() {
                         const firstLessonOfNextCourse = nextCourse.lessons[0];
 
                         // Cập nhật trạng thái cho bài học đầu tiên của khóa học tiếp theo
-                        dispatch(course.actions.setProgressing(firstLessonOfNextCourse));
+                        if (user.role_id !== 4) {
+                            dispatch(course.actions.setProgressing(firstLessonOfNextCourse));
+                        }
                     } else {
                         console.log('Đã hoàn thành tất cả bài học.');
                     }
@@ -129,7 +138,7 @@ function useCourseUtils() {
 
                 if (nextCourseIndex < courses.length) {
                     const nextCourse = courses[nextCourseIndex];
-                    dispatch(course.actions.setActiveLessonID(nextCourse.lessons[0].id));
+                    dispatch(course.actions.setActiveLessonID(nextCourse.lessons[0]?.id));
                     dispatch(course.actions.setSelectedLesson(nextCourse.lessons[0]));
                 } else {
                     console.log('Đã đến bài học cuối cùng của tất cả các khóa học.');

@@ -1,7 +1,15 @@
 import classNames from 'classnames/bind';
 import styles from './AdminLayout.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faGear, faHouse, faNewspaper, faUser } from '@fortawesome/free-solid-svg-icons';
+import {
+    faBook,
+    faGear,
+    faHouse,
+    faNewspaper,
+    faPersonMilitaryPointing,
+    faShieldHalved,
+    faUser,
+} from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import HeaderAdmin from '../components/HeaderAdmin/HeaderAdmin';
 
@@ -12,6 +20,11 @@ const navbar = [
         name: 'HomePage',
         icon: <FontAwesomeIcon icon={faHouse} className="fa-lg" />,
         path: '',
+    },
+    {
+        name: 'Approve',
+        icon: <FontAwesomeIcon icon={faShieldHalved} className="fa-lg" />,
+        path: 'admin/approve',
     },
     {
         name: 'Users',

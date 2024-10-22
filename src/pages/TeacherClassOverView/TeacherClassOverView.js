@@ -16,6 +16,7 @@ const cx = classNames.bind(styles);
 
 function TeacherClassOverView() {
     const { slug } = useParams();
+    const user = useSelector((state) => state.user.user);
     const [classData, setClassData] = useState([]);
     const [loading, setLoading] = useState(false);
     const AnaData = [
@@ -58,21 +59,23 @@ function TeacherClassOverView() {
                 </div>
             ) : (
                 <>
-                    <div className="row row-cols-1 row-cols-md-2 g-5">
-                        {AnaData.map((item, index) => {
-                            return (
-                                <div className="col" key={index}>
-                                    <AnalystItem item={item} />
-                                </div>
-                            );
-                        })}
-                    </div>
-                    <h1 className={cx('title')}>Your class cart</h1>
+                    {user.role_id !== 4 && (
+                        <div className="row row-cols-1 row-cols-md-2 g-5">
+                            {AnaData.map((item, index) => {
+                                return (
+                                    <div className="col" key={index}>
+                                        <AnalystItem item={item} />
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    )}
+                    <h1 className={cx('title')}>Class cart</h1>
                     <div className={cx('cart-wrap')}>
                         <CartItem data={classData} />
                     </div>
                     <div className={cx('desc-wrap')}>
-                        <h2 className={cx('desc-title')}>Your description</h2>
+                        <h2 className={cx('desc-title')}>Description</h2>
                         <div
                             className={cx('desc')}
                             dangerouslySetInnerHTML={{ __html: classData?.class?.description }}

@@ -29,6 +29,7 @@ const cx = classNames.bind(styles);
 
 function TeacherNavbar({ showNav, setShowNav }) {
     const { slug } = useParams();
+    const user = useSelector((state) => state.user.user);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
@@ -94,6 +95,24 @@ function TeacherNavbar({ showNav, setShowNav }) {
                     title: 'All comments',
                     icon: <FontAwesomeIcon className="fa-md" icon={faComment} />,
                     to: `own/${slug}/comments`,
+                },
+            ],
+        },
+    ];
+    const adminNav = [
+        {
+            title: 'Detail',
+            icon: view,
+            children: [
+                {
+                    title: 'Your class',
+                    icon: <FontAwesomeIcon className="fa-md" icon={faHome} />,
+                    to: `own/${slug}`,
+                },
+                {
+                    title: 'Courses',
+                    icon: <FontAwesomeIcon className="fa-md" icon={faBook} />,
+                    to: `class/${slug}/course`,
                 },
             ],
         },
@@ -190,13 +209,12 @@ function TeacherNavbar({ showNav, setShowNav }) {
                 </div>
                 <ul className={cx('list')}>
                     {slug
-                        ? navItems.map((item, index) => {
-                              return <NavList item={item} key={index} />;
-                          })
-                        : createNav.map((item, index) => {
-                              return <NavList item={item} key={index} />;
-                          })}
+                        ? user.role_id === 4
+                            ? adminNav.map((item, index) => <NavList item={item} key={index} />)
+                            : navItems.map((item, index) => <NavList item={item} key={index} />)
+                        : createNav.map((item, index) => <NavList item={item} key={index} />)}
                 </ul>
+
                 {!slug && (
                     <Button
                         classNames={cx('export-btn')}
@@ -208,14 +226,25 @@ function TeacherNavbar({ showNav, setShowNav }) {
                         Export class
                     </Button>
                 )}
-                {slug && (
-                    <Button classNames={cx('delete-btn')} onClick={handleDeleteCart}>
-                        Delete Cart
-                    </Button>
+                {user.role_id === 4 ? (
+                    <>
+                        <Button save classNames={cx('approve-btn')}>
+                            Approve
+                        </Button>
+                        <Button classNames={cx('delete-btn')}>Deny</Button>
+                    </>
+                ) : (
+                    <>
+                        {slug && (
+                            <Button classNames={cx('delete-btn')} onClick={handleDeleteCart}>
+                                Delete Cart
+                            </Button>
+                        )}
+                        <Button classNames={cx('cancle-btn')} onClick={handleCancle}>
+                            {slug ? 'Back to home' : 'Cancle class'}
+                        </Button>
+                    </>
                 )}
-                <Button classNames={cx('cancle-btn')} onClick={handleCancle}>
-                    {slug ? 'Back to home' : 'Cancle class'}
-                </Button>
             </div>
             <Modal toggle={showModal} setToggle={setShowModal}>
                 <div className={cx('modal')}>

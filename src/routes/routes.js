@@ -6,6 +6,8 @@ import HeaderOnly from '~/Layouts/HeaderOnly/HeaderOnly';
 import NotFound from '~/Layouts/NotFound/NotFound';
 import SingleLayout from '~/Layouts/SingleLayout/SingleLayout';
 import TeacherClassLayout from '~/Layouts/TeacherClassLayout/TeacherClassLayout';
+import Approve from '~/pages/Approve/Approve';
+import ApproveDetail from '~/pages/ApproveDetail/ApproveDetail';
 import BlogAdmin from '~/pages/BlogAdmin/BlogAdmin';
 import Blogs from '~/pages/Blogs';
 import BlogsDetail from '~/pages/BlogsDetail/BlogsDetail';
@@ -119,6 +121,9 @@ const teacherPage = [
 ];
 const adminPage = [
     { path: '/', element: HomeAdmin, layout: AdminLayout },
+    { path: '/admin/approve', element: Approve, layout: AdminLayout },
+    { path: '/own/:slug/', element: TeacherClassOverView, layout: TeacherClassLayout },
+    { path: '/class/:slug/course', element: CourseStudent, layout: null },
     { path: '/admin/users', element: UserAdmin, layout: AdminLayout },
     { path: '/admin/blogs', element: BlogAdmin, layout: AdminLayout },
     { path: '/admin/classes', element: ClassAdmin, layout: AdminLayout },

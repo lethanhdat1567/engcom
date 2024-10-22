@@ -8,7 +8,7 @@ import { faPenSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
-function DataTable({ columns, loading }) {
+function DataTable({ columns }) {
     return (
         <>
             <div className={cx('table')}>

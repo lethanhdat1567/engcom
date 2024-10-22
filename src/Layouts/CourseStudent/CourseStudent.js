@@ -11,8 +11,6 @@ import { ScaleLoader } from 'react-spinners';
 import { course } from '~/redux/reducer/Course';
 import Content from './Content/Content';
 import CourseFooter from '../components/CourseFooter/CourseFooter';
-import { validateProgress } from '~/utils/validateProgress';
-import request from '~/utils/request';
 import { insertProgress } from '~/requestApi/requestCourse';
 import useCourseUtils from '~/utils/useCourseUtils';
 const cx = classNames.bind(styles);
@@ -47,7 +45,7 @@ function CourseStudent() {
     }, []);
 
     useEffect(() => {
-        if (user && progressData.length > 0) {
+        if (user && progressData.length > 0 && user.role_id !== 4) {
             insertProgress(user.id, progressData)
                 .then((res) => {
                     console.log('Progress saved:', res);

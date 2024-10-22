@@ -12,11 +12,12 @@ const cx = classNames.bind(styles);
 function StudentLesson({ lesson, index }) {
     // redux
     const activeLessonID = useSelector((state) => state.course.activeLessonID);
+    const user = useSelector((state) => state.user.user);
     const dispatch = useDispatch();
     // handle logic
     const isCompleted = lesson.is_completed;
     const isInProgress = lesson.is_in_progress;
-    const isBlocked = !isCompleted && !isInProgress;
+    const isBlocked = !isCompleted && !isInProgress && user.role_id !== 4;
 
     const handleClick = () => {
         if (!isBlocked) {
@@ -26,7 +27,10 @@ function StudentLesson({ lesson, index }) {
     };
     return (
         <div
-            className={cx('wrap', { blocked: isBlocked, active: activeLessonID === lesson.id })}
+            className={cx('wrap', {
+                blocked: isBlocked,
+                active: activeLessonID === lesson.id,
+            })}
             onClick={handleClick}
         >
             <span className={cx('decor')}>

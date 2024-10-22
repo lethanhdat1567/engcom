@@ -27,10 +27,12 @@ function HeaderCourse() {
                 </div>
                 <Logo white />
             </div>
-            <div className={cx('right')}>
-                <Note white />
-                <ProfileCourse />
-            </div>
+            {user.role_id !== 4 && (
+                <div className={cx('right')}>
+                    <Note white />
+                    <ProfileCourse />
+                </div>
+            )}
         </div>
     );
 }

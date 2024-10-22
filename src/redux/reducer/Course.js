@@ -15,8 +15,8 @@ export const course = createSlice({
         },
         // Progress
         setProgressing(state, action) {
-            const lesson_id = action.payload.id;
-            const course_id = action.payload.course_id;
+            const lesson_id = action.payload?.id;
+            const course_id = action.payload?.course_id;
 
             // Tìm bài học và cập nhật trạng thái
             state.course.forEach((item) => {

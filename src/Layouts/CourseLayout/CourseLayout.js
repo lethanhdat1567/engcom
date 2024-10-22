@@ -9,6 +9,7 @@ import { getCourse } from '~/requestApi/requestCourse';
 import { useParams } from 'react-router-dom';
 import { teacher } from '~/redux/reducer/TeacherSlice';
 import UpdateLoading from '~/components/Loading/UpdateLoading/UpdateLoading';
+import HeaderAdmin from '../components/HeaderAdmin/HeaderAdmin';
 const cx = classNames.bind(styles);
 
 function CourseLayout({ children }) {
@@ -38,14 +39,15 @@ function CourseLayout({ children }) {
 
     return (
         <div className={cx('wrap')}>
-            <HeaderCourse />
+            {user.role_id === 3 && <HeaderCourse />}
+            {user.role_id === 4 && <HeaderAdmin />}
             {loading ? (
                 <UpdateLoading />
             ) : (
                 <>
                     <div className={cx('body')}>
                         <div className={cx('content', { full: !showNav })}>{children}</div>
-                        {user.role_id === 3 && (
+                        {(user.role_id === 3 || user.role_id === 4) && (
                             <CourseSidebarTeacher showNav={showNav} setShowNav={setShowNav} />
                         )}
                     </div>

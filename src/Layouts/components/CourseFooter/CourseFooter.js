@@ -12,6 +12,7 @@ import Tippy from '@tippyjs/react';
 const cx = classNames.bind(styles);
 
 function CourseFooter({ setShowNav, showNav }) {
+    const user = useSelector((state) => state.user.user);
     const currentLesson = useSelector((state) => state.course.selectedLesson);
     const { handleNextLesson, handlePrevLesson } = useCourseUtils();
     const [askModal, setAskModal] = useState(false);
@@ -32,35 +33,45 @@ function CourseFooter({ setShowNav, showNav }) {
     return (
         <>
             <footer className={cx('footer')}>
-                <Tippy content="Students question" placement="top-end">
-                    <div className={cx('ask')} onClick={() => setAskModal(true)}>
-                        <FontAwesomeIcon icon={faQuestion} />
-                    </div>
-                </Tippy>
-                <div className={cx('lesson')}>
-                    <div className={cx('btn-wrap', 'btn-prev')} onClick={handlePrev}>
-                        <span className={cx('btn-icon')}>
-                            <FontAwesomeIcon icon={faArrowLeft} />
-                        </span>
-                        <button className={cx('btn')}>Previous lesson</button>
-                    </div>
-                    <Tippy
-                        visible={showTippy}
-                        onClickOutside={() => setShowTippy(false)}
-                        content="Your need to done your lesson"
-                    >
-                        <div
-                            className={cx('btn-wrap', 'outlined', { active: currentLesson?.is_completed })}
-                            onClick={handleNext}
-                        >
-                            <button className={cx('btn')}>Next lesson</button>
-                            <span className={cx('btn-icon')}>
-                                <FontAwesomeIcon icon={faArrowRight} />
-                            </span>
+                {user.role_id !== 4 && (
+                    <>
+                        <Tippy content="Students question" placement="top-end">
+                            <div className={cx('ask')} onClick={() => setAskModal(true)}>
+                                <FontAwesomeIcon icon={faQuestion} />
+                            </div>
+                        </Tippy>
+                        <div className={cx('lesson')}>
+                            <div className={cx('btn-wrap', 'btn-prev')} onClick={handlePrev}>
+                                <span className={cx('btn-icon')}>
+                                    <FontAwesomeIcon icon={faArrowLeft} />
+                                </span>
+                                <button className={cx('btn')}>Previous lesson</button>
+                            </div>
+                            <Tippy
+                                visible={showTippy}
+                                onClickOutside={() => setShowTippy(false)}
+                                content="Your need to done your lesson"
+                            >
+                                <div
+                                    className={cx('btn-wrap', 'outlined', {
+                                        active: currentLesson?.is_completed,
+                                    })}
+                                    onClick={handleNext}
+                                >
+                                    <button className={cx('btn')}>Next lesson</button>
+                                    <span className={cx('btn-icon')}>
+                                        <FontAwesomeIcon icon={faArrowRight} />
+                                    </span>
+                                </div>
+                            </Tippy>
                         </div>
-                    </Tippy>
-                </div>
-                <div className={cx('side-bar')} onClick={() => setShowNav(!showNav)}>
+                    </>
+                )}
+                <div
+                    className={cx('side-bar')}
+                    onClick={() => setShowNav(!showNav)}
+                    style={user.role_id === 4 ? { marginLeft: 'auto' } : {}}
+                >
                     <span className={cx('side-bar-icon')}>{showNav ? courseBack : sideBar}</span>
                 </div>
             </footer>
