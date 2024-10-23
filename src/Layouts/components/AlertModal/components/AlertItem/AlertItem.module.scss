@@ -15,3 +15,17 @@
         width: 100%;
     }
 }
+.head {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.delete-icon {
+    cursor: pointer;
+}
+.utils {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

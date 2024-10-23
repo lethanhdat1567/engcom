@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './HeaderAdmin.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-regular-svg-icons';
-import { faGear } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faGear } from '@fortawesome/free-solid-svg-icons';
 import { Dropdown, Space } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '~/components/Logo/Logo';
@@ -15,10 +15,12 @@ import { usersSlice } from '~/redux/reducer/UserSlice';
 import { refreshToken } from '~/requestApi/requestToken';
 import { auth } from '~/firebase/config';
 import Loading from '~/components/Loading/Loading';
+import { handleAvatar } from '~/utils/handleAvatar';
 
 const cx = classNames.bind(styles);
 
 function HeaderAdmin() {
+    const user = useSelector((state) => state.user.user);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -91,7 +93,12 @@ function HeaderAdmin() {
                                     </Dropdown>
                                 </Space>
                             </Space>
-                            <ProfileCourse />
+                            <div className={cx('avatar')}>
+                                <img className={cx('avatar-img')} src={handleAvatar(user.avatar)} />
+                                <div className={cx('info')}>
+                                    <h3 className={cx('info-name')}>{user.name}</h3>
+                                </div>
+                            </div>
                             <Space direction="vertical">
                                 <Space wrap>
                                     <Dropdown trigger="click" menu={{ items }} placement="">

@@ -3,6 +3,7 @@ import styles from './AdminLayout.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faBook,
+    faBullhorn,
     faGear,
     faHouse,
     faNewspaper,
@@ -42,9 +43,9 @@ const navbar = [
         path: 'admin/blogs',
     },
     {
-        name: 'Setting',
-        icon: <FontAwesomeIcon icon={faGear} className="fa-lg" />,
-        path: 'admin/setting',
+        name: 'Alert edit',
+        icon: <FontAwesomeIcon icon={faBullhorn} className="fa-lg" />,
+        path: 'admin/alert/edit',
     },
 ];
 

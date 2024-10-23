@@ -6,15 +6,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import DataTable from '~/components/DataTable/DataTable';
+import { getUser } from '~/requestApi/requestAdmin';
+import { handleAvatar } from '~/utils/handleAvatar';
 
 const cx = classNames.bind(styles);
 
 function UserAdmin() {
     // Hooks
-    const [dataUsers, setDataUsers] = useState();
     const [loading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
 
     const columns = [
+        {
+            title: 'Avatar',
+            dataIndex: 'avatar',
+            render: (text) => {
+                return <img src={handleAvatar(text)} alt="Avatar" className={cx('avatar')} />;
+            },
+        },
         {
             title: 'Name',
             dataIndex: 'fullname',
@@ -36,19 +45,12 @@ function UserAdmin() {
             key: 'role',
             render: (text, record) => {
                 return (
-                    <div className={cx('select')}>
-                        <Select
-                            style={{ width: '100%' }}
-                            defaultValue={
-                                text.role_id === 1 ? `${text.role_id}: User` : `${text.role_id}: Admin`
-                            }
-                        >
-                            <Select.Option value="1">1: User</Select.Option>
-                            <Select.Option value="2">2: Admin</Select.Option>
+                    <div className={cx('select')} style={{ width: '120px' }}>
+                        <Select style={{ width: '100%' }} value={`${text.role_id}`}>
+                            <Select.Option value="2">User</Select.Option>
+                            <Select.Option value="3">Teacher</Select.Option>
+                            <Select.Option value="4">Admin</Select.Option>
                         </Select>
-                        <div className={cx('custom-arrow')}>
-                            <FontAwesomeIcon icon={faCaretDown} />
-                        </div>
                     </div>
                 );
             },
@@ -57,23 +59,34 @@ function UserAdmin() {
             title: 'Created At',
             dataIndex: 'created_at',
         },
-        {
-            title: 'Updated At',
-            dataIndex: 'updated_at',
-        },
     ];
-    const data = dataUsers;
+
+    useEffect(() => {
+        setLoading(true);
+        getUser()
+            .then((res) => {
+                setLoading(false);
+                setData(res.data);
+            })
+            .catch((error) => {
+                setLoading(false);
+                console.log(error);
+            });
+    }, []);
 
     return (
         <div className={cx('user')}>
             <div className={cx('head')}>
                 <h2 className={cx('title')}>List Users</h2>
-                <Link to={`${process.env.REACT_APP_ROOT}/admin/users/create`}>
-                    <Button type="primary">Add User</Button>
-                </Link>
             </div>
             <div className={cx('form')}>
-                <DataTable columns={columns} data={data} loading={loading} field={'users'} />
+                <DataTable
+                    columns={columns}
+                    data={data}
+                    setData={setData}
+                    loading={loading}
+                    field={'users'}
+                />
             </div>
         </div>
     );

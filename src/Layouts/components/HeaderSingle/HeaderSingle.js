@@ -31,7 +31,7 @@ function HeaderSingle({ transparent }) {
                     </span>
                 </div>
             </div>
-            {Object.keys(user).length > 0 && (
+            {Object.keys(user).length > 0 && user.role_id !== 4 && (
                 <div className={cx('right')}>
                     <HeaderAlert />
                     <ProfileHeader />

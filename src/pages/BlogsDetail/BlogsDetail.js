@@ -94,31 +94,33 @@ function BlogsDetail() {
                                     <span className={cx('timer')}>{handleTime(content.created_at)}</span>
                                 </div>
                             </div>
-                            <div className={cx('right')}>
-                                <div className={cx('utils')}>
-                                    {validateSaveBlog(saveBlogs, guest.id, content.id) ? (
-                                        saveBlogLoading ? (
+                            {guest.role_id !== 4 && (
+                                <div className={cx('right')}>
+                                    <div className={cx('utils')}>
+                                        {validateSaveBlog(saveBlogs, guest.id, content.id) ? (
+                                            saveBlogLoading ? (
+                                                <FontAwesomeIcon
+                                                    icon={faSpinner}
+                                                    className="fa-solid fa-spinner fa-spin-pulse fa-spin-reverse"
+                                                />
+                                            ) : (
+                                                <span className={cx('icon', 'fa-lg')} onClick={handleUnSave}>
+                                                    <FontAwesomeIcon icon={bookmarkSolid} />
+                                                </span>
+                                            )
+                                        ) : saveBlogLoading ? (
                                             <FontAwesomeIcon
                                                 icon={faSpinner}
                                                 className="fa-solid fa-spinner fa-spin-pulse fa-spin-reverse"
                                             />
                                         ) : (
-                                            <span className={cx('icon', 'fa-lg')} onClick={handleUnSave}>
-                                                <FontAwesomeIcon icon={bookmarkSolid} />
+                                            <span className={cx('icon', 'fa-lg')} onClick={handleSaveBlog}>
+                                                <FontAwesomeIcon icon={faBookmark} />
                                             </span>
-                                        )
-                                    ) : saveBlogLoading ? (
-                                        <FontAwesomeIcon
-                                            icon={faSpinner}
-                                            className="fa-solid fa-spinner fa-spin-pulse fa-spin-reverse"
-                                        />
-                                    ) : (
-                                        <span className={cx('icon', 'fa-lg')} onClick={handleSaveBlog}>
-                                            <FontAwesomeIcon icon={faBookmark} />
-                                        </span>
-                                    )}
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
+                            )}
                         </div>
                         <div dangerouslySetInnerHTML={{ __html: content.content }}></div>
                     </>

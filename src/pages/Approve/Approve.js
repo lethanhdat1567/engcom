@@ -1,15 +1,18 @@
 import classNames from 'classnames/bind';
 import styles from './Approve.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Table } from 'antd';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
+import { getApprove } from '~/requestApi/requestAdmin';
+import { ClipLoader } from 'react-spinners';
 
 const cx = classNames.bind(styles);
 
 function Approve() {
+    const [data, setData] = useState([]);
     const columns = [
         {
             title: 'Class name',
@@ -51,38 +54,42 @@ function Approve() {
             ),
         },
     ];
-    const data = [
-        {
-            key: '1',
-            class_id: '195',
-            class_name: 'Math 101',
-            user_name: 'John Doe',
-            created_at: '2024-01-01',
-        },
-        {
-            key: '2',
-            class_id: 'class_102',
-            class_name: 'Physics 101',
-            user_name: 'Jane Smith',
-            created_at: '2024-02-01',
-        },
-        // Thêm các đối tượng khác nếu cần
-    ];
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        setLoading(true);
+        getApprove()
+            .then((res) => {
+                setLoading(false);
+                setData(res.data);
+            })
+            .catch((error) => {
+                setLoading(false);
+                console.log(error);
+            });
+    }, []);
 
     return (
         <div className={cx('table')}>
             <h2 className={cx('title')}>Approve class</h2>
-            <Table
-                dataSource={data}
-                columns={columns}
-                pagination={{
-                    pageSize: 5,
-                    style: { width: '200px', margin: '0 auto', padding: '20px' },
-                }}
-                scroll={{ x: 1000 }}
-                className={cx('ant-table')}
-                style={{ textAlign: 'center', width: '100%' }}
-            />
+            {loading ? (
+                <div className={cx('load-wrap')}>
+                    <ClipLoader color="#fff" />
+                </div>
+            ) : (
+                <Table
+                    rowKey="id"
+                    dataSource={data}
+                    columns={columns}
+                    pagination={{
+                        pageSize: 5,
+                        style: { width: '200px', margin: '0 auto', padding: '20px' },
+                    }}
+                    scroll={{ x: 1000 }}
+                    className={cx('ant-table')}
+                    style={{ textAlign: 'center', width: '100%' }}
+                />
+            )}
         </div>
     );
 }
