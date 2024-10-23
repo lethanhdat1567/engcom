@@ -3,36 +3,82 @@ import styles from './AlertItem.module.scss';
 import imgs from '~/assets/Image';
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faSpinner, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
+import { useState } from 'react';
+import { Alert, Button, Modal } from 'antd';
+import request from '~/utils/request';
+import { toastify } from '~/utils/toast';
 
 const cx = classNames.bind(styles);
 
-function AlertItem() {
+function AlertItem({ data, setAlertData }) {
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [loading, setLoading] = useState(false);
     const user = useSelector((state) => state.user.user);
+
+    const handleShowModal = () => {
+        setShowDeleteModal(true);
+    };
+    const handleDelete = () => {
+        setLoading(true);
+        request
+            .delete(`engcom/alert/${data.id}`)
+            .then((res) => {
+                setAlertData((prev) => prev.filter((item) => item.id !== data.id));
+                setShowDeleteModal(false);
+                setLoading(false);
+                toastify('Delete success!', 'success', 2000, 'top-right');
+            })
+            .catch((error) => {
+                console.log(error);
+                setLoading(false);
+                setShowDeleteModal(false);
+            });
+    };
+
     return (
-        <div className={cx('wrap')}>
-            <div className={cx('head')}>
-                <h3 className={cx('title')}>
-                    <span className={cx('decor')}>#</span>"Try Hard" Cùng Lớp Học Offline Tại Hà Nội - Ai Sợ
-                    Thì Đi Về!
-                </h3>
-                {user.role_id === 4 && (
-                    <Tippy content="Delete content">
-                        <span className={cx('delete-icon')}>
-                            <FontAwesomeIcon icon={faTrash} style={{ color: 'red' }} className="fa-lg" />
-                        </span>
-                    </Tippy>
+        <>
+            <div className={cx('wrap')}>
+                <div className={cx('head')}>
+                    <h3 className={cx('title')}>
+                        <span className={cx('decor')}>#</span> {data.title}
+                    </h3>
+                    {user.role_id === 4 && (
+                        <Tippy content="Delete content">
+                            <span className={cx('delete-icon')} onClick={handleShowModal}>
+                                <FontAwesomeIcon icon={faTrash} style={{ color: 'red' }} className="fa-lg" />
+                            </span>
+                        </Tippy>
+                    )}
+                </div>
+                {data.thumbnail && (
+                    <img
+                        src={`${process.env.REACT_APP_BACKEND_UPLOAD}/${data.thumbnail}`}
+                        className={cx('img')}
+                    />
                 )}
+                <p className={cx('desc')}>{data.content}</p>
             </div>
-            <img src={imgs.banner1} className={cx('img')} />
-            <p className={cx('desc')}>
-                Lưu ý: Lớp học offline dành cho những bạn xác định "all in" với nghề. Không dành cho các bạn
-                nghĩ "học offline cho dễ học" nhé. Vì để đáp ứng cho đầu vào doanh nghiệp hiện nay, kiến thức
-                học sẽ thử thách và nâng cao - đòi hỏi bạn phải là người có tính nỗ lực, dám đầu tư thời gian
-                và công sức!
-            </p>
-        </div>
+            <Modal
+                open={showDeleteModal}
+                title="Delete confirmation"
+                footer={[
+                    <Button key="no" onClick={() => setShowDeleteModal(false)}>
+                        No
+                    </Button>,
+                    <Button key="yes" type="primary" onClick={handleDelete}>
+                        {loading ? (
+                            <FontAwesomeIcon icon={faSpinner} className="fa-solid fa-spinner fa-spin-pulse" />
+                        ) : (
+                            'Yes'
+                        )}
+                    </Button>,
+                ]}
+            >
+                <Alert description="Are you sure you want to delete" type="error" showIcon />
+            </Modal>
+        </>
     );
 }
 

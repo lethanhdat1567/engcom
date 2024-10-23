@@ -16,11 +16,11 @@ function Approve() {
     const columns = [
         {
             title: 'Class name',
-            dataIndex: 'class_name',
+            dataIndex: 'classes_name',
         },
         {
             title: 'User name',
-            dataIndex: 'user_name',
+            dataIndex: 'users_name',
         },
         {
             title: 'Created At',
@@ -35,7 +35,7 @@ function Approve() {
                         <Link
                             className={cx('icon', 'fa-lg')}
                             style={{ color: 'blue' }}
-                            to={`${process.env.REACT_APP_ROOT}/own/${record.class_id}`}
+                            to={`${process.env.REACT_APP_ROOT}/own/${record.classes_id}`}
                         >
                             <FontAwesomeIcon icon={faEye} />
                         </Link>
@@ -78,7 +78,7 @@ function Approve() {
                 </div>
             ) : (
                 <Table
-                    rowKey="id"
+                    rowKey="classes_id"
                     dataSource={data}
                     columns={columns}
                     pagination={{

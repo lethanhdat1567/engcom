@@ -36,3 +36,10 @@ export const deleteUser = async (user_id) => {
 
     return result.data;
 };
+
+// POST
+export const updateRoleUser = async (user_id, role_id) => {
+    const result = await request.put(`engcom/GetUser/${user_id}`, { role_id });
+
+    return result.data;
+};

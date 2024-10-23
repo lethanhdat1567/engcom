@@ -82,6 +82,7 @@ function DataTable({ columns, data, setData, field, loading }) {
             ) : (
                 <div className={cx('table')}>
                     <Table
+                        mountNode
                         rowKey="id"
                         dataSource={data}
                         columns={[
@@ -120,7 +121,6 @@ function DataTable({ columns, data, setData, field, loading }) {
                         ]}
                         pagination={{
                             pageSize: 5,
-                            style: { width: '200px', margin: '0 auto', padding: '20px' },
                         }}
                         scroll={{ x: 1000 }}
                         className={cx('ant-table')}

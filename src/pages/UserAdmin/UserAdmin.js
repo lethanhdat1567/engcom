@@ -6,8 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import DataTable from '~/components/DataTable/DataTable';
-import { getUser } from '~/requestApi/requestAdmin';
+import { getUser, updateRoleUser } from '~/requestApi/requestAdmin';
 import { handleAvatar } from '~/utils/handleAvatar';
+import { toastify } from '~/utils/toast';
 
 const cx = classNames.bind(styles);
 
@@ -16,6 +17,24 @@ function UserAdmin() {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
 
+    const handleChangeRole = (user_id, role_id) => {
+        updateRoleUser(user_id, role_id)
+            .then((res) => {
+                setData((prev) => {
+                    const index = prev.findIndex((user) => user.id === user_id);
+                    if (index !== -1) {
+                        const updatedUsers = [...prev];
+                        updatedUsers[index] = { ...updatedUsers[index], role_id };
+                        return updatedUsers;
+                    }
+                    return prev;
+                });
+                toastify('Change role sucess', 'success', 1000, 'top-right');
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
     const columns = [
         {
             title: 'Avatar',
@@ -45,8 +64,12 @@ function UserAdmin() {
             key: 'role',
             render: (text, record) => {
                 return (
-                    <div className={cx('select')} style={{ width: '120px' }}>
-                        <Select style={{ width: '100%' }} value={`${text.role_id}`}>
+                    <div className={cx('select')} style={{ width: '100px' }}>
+                        <Select
+                            style={{ width: '100%' }}
+                            value={`${text.role_id}`}
+                            onChange={(value) => handleChangeRole(text.id, value)}
+                        >
                             <Select.Option value="2">User</Select.Option>
                             <Select.Option value="3">Teacher</Select.Option>
                             <Select.Option value="4">Admin</Select.Option>

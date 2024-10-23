@@ -5,15 +5,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import TextArea from 'antd/es/input/TextArea';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faSpinner, faXmark } from '@fortawesome/free-solid-svg-icons';
+import request from '~/utils/request';
+import { toastify } from '~/utils/toast';
 
 const cx = classNames.bind(styles);
 
-function CreateAlert() {
+function CreateAlert({ setAlertData }) {
     const [activeCreate, setActiveCreate] = useState(false);
     const [form] = Form.useForm();
     const [fileValue, setFileValue] = useState(null);
     const [imgValue, setImgValue] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const handleCancle = () => {
         form.resetFields();
@@ -25,7 +28,26 @@ function CreateAlert() {
     const handleSubmit = () => {
         let values = form.getFieldsValue();
         values = { ...values, thumbnail: imgValue };
-        console.log(values);
+        setLoading(true);
+        request
+            .post(`engcom/alert`, values, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            })
+            .then((res) => {
+                form.resetFields();
+                setFileValue();
+                setImgValue();
+                setActiveCreate();
+                setAlertData((prev) => [res.data.data, ...prev]);
+                toastify('Add success!', 'success', 2000, 'top-right');
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.log(error);
+                setLoading(false);
+            });
     };
 
     const handleUpload = (e) => {
@@ -43,7 +65,11 @@ function CreateAlert() {
                 <Flex justify="end" gap={10} style={{ margin: '10px 0px' }}>
                     <Button onClick={handleCancle}>Cancel</Button>
                     <Button type="primary" htmlType="submit" form="create-alert-form">
-                        Submit
+                        {loading ? (
+                            <FontAwesomeIcon icon={faSpinner} className="fa-solid fa-spinner fa-spin-pulse" />
+                        ) : (
+                            'Save'
+                        )}
                     </Button>
                 </Flex>
             ) : (
@@ -95,7 +121,7 @@ function CreateAlert() {
                         )}
                     </div>
                     <Form.Item
-                        name="desc"
+                        name="content"
                         rules={[{ required: true, message: 'Please input the description!' }]}
                     >
                         <TextArea autoSize={{ minRows: 6 }} placeholder="Description..." />

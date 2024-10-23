@@ -1,8 +1,8 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
 .wrap {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100vw;
     height: calc(100vh - 66px);
 }
 .body {
@@ -13,4 +13,10 @@
     width: 900px;
     height: 90%;
     overflow: hidden auto;
+    @include abs.screen(lg) {
+        width: 90%;
+    }
+    @include abs.screen(md) {
+        width: 100%;
+    }
 }

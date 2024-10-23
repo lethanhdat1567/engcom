@@ -3,7 +3,6 @@ import styles from './Home.module.scss';
 
 import SliderBanner from './SliderBanner';
 import Classes from './Classes';
-import imgs from '~/assets/Image';
 import { useEffect, useState } from 'react';
 import { getAllClasses } from '~/requestApi/requestClass';
 import { readAllBlogs } from '~/requestApi/requestBlog';
