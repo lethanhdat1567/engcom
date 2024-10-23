@@ -26,21 +26,29 @@ function ProfileHeader() {
     const handleLogout = async () => {
         setShowDropdown(false);
         setLoading(true);
+
         try {
             await signOut(auth);
             await logoutRequest();
             dispatch(usersSlice.actions.logoutUser());
-            setLoading(false);
             navigate('/');
         } catch (error) {
-            setLoading(false);
             console.error('Error signing out:', error);
-            refreshToken(refresh_token)
-                .then((res) => {
-                    dispatch(usersSlice.actions.getToken(res.data.access_token));
-                    dispatch(usersSlice.actions.getRefreshToken(res.data.refresh_token));
-                })
-                .catch((error) => console.log(error));
+
+            try {
+                const res = await refreshToken(refresh_token);
+                dispatch(usersSlice.actions.getToken(res.data.access_token));
+                dispatch(usersSlice.actions.getRefreshToken(res.data.refresh_token));
+
+                await signOut(auth);
+                await logoutRequest();
+                dispatch(usersSlice.actions.logoutUser());
+                navigate('/');
+            } catch (refreshError) {
+                console.error('Error refreshing token:', refreshError);
+            }
+        } finally {
+            setLoading(false);
         }
     };
 

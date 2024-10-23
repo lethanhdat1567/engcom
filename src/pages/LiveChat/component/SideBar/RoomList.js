@@ -57,7 +57,9 @@ function RoomList({ selectedRoomID, setSelectedRoomID }) {
             <Collapse ghost defaultActiveKey={['1']}>
                 <PanelStyle key={1} header="Room lists">
                     <div className={cx('room-list')}>
-                        {roomsValue.length === 0 && <span className={cx('empty')}>Empty</span>}
+                        {roomsValue.length === 0 && (
+                            <span className={cx('empty')}>You don't have any rooms.</span>
+                        )}
                         {roomsValue.map((item) => {
                             return (
                                 <Typography.Link

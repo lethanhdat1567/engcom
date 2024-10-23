@@ -62,3 +62,21 @@
         display: none;
     }
 }
+.back-wrap {
+    display: none;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    font-size: 1.6rem;
+    &.active {
+        display: flex;
+    }
+    .back-icon {
+        transition: ease 0.2s;
+    }
+    &:hover {
+        .back-icon {
+            transform: translateX(-3px);
+        }
+    }
+}

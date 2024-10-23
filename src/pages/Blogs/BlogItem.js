@@ -121,33 +121,6 @@ function BlogItem({ data }) {
                                     <FontAwesomeIcon icon={bookmarkRegular} />
                                 </span>
                             )}
-
-                            <Tippy
-                                interactive
-                                placement="bottom-end"
-                                trigger="click"
-                                render={(attrs) => {
-                                    return (
-                                        <div {...attrs}>
-                                            <ul className={cx('ellip-list')}>
-                                                {ellipData.map((item, index) => {
-                                                    return (
-                                                        <li className={cx('ellip-item')} key={index}>
-                                                            <Button leftIcon={item.icon} key={index}>
-                                                                {item.title}
-                                                            </Button>
-                                                        </li>
-                                                    );
-                                                })}
-                                            </ul>
-                                        </div>
-                                    );
-                                }}
-                            >
-                                <span className={cx('icon', 'fa-lg')}>
-                                    <FontAwesomeIcon icon={faEllipsis} />
-                                </span>
-                            </Tippy>
                         </div>
                     )}
                 </div>

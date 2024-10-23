@@ -1,3 +1,4 @@
+@use '../../../components/GlobalStyles/abstracts/' as abs;
 .modal {
     display: none;
     position: fixed;
@@ -17,13 +18,15 @@
         width: 60%;
         background-color: #fff;
         height: calc(100vh - 150px);
-        overflow: hidden auto;
+        overflow: hidden;
         overscroll-behavior: contain;
-        padding: 20px;
         border-radius: 16px;
         box-shadow: 0px 0px 11px 0px rgba(53, 48, 48, 0.75);
         -webkit-box-shadow: 0px 0px 11px 0px rgba(53, 48, 48, 0.75);
         -moz-box-shadow: 0px 0px 11px 0px rgba(53, 48, 48, 0.75);
+        @include abs.screen(md) {
+            width: 90%;
+        }
         .close-wrap {
             display: flex;
             align-items: center;
@@ -50,7 +53,12 @@
 }
 .body {
     width: 100%;
-    overflow: hidden;
+    height: 100%;
+    padding: 20px 30px;
+    overflow: hidden auto;
+    @include abs.screen(md) {
+        padding: 10px;
+    }
 }
 
 @keyframes fadeIn {

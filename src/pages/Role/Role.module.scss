@@ -1,66 +1,43 @@
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background-color: #fff;
+@use '../../components/GlobalStyles/abstracts/' as abs;
+.wrap {
+    width: 100vw;
+    min-height: 100vh;
+    background-color: #0093e9;
+    background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%);
     display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 99;
-    .modal {
-        position: relative;
-        background-color: #fff;
-        box-shadow: 0 4px 8px #0000001a;
-        border-radius: 16px;
-        overflow: hidden;
-        width: 500px;
-    }
-}
-.header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background-color: #ccc;
-    .img {
-        width: 100px;
-        height: 100px;
-        object-fit: cover;
-    }
-    .title {
-        font-size: 3rem;
-        font-weight: 500;
-        margin-bottom: 10px;
-        background: linear-gradient(141.34deg, #5ebbff 0%, #a174ff 91.11%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    .head-desc {
-        font-size: 1.4rem;
-        font-weight: 400;
-        color: #2f2e2e;
-    }
-}
-.info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    .choice {
-        margin-bottom: 20px;
-    }
-    .choice-desc {
-        font-size: 1.6rem;
-        font-weight: 400;
-        color: #3f3f3f;
-        margin-bottom: 20px;
-        word-break: break-all;
+    .body {
+        margin: auto;
+        width: 70%;
+        height: 100%;
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        @include abs.screen(xxl) {
+            width: 80%;
+        }
+        @include abs.screen(xl) {
+            width: 100%;
+        }
+        @include abs.screen(lg) {
+            width: 80%;
+            margin: 40px auto;
+            display: block;
+        }
+        @include abs.screen(sm) {
+            width: 100%;
+        }
+        .title {
+            margin-top: 20px;
+            font-size: 4rem;
+            font-weight: 500;
+            color: blue;
+        }
+        .desc {
+            color: #ede7e7;
+            font-size: 1.8rem;
+            font-weight: 400;
+        }
     }
-}
-.animate {
-    width: 20px !important;
-    height: 20px !important;
-    object-fit: cover;
 }

@@ -7,16 +7,12 @@ import { kink } from '~/assets/Icon';
 import UserRole from '~/components/UserRole/UserRole';
 import confetti from 'canvas-confetti';
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { getClassRank, getSubRank } from '~/requestApi/requestRank';
 import { handleAvatar } from '~/utils/handleAvatar';
-import { handleTime } from '~/utils/handleTime';
-import Loading from '~/components/Loading/Loading';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons';
-import VideoLoading from '~/components/Loading/VideoLoading/VideoLoading';
+import { ClipLoader } from 'react-spinners';
 
 const cx = classNames.bind(styles);
 
@@ -160,12 +156,8 @@ function Rank() {
                                 <tbody>
                                     {loading ? (
                                         <tr>
-                                            <td colSpan="4">
-                                                <Skeleton
-                                                    height={50}
-                                                    count={10}
-                                                    style={{ width: '100%', margin: '10px 0px' }}
-                                                />
+                                            <td colSpan="4" style={{ textAlign: 'center' }}>
+                                                <ClipLoader color="#fff" />
                                             </td>
                                         </tr>
                                     ) : (

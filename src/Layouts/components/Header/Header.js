@@ -30,6 +30,12 @@ function Header() {
     const token = useSelector((state) => state.user.token);
     const navigate = useNavigate();
     const location = useLocation();
+    const validateUrl = () => {
+        return (
+            location.pathname.includes('/class/') || // [class/:slug]
+            location.pathname.includes('/me/')
+        );
+    };
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -73,6 +79,9 @@ function Header() {
             <header className={cx('header')}>
                 <div className={cx('wrap')}>
                     <Logo />
+                    <span className={cx('back-wrap', { active: validateUrl() })} onClick={() => navigate(-1)}>
+                        <FontAwesomeIcon className={cx('back-icon', 'fa-sm')} icon={faChevronLeft} /> Back
+                    </span>
                 </div>
                 <Search />
                 {user.id && user.role_id ? (

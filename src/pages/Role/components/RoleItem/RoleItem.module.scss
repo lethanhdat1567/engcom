@@ -1,0 +1,57 @@
+@use '../../../../components/GlobalStyles/abstracts/' as abs;
+.wrap {
+    margin: 0 auto;
+    width: 80%;
+    height: 550px;
+    background-color: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 6px solid #ccc;
+    padding: 20px;
+    transition: ease 0.3s;
+    overflow: auto;
+    cursor: pointer;
+    &.active {
+        transform: translateY(-20px);
+        border: 6px solid #33a094;
+    }
+    @include abs.screen(sm) {
+        height: auto;
+    }
+    .img {
+        width: 200px;
+        height: 212px;
+    }
+}
+.body {
+    .title {
+        font-size: 3rem;
+        font-weight: 500;
+        color: #36895d;
+    }
+    .desc {
+        margin: 10px 0px;
+        font-size: 1.6rem;
+        font-weight: 500;
+        color: #625e5e;
+        text-align: center;
+    }
+    .list {
+        text-align: start;
+        padding-left: 40px;
+        .item {
+            list-style-type: circle;
+            margin: 10px 0px;
+            font-size: 1.6rem;
+            font-weight: 400;
+        }
+    }
+    .sub-title {
+        display: block;
+        text-align: start;
+        font-size: 1.6rem;
+        font-weight: 500;
+        color: #3a3838;
+        margin-top: 20px;
+    }
+}

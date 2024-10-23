@@ -1,77 +1,101 @@
 import classNames from 'classnames/bind';
 import styles from './Role.module.scss';
+import RoleItem from './components/RoleItem/RoleItem';
+import { Button } from 'antd';
 import imgs from '~/assets/Image';
-import { Button, Select } from 'antd';
 import { useState } from 'react';
-import request from '~/utils/request';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import request from '~/utils/request';
 import { usersSlice } from '~/redux/reducer/UserSlice';
+import { useNavigate } from 'react-router-dom';
+import Loading from '~/components/Loading/Loading';
 
 const cx = classNames.bind(styles);
 
 function Role() {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
     const user = useSelector((state) => state.user.user);
-    const [role, setRole] = useState('0');
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [currentChoiceIndex, setCurrentChoiceIndex] = useState();
+    const [loading, setLoading] = useState(false);
     const roleData = [
         {
-            img: imgs.StudentRole,
-            desc: 'As a student, you can access course materials, participate in discussions, and track your progress.',
+            banner: imgs.TeacherRole,
+            title: 'Teacher',
+            value: 3,
+            features: [
+                'Create and manage course content',
+                'Grade assignments and provide feedback',
+                'Monitor student progress and attendance',
+                'Facilitate discussions and group activities',
+                'Communicate with students and parents',
+            ],
         },
         {
-            img: imgs.TeacherRole,
-            desc: 'As a teacher, you can create courses, manage students, and monitor their performance.',
+            banner: imgs.StudentRole,
+            title: 'Student',
+            value: 2,
+            features: [
+                'Access course materials and resources',
+                'Participate in discussions and group work',
+                'Submit assignments and track grades',
+                'Communicate with instructors and peers',
+                'Monitor personal progress and set learning goals',
+            ],
         },
     ];
+
     const handleSubmit = () => {
-        const roleValue = Number.parseInt(role) + 2;
+        const roleValue = roleData[currentChoiceIndex].value;
         const values = {
             id: user.id,
             role_id: roleValue,
         };
+        setLoading(true);
         request
             .post('/engcom/changeRole', values)
             .then((res) => {
+                setLoading(false);
                 dispatch(usersSlice.actions.updateRole(res.data.role_id));
                 navigate('/');
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log(error);
+                setLoading(false);
+            });
     };
+
     return (
-        <div className={cx('modal-overlay')}>
-            <div className={cx('modal')}>
-                <div className="row row-cols-1">
-                    <div className="col">
-                        <div className={cx('header')}>
-                            <img src={roleData[role]?.img} className={cx('img')} />
-                            <h1 className={cx('title')}>WELCOME TO OUR WEBSITE</h1>
-                            <p className={cx('head-desc')}>Choice your role to have a lot of feature</p>
+        <div className={cx('wrap')}>
+            {loading ? (
+                <Loading />
+            ) : (
+                <>
+                    <div className={cx('body')}>
+                        <div className="row row-cols-1 row-cols-lg-2 g-5">
+                            {roleData.map((item, index) => {
+                                return (
+                                    <div className="col" key={index}>
+                                        <RoleItem
+                                            data={item}
+                                            index={index}
+                                            currentChoiceIndex={currentChoiceIndex}
+                                            setCurrentChoiceIndex={setCurrentChoiceIndex}
+                                        />
+                                    </div>
+                                );
+                            })}
                         </div>
+                        <Button
+                            type="primary"
+                            style={{ marginTop: '20px', padding: '20px 24px', fontSize: '2rem' }}
+                            onClick={handleSubmit}
+                        >
+                            Continue
+                        </Button>
                     </div>
-                    <div className="col">
-                        <div className={cx('info')}>
-                            <div className={cx('choice')}>
-                                <Select onChange={(value) => setRole(value)} defaultValue="0">
-                                    <Select.Option value="0">
-                                        <img src={imgs.AnimateStudent} className={cx('animate')} />
-                                        Student
-                                    </Select.Option>
-                                    <Select.Option value="1">
-                                        <img src={imgs.AnimateTeacher} className={cx('animate')} />
-                                        Teacher
-                                    </Select.Option>
-                                </Select>
-                            </div>
-                            <p className={cx('choice-desc')}>{roleData[role]?.desc}</p>
-                            <Button type="primary" onClick={handleSubmit}>
-                                Continue
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                </>
+            )}
         </div>
     );
 }

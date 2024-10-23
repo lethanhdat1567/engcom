@@ -50,7 +50,7 @@ const publicPage = [
     { path: '/blogs/:slug', element: BlogsDetail, layout: HeaderOnly },
     { path: '/community', element: Community },
     { path: '/classes/:slug', element: ClassMore },
-    { path: '/user/role', element: Role },
+    { path: '/user/role', element: Role, layout: null },
     { path: '/class/:slug', element: ClassDetail },
     { path: '/search', element: SearchMore },
     { path: '/profile/:slug', element: Profile, layout: SingleLayout },
