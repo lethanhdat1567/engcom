@@ -44,8 +44,8 @@ function Profile() {
     ];
     return (
         <div className={cx('wrap')}>
-            <h2 className={cx('title')}>Thong tin ca nhan</h2>
-            <p className={cx('desc')}>Quan li thong tin ca nhan cua ban</p>
+            <h2 className={cx('title')}>Personal Information.</h2>
+            <p className={cx('desc')}>Manage your personal information.</p>
             <div className={cx('cart-wrap')}>
                 {InfoData.map((item, index) => {
                     return <ProfileItem data={item} key={index} />;

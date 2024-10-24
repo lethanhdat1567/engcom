@@ -36,7 +36,7 @@ function CourseTeacher({ data, index }) {
     const lessonData = lessons.filter((item, index) => item.course_id === data.id);
 
     const handleDeleteCourse = () => {
-        if (Object.keys(slug).length > 0) {
+        if (slug && Object.keys(slug)?.length > 0) {
             if (Number(data.id)) {
                 setDeleteCourseLoading(true);
                 if (!deleteCourseLoading) {
@@ -59,7 +59,7 @@ function CourseTeacher({ data, index }) {
             }
         } else {
             dispatch(teacher.actions.deleteCourse(data.id));
-            showAlertModal(false);
+            setShowAlertModal(false);
         }
     };
     return (
@@ -139,7 +139,7 @@ function CourseTeacher({ data, index }) {
                             className="fa-xl"
                         />
                     </span>
-                    <span className={cx('alert-desc')}>Du liệu của bạn sẽ mất hết!</span>
+                    <span className={cx('alert-desc')}>Your data will be lost!</span>
                 </div>
             </Modal>
         </>

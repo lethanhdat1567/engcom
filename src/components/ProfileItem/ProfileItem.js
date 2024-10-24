@@ -185,8 +185,8 @@ function ProfileItem({ data }) {
                         <>
                             <h4 className={cx('modal-title')}>Update Your {data.title}</h4>
                             <p className={cx('modal-desc')}>
-                                Tên sẽ được hiển thị trên trang cá nhân, trong các bình luận và bài viết của
-                                bạn.
+                                Information will be displayed on your profile page, in your comments and
+                                posts.
                             </p>
                             <div className={cx('modal-form-group')}>
                                 <label className={cx('modal-label')}>{data.title}</label>

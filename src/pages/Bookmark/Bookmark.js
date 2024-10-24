@@ -32,7 +32,7 @@ function Bookmark() {
     return (
         <div className={cx('wrap')}>
             <div className={cx('header-wrap')}>
-                <h1 className={cx('title')}>My BLogs</h1>
+                <h1 className={cx('title')}>Blogs saved</h1>
             </div>
             <div className={cx('body')}>
                 <div className="row">
@@ -40,7 +40,7 @@ function Bookmark() {
                         <div className={cx('list-wrap')}>
                             <ul className={cx('list')}>
                                 <li className={cx('item')}>
-                                    <Link className={cx('item-link')}>Ban nhap</Link>
+                                    <Link className={cx('item-link')}>Saved blog posts.</Link>
                                 </li>
                             </ul>
                             <div className={cx('seperate')}></div>

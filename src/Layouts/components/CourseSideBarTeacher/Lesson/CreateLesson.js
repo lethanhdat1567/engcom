@@ -19,7 +19,7 @@ function CreateLesson({ course_id }) {
             {/* Ui create course */}
             <div className={cx('create-wrap')}>
                 {/* Create lesson */}
-                <div className={cx('create-lesson')} onClick={() => setShowCreateLesson(true)}>
+                <div className={cx('create-lesson')} onClick={() => setShowCreateLesson(!showCreateLesson)}>
                     <span className={cx('create-icon')}>
                         <FontAwesomeIcon icon={faSquarePlus} />
                     </span>

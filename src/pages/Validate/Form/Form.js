@@ -40,10 +40,10 @@ function Form({ type, setToggle }) {
                 label: 'Email',
                 placeholder: 'Enter your email',
                 rules: {
-                    required: 'Vui long nhap email',
+                    required: 'Please enter your email',
                     pattern: {
                         value: /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/,
-                        message: 'Dinh dang email khong dung',
+                        message: 'Invalid email format',
                     },
                 },
             },
@@ -53,21 +53,22 @@ function Form({ type, setToggle }) {
                 type: 'password',
                 placeholder: 'Enter your password',
                 rules: {
-                    required: 'Vui long nhap mat khau',
+                    required: 'Please enter your password',
                     minLength: {
                         value: 6,
-                        message: 'Vui long nhap it nhat 6 ki tu',
+                        message: 'Please enter at least 6 characters',
                     },
                 },
             },
         ],
+
         Register: [
             {
                 name: 'name',
-                label: 'What your name?',
+                label: 'What is your name?',
                 placeholder: 'Enter your fullname',
                 rules: {
-                    required: 'Vui long nhap ho ten',
+                    required: 'Please enter your full name',
                 },
             },
             {
@@ -75,10 +76,10 @@ function Form({ type, setToggle }) {
                 label: 'Create your account',
                 placeholder: 'Enter your email',
                 rules: {
-                    required: 'Vui long nhap email',
+                    required: 'Please enter your email',
                     pattern: {
                         value: /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/,
-                        message: 'Dinh dang email khong dung',
+                        message: 'Invalid email format',
                     },
                 },
             },
@@ -88,10 +89,10 @@ function Form({ type, setToggle }) {
                 type: 'password',
                 placeholder: 'Enter your password',
                 rules: {
-                    required: 'Vui long nhap mat khau',
+                    required: 'Please enter your password',
                     minLength: {
                         value: 6,
-                        message: 'Vui long nhap it nhat 6 ki tu',
+                        message: 'Please enter at least 6 characters',
                     },
                 },
             },
@@ -101,7 +102,7 @@ function Form({ type, setToggle }) {
                 type: 'password',
                 placeholder: 'Confirm your password',
                 rules: {
-                    required: 'Vui long nhap lai mat khau',
+                    required: 'Please confirm your password',
                 },
             },
         ],

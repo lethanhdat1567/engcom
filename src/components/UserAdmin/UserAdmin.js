@@ -1,20 +1,25 @@
 import classNames from 'classnames/bind';
 import styles from './UserAdmin.module.scss';
 import imgs from '~/assets/Image';
+import RoleItem from '~/pages/Role/components/RoleItem/RoleItem';
+import UserRole from '../UserRole/UserRole';
+import { handleAvatar } from '~/utils/handleAvatar';
 
 const cx = classNames.bind(styles);
 
-function UserAdmin() {
+function UserAdmin({ data }) {
     return (
         <div className={cx('wrap')}>
             <div className={cx('user')}>
-                <img src={imgs.unsetAvatar} alt="" className={cx('avatar')} />
+                <img src={handleAvatar(data.avatar)} alt="" className={cx('avatar')} />
                 <div className={cx('info')}>
-                    <p className={cx('name')}>DatLee Thanh</p>
-                    <p className={cx('email')}>abc@gmail.com</p>
+                    <p className={cx('name')}>{data.name}</p>
+                    <div className={cx('email')}>
+                        <UserRole type={data.role_id} />
+                    </div>
                 </div>
             </div>
-            <p className={cx('price')}>300.000 d</p>
+            <p className={cx('price')}>{data.rank_count} classes</p>
         </div>
     );
 }

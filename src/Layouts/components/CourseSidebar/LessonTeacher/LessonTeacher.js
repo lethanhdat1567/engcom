@@ -95,7 +95,7 @@ function LessonTeacher({ data, index }) {
                             className="fa-xl"
                         />
                     </span>
-                    <span className={cx('alert-desc')}>Dữ liệu của bạn sẽ mất hết!</span>
+                    <span className={cx('alert-desc')}>Your data will be lost!. </span>
                 </div>
             </Modal>
         </>

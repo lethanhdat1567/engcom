@@ -87,7 +87,7 @@ function ProfileHeader() {
                                     to={`${process.env.REACT_APP_ROOT}/profile`}
                                     className={cx('profile-item-link')}
                                 >
-                                    Trang ca nhan
+                                    My profile
                                 </Link>
                             </li>
                         </ul>
@@ -111,7 +111,7 @@ function ProfileHeader() {
                                     to={`${process.env.REACT_APP_ROOT}/new-post`}
                                     className={cx('profile-item-link')}
                                 >
-                                    Viet Blogs
+                                    Write Blogs
                                 </Link>
                             </li>
                             <li className={cx('profile-item')} onClick={() => setShowDropdown(false)}>
@@ -119,7 +119,7 @@ function ProfileHeader() {
                                     to={`${process.env.REACT_APP_ROOT}/me/post`}
                                     className={cx('profile-item-link')}
                                 >
-                                    Bai viet cua toi
+                                    My blogs
                                 </Link>
                             </li>
                             <li className={cx('profile-item')} onClick={() => setShowDropdown(false)}>
@@ -127,14 +127,14 @@ function ProfileHeader() {
                                     to={`${process.env.REACT_APP_ROOT}/me/bookmark`}
                                     className={cx('profile-item-link')}
                                 >
-                                    Bai viet da luu
+                                    Saved blogs
                                 </Link>
                             </li>
                         </ul>
                         <hr />
                         <ul className={cx('profile-list')}>
                             <li className={cx('profile-item')} onClick={handleLogout}>
-                                <Link className={cx('profile-item-link')}>Dang xuat</Link>
+                                <Link className={cx('profile-item-link')}>Logout</Link>
                             </li>
                         </ul>
                     </div>

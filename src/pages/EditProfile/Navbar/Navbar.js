@@ -15,17 +15,17 @@ function Navbar({ isActive, setActive }) {
 
     const navItems = [
         {
-            title: 'Thong tin ca nhan',
+            title: 'Personal Information',
             icon: <FontAwesomeIcon icon={faUser} className="fa-lg" />,
         },
         {
-            title: 'Mat khau va bao mat',
+            title: 'Password and Security',
             icon: <FontAwesomeIcon icon={faShield} className="fa-lg" />,
         },
     ];
     const singleNav = [
         {
-            title: 'Thong tin ca nhan',
+            title: 'Personal Information',
             icon: <FontAwesomeIcon icon={faUser} className="fa-lg" />,
         },
     ];
@@ -39,10 +39,9 @@ function Navbar({ isActive, setActive }) {
                 <FontAwesomeIcon icon={faRightFromBracket} />
             </Link>
             <Logo />
-            <h1 className={cx('title')}>Cai dat tai khoan</h1>
+            <h1 className={cx('title')}>Account Settings.</h1>
             <p className={cx('desc')}>
-                Quản lý cài đặt tài khoản của bạn như thông tin cá nhân, cài đặt bảo mật, quản lý thông báo,
-                v.v.
+                Manage your account settings such as personal information, security settings.
             </p>
             <div className={cx('nav-wrap')}>
                 {user.uid

@@ -255,7 +255,7 @@ function TeacherNavbar({ showNav, setShowNav }) {
                         <span className={cx('modal-title')}>Warning</span>
                     </div>
                     <div className={cx('drop-mbody')}>
-                        <p className={cx('drop-desc')}>Tat ca du lieu cua ban se mat het !.</p>
+                        <p className={cx('drop-desc')}>Your data will be lost!</p>
                     </div>
                     <Flex gap={10} justify="right">
                         <Button classNames={cx('btn-cancle')} onClick={() => setShowModal(false)}>

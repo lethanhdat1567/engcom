@@ -115,7 +115,6 @@ function CreateLessonForm({ showCreateLesson, setShowCreateLesson, course_id }) 
             <span className={cx('decor')}>{lessonType[typeValue]?.icon}</span>
             <div className={cx('main')}>
                 <div className={cx('title')}>
-                    1.1
                     <input
                         className={cx('lesson-input')}
                         onChange={(e) => setTitleValue(e.target.value)}

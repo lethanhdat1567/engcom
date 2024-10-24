@@ -111,7 +111,7 @@ function ForgetPasswordForm() {
                         </div>
                         <div className={cx('form-group')}>
                             <label className={cx('label')} htmlFor={'input-pass'}>
-                                Nhap ma xac nhan
+                                Enter the confirmation code
                             </label>
                             <div className={cx('input-wrap', { disable: !!adoptCode })}>
                                 <input
@@ -161,14 +161,13 @@ function ForgetPasswordForm() {
                             )}
                         </div>
                         <Button save classNames={cx('next-btn')} onClick={handleSubmit} disable={adoptCode}>
-                            Dat lai mat khau
+                            Reset password
                         </Button>
                     </div>
                 </>
             )}
             <p className={cx('sub-desc')}>
-                Việc bạn tiếp tục sử dụng trang web này đồng nghĩa bạn đồng ý với điều khoản sử dụng của chúng
-                tôi.
+                By continuing to use this website, you agree to our terms of service.
             </p>
         </div>
     );

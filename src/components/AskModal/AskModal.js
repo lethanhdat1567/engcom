@@ -68,7 +68,7 @@ function AskModal({ setAskModal, askModal }) {
     return (
         <div className={cx('wrap', { active: askModal })}>
             <div className={cx('header')}>
-                <h3 className={cx('title')}>Hoi dap</h3>
+                <h3 className={cx('title')}>Questions and Answers</h3>
                 <span className={cx('close')} onClick={() => setAskModal(false)}>
                     <FontAwesomeIcon icon={faXmark} className="fa-xl" />
                 </span>

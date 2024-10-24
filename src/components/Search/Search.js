@@ -32,7 +32,7 @@ function Search() {
     // Hooks
     const [searchValue, setSearchValue] = useState('');
     const [showSearch, setShowSearch] = useState(false);
-    const [searchHoder, setSearchHoder] = useState('Search classes, users, blogs, ...');
+    const [searchHoder, setSearchHoder] = useState('Search classes and users');
     const [loading, setLoading] = useState(true);
     const inputRef = useRef(null);
     const [searchData, setSearchData] = useState([]);

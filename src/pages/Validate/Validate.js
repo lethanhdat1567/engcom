@@ -104,7 +104,7 @@ function Validate({ toggle, setToggle, field }) {
     const ItemChoices = [
         {
             icon: user,
-            desc: `${toggleText.text} with email/phone number`,
+            desc: `${toggleText.text} with your email`,
             type: 'form',
             onClick: handleForm,
         },

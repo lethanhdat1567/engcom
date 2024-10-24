@@ -19,7 +19,7 @@ function PasswordForm() {
             <>
                 <h4 className={cx('modal-title')}>Update Your Password</h4>
                 <p className={cx('modal-desc')}>
-                    Tên sẽ được hiển thị trên trang cá nhân, trong các bình luận và bài viết của bạn.
+                    Please enter your new password below. Make sure it’s strong and secure
                 </p>
                 <div className={cx('modal-form-group')}>
                     <label className={cx('modal-label')}>New password</label>

@@ -21,8 +21,8 @@ function Sercurity() {
     return (
         <>
             <div className={cx('wrap')} onClick={() => setToggleModal(true)}>
-                <h2 className={cx('title')}>Thong tin ca nhan</h2>
-                <p className={cx('desc')}>Quan li thong tin ca nhan cua ban</p>
+                <h2 className={cx('title')}>Personal Information.</h2>
+                <p className={cx('desc')}>Manage your personal information.</p>
                 <div className={cx('cart-wrap')}>
                     <div className={cx('item')}>
                         <h3 className={cx('item-label')}>Password</h3>
@@ -38,7 +38,7 @@ function Sercurity() {
                     <>
                         <h4 className={cx('modal-title')}>Update Your Password</h4>
                         <p className={cx('modal-desc')}>
-                            Tên sẽ được hiển thị trên trang cá nhân, trong các bình luận và bài viết của bạn.
+                            This feature allows users to update their password easily and securely.
                         </p>
                         <div className={cx('modal-form-group')}>
                             <label className={cx('modal-label')}>Your password</label>

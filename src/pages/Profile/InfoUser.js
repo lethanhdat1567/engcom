@@ -67,7 +67,7 @@ function InfoUser({ info }) {
     if (slug) {
         return (
             <div className={cx('wrapper')}>
-                <h2 className={cx('info-title')}>Gioi thieu</h2>
+                <h2 className={cx('info-title')}>User Information</h2>
                 <ul className={cx('info-list')}>
                     {InfoDataPublic.map((item, index) => {
                         return (
@@ -91,7 +91,7 @@ function InfoUser({ info }) {
     } else {
         return (
             <div className={cx('wrapper')}>
-                <h2 className={cx('info-title')}>Gioi thieu</h2>
+                <h2 className={cx('info-title')}>User Information</h2>
                 <ul className={cx('info-list')}>
                     {InfoData.map((item, index) => {
                         return (

@@ -5,12 +5,10 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 const cx = classNames.bind(styles);
 
 const data = [
-    { name: 'Group A', value: 400, color: '#0088FE' },
-    { name: 'Group B', value: 300, color: '#00C49F' },
-    { name: 'Group C', value: 300, color: '#FFBB28' },
-    { name: 'Group D', value: 200, color: '#FF8042' },
+    { name: 'Student', value: 300, color: '#FFBB28' },
+    { name: 'Teacher', value: 200, color: '#FF8042' },
 ];
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const COLORS = ['#FFBB28', '#FF8042'];
 
 function PieChartBox() {
     return (
@@ -41,8 +39,9 @@ function PieChartBox() {
                         <div className={cx('item')} key={index}>
                             <div className={cx('decor')} style={{ backgroundColor: `${item.color}` }}></div>
                             <div className={cx('options-info')}>
-                                <p className={cx('options-title')}>{item.name}</p>
-                                <p className={cx('options-quantiy')}>{item.value}</p>
+                                <p className={cx('options-title')}>
+                                    {item.name}: {item.value}
+                                </p>
                             </div>
                         </div>
                     );

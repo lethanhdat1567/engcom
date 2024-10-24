@@ -5,6 +5,8 @@ import { deleteNote } from '~/requestApi/requestNote';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { ownData } from '~/redux/reducer/OwnDataSlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-regular-svg-icons';
 
 const cx = classNames.bind(styles);
 
@@ -27,20 +29,21 @@ function NoteItem({ data, utils, setShowModal, setActiveNote }) {
         setShowUpdate(true);
         setUpdateValues(data);
     };
+
+    const handleDetail = () => {
+        setShowModal(true);
+        setActiveNote(data);
+    };
+
     return (
         <>
             <div className={cx('wrap', { delete: deleteLoading })}>
                 <div className={cx('header')}>
-                    <h4
-                        className={cx('title')}
-                        onClick={() => {
-                            setShowModal(true);
-                            setActiveNote(data);
-                        }}
-                    >
-                        {data.title}
-                    </h4>
+                    <h4 className={cx('title')}>{data.title}</h4>
                     <div className={cx('utils')}>
+                        <span className={cx('icon')} onClick={handleDetail}>
+                            <FontAwesomeIcon icon={faEye} className="fa-lg" style={{ color: '#5174F1' }} />
+                        </span>
                         <span className={cx('icon')} onClick={handleUpdate}>
                             {penNote}
                         </span>
@@ -49,13 +52,7 @@ function NoteItem({ data, utils, setShowModal, setActiveNote }) {
                         </span>
                     </div>
                 </div>
-                <div
-                    className={cx('desc-wrap')}
-                    onClick={() => {
-                        setShowModal(true);
-                        setActiveNote(data);
-                    }}
-                >
+                <div className={cx('desc-wrap')}>
                     <p dangerouslySetInnerHTML={{ __html: data.content }}></p>
                 </div>
             </div>
