@@ -111,9 +111,6 @@ function ProfileCourse() {
                             <hr />
                             <ul className={cx('profile-list')}>
                                 <li className={cx('profile-item')}>
-                                    <Link className={cx('profile-item-link')}>Cai dat</Link>
-                                </li>
-                                <li className={cx('profile-item')}>
                                     <Link className={cx('profile-item-link')} onClick={handleLogout}>
                                         Dang xuat
                                     </Link>

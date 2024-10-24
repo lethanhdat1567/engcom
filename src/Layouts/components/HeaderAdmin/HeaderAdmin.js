@@ -3,7 +3,7 @@ import styles from './HeaderAdmin.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-regular-svg-icons';
 import { faChevronDown, faGear } from '@fortawesome/free-solid-svg-icons';
-import { Dropdown, Space } from 'antd';
+import { Button, Dropdown, Space } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '~/components/Logo/Logo';
 import ProfileCourse from '~/components/ProfileCourse/ProfileCourse';
@@ -28,44 +28,30 @@ function HeaderAdmin() {
     // Data
     const handleLogout = async () => {
         setLoading(true);
+
         try {
             await signOut(auth);
             await logoutRequest();
             dispatch(usersSlice.actions.logoutUser());
-            setLoading(false);
             navigate('/');
         } catch (error) {
-            setLoading(false);
             console.error('Error signing out:', error);
-            refreshToken(refresh_token)
-                .then((res) => {
-                    dispatch(usersSlice.actions.getToken(res.data.access_token));
-                    dispatch(usersSlice.actions.getRefreshToken(res.data.refresh_token));
-                })
-                .catch((error) => console.log(error));
-        }
-    };
-    const items = [
-        {
-            key: '1',
-            label: <Link className={cx('alert-item')}>Setting</Link>,
-        },
-        {
-            key: '2',
-            label: (
-                <Link className={cx('alert-item')} onClick={handleLogout}>
-                    Logout
-                </Link>
-            ),
-        },
-    ];
 
-    const dropdownAlert = () => {
-        return (
-            <div className={cx('alert-dropdown')}>
-                <h3 className={cx('head')}>Your notification</h3>
-            </div>
-        );
+            try {
+                const res = await refreshToken(refresh_token);
+                dispatch(usersSlice.actions.getToken(res.data.access_token));
+                dispatch(usersSlice.actions.getRefreshToken(res.data.refresh_token));
+
+                await signOut(auth);
+                await logoutRequest();
+                dispatch(usersSlice.actions.logoutUser());
+                navigate('/');
+            } catch (refreshError) {
+                console.error('Error refreshing token:', refreshError);
+            }
+        } finally {
+            setLoading(false);
+        }
     };
 
     return loading ? (
@@ -81,31 +67,15 @@ function HeaderAdmin() {
                     </div>
                     <div className={cx('right')}>
                         <div className={cx('user-wrap')}>
-                            <Space direction="vertical">
-                                <Space wrap size={'large'}>
-                                    <Dropdown
-                                        trigger="click"
-                                        dropdownRender={dropdownAlert}
-                                        placement="bottom"
-                                        arrow
-                                    >
-                                        <FontAwesomeIcon icon={faBell} className={cx('icon', 'fa-xl')} />
-                                    </Dropdown>
-                                </Space>
-                            </Space>
                             <div className={cx('avatar')}>
                                 <img className={cx('avatar-img')} src={handleAvatar(user.avatar)} />
                                 <div className={cx('info')}>
                                     <h3 className={cx('info-name')}>{user.name}</h3>
                                 </div>
                             </div>
-                            <Space direction="vertical">
-                                <Space wrap>
-                                    <Dropdown trigger="click" menu={{ items }} placement="">
-                                        <FontAwesomeIcon icon={faGear} className={cx('icon', 'fa-xl')} />
-                                    </Dropdown>
-                                </Space>
-                            </Space>
+                            <Button type="primary" danger onClick={handleLogout}>
+                                Logout
+                            </Button>
                         </div>
                     </div>
                 </div>

@@ -35,7 +35,7 @@ function TeacherClassHome() {
     const [showTippy, setShowTippy] = useState(true);
     const cartId = useId();
     const validateCart = () => {
-        if (titleCart && cartType) {
+        if (titleCart && cartType && cartSubject) {
             return true;
         }
         return false;

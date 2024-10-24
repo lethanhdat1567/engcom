@@ -15,15 +15,15 @@ import Loading from '~/components/Loading/Loading';
 import { postSocial } from '~/requestApi/requestSocial';
 import { useDispatch } from 'react-redux';
 import { usersSlice } from '~/redux/reducer/UserSlice';
+import ForgetPasswordForm from './ForgetPasswordForm/ForgetPasswordForm';
 
 const cx = classNames.bind(styles);
 const fbProvider = new FacebookAuthProvider();
 const ggProvider = new GoogleAuthProvider();
 
 function Validate({ toggle, setToggle, field }) {
-    const [validateError, setValidateError] = useState(false);
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
+    const [showForgot, setShowForgot] = useState(false);
     const dispatch = useDispatch();
     const handleError = async (error) => {
         if (error.code === 'auth/account-exists-with-different-credential') {
@@ -34,7 +34,6 @@ function Validate({ toggle, setToggle, field }) {
     };
     // Facebook
     const handleFbLogin = async () => {
-        setLoading(true); // Bắt đầu tải
         try {
             const result = await signInWithPopup(auth, fbProvider);
             const userValue = await postSocial(result);
@@ -51,13 +50,11 @@ function Validate({ toggle, setToggle, field }) {
             console.error('Error posting social:', error);
             handleError(error);
         } finally {
-            setLoading(false);
         }
     };
 
     // Google
     const handleGGLogin = async () => {
-        setLoading(true);
         try {
             const result = await signInWithPopup(auth, ggProvider);
 
@@ -70,12 +67,10 @@ function Validate({ toggle, setToggle, field }) {
             if (userValue.data.user.role_id === 1) {
                 navigate('/user/role');
             }
-            setLoading(false);
         } catch (error) {
             console.error('Error posting social:', error);
             handleError(error);
         } finally {
-            setLoading(false);
         }
     };
     const handleForm = (item) => {
@@ -131,46 +126,66 @@ function Validate({ toggle, setToggle, field }) {
 
     return (
         <div className={cx('validate')}>
-            {loading && <Loading />}
             <Modal toggle={toggle} setToggle={setToggle}>
                 <div className={cx('wrap')}>
-                    {showForm && (
+                    {(showForm || showForgot) && (
                         <div
                             className={cx('back')}
                             onClick={() => {
                                 setShowForm(false);
+                                setShowForgot(false);
                             }}
                         >
                             <FontAwesomeIcon icon={faChevronLeft} className={cx('back-icon')} />
                             <span className={cx('back-desc')}>Back</span>
                         </div>
                     )}
-                    <header className={cx('header')}>
-                        <Logo className={cx('logo')} />
-                        <h2 className={cx('title')}>{toggleText.title}</h2>
-                        <p className={cx('desc')}>Each person should only use one account.</p>
-                    </header>
-                    <main className={cx('main')}>
-                        <div className={cx('form-wrap')}>
-                            {!showForm &&
-                                ItemChoices.map((item, index) => {
-                                    return <ItemChoice data={item} key={index} onClick={item.onClick} />;
-                                })}
-                            {/* Form */}
-                            {showForm && <Form setToggle={setToggle} type={type} />}
-                        </div>
-                        <p className={cx('sub')}>
-                            {toggleText.ask}
-                            <Link className={cx('link-alert')} onClick={() => setType(toggleText.toggle)}>
-                                {toggleText.toggle}
-                            </Link>
-                        </p>
-                        <Link className={cx('forget', 'link-alert')}>Forget password</Link>
-                        <p className={cx('footer-desc')}>
-                            Continued use of this site constitutes your agreement to
-                            <Link className={cx('service')}>our terms of service</Link>.
-                        </p>
-                    </main>
+                    {showForgot ? (
+                        <ForgetPasswordForm />
+                    ) : (
+                        <>
+                            <header className={cx('header')}>
+                                <Logo className={cx('logo')} />
+                                <h2 className={cx('title')}>{toggleText.title}</h2>
+                                <p className={cx('desc')}>Each person should only use one account.</p>
+                            </header>
+                            <main className={cx('main')}>
+                                <div className={cx('form-wrap')}>
+                                    {!showForm &&
+                                        !showForgot &&
+                                        ItemChoices.map((item, index) => {
+                                            return (
+                                                <ItemChoice data={item} key={index} onClick={item.onClick} />
+                                            );
+                                        })}
+                                    {/* Form */}
+                                    {showForm && <Form setToggle={setToggle} type={type} />}
+                                </div>
+                                <p className={cx('sub')}>
+                                    {toggleText.ask}
+                                    <Link
+                                        className={cx('link-alert')}
+                                        onClick={() => setType(toggleText.toggle)}
+                                    >
+                                        {toggleText.toggle}
+                                    </Link>
+                                </p>
+                                <span
+                                    className={cx('forget', 'link-alert')}
+                                    onClick={() => {
+                                        setShowForgot(true);
+                                        setShowForm(false);
+                                    }}
+                                >
+                                    Forget password
+                                </span>
+                                <p className={cx('footer-desc')}>
+                                    Continued use of this site constitutes your agreement to
+                                    <Link className={cx('service')}>our terms of service</Link>.
+                                </p>
+                            </main>
+                        </>
+                    )}
                 </div>
             </Modal>
         </div>

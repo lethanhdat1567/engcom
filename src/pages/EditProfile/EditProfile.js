@@ -1,6 +1,5 @@
 import classNames from 'classnames/bind';
 import styles from './EditProfile.module.scss';
-import Header from './Header/Header';
 import Navbar from './Navbar/Navbar';
 import Content from './Content/Content';
 import { useEffect, useState } from 'react';

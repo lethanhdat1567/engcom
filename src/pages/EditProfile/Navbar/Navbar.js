@@ -6,10 +6,13 @@ import { faRightFromBracket, faShield, faUser } from '@fortawesome/free-solid-sv
 import NavItem from './NavItem';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles);
 
 function Navbar({ isActive, setActive }) {
+    const user = useSelector((state) => state.user.user);
+
     const navItems = [
         {
             title: 'Thong tin ca nhan',
@@ -18,6 +21,12 @@ function Navbar({ isActive, setActive }) {
         {
             title: 'Mat khau va bao mat',
             icon: <FontAwesomeIcon icon={faShield} className="fa-lg" />,
+        },
+    ];
+    const singleNav = [
+        {
+            title: 'Thong tin ca nhan',
+            icon: <FontAwesomeIcon icon={faUser} className="fa-lg" />,
         },
     ];
 
@@ -36,16 +45,27 @@ function Navbar({ isActive, setActive }) {
                 v.v.
             </p>
             <div className={cx('nav-wrap')}>
-                {navItems.map((item, index) => {
-                    return (
-                        <NavItem
-                            isActive={isActive === index}
-                            data={item}
-                            key={index}
-                            onClick={() => handleActive(index)}
-                        />
-                    );
-                })}
+                {user.uid
+                    ? singleNav.map((item, index) => {
+                          return (
+                              <NavItem
+                                  isActive={isActive === index}
+                                  data={item}
+                                  key={index}
+                                  onClick={() => handleActive(index)}
+                              />
+                          );
+                      })
+                    : navItems.map((item, index) => {
+                          return (
+                              <NavItem
+                                  isActive={isActive === index}
+                                  data={item}
+                                  key={index}
+                                  onClick={() => handleActive(index)}
+                              />
+                          );
+                      })}
             </div>
         </div>
     );

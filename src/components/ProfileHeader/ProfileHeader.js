@@ -133,9 +133,6 @@ function ProfileHeader() {
                         </ul>
                         <hr />
                         <ul className={cx('profile-list')}>
-                            <li className={cx('profile-item')} onClick={() => setShowDropdown(false)}>
-                                <Link className={cx('profile-item-link')}>Cai dat</Link>
-                            </li>
                             <li className={cx('profile-item')} onClick={handleLogout}>
                                 <Link className={cx('profile-item-link')}>Dang xuat</Link>
                             </li>

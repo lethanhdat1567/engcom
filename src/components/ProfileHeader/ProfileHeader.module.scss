@@ -1,5 +1,6 @@
 @use '../../components/GlobalStyles/abstracts/' as abs;
 .profile-drop {
+    min-width: 300px;
     background: var(--white-color);
     padding: 20px;
     box-shadow: 0 -4px 32px #0003;

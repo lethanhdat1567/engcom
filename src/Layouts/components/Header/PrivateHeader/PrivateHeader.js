@@ -1,7 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './PrivateHeader.module.scss';
 import Classes from './Classes';
-import HeaderAlert from '~/components/HeaderAlert/HeaderAlert';
 import ProfileHeader from '~/components/ProfileHeader/ProfileHeader';
 import Note from '~/components/Note/Note';
 import { useSelector } from 'react-redux';
@@ -15,7 +14,6 @@ function PrivateHeader() {
             <ul className={cx('list')}>
                 {user.role_id === 2 && <Classes />}
                 <Note />
-                <HeaderAlert />
                 <ProfileHeader />
             </ul>
         </div>
