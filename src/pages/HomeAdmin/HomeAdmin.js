@@ -6,12 +6,19 @@ import PieChartBox from '~/components/PieChartBox/PieChartBox';
 import { useEffect, useState } from 'react';
 import { getClassRank } from '~/requestApi/requestRank';
 import Skeleton from 'react-loading-skeleton';
+import { getSeparate, getStatistics } from '~/requestApi/requestAdmin';
 
 const cx = classNames.bind(styles);
 
 function HomeAdmin() {
     const [rankData, setRankData] = useState([]);
+    const [staticData, setStaticData] = useState([]);
+    const [separateData, setSeparateData] = useState({});
+    const [separateLoading, setSeparateLoading] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [staticLoading, setStaticLoading] = useState(true);
+
+    // Rank
     useEffect(() => {
         setLoading(true);
         getClassRank()
@@ -21,6 +28,32 @@ function HomeAdmin() {
             })
             .catch((error) => {
                 setLoading(false);
+                console.log(error);
+            });
+    }, []);
+    // Stastistic
+    useEffect(() => {
+        setStaticLoading(true);
+        getStatistics()
+            .then((res) => {
+                setStaticData(res);
+                setStaticLoading(false);
+            })
+            .catch((error) => {
+                setStaticLoading(false);
+                console.log(error);
+            });
+    }, []);
+    // Separate
+    useEffect(() => {
+        setSeparateLoading(true);
+        getSeparate()
+            .then((res) => {
+                setSeparateData(res);
+                setSeparateLoading(false);
+            })
+            .catch((error) => {
+                setSeparateLoading(false);
                 console.log(error);
             });
     }, []);
@@ -44,27 +77,28 @@ function HomeAdmin() {
                 </div>
                 <div className="col-12 col-md-6 col-xl-8 ">
                     <div className="row g-5">
-                        <div className="col-12 col-xl-6">
-                            {loading ? (
-                                <Skeleton style={{ height: '200px' }} />
-                            ) : (
-                                <div className={cx('charts')}>
-                                    <ChartBox />
-                                </div>
-                            )}
-                        </div>
-                        <div className="col-12 col-xl-6">
-                            {loading ? (
-                                <Skeleton style={{ height: '200px' }} />
-                            ) : (
-                                <div className={cx('charts')}>
-                                    <ChartBox />
-                                </div>
-                            )}
-                        </div>
+                        {staticLoading ? (
+                            <Skeleton style={{ height: '190px' }} />
+                        ) : (
+                            <>
+                                {staticData.map((item, index) => {
+                                    return (
+                                        <div className="col-12 col-xl-6" key={index}>
+                                            <div className={cx('charts')}>
+                                                <ChartBox data={item} />
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </>
+                        )}
                         <div className="col-12">
                             <div className={cx('charts')}>
-                                {loading ? <Skeleton style={{ height: '300px' }} /> : <PieChartBox />}
+                                {separateLoading ? (
+                                    <Skeleton height="300px" />
+                                ) : (
+                                    <PieChartBox item={separateData} />
+                                )}
                             </div>
                         </div>
                     </div>

@@ -4,13 +4,13 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 
 const cx = classNames.bind(styles);
 
-const data = [
-    { name: 'Student', value: 300, color: '#FFBB28' },
-    { name: 'Teacher', value: 200, color: '#FF8042' },
-];
 const COLORS = ['#FFBB28', '#FF8042'];
 
-function PieChartBox() {
+function PieChartBox({ item }) {
+    const data = [
+        { name: 'Student', value: item?.students_count, color: '#FFBB28' },
+        { name: 'Teacher', value: item?.teacher_count, color: '#FF8042' },
+    ];
     return (
         <div className={cx('wrap')}>
             <h2 className={cx('title')}>Leads by Sourse</h2>

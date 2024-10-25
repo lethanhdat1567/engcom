@@ -1,33 +1,27 @@
 import classNames from 'classnames/bind';
 import styles from './ChartBox.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-regular-svg-icons';
-import { Link } from 'react-router-dom';
 import { Line, LineChart, ResponsiveContainer, Tooltip } from 'recharts';
+import { faBook, faUsers } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
-const data = [
-    { date: '2023-10-01', alo: 10 },
-    { date: '2023-10-02', alo: 15 },
-    { date: '2023-10-03', alo: 20 },
-    { date: '2023-10-04', alo: 25 },
-    { date: '2023-10-05', alo: 30 },
-];
+function ChartBox({ data }) {
+    const dataAnalysis = data.daily;
+    console.log(data);
 
-function ChartBox() {
     return (
         <div className={cx('wrap')}>
             <div className={cx('left')}>
                 <div className={cx('head')}>
-                    <FontAwesomeIcon icon={faUser} className="fa-xl" />
-                    <p className={cx('title')}>Total Users</p>
+                    <FontAwesomeIcon icon={data.title === 'Classes' ? faBook : faUsers} className="fa-xl" />
+                    <p className={cx('title')}>Total {data?.title}</p>
                 </div>
-                <p className={cx('quantity')}>11.112</p>
+                <p className={cx('quantity')}>{data.total}</p>
             </div>
             <div className={cx('right')}>
                 <ResponsiveContainer width="100%" height="100%">
-                    <LineChart width={300} height={100} data={data}>
+                    <LineChart width={300} height={100} data={dataAnalysis}>
                         <Tooltip
                             content={({ active, payload }) => {
                                 if (active && payload && payload.length) {
@@ -48,7 +42,7 @@ function ChartBox() {
                                 return null;
                             }}
                         />
-                        <Line type="monotone" dataKey="alo" stroke="#8884d8" strokeWidth={2} />
+                        <Line type="monotone" dataKey="total" stroke="#8884d8" strokeWidth={2} />
                     </LineChart>
                 </ResponsiveContainer>
             </div>

@@ -43,3 +43,27 @@ export const updateRoleUser = async (user_id, role_id) => {
 
     return result.data;
 };
+
+// PUT
+export const updateApprove = async (class_id, deleted) => {
+    const result = await request.put(`engcom/approve/${class_id}`, deleted);
+
+    return result.data;
+};
+// ANALYSIS
+export const getTotal = async () => {
+    const result = await request.get(`engcom/analysis/total`);
+
+    return result.data;
+};
+
+export const getSeparate = async () => {
+    const result = await request.get(`engcom/analysis/separate`);
+
+    return result.data;
+};
+export const getStatistics = async () => {
+    const result = await request.get(`engcom/analysis/statistics`);
+
+    return result.data;
+};

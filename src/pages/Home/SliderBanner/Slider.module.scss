@@ -3,9 +3,44 @@
     border-radius: 16px;
     overflow: hidden;
     cursor: grab;
+    &.st {
+        background-color: #379f87;
+        background-image: linear-gradient(90deg, #379f87 0%, #f0fbf0 69%);
+
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0px 20px;
+        .st-left {
+            width: 640px;
+        }
+        .st-right {
+            text-align: end;
+            width: 500px;
+            height: 100%;
+        }
+    }
     .img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+    }
+    .title {
+        color: #fff;
+        font-size: 3.2rem;
+        line-height: 1.5;
+        font-weight: 700;
+    }
+    .desc {
+        font-size: 1.6rem;
+        font-weight: 400;
+        color: #fff;
+        width: 600px;
+        line-height: 2.2rem;
+    }
+    .img-sub {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
 }

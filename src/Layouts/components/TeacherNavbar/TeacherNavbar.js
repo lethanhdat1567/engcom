@@ -6,6 +6,7 @@ import {
     faComment,
     faEye,
     faHome,
+    faSpinner,
     faTriangleExclamation,
     faUsersLine,
     faXmark,
@@ -24,6 +25,8 @@ import Loading from '~/components/Loading/Loading';
 import { createClass, deleteClass, updateClass } from '~/requestApi/requestClass';
 import { activeLesson } from '~/redux/reducer/ActiveLesson';
 import { toast } from '~/redux/reducer/Toast';
+import { updateApprove } from '~/requestApi/requestAdmin';
+import { toastify } from '~/utils/toast';
 
 const cx = classNames.bind(styles);
 
@@ -41,6 +44,8 @@ function TeacherNavbar({ showNav, setShowNav }) {
 
     const [showModal, setShowModal] = useState(false);
     const [isDelete, setIsDelete] = useState(false);
+    const [approveLoading, setApproveLoading] = useState(false);
+    const [denyLoading, setDenyLoading] = useState(false);
 
     const createNav = [
         {
@@ -197,6 +202,36 @@ function TeacherNavbar({ showNav, setShowNav }) {
         }
     };
 
+    const handleApprove = () => {
+        const values = { deleted: 1 };
+        setApproveLoading(true);
+        updateApprove(slug, values)
+            .then((res) => {
+                navigate('/admin/approve');
+                setApproveLoading(false);
+                toastify('Class have been approve', 'success', 2000, 'top-right');
+            })
+            .catch((error) => {
+                console.log(error);
+                setApproveLoading(false);
+            });
+    };
+
+    const handleDeny = () => {
+        const values = { deleted: 0 };
+        setDenyLoading(true);
+        updateApprove(slug, values)
+            .then((res) => {
+                navigate('/admin/approve');
+                toastify('Class have been deny', 'success', 2000, 'top-right');
+                setDenyLoading(false);
+            })
+            .catch((error) => {
+                console.log(error);
+                setDenyLoading(false);
+            });
+    };
+
     return (
         <>
             {loading && <Loading />}
@@ -228,10 +263,31 @@ function TeacherNavbar({ showNav, setShowNav }) {
                 )}
                 {user.role_id === 4 ? (
                     <>
-                        <Button save classNames={cx('approve-btn')}>
-                            Approve
+                        <Button
+                            save
+                            classNames={cx('approve-btn')}
+                            onClick={handleApprove}
+                            disable={denyLoading}
+                        >
+                            {approveLoading ? (
+                                <FontAwesomeIcon
+                                    icon={faSpinner}
+                                    className="fa-solid fa-spinner fa-spin-pulse"
+                                />
+                            ) : (
+                                'Approve'
+                            )}
                         </Button>
-                        <Button classNames={cx('delete-btn')}>Deny</Button>
+                        <Button classNames={cx('delete-btn')} onClick={handleDeny} disable={approveLoading}>
+                            {denyLoading ? (
+                                <FontAwesomeIcon
+                                    icon={faSpinner}
+                                    className="fa-solid fa-spinner fa-spin-pulse"
+                                />
+                            ) : (
+                                'Deny'
+                            )}
+                        </Button>
                     </>
                 ) : (
                     <>
