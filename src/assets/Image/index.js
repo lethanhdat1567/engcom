@@ -26,6 +26,7 @@ const imgs = {
     decor_rank_2: require('./imgs/decor-rank-2.png'),
     thank: require('./imgs/thank.gif'),
     thankBanner: require('./imgs/thankBanner.jpg'),
+    togetherBanner: require('./imgs/together.jpg'),
 };
 
 export default imgs;

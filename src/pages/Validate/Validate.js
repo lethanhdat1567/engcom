@@ -141,7 +141,7 @@ function Validate({ toggle, setToggle, field }) {
                         </div>
                     )}
                     {showForgot ? (
-                        <ForgetPasswordForm />
+                        <ForgetPasswordForm setShowForgot={setShowForgot} />
                     ) : (
                         <>
                             <header className={cx('header')}>

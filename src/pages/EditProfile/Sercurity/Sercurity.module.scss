@@ -99,6 +99,10 @@
             &:focus-within {
                 border: 1px solid #1dbfaf;
             }
+            &.error {
+                background-color: #ff00001a;
+                border: 1.5px solid var(--invalid-color);
+            }
         }
         .modal-input {
             display: block;
@@ -147,5 +151,45 @@
         &:hover {
             opacity: 0.7;
         }
+    }
+}
+.error-wrap {
+    animation: slide ease 0.3s;
+    .error-item {
+        display: flex;
+        align-items: center;
+    }
+}
+.error-text {
+    margin: 8px 0 8px 8px;
+    color: var(--invalid-color);
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+.error-message {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: red;
+    animation: slide ease 0.3s;
+    margin-bottom: 10px;
+}
+.eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+}
+@keyframes slide {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-4px);
+    }
+    100% {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0px);
     }
 }

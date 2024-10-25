@@ -1,25 +1,30 @@
 import classNames from 'classnames/bind';
 import styles from './ForgetPasswordForm.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookOpenReader } from '@fortawesome/free-solid-svg-icons';
+import { faBookOpenReader, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Form, Input } from 'antd';
 import { errorIcon } from '~/assets/Icon';
 import Button from '~/components/Button';
 import { useEffect, useRef, useState } from 'react';
 import { faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
 import PasswordForm from './PasswordForm';
+import { emailCode, validateForget } from '~/requestApi/requestForgetPassword';
 
 const cx = classNames.bind(styles);
 
-function ForgetPasswordForm() {
+function ForgetPasswordForm({ setShowForgot }) {
     const [emailValue, setEmailValue] = useState('');
     const [codeValue, setCodeValue] = useState('');
     const [adoptSend, setAdoptSend] = useState(false);
     const [currentSend, setCurrentSend] = useState(120);
+    const [sendCodeMessage, setSendCodeMessage] = useState('');
     const [error, setError] = useState([]);
     const [adoptCode, setAdoptCode] = useState(true);
     const [showSetPassword, setShowSetPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [loadingSubmit, setLoadingSubmit] = useState(false);
     const codeInput = useRef();
+    const [finalCode, setFinalCode] = useState('');
 
     useEffect(() => {
         if (!adoptCode) {
@@ -30,12 +35,14 @@ function ForgetPasswordForm() {
     useEffect(() => {
         let countId;
         if (adoptSend) {
+            setSendCodeMessage('The code has been emailed to you!.');
             countId = setInterval(() => {
                 setCurrentSend((prev) => {
                     if (prev <= 1) {
                         clearInterval(countId);
                         setAdoptSend(false);
                         setCurrentSend(120);
+                        setSendCodeMessage('');
                         return 0;
                     }
                     return prev - 1;
@@ -43,6 +50,7 @@ function ForgetPasswordForm() {
             }, 1000);
         } else {
             setCurrentSend(120);
+            setSendCodeMessage('');
         }
 
         return () => clearInterval(countId);
@@ -50,8 +58,22 @@ function ForgetPasswordForm() {
 
     const handleSendCode = () => {
         if (emailValue.trim()) {
-            setAdoptCode(false);
-            setAdoptSend(true);
+            setLoading(true);
+            emailCode({ email: emailValue })
+                .then((res) => {
+                    setAdoptCode(false);
+                    setLoading(false);
+                    setAdoptSend(true);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    if (error.response && error.response.data && error.response.data.message) {
+                        setError([error.response.data.message]);
+                        setLoading(false);
+                        setAdoptSend(false);
+                        setAdoptCode(true);
+                    }
+                });
         }
     };
 
@@ -74,11 +96,23 @@ function ForgetPasswordForm() {
             setError([]);
             const values = {
                 email: emailValue,
-                code: codeValue,
+                token: codeValue,
             };
-            setShowSetPassword(true);
+            setLoadingSubmit(true);
+            validateForget(values)
+                .then((res) => {
+                    setFinalCode(codeValue);
+                    setShowSetPassword(true);
+                    setLoadingSubmit(false);
+                })
+                .catch((error) => {
+                    if (error.response && error.response.data && error.response.data.message) {
+                        setError([error.response.data.message]);
+                        setLoadingSubmit(false);
+                    }
+                });
         } else {
-            setError((prev) => [...prev, 'Vui long nhap day du thong tin']);
+            setError((prev) => [...prev, 'Please fill in all the required information.']);
         }
     };
 
@@ -86,7 +120,7 @@ function ForgetPasswordForm() {
         <div className={cx('wrap')}>
             <FontAwesomeIcon icon={faBookOpenReader} style={{ fontSize: '3rem' }} />
             {showSetPassword ? (
-                <PasswordForm />
+                <PasswordForm data={finalCode} setShowForgot={setShowForgot} />
             ) : (
                 <>
                     <h3 className={cx('title')}>Forget your password ?</h3>
@@ -130,7 +164,7 @@ function ForgetPasswordForm() {
                                         }
                                     }}
                                 />
-                                {adoptSend ? (
+                                {adoptSend && !loading ? (
                                     <Button disable classNames={cx('code-btn', 'disable')}>
                                         {currentSend}
                                     </Button>
@@ -141,10 +175,20 @@ function ForgetPasswordForm() {
                                         classNames={cx('code-btn')}
                                         onClick={handleSendCode}
                                     >
-                                        Send code
+                                        {loading ? (
+                                            <FontAwesomeIcon
+                                                icon={faSpinner}
+                                                className="fa-solid fa-spinner fa-spin-pulse"
+                                            />
+                                        ) : (
+                                            'Send code'
+                                        )}
                                     </Button>
                                 )}
                             </div>
+                            {sendCodeMessage && error.length === 0 && (
+                                <span className={cx('code')}>{sendCodeMessage}</span>
+                            )}
                             {error.length > 0 && (
                                 <div className={cx('error-wrap')}>
                                     {error.map((item, index) => {
@@ -161,7 +205,14 @@ function ForgetPasswordForm() {
                             )}
                         </div>
                         <Button save classNames={cx('next-btn')} onClick={handleSubmit} disable={adoptCode}>
-                            Reset password
+                            {loadingSubmit ? (
+                                <FontAwesomeIcon
+                                    icon={faSpinner}
+                                    className="fa-solid fa-spinner fa-spin-pulse"
+                                />
+                            ) : (
+                                'Reset password'
+                            )}
                         </Button>
                     </div>
                 </>

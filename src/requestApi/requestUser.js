@@ -11,3 +11,9 @@ export const getUser = async (user_id) => {
 
     return result.data;
 };
+
+export const updatePassword = async (values) => {
+    const result = await request.put(`engcom/changepassWebUser`, values);
+
+    return result.data;
+};
