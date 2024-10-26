@@ -10,7 +10,7 @@ function CourseSidebar({ showNav, courseData }) {
             <div className={cx('heading')}>Unit process</div>
             <div className={cx('body')}>
                 {courseData.map((item, index) => {
-                    return <CourseItem data={item} key={index} />;
+                    return <CourseItem data={item} key={index} course_index={index} />;
                 })}
             </div>
         </div>

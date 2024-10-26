@@ -27,6 +27,8 @@ const imgs = {
     thank: require('./imgs/thank.gif'),
     thankBanner: require('./imgs/thankBanner.jpg'),
     togetherBanner: require('./imgs/together.jpg'),
+    studentBanner: require('./imgs/studentBanner.jpg'),
+    teacherBanner: require('./imgs/teacherBanner.jpg'),
 };
 
 export default imgs;

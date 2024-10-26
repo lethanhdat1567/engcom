@@ -60,16 +60,6 @@ function CreateLessonForm({ showCreateLesson, setShowCreateLesson, course_id }) 
                 </span>
             ),
         },
-        {
-            value: 3,
-            lesson: 'Exam',
-            icon: <FontAwesomeIcon icon={faBookOpen} />,
-            label: (
-                <span className={cx('type-wrap')}>
-                    <FontAwesomeIcon icon={faBookOpen} /> Exam
-                </span>
-            ),
-        },
     ];
 
     const handleSubmit = () => {

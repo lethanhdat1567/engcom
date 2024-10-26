@@ -23,7 +23,7 @@ import { toastify } from '~/utils/toast';
 
 const cx = classNames.bind(styles);
 
-function CourseTeacher({ data, index }) {
+function CourseTeacher({ data, course_index }) {
     const dispatch = useDispatch();
     const { slug } = useParams();
     const lessons = useSelector((state) => state.teacher.lessons);
@@ -33,7 +33,7 @@ function CourseTeacher({ data, index }) {
     const [moreEdit, setMoreEdit] = useState(false);
     const [deleteCourseLoading, setDeleteCourseLoading] = useState(false);
 
-    const lessonData = lessons.filter((item, index) => item.course_id === data.id);
+    const lessonData = lessons.filter((item, course_index) => item.course_id === data.id);
 
     const handleDeleteCourse = () => {
         if (slug && Object.keys(slug)?.length > 0) {
@@ -64,11 +64,11 @@ function CourseTeacher({ data, index }) {
     };
     return (
         <>
-            <div className={cx('course-wrap', { show: showLesson })} key={index}>
+            <div className={cx('course-wrap', { show: showLesson })} key={course_index}>
                 <div className={cx('course')} onClick={() => setShowLesson(!showLesson)}>
                     <div className={cx('course-header')}>
                         <h4 className={cx('title')}>
-                            {index + 1}. {data.name}
+                            {course_index + 1}. {data.name}
                         </h4>
                         <span className={cx('quantity')}>{lessonData.length} lesson available</span>
                     </div>
@@ -110,7 +110,14 @@ function CourseTeacher({ data, index }) {
                     {showUpdateCourse && <CreateCourse setShowCreate={setShowUpdateCourse} data={data} />}
                     <CreateLesson course_id={data.id} />
                     {lessonData.map((item, index) => {
-                        return <LessonTeacher key={index} data={item} index={index} />;
+                        return (
+                            <LessonTeacher
+                                key={index}
+                                data={item}
+                                index={index}
+                                course_index={course_index}
+                            />
+                        );
                     })}
                 </div>
             </div>

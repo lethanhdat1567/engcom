@@ -15,7 +15,7 @@ import { Button, Modal } from 'antd';
 import { toastify } from '~/utils/toast';
 const cx = classNames.bind(styles);
 
-function LessonTeacher({ data, index }) {
+function LessonTeacher({ data, index, course_index }) {
     const dispatch = useDispatch();
     const slug = useParams();
     const currentLesson = useSelector((state) => state.activeLesson.lesson);
@@ -23,6 +23,7 @@ function LessonTeacher({ data, index }) {
     const currentContent = contents.find((item) => item.lesson_id === data.id);
     const [showAlertModal, setShowAlertModal] = useState(false);
     const [deleteLessonLoading, setDeleteLessonLoading] = useState(false);
+    console.log(course_index);
 
     const handleDelete = () => {
         if (Number(data.id)) {
@@ -60,7 +61,7 @@ function LessonTeacher({ data, index }) {
                     onClick={() => dispatch(activeLesson.actions.setActiveLesson(data))}
                 >
                     <h5 className={cx('title')}>
-                        1.{index + 1} {data.name}
+                        {Number(course_index) + 1}.{index + 1} {data.name}
                     </h5>
                     <span className={cx('sub-title')}>{validateText(data.type)}</span>
                 </div>

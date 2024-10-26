@@ -9,7 +9,7 @@ import { course } from '~/redux/reducer/Course';
 
 const cx = classNames.bind(styles);
 
-function StudentLesson({ lesson, index }) {
+function StudentLesson({ lesson, index, course_index }) {
     // redux
     const activeLessonID = useSelector((state) => state.course.activeLessonID);
     const user = useSelector((state) => state.user.user);
@@ -38,7 +38,7 @@ function StudentLesson({ lesson, index }) {
             </span>
             <div className={cx('main')}>
                 <h5 className={cx('title')}>
-                    1.{index + 1} {lesson.name}
+                    {Number(course_index) + 1}.{Number(index) + 1} {lesson.name}
                 </h5>
                 <span className={cx('sub-title')}>{validateText(lesson.type)}</span>
             </div>
