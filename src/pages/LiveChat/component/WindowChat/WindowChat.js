@@ -18,7 +18,6 @@ const cx = classNames.bind(styles);
 function WindowChat({ selectedRoomID, setSelectedRoomID, isShowNav, setIsShowNav }) {
     const rooms = useSelector((state) => state.rooms.rooms);
     const user = useSelector((state) => state.user.user);
-
     const [allUserData, setAllUserData] = useState([]);
     const [selectedRoom, setSelectedRoom] = useState({});
     const [chatValue, setChatValue] = useState('');
@@ -158,7 +157,12 @@ function WindowChat({ selectedRoomID, setSelectedRoomID, isShowNav, setIsShowNav
                                         className={cx('send-input')}
                                         placeholder="Your message...."
                                         onChange={(e) => handleChange(e)}
-                                        onPressEnter={handleSubmit}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter') {
+                                                e.preventDefault(); // Prevent new line
+                                                handleSubmit(); // Call your submit function
+                                            }
+                                        }}
                                         style={{
                                             border: 'none',
                                             resize: 'none',

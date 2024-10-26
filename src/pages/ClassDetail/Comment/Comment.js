@@ -60,27 +60,29 @@ function Comment() {
     }, [valueComment]);
 
     const handleSubmit = () => {
-        const values = {
-            class_id: slug,
-            parent_id: null,
-            user_id: user.id,
-            content: valueComment,
-        };
-        setIsComment(false);
-        setValueComment('');
-        insertComment(values)
-            .then((res) => {
-                getComment(res.data.class_id)
-                    .then((res) => {
-                        setComments(res.data);
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        if (valueComment.trim()) {
+            const values = {
+                class_id: slug,
+                parent_id: null,
+                user_id: user.id,
+                content: valueComment,
+            };
+            setIsComment(false);
+            setValueComment('');
+            insertComment(values)
+                .then((res) => {
+                    getComment(res.data.class_id)
+                        .then((res) => {
+                            setComments(res.data);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
     };
     return (
         <div className={cx('comment-wrap')}>
@@ -106,7 +108,12 @@ function Comment() {
                                     value={valueComment}
                                     onFocus={() => setIsComment(true)}
                                     onChange={handleChange}
-                                    onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter') {
+                                            e.preventDefault();
+                                            handleSubmit();
+                                        }
+                                    }}
                                 />
                                 <div className={cx('com-utils')}>
                                     <button className={cx('com-cancle')} onClick={handleCancle}>

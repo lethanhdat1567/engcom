@@ -23,7 +23,6 @@ function LessonTeacher({ data, index, course_index }) {
     const currentContent = contents.find((item) => item.lesson_id === data.id);
     const [showAlertModal, setShowAlertModal] = useState(false);
     const [deleteLessonLoading, setDeleteLessonLoading] = useState(false);
-    console.log(course_index);
 
     const handleDelete = () => {
         if (Number(data.id)) {
@@ -55,7 +54,7 @@ function LessonTeacher({ data, index, course_index }) {
     return (
         <>
             <div className={cx('wrap', { active: currentLesson.id === data.id })}>
-                <span className={cx('decor')}>{<FontAwesomeIcon icon={validateIcon(data.type)} />}</span>
+                <span className={cx('decor')}>{<FontAwesomeIcon icon={validateIcon(data?.type)} />}</span>
                 <div
                     className={cx('main')}
                     onClick={() => dispatch(activeLesson.actions.setActiveLesson(data))}

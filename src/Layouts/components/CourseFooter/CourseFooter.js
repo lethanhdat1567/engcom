@@ -6,8 +6,8 @@ import { courseBack, sideBar } from '~/assets/Icon';
 import { useSelector } from 'react-redux';
 import useCourseUtils from '~/utils/useCourseUtils';
 import { useState } from 'react';
-import AskModal from '~/components/AskModal/AskModal';
 import Tippy from '@tippyjs/react';
+import { validateIcon } from '~/utils/validateIcon';
 
 const cx = classNames.bind(styles);
 
@@ -15,7 +15,6 @@ function CourseFooter({ setShowNav, showNav }) {
     const user = useSelector((state) => state.user.user);
     const currentLesson = useSelector((state) => state.course.selectedLesson);
     const { handleNextLesson, handlePrevLesson } = useCourseUtils();
-    const [askModal, setAskModal] = useState(false);
     const [showTippy, setShowTippy] = useState(false);
 
     const handleNext = () => {
@@ -29,17 +28,16 @@ function CourseFooter({ setShowNav, showNav }) {
     const handlePrev = () => {
         handlePrevLesson();
     };
+    console.log(validateIcon(currentLesson?.type));
 
     return (
         <>
             <footer className={cx('footer')}>
                 {user.role_id !== 4 && (
                     <>
-                        <Tippy content="Students question" placement="top-end">
-                            <div className={cx('ask')} onClick={() => setAskModal(true)}>
-                                <FontAwesomeIcon icon={faQuestion} />
-                            </div>
-                        </Tippy>
+                        <span className={cx('unit-wrap')}>
+                            <FontAwesomeIcon icon={validateIcon(currentLesson?.type)} />
+                        </span>
                         <div className={cx('lesson')}>
                             <div className={cx('btn-wrap', 'btn-prev')} onClick={handlePrev}>
                                 <span className={cx('btn-icon')}>
@@ -75,7 +73,6 @@ function CourseFooter({ setShowNav, showNav }) {
                     <span className={cx('side-bar-icon')}>{showNav ? courseBack : sideBar}</span>
                 </div>
             </footer>
-            <AskModal setAskModal={setAskModal} askModal={askModal} />
         </>
     );
 }

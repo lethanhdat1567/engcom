@@ -4,14 +4,14 @@ import { Avatar } from 'antd';
 import { handleTime } from '~/utils/handleTime';
 import { handleAvatar } from '~/utils/handleAvatar';
 import moment from 'moment';
+import { Timestamp } from 'firebase/firestore';
 
 const cx = classNames.bind(styles);
 
 function Message({ item }) {
-    const createdAtMillis = item.createdAt;
+    const createdAtMillis =
+        item.createdAt instanceof Timestamp ? item.createdAt.toDate().getTime() : item.createdAt;
     const createdAtMoment = moment(createdAtMillis);
-
-    const monthsAgo = moment().diff(createdAtMoment, 'months');
 
     return (
         <div className={cx('message')}>
@@ -19,7 +19,7 @@ function Message({ item }) {
                 <Avatar src={handleAvatar(item.avatar)} />
                 <div className={cx('message-info-head')}>
                     <span className={cx('user-name')}>{item.name}</span>
-                    <span className={cx('timmer')}>{handleTime(monthsAgo)}</span>
+                    <span className={cx('timmer')}>{handleTime(createdAtMoment)}</span>
                 </div>
             </div>
             <p className={cx('content')}>{item.text}</p>

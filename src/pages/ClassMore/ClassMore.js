@@ -29,7 +29,6 @@ function ClassMore() {
         const type = typeValue;
         const filter = filterValue;
         setLoading(true);
-        console.log(currentPage);
 
         getFilterClass(classValue, type, filter, currentPage, itemsPerPage) // Thêm tham số phân trang
             .then((res) => {

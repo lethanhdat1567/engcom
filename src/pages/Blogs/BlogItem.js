@@ -81,6 +81,8 @@ function BlogItem({ data }) {
             setShowRegisterModal(true);
         }
     };
+    console.log(blog);
+
     return (
         <>
             <section className={cx('blog')}>
@@ -143,10 +145,9 @@ function BlogItem({ data }) {
                     <div dangerouslySetInnerHTML={{ __html: content }} className={cx('body-desc')}></div>
                 </div>
                 <div className={cx('footer')}>
-                    <span className={cx('blog-info')}>{handleTime(data.updated_at || data.created_at)}</span>
+                    <span className={cx('blog-info')}>{handleTime(blog.updated_at)}</span>
                 </div>
             </section>
-
             {showRegisterModal && (
                 <Validate toggle={showRegisterModal} setToggle={setShowRegisterModal} field="Register" />
             )}
