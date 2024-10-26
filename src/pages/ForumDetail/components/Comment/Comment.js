@@ -1,7 +1,5 @@
 import classNames from 'classnames/bind';
 import styles from './Comment.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { Avatar, Button } from 'antd';
 import CommentItem from './CommentItem';
 import { useState } from 'react';
@@ -9,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { insertCommentPost } from '~/requestApi/requestPost';
 import { handleAvatar } from '~/utils/handleAvatar';
+import TextareaAutosize from 'react-textarea-autosize';
 
 const cx = classNames.bind(styles);
 
@@ -49,7 +48,13 @@ function Comment({ commentPost, setCommentPost }) {
             <div className={cx('heaad')}>
                 <div className={cx('comment-wrap')}>
                     <Avatar src={handleAvatar(user.avatar)} size="medium" style={{ flexShrink: 0 }} />
-                    <input
+                    <TextareaAutosize
+                        style={{
+                            border: 'none',
+                            resize: 'none',
+                            width: '100%',
+                            outline: 'none',
+                        }}
                         placeholder="write your comment..."
                         className={cx('comment-input')}
                         onChange={handleChange}

@@ -27,25 +27,25 @@ function Profile() {
                         <hr />
                         <ul className={cx('profile-list')}>
                             <li className={cx('profile-item')}>
-                                <Link className={cx('profile-item-link')}>Trang ca nhan</Link>
+                                <Link className={cx('profile-item-link')}>My profile</Link>
                             </li>
                         </ul>
                         <hr />
                         <ul className={cx('profile-list')}>
                             <li className={cx('profile-item')}>
-                                <Link className={cx('profile-item-link')}>Viet Blogs</Link>
+                                <Link className={cx('profile-item-link')}> Write Blogs</Link>
                             </li>
                             <li className={cx('profile-item')}>
-                                <Link className={cx('profile-item-link')}>Bai viet cua toi</Link>
+                                <Link className={cx('profile-item-link')}> My blogs</Link>
                             </li>
                             <li className={cx('profile-item')}>
-                                <Link className={cx('profile-item-link')}>Bai viet da luu</Link>
+                                <Link className={cx('profile-item-link')}> Saved blogs</Link>
                             </li>
                         </ul>
                         <hr />
                         <ul className={cx('profile-list')}>
                             <li className={cx('profile-item')}>
-                                <Link className={cx('profile-item-link')}>Dang xuat</Link>
+                                <Link className={cx('profile-item-link')}>Logout</Link>
                             </li>
                         </ul>
                     </div>

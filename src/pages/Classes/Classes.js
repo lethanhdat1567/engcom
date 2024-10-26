@@ -36,7 +36,7 @@ function Classes() {
                 <Skeleton count={1} height={50} style={{ marginBottom: '20px' }} />
             ) : (
                 <p className={cx('desc')}>
-                    Bạn có <span className={cx('mark')}>{classesData.length}</span> khóa học của bạn.
+                    You have <span className={cx('mark')}>{classesData.length}</span> courses to learn.
                 </p>
             )}
             <div className={cx('body')}>

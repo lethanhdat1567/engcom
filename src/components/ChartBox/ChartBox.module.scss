@@ -1,9 +1,13 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
 .wrap {
     width: 100%;
     display: flex;
     align-items: flex-start;
     gap: 20px;
     padding: 20px;
+    @include abs.screen(sm) {
+        flex-direction: column;
+    }
     .left {
         display: flex;
         flex-direction: column;
@@ -38,6 +42,9 @@
 .right {
     flex: 1;
     height: 150px;
+    @include abs.screen(sm) {
+        width: 100%;
+    }
 }
 .info-wrap {
     background-color: #fff !important;

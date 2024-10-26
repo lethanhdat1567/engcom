@@ -6,6 +6,7 @@ import HeaderAlert from '~/components/HeaderAlert/HeaderAlert';
 import ProfileHeader from '~/components/ProfileHeader/ProfileHeader';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Note from '~/components/Note/Note';
 
 const cx = classNames.bind(styles);
 
@@ -43,7 +44,7 @@ function HeaderSingle({ transparent }) {
             </div>
             {Object.keys(user).length > 0 && user.role_id !== 4 && (
                 <div className={cx('right')}>
-                    <HeaderAlert />
+                    <Note />
                     <ProfileHeader />
                 </div>
             )}

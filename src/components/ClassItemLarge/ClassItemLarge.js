@@ -10,13 +10,13 @@ const cx = classNames.bind(styles);
 function ClassItemLarge({ data }) {
     const classData = data.class;
     const infoItem = data.info;
-    console.log(classData.thumbnail);
 
     const { content } = extractContent(classData.description);
+    console.log(classData);
 
     return (
         <div className={cx('wrap')}>
-            <Link className={cx('img-link')} to={`${process.env.REACT_APP_ROOT}/class/${classData.class_id}`}>
+            <Link className={cx('img-link')} to={`${process.env.REACT_APP_ROOT}/class/${classData.id}`}>
                 <img
                     className={cx('img')}
                     src={

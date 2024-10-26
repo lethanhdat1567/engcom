@@ -33,6 +33,7 @@
         animation: scale ease 0.3s;
         @include abs.screen(sm) {
             width: 100%;
+            padding: 20px;
         }
         &:after {
             content: '';

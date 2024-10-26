@@ -77,10 +77,22 @@ function ProfileCourse() {
                                         to={`${process.env.REACT_APP_ROOT}/profile`}
                                         className={cx('profile-item-link')}
                                     >
-                                        Trang ca nhan
+                                        My profile
                                     </Link>
                                 </li>
                             </ul>
+                            <div className={cx('response')}>
+                                <ul className={cx('profile-list')}>
+                                    <li className={cx('profile-item')}>
+                                        <Link
+                                            to={`${process.env.REACT_APP_ROOT}/my-class`}
+                                            className={cx('profile-item-link')}
+                                        >
+                                            My Classes
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
                             <hr />
                             <ul className={cx('profile-list')}>
                                 <li className={cx('profile-item')}>
@@ -88,7 +100,7 @@ function ProfileCourse() {
                                         to={`${process.env.REACT_APP_ROOT}/new-post`}
                                         className={cx('profile-item-link')}
                                     >
-                                        Viet Blogs
+                                        Write Blogs
                                     </Link>
                                 </li>
                                 <li className={cx('profile-item')}>
@@ -96,7 +108,7 @@ function ProfileCourse() {
                                         to={`${process.env.REACT_APP_ROOT}/me/post`}
                                         className={cx('profile-item-link')}
                                     >
-                                        Bai viet cua toi
+                                        My blogs
                                     </Link>
                                 </li>
                                 <li className={cx('profile-item')}>
@@ -104,7 +116,7 @@ function ProfileCourse() {
                                         to={`${process.env.REACT_APP_ROOT}/me/bookmark`}
                                         className={cx('profile-item-link')}
                                     >
-                                        Bai viet da luu
+                                        Saved blogs
                                     </Link>
                                 </li>
                             </ul>
@@ -112,7 +124,7 @@ function ProfileCourse() {
                             <ul className={cx('profile-list')}>
                                 <li className={cx('profile-item')}>
                                     <Link className={cx('profile-item-link')} onClick={handleLogout}>
-                                        Dang xuat
+                                        Logout
                                     </Link>
                                 </li>
                             </ul>

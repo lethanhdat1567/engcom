@@ -1,13 +1,13 @@
 import classNames from 'classnames/bind';
 import styles from './Comment.module.scss';
 import { useEffect, useRef, useState } from 'react';
-import imgs from '~/assets/Image';
 import CommentItem from '~/components/CommentItem/CommentItem';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getComment, insertComment } from '~/requestApi/requestComment';
-import Img from '~/components/Img';
 import Skeleton from 'react-loading-skeleton';
+import { handleAvatar } from '~/utils/handleAvatar';
+import TextareaAutosize from 'react-textarea-autosize';
 
 const cx = classNames.bind(styles);
 
@@ -91,9 +91,15 @@ function Comment() {
                     <h2 className={cx('com-title')}>{comments.length} comments</h2>
                     <div className={cx('comment')}>
                         <div className={cx('com-head')}>
-                            <Img src={user.avatar || ''} className={cx('com-avatar')} />
+                            <img src={handleAvatar(user.avatar)} className={cx('com-avatar')} />
                             <div className={cx('com-input-wrap', { active: isComment })}>
-                                <input
+                                <TextareaAutosize
+                                    style={{
+                                        border: 'none',
+                                        resize: 'none',
+                                        width: '100%',
+                                        outline: 'none',
+                                    }}
                                     ref={commentRef}
                                     className={cx('com-input')}
                                     placeholder="Write comment..."

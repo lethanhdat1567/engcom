@@ -40,7 +40,7 @@ function TeacherHome() {
                 </div>
                 <div className="container">
                     <div className={cx('content')}>
-                        <h1 className={cx('title')}>Your class</h1>
+                        <h1 className={cx('title')}>Your classes</h1>
                         <div className={cx('classes')}>
                             <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-5">
                                 <div className="col">

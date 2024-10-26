@@ -1,7 +1,5 @@
 import classNames from 'classnames/bind';
 import styles from './UserAdmin.module.scss';
-import imgs from '~/assets/Image';
-import RoleItem from '~/pages/Role/components/RoleItem/RoleItem';
 import UserRole from '../UserRole/UserRole';
 import { handleAvatar } from '~/utils/handleAvatar';
 

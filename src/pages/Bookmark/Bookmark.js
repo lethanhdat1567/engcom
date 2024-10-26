@@ -65,7 +65,7 @@ function Bookmark() {
                             </div>
                         </div>
                     </div>
-                    <div className="col-12 col-lg-4">sdsd</div>
+                    <div className="col-12 col-lg-4 d-none d-lg-block">sdsd</div>
                 </div>
             </div>
         </div>

@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { ownData } from '~/redux/reducer/OwnDataSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
+import { Alert, Modal } from 'antd';
 
 const cx = classNames.bind(styles);
 
@@ -15,6 +16,7 @@ function NoteItem({ data, utils, setShowModal, setActiveNote }) {
     // redux
     const dispatch = useDispatch();
     const [deleteLoading, setDeleteLoading] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
 
     const handleDelete = async () => {
         if (!deleteLoading) {
@@ -23,6 +25,7 @@ function NoteItem({ data, utils, setShowModal, setActiveNote }) {
             const deleteUser = res.data.data;
             dispatch(ownData.actions.deleteNotes(deleteUser));
             setDeleteLoading(false);
+            setShowDelete(false);
         }
     };
     const handleUpdate = () => {
@@ -47,7 +50,7 @@ function NoteItem({ data, utils, setShowModal, setActiveNote }) {
                         <span className={cx('icon')} onClick={handleUpdate}>
                             {penNote}
                         </span>
-                        <span className={cx('icon')} onClick={handleDelete}>
+                        <span className={cx('icon')} onClick={() => setShowDelete(true)}>
                             {trashNote}
                         </span>
                     </div>
@@ -56,6 +59,14 @@ function NoteItem({ data, utils, setShowModal, setActiveNote }) {
                     <p dangerouslySetInnerHTML={{ __html: data.content }}></p>
                 </div>
             </div>
+            <Modal
+                title="Warning infomation"
+                open={showDelete}
+                onCancel={() => setShowDelete(false)}
+                onOk={handleDelete}
+            >
+                <Alert description="Are you sure you want to delete" type="error" showIcon />
+            </Modal>
         </>
     );
 }

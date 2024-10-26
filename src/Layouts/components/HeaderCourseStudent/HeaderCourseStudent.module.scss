@@ -1,3 +1,5 @@
+@use '../../../components/GlobalStyles/abstracts/' as abs;
+
 .wrap {
     display: flex;
     align-items: center;
@@ -12,6 +14,9 @@
     background: #191d1e;
     -webkit-backdrop-filter: blur(32px);
     backdrop-filter: blur(32px);
+    @include abs.screen(sm) {
+        padding: 0px 10px;
+    }
     .right {
         display: flex;
         align-items: center;
@@ -24,6 +29,9 @@
     align-items: center;
     gap: 10px;
     height: 100%;
+    @include abs.screen(sm) {
+        gap: 20px;
+    }
     .icon-back {
         display: flex;
         align-items: center;
@@ -33,6 +41,9 @@
         cursor: pointer;
         color: #fff;
         transition: background-color 0.3s ease, opacity 0.3s ease;
+        @include abs.screen(sm) {
+            padding: 0px 10px;
+        }
         &:hover {
             background-color: #4b4b4b;
             opacity: 0.7;

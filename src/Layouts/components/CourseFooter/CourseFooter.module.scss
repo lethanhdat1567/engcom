@@ -10,6 +10,9 @@
     align-items: center;
     justify-content: space-between;
     padding: 0px 12px;
+    @include abs.screen(sm) {
+        padding: 0px 4px;
+    }
     .unit {
         min-width: 100px;
         font-size: 1.4rem;
@@ -36,12 +39,13 @@
             border-radius: 10px; /* Áp dụng border-radius cho phần tử */
             border: 2px solid transparent;
             @include abs.screen(sm) {
-                width: 144px;
+                width: 130px;
+                gap: 2px;
             }
         }
         .btn-wrap.outlined {
             background: linear-gradient(#191d1e, #191d1e) padding-box,
-                /* Nền của phần tử */ linear-gradient(141.34deg, #5ebbff 0%, #a174ff 91.11%) border-box; /* Gradient cho border */
+                linear-gradient(141.34deg, #5ebbff 0%, #a174ff 91.11%) border-box; /* Gradient cho border */
         }
         .btn-wrap.active {
             background: linear-gradient(141.34deg, #5ebbff 0%, #a174ff 91.11%) border-box;
@@ -54,12 +58,15 @@
             font-weight: 500;
             background-color: transparent;
             color: #fff;
+            @include abs.screen(sm) {
+                font-size: 1.4rem;
+            }
         }
         .btn-prev {
             &:hover {
                 border: 2px solid transparent;
                 background: linear-gradient(#191d1e, #191d1e) padding-box,
-                    /* Nền của phần tử */ linear-gradient(141.34deg, #5ebbff 0%, #a174ff 91.11%) border-box; /* Gradient cho border */
+                    linear-gradient(141.34deg, #5ebbff 0%, #a174ff 91.11%) border-box; /* Gradient cho border */
             }
         }
     }

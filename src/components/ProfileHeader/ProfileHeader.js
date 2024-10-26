@@ -92,11 +92,10 @@ function ProfileHeader() {
                             </li>
                         </ul>
                         <div className={cx('response')}>
-                            <hr />
                             <ul className={cx('profile-list')}>
                                 <li className={cx('profile-item')} onClick={() => setShowDropdown(false)}>
                                     <Link
-                                        to={`${process.env.REACT_APP_ROOT}/profile`}
+                                        to={`${process.env.REACT_APP_ROOT}/my-class`}
                                         className={cx('profile-item-link')}
                                     >
                                         My Classes

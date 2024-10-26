@@ -1,3 +1,5 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
+
 .wrap {
     padding: 10px 0px;
     word-break: break-word; /* Breaks long words */
@@ -10,6 +12,9 @@
     margin: 10px 0px;
     font-size: 4rem;
     font-weight: 500;
+    @include abs.screen(sm) {
+        font-size: 2.6rem;
+    }
 }
 .user-info {
     display: flex;
@@ -20,24 +25,40 @@
         display: flex;
         align-items: center;
         gap: 20px;
+        @include abs.screen(sm) {
+            gap: 10px;
+        }
         .avatar {
             width: 60px;
             height: 60px;
             border-radius: 50%;
             object-fit: cover;
+            @include abs.screen(sm) {
+                width: 40px;
+                height: 40px;
+            }
         }
         .info {
             display: flex;
             flex-direction: column;
             gap: 10px;
+            @include abs.screen(sm) {
+                gap: 4px;
+            }
             .name {
                 font-size: 2rem;
                 font-weight: 500;
+                @include abs.screen(sm) {
+                    font-size: 1.8rem;
+                }
             }
             .timer {
                 font-size: 1.6rem;
                 font-weight: 400;
                 color: #4f4a4a;
+                @include abs.screen(sm) {
+                    font-size: 1.4rem;
+                }
             }
         }
     }

@@ -1,9 +1,11 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
 .wrap {
     position: relative;
     width: 100vw;
     height: 100vh;
     .back-wrap {
         z-index: 99;
+        color: #ccc;
         cursor: pointer;
         position: absolute;
         top: 20px;
@@ -45,6 +47,10 @@
         color: #d9dade;
         padding: 0px 10px;
         border-radius: 10px;
+        @include abs.screen(sm) {
+            top: 70px;
+            right: 0;
+        }
         .icon {
             background-color: #424155;
             padding: 10px;

@@ -12,6 +12,7 @@
     transform: translateX(100%);
     opacity: 0;
     visibility: hidden;
+    z-index: 999;
     @include abs.screen(lg) {
         width: 300px;
     }

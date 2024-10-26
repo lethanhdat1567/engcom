@@ -24,9 +24,9 @@ function Search() {
     // resize
     const handleResize = () => {
         if (window.innerWidth < 766) {
-            setSearchHoder('Search...');
+            setSearchHoder('Search classes, users...');
         } else {
-            setSearchHoder('Search classes, users, blogs, ...');
+            setSearchHoder('Search classes, users, ...');
         }
     };
     // Hooks

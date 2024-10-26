@@ -64,6 +64,13 @@
 .body {
     border-top: 1px solid #ccc;
     padding: 20px 10px;
+    .wrap-item {
+        width: 100%;
+        min-height: 688px;
+        @include abs.screen(md) {
+            min-height: auto;
+        }
+    }
 }
 .filter {
     width: 120px;
@@ -77,4 +84,10 @@
 .filter-wrap {
     display: flex;
     align-items: center;
+}
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0px;
 }

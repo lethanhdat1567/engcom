@@ -48,14 +48,16 @@ export const getUserClass = async (class_id) => {
     return result.data;
 };
 
-export const getFilterClass = async (class_type, type, filter) => {
+export const getFilterClass = async (class_type, type, filter, currentPage = 1, itemsPerPage = 10) => {
     const result = await request.get(`engcom/filterData`, {
         params: {
             class: class_type,
             type,
             filter,
+            page: currentPage, // Thêm tham số trang
+            limit: itemsPerPage, // Thêm tham số giới hạn
         },
     });
 
-    return result.data;
+    return result.data; // Giả sử server sẽ trả về dữ liệu theo định dạng mong muốn
 };

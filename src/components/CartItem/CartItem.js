@@ -3,9 +3,7 @@ import styles from './CartItem.module.scss';
 import { Link } from 'react-router-dom';
 import InfoItem from '../InfoItem/InfoItem';
 import imgs from '~/assets/Image';
-import { useState } from 'react';
-import Validate from '~/pages/Validate';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import InfoCart from './InfoCart';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
@@ -25,9 +23,10 @@ function CartItem({ data, create = false }) {
                 <div className={cx('wrap', { teacher: cartItem.id && create })}>
                     <Link
                         to={
-                            cartItem.id && create
+                            cartItem.id &&
+                            (create
                                 ? `${process.env.REACT_APP_ROOT}/own/${cartItem.id}`
-                                : `${process.env.REACT_APP_ROOT}/class/${cartItem.id}`
+                                : `${process.env.REACT_APP_ROOT}/class/${cartItem.id}`)
                         }
                         className={cx('banner')}
                     >

@@ -2,13 +2,12 @@ import classNames from 'classnames/bind';
 import styles from './AskModal.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner, faXmark } from '@fortawesome/free-solid-svg-icons';
-import imgs from '~/assets/Image';
-import CommentItem from '../CommentItem/CommentItem';
 import AskItem from './Component/AskItem/AskItem';
 import { useEffect, useState } from 'react';
 import { getAsk, insertAsk } from '~/requestApi/requestAsk';
 import { useSelector } from 'react-redux';
 import Img from '../Img';
+import TextareaAutosize from 'react-textarea-autosize';
 
 const cx = classNames.bind(styles);
 
@@ -91,11 +90,17 @@ function AskModal({ setAskModal, askModal }) {
                                 }
                                 alt="User Avatar"
                             />
-                            <input
+                            <TextareaAutosize
                                 onChange={(e) => handleChange(e)}
                                 className={cx('ask-input')}
                                 placeholder="your question..."
                                 value={inputQuestion}
+                                style={{
+                                    border: 'none',
+                                    resize: 'none',
+                                    width: '100%',
+                                    outline: 'none',
+                                }}
                                 onKeyDown={(e) => e.key === 'Enter' && handleComment()}
                             />
                         </div>

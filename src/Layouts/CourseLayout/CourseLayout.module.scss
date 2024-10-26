@@ -6,6 +6,9 @@
         min-height: calc(100vh - 50px);
         display: flex;
         padding: 20px;
+        @include abs.screen(sm) {
+            padding: 0;
+        }
     }
     .content {
         width: 77%;

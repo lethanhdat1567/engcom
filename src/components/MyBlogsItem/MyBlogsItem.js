@@ -9,6 +9,7 @@ import { deleteBlog, deleteSaveBlog } from '~/requestApi/requestBlog';
 import { useDispatch, useSelector } from 'react-redux';
 import { ownData } from '~/redux/reducer/OwnDataSlice';
 import { toastify } from '~/utils/toast';
+import { handleTime } from '~/utils/handleTime';
 
 const cx = classNames.bind(styles);
 
@@ -50,14 +51,13 @@ function MyBlogsItem({ data, setBlogItems, blogItems, type, deleting, setDeletin
                 });
         }
     };
+    console.log(data);
 
     return (
         <div className={cx('blog-item', { delete: deleting })}>
             <h3 className={cx('blog-title')}>{data?.title}</h3>
             <div className={cx('author')}>
-                <span className={cx('timer')}>Chinh sua 1 gio truoc</span>
-                <span className={cx('dot')}></span>
-                <span className={cx('timer')}>1 phut doc</span>
+                <span className={cx('timer')}>{handleTime(data?.updated_at)}</span>
             </div>
 
             {type === 'save' ? (

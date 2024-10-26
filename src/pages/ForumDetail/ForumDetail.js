@@ -19,6 +19,7 @@ import { validatePostLike, validatePostLikeValue } from '~/utils/validatePostLik
 import { post_like } from '~/redux/reducer/postLike';
 import Skeleton from 'react-loading-skeleton';
 import ZoomImage from '~/components/ZoomImage/ZoomImage';
+import { handleAvatar } from '~/utils/handleAvatar';
 
 const cx = classNames.bind(styles);
 
@@ -37,6 +38,9 @@ function ForumDetail() {
     const likeDebounce = useDebounce(likeValue, 500);
     const [isZoomIn, setIsZoomIn] = useState(false);
     const [zoomSrc, setZoomSrc] = useState('');
+
+    console.log('current_user: ', user);
+    console.log('user: ', postValue);
 
     const handleLike = () => {
         setIsLiked(!isLiked);
@@ -127,26 +131,28 @@ function ForumDetail() {
                     <FontAwesomeIcon icon={faRightFromBracket} />
                 </span>
                 <div className={cx('header')}>
-                    <Avatar style={{ flexShrink: '0' }}>A</Avatar>
+                    <Avatar style={{ flexShrink: '0' }} src={handleAvatar(postValue?.user?.avatar)} />
                     <h3 className={cx('title')}>{postValue?.user?.name}</h3>
                     <span className={cx('timer')}>{handleTime(postValue?.created_at)}</span>
-                    <Tippy
-                        interactive
-                        trigger="click"
-                        placement="bottom-end"
-                        render={(attrs) => (
-                            <div {...attrs} className={cx('dropdown')}>
-                                <span className={cx('drop-item')}>
-                                    <FontAwesomeIcon icon={faTrash} style={{ marginRight: '4px' }} />
-                                    Delete
-                                </span>
-                            </div>
-                        )}
-                    >
-                        <span className={cx('option')}>
-                            <FontAwesomeIcon icon={faEllipsisVertical} />
-                        </span>
-                    </Tippy>
+                    {user.id === postValue?.user?.user_id && (
+                        <Tippy
+                            interactive
+                            trigger="click"
+                            placement="bottom-end"
+                            render={(attrs) => (
+                                <div {...attrs} className={cx('dropdown')}>
+                                    <span className={cx('drop-item')}>
+                                        <FontAwesomeIcon icon={faTrash} style={{ marginRight: '4px' }} />
+                                        Delete
+                                    </span>
+                                </div>
+                            )}
+                        >
+                            <span className={cx('option')}>
+                                <FontAwesomeIcon icon={faEllipsisVertical} />
+                            </span>
+                        </Tippy>
+                    )}
                 </div>
                 <p className={cx('desc')}>{postValue?.content}</p>
                 <Slider setIsZoomIn={setIsZoomIn} setZoomSrc={setZoomSrc} images={postValue?.thumbnails} />

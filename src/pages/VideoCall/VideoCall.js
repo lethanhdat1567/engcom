@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './VideoCall.module.scss';
-import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
 import { startCallVideo } from '~/zegoClould/zegoService';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,7 +10,6 @@ import { useNavigate } from 'react-router-dom';
 import { arrayRemove, deleteDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '~/firebase/config';
 import { message } from 'antd';
-import { rooms } from '~/redux/reducer/RoomsSlice';
 import Draggable from 'react-draggable';
 import Tippy from '@tippyjs/react';
 import NotFound from '~/Layouts/NotFound/NotFound';
@@ -42,11 +40,8 @@ function VideoCall() {
     useEffect(() => {
         if (zoomValue && Object.keys(zoomValue).length > 0) {
             const element = document.getElementById('zego-embed');
-
             const roomID = zoomValue.zoom_id;
-
             const userName = user.name.replace(/\s+/g, '_');
-
             zegoUIKitRef.current = startCallVideo(roomID, userName, element);
         }
 
@@ -57,8 +52,6 @@ function VideoCall() {
                     members: arrayRemove(user.id),
                 })
                     .then(async () => {
-                        console.log(`User ${user.id} removed from members`);
-
                         const roomDoc = await getDoc(roomRef);
                         if (roomDoc.exists()) {
                             const currentMembers = roomDoc.data().members;
@@ -73,13 +66,13 @@ function VideoCall() {
             }
 
             if (zegoUIKitRef.current) {
-                console.log('123');
-
                 zegoUIKitRef.current.destroy();
                 dispatch(zoom.actions.deleteZoom());
             }
         };
-    }, []);
+    }, [zoomValue, user.id, dispatch]);
+
+    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
 
     return (
         <div className={cx('wrap')}>
@@ -93,7 +86,25 @@ function VideoCall() {
                     </div>
                     <div id="zego-embed" style={{ width: '100%', height: '100%' }} />
                     {showRoomId ? (
-                        <Draggable>
+                        !isMobile ? ( // Chỉ sử dụng Draggable nếu không phải là di động
+                            <Draggable>
+                                <div className={cx('zoom_id-wrap', 'expand')}>
+                                    <span
+                                        className={cx('icon')}
+                                        style={{ background: '#ac2727' }}
+                                        onClick={() => setShowRoomId(false)}
+                                    >
+                                        <FontAwesomeIcon icon={faXmark} />
+                                    </span>
+                                    <span className={cx('zoom_id')}>Your room ID: {zoomValue.zoom_id}</span>
+                                    <Tippy content="Copy">
+                                        <span className={cx('icon')} onClick={handleCopy}>
+                                            <FontAwesomeIcon icon={faCopy} />
+                                        </span>
+                                    </Tippy>
+                                </div>
+                            </Draggable>
+                        ) : (
                             <div className={cx('zoom_id-wrap', 'expand')}>
                                 <span
                                     className={cx('icon')}
@@ -109,7 +120,7 @@ function VideoCall() {
                                     </span>
                                 </Tippy>
                             </div>
-                        </Draggable>
+                        )
                     ) : (
                         <span className={cx('room-id-btn')} onClick={() => setShowRoomId(true)}>
                             Room ID

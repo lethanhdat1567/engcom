@@ -1,3 +1,4 @@
+@use '../../components/GlobalStyles/abstracts/' as abs;
 .wrap {
     position: fixed;
     overflow-y: scroll;
@@ -11,6 +12,12 @@
     opacity: 0;
     visibility: hidden;
     transition: ease 0.4s;
+    @include abs.screen(lg) {
+        width: 80%;
+    }
+    @include abs.screen(md) {
+        width: 100%;
+    }
     &.active {
         left: 0;
         visibility: visible;
@@ -47,6 +54,10 @@
         display: flex;
         align-items: center;
         gap: 10px;
+        @include abs.screen(sm) {
+            flex-direction: column;
+            align-items: end;
+        }
         .ask-content {
             width: 100%;
             display: flex;
@@ -62,7 +73,7 @@
         .ask-input {
             flex: 1;
             background-color: transparent;
-            border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid #ccc !important;
             color: #fff;
             padding-bottom: 8px;
             &::placeholder {
