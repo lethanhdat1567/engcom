@@ -16,9 +16,10 @@ import { edit, view } from '~/assets/Icon';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '~/components/Button';
+import { Button as ButtonAnt } from 'antd';
 import { useState } from 'react';
-import Modal from '~/components/Modal/Modal';
-import { Flex } from 'antd';
+import { Modal as ModalAnt } from 'antd';
+import { Alert, Flex } from 'antd';
 import { requestDeleteUpload, requestDeleteVideo } from '~/requestApi/requestUpload';
 import { teacher } from '~/redux/reducer/TeacherSlice';
 import Loading from '~/components/Loading/Loading';
@@ -43,6 +44,8 @@ function TeacherNavbar({ showNav, setShowNav }) {
     const contentsCreate = useSelector((state) => state.teacher.contents);
 
     const [showModal, setShowModal] = useState(false);
+    const [approveModal, setApproveModal] = useState(false);
+    const [denyModal, setDenyModal] = useState(false);
     const [isDelete, setIsDelete] = useState(false);
     const [approveLoading, setApproveLoading] = useState(false);
     const [denyLoading, setDenyLoading] = useState(false);
@@ -210,9 +213,11 @@ function TeacherNavbar({ showNav, setShowNav }) {
                 navigate('/admin/approve');
                 setApproveLoading(false);
                 toastify('Class have been approve', 'success', 2000, 'top-right');
+                setApproveModal(false);
             })
             .catch((error) => {
                 console.log(error);
+                setApproveModal(false);
                 setApproveLoading(false);
             });
     };
@@ -225,10 +230,12 @@ function TeacherNavbar({ showNav, setShowNav }) {
                 navigate('/admin/approve');
                 toastify('Class have been deny', 'success', 2000, 'top-right');
                 setDenyLoading(false);
+                setDenyModal(false);
             })
             .catch((error) => {
                 console.log(error);
                 setDenyLoading(false);
+                setDenyModal(false);
             });
     };
 
@@ -266,7 +273,7 @@ function TeacherNavbar({ showNav, setShowNav }) {
                         <Button
                             save
                             classNames={cx('approve-btn')}
-                            onClick={handleApprove}
+                            onClick={() => setApproveModal(true)}
                             disable={denyLoading}
                         >
                             {approveLoading ? (
@@ -278,7 +285,11 @@ function TeacherNavbar({ showNav, setShowNav }) {
                                 'Approve'
                             )}
                         </Button>
-                        <Button classNames={cx('delete-btn')} onClick={handleDeny} disable={approveLoading}>
+                        <Button
+                            classNames={cx('delete-btn')}
+                            onClick={() => setDenyModal(true)}
+                            disable={approveLoading}
+                        >
                             {denyLoading ? (
                                 <FontAwesomeIcon
                                     icon={faSpinner}
@@ -302,7 +313,7 @@ function TeacherNavbar({ showNav, setShowNav }) {
                     </>
                 )}
             </div>
-            <Modal toggle={showModal} setToggle={setShowModal}>
+            <ModalAnt toggle={showModal} setToggle={setShowModal}>
                 <div className={cx('modal')}>
                     <div className={cx('drop-head')}>
                         <span className={cx('modal-icon')}>
@@ -322,7 +333,39 @@ function TeacherNavbar({ showNav, setShowNav }) {
                         </Button>
                     </Flex>
                 </div>
-            </Modal>
+            </ModalAnt>
+            <ModalAnt
+                open={approveModal}
+                onCancel={() => {
+                    setApproveModal(false);
+                }}
+                title="Warning Information"
+                footer={[
+                    <ButtonAnt key="cancel" onClick={() => setApproveModal(false)}>
+                        Cancel
+                    </ButtonAnt>,
+                    <ButtonAnt key="approve" type="primary" loading={approveLoading} onClick={handleApprove}>
+                        Approve
+                    </ButtonAnt>,
+                ]}
+            >
+                <Alert type="info" description="Are you sure to approve this class?" showIcon />
+            </ModalAnt>
+
+            <ModalAnt
+                open={denyModal}
+                title="Warning Information"
+                footer={[
+                    <ButtonAnt key="cancel" onClick={() => setDenyModal(false)}>
+                        Cancel
+                    </ButtonAnt>,
+                    <ButtonAnt key="deny" type="primary" danger loading={denyLoading} onClick={handleDeny}>
+                        Deny
+                    </ButtonAnt>,
+                ]}
+            >
+                <Alert type="info" description="Are you sure to deny this class?" showIcon />
+            </ModalAnt>
         </>
     );
 }

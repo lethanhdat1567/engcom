@@ -8,10 +8,6 @@ const cx = classNames.bind(styles);
 function Footer() {
     const list = [
         {
-            title: 'UseFullLink',
-            children: ['Home', 'About us', 'Services', 'Community'],
-        },
-        {
             title: 'Contact Info',
             children: [
                 'Da Phuoc, Binh Chanh, Ho Chi Minh city',
@@ -24,22 +20,24 @@ function Footer() {
         },
         {
             title: 'Legal',
-            children: ['Website by daphuoc_broders', '©2024. All Rights Reserved'],
+            children: ['Developed by Bảo, Đạt, and Quân', '©2024. All Rights Reserved'],
         },
     ];
     return (
         <footer className={cx('footer')}>
             <div className="container">
                 <div className="row g-5">
-                    <div className="col-12 col-lg-2">
+                    <div className="col-12 col-lg-3">
                         <div className={cx('main')}>
                             <Logo white />
                             <p className={cx('main-desc')}>
-                                This's a website made by 3 members study at PTIT
+                                Welcome to our website, created by a dedicated team of three students from
+                                PTIT. We aim to foster a collaborative learning environment and connect
+                                individuals passionate about education.
                             </p>
                         </div>
                     </div>
-                    <div className="col-12 col-lg-10">
+                    <div className="col-12 col-lg-9">
                         <div className={cx('list-wrap')}>
                             {list.map((item, index) => {
                                 return (

@@ -12,7 +12,6 @@ function ClassItemLarge({ data }) {
     const infoItem = data.info;
 
     const { content } = extractContent(classData.description);
-    console.log(classData);
 
     return (
         <div className={cx('wrap')}>

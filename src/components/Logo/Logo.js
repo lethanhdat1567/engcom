@@ -27,7 +27,7 @@ function Logo({ white, className = false }) {
             <span className={cx('logo-icon', { white: white })}>
                 <FontAwesomeIcon icon={faBookOpenReader} className="fa-xl" />
             </span>
-            <p className={cx('logo-desc', { white: white })}>English Community</p>
+            <p className={cx('logo-desc', { white: white })}>Education Community</p>
         </Link>
     );
 }

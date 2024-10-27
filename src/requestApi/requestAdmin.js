@@ -20,6 +20,11 @@ export const getBlog = async (class_id) => {
 
     return result.data;
 };
+export const showDeletedClass = async (user_id) => {
+    const result = await request.get(`engcom/GetClasses/${user_id}`);
+
+    return result.data;
+};
 // DELETE
 export const deleteClass = async (class_id) => {
     const result = await request.delete(`engcom/class/${class_id}`);
