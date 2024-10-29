@@ -105,7 +105,7 @@ function TeacherHome() {
                     {deletedClasses.length > 0 ? (
                         deletedClasses.length > 0 &&
                         deletedClasses.map((item, index) => {
-                            return <ClassItemLarge data={{ class: item }} key={index} />;
+                            return <ClassItemLarge data={{ class: item }} key={index} role />;
                         })
                     ) : (
                         <span className={cx('empty-class')}>You don't have any deleted classes</span>

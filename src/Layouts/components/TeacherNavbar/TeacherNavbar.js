@@ -151,10 +151,14 @@ function TeacherNavbar({ showNav, setShowNav }) {
         }
     };
     const handleDeleteCart = () => {
+        console.log('test');
+
         setShowModal(true);
         setIsDelete(true);
     };
     const handleCancle = () => {
+        console.log(!slug);
+
         if (!slug) {
             setShowModal(true);
             return;
@@ -308,12 +312,18 @@ function TeacherNavbar({ showNav, setShowNav }) {
                             </Button>
                         )}
                         <Button classNames={cx('cancle-btn')} onClick={handleCancle}>
-                            {slug ? 'Back to home' : 'Cancle class'}
+                            {slug ? 'Back to home' : 'Cancel class'}
                         </Button>
                     </>
                 )}
             </div>
-            <ModalAnt toggle={showModal} setToggle={setShowModal}>
+            <ModalAnt
+                open={showModal}
+                onCancel={() => {
+                    setShowModal(false);
+                }}
+                footer={false}
+            >
                 <div className={cx('modal')}>
                     <div className={cx('drop-head')}>
                         <span className={cx('modal-icon')}>

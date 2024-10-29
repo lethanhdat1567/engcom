@@ -1,13 +1,13 @@
 import classNames from 'classnames/bind';
 import styles from './ClassItemLarge.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import InfoItem from '../InfoItem/InfoItem';
 import imgs from '~/assets/Image';
 import extractContent from '~/utils/extractContent';
 
 const cx = classNames.bind(styles);
 
-function ClassItemLarge({ data }) {
+function ClassItemLarge({ data, role = false }) {
     const classData = data.class;
     const infoItem = data.info;
 
@@ -15,7 +15,10 @@ function ClassItemLarge({ data }) {
 
     return (
         <div className={cx('wrap')}>
-            <Link className={cx('img-link')} to={`${process.env.REACT_APP_ROOT}/class/${classData.id}`}>
+            <Link
+                className={cx('img-link')}
+                to={role ? '' : `${process.env.REACT_APP_ROOT}/class/${classData.id}`}
+            >
                 <img
                     className={cx('img')}
                     src={
@@ -28,7 +31,7 @@ function ClassItemLarge({ data }) {
             <div className={cx('info')}>
                 <div className={cx('wrap-info')}>
                     <h2 className={cx('title')}>
-                        <Link to={`${process.env.REACT_APP_ROOT}/class/${classData.class_id}`}>
+                        <Link to={role ? '' : `${process.env.REACT_APP_ROOT}/class/${classData.class_id}`}>
                             {classData.title}
                         </Link>
                     </h2>

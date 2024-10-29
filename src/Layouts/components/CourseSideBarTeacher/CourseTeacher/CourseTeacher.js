@@ -92,7 +92,7 @@ function CourseTeacher({ data, course_index }) {
                                     <FontAwesomeIcon icon={faSquarePlus} />
                                 </span>
                                 <span className={cx('create-desc')}>
-                                    {showUpdateCourse ? 'Cancle' : 'Update'} course
+                                    {showUpdateCourse ? 'Cancel' : 'Update'} course
                                 </span>
                             </div>
                             {/* Delete */}
