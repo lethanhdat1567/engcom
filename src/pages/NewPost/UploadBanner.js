@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { Button, Flex } from 'antd';
 import { requestDeleteUpload } from '~/requestApi/requestUpload';
 import VideoLoading from '~/components/Loading/VideoLoading/VideoLoading';
+import { toastify } from '~/utils/toast';
 
 const cx = classNames.bind(styles);
 
@@ -29,6 +30,7 @@ function UploadBanner({ setThumnailValue, thumbnailValue }) {
             })
             .catch((error) => {
                 console.log(error);
+                toastify('The image size is too large.', 'error', 2000, 'top-right');
                 setLoading(false);
             });
     };
@@ -42,7 +44,6 @@ function UploadBanner({ setThumnailValue, thumbnailValue }) {
                 .catch((error) => console.log(error));
         }
     };
-    console.log(thumbnailValue);
 
     return thumbnailValue ? (
         <div className={cx('banner-wrap')}>

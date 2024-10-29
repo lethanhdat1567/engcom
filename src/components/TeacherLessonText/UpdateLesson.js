@@ -61,7 +61,7 @@ function UpdateLesson({ data, setIsUpdate }) {
         <div className={cx('create')}>
             <Flex justify="end" gap={10} style={{ marginBottom: 10 }}>
                 <Button type="primary" danger onClick={() => setIsUpdate(false)}>
-                    Cancle
+                    Cancel
                 </Button>
                 <Button type="primary" onClick={handleSave}>
                     {loadingContent ? (

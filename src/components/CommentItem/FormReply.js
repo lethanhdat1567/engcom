@@ -68,7 +68,7 @@ function FormReply({ isReply, setIsReply, parent_id, setResponses }) {
                 />
                 <div className={cx('com-utils')}>
                     <button className={cx('com-cancle')} onClick={handleCancle}>
-                        Cancle
+                        Cancel
                     </button>
                     <button className={cx('com-submit', { active: isAdopt })} onClick={handleSubmit}>
                         Comment

@@ -33,20 +33,6 @@ function BlogItem({ data }) {
     const { blog, user } = data;
     const { content } = extractContent(blog?.content);
 
-    const ellipData = [
-        {
-            title: 'Chia se len Facebook',
-            icon: <FontAwesomeIcon icon={faFacebook} />,
-        },
-        {
-            title: 'Chia se len Instagram',
-            icon: <FontAwesomeIcon icon={faInstagram} />,
-        },
-        {
-            title: 'Chia se len Twitter',
-            icon: <FontAwesomeIcon icon={faTwitter} />,
-        },
-    ];
     const handleSaveBlog = () => {
         if (Object.keys(guest).length > 0) {
             setLoading(true);
@@ -81,7 +67,6 @@ function BlogItem({ data }) {
             setShowRegisterModal(true);
         }
     };
-    console.log(blog);
 
     return (
         <>
@@ -145,6 +130,7 @@ function BlogItem({ data }) {
                     <div dangerouslySetInnerHTML={{ __html: content }} className={cx('body-desc')}></div>
                 </div>
                 <div className={cx('footer')}>
+                    {console.log(blog.updated_at)}
                     <span className={cx('blog-info')}>{handleTime(blog.updated_at)}</span>
                 </div>
             </section>

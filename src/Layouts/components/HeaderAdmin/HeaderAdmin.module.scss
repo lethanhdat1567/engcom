@@ -1,6 +1,7 @@
+@use '../../../components/GlobalStyles/abstracts/' as abs;
 .admin {
     padding: 20px;
-    width: 1500px;
+    width: 100%;
     margin: 0 auto;
 }
 .wrapper {
@@ -26,6 +27,9 @@
     .icon {
         color: #fff;
         cursor: pointer;
+    }
+    @include abs.screen(sm) {
+        gap: 10px;
     }
 }
 

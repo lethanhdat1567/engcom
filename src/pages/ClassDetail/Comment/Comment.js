@@ -117,7 +117,7 @@ function Comment() {
                                 />
                                 <div className={cx('com-utils')}>
                                     <button className={cx('com-cancle')} onClick={handleCancle}>
-                                        Cancle
+                                        Cancel
                                     </button>
                                     <button
                                         className={cx('com-submit', { active: isAdopt })}

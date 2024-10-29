@@ -101,6 +101,10 @@ const teacherPage = [
     { path: '/blogs/:slug', element: BlogsDetail, layout: HeaderOnly },
     { path: '/me/post', element: MyBlogs },
     { path: '/me/bookmark', element: Bookmark },
+    { path: '/profile/:slug', element: Profile, layout: SingleLayout },
+    { path: '/post/:slug', element: UpdateBLog, layout: HeaderOnly },
+    { path: '/search', element: SearchMore },
+
     // Update class
     { path: '/own/:slug/', element: TeacherClassHome, layout: TeacherClassLayout },
     { path: '/own/:slug/overview', element: TeacherClassOverView, layout: TeacherClassLayout },

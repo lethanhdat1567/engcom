@@ -129,7 +129,7 @@ function FormZoom() {
                             </div>
                             <Flex gap={10} justify="end" style={{ marginTop: 'auto' }}>
                                 <Button type="primary" danger onClick={() => navigate('/community/meeting')}>
-                                    Cancle
+                                    Cancel
                                 </Button>
                                 <Button type="primary" onClick={handleSubmit}>
                                     {loading ? (

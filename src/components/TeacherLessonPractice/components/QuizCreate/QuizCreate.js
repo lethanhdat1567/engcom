@@ -151,7 +151,7 @@ function QuizCreate() {
                                 />
                                 <Flex gap="small">
                                     <Button type="primary" danger onClick={() => setQuestionInput(false)}>
-                                        Cancle
+                                        Cancel
                                     </Button>
                                     <Button
                                         disabled={!questionValue.trim()}

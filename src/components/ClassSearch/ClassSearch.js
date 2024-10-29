@@ -7,8 +7,9 @@ const cx = classNames.bind(styles);
 
 function ClassSearch({ data }) {
     const classData = data.class;
+
     return (
-        <Link to={`${process.env.REACT_APP_ROOT}/class/${data.class_id}`}>
+        <Link to={`${process.env.REACT_APP_ROOT}/class/${classData.class_id}`}>
             <div className={cx('wrap')}>
                 <img
                     src={

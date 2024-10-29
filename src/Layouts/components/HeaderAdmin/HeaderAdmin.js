@@ -1,12 +1,8 @@
 import classNames from 'classnames/bind';
 import styles from './HeaderAdmin.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell } from '@fortawesome/free-regular-svg-icons';
-import { faChevronDown, faGear } from '@fortawesome/free-solid-svg-icons';
-import { Button, Dropdown, Space } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
+import { Button } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import Logo from '~/components/Logo/Logo';
-import ProfileCourse from '~/components/ProfileCourse/ProfileCourse';
 import { useState } from 'react';
 import { signOut } from 'firebase/auth';
 import { logoutRequest } from '~/requestApi/requestSocial';

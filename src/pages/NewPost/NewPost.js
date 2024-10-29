@@ -43,6 +43,8 @@ function NewPost() {
             navigate('/me/post');
             toastify('Create blog success', 'success', 2000, 'top-right');
         } catch (error) {
+            toastify('Title and description are require', 'error', 2000, 'top-right');
+            setLoading(false);
             console.error('Error details:', error.response ? error.response.data : error.message);
         }
     };

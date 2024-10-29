@@ -7,6 +7,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getUserClass } from '~/requestApi/requestClass';
 import Skeleton from 'react-loading-skeleton';
+import { handleAvatar } from '~/utils/handleAvatar';
 
 const cx = classNames.bind(styles);
 
@@ -19,13 +20,7 @@ function TeacherClassUser() {
             title: 'Avatar',
             dataIndex: 'avatar',
             key: 'avatar',
-            render: (avatar) => (
-                <img
-                    src={`${process.env.REACT_APP_BACKEND_UPLOAD}/${avatar}`}
-                    alt="User Avatar"
-                    className={cx('avatar')}
-                />
-            ),
+            render: (avatar) => <img src={handleAvatar(avatar)} alt="User Avatar" className={cx('avatar')} />,
         },
         {
             title: 'Name',
@@ -42,21 +37,6 @@ function TeacherClassUser() {
             title: 'Progress',
             dataIndex: 'progress',
             key: 'progress',
-        },
-
-        {
-            title: 'Utils',
-            key: 'action',
-            render: (_, record) => (
-                <div className={cx('utils')}>
-                    <Link className={cx('icon')} style={{ color: 'red' }}>
-                        <FontAwesomeIcon icon={faTrash} className="fa-xl" />
-                    </Link>
-                    <Link className={cx('icon')} style={{ color: 'blue' }}>
-                        <FontAwesomeIcon icon={faPenToSquare} className="fa-xl" />
-                    </Link>
-                </div>
-            ),
         },
     ];
     useEffect(() => {

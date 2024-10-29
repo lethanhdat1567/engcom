@@ -326,7 +326,7 @@ function TeacherNavbar({ showNav, setShowNav }) {
                     </div>
                     <Flex gap={10} justify="right">
                         <Button classNames={cx('btn-cancle')} onClick={() => setShowModal(false)}>
-                            Cancle
+                            Cancel
                         </Button>
                         <Button save onClick={handleAdopt}>
                             I got it

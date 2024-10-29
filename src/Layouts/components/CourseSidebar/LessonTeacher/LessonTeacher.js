@@ -76,7 +76,7 @@ function LessonTeacher({ data, index, course_index }) {
                 onCancel={() => setShowAlertModal(false)}
                 footer={[
                     <Button key="cancel" onClick={() => setShowAlertModal(false)}>
-                        Cancle
+                        Cancel
                     </Button>,
                     <Button key="confirm" type="primary" onClick={handleDelete}>
                         {deleteLessonLoading ? (

@@ -43,7 +43,6 @@ function TeacherHome() {
     useEffect(() => {
         showDeletedClass(user.id)
             .then((res) => {
-                console.log(res);
                 setDeletedClasses(res);
             })
             .catch((error) => {
@@ -103,10 +102,14 @@ function TeacherHome() {
                 }
             >
                 <div className={cx('class-wrap')}>
-                    {deletedClasses.length > 0 &&
+                    {deletedClasses.length > 0 ? (
+                        deletedClasses.length > 0 &&
                         deletedClasses.map((item, index) => {
                             return <ClassItemLarge data={{ class: item }} key={index} />;
-                        })}
+                        })
+                    ) : (
+                        <span className={cx('empty-class')}>You don't have any deleted classes</span>
+                    )}
                 </div>
             </Modal>
         </>

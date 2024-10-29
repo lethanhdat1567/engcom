@@ -38,7 +38,6 @@ function UpdateBLog() {
             content: editorContent,
             thumbnail: thumbnailValue,
         };
-
         try {
             const res = await updateBlog(blogId, values);
             setLoading(false);
@@ -53,12 +52,12 @@ function UpdateBLog() {
         setLoading(true);
         readBlog(slug)
             .then((res) => {
-                setTitleValue(res.data.title);
-                setEditorContent(res.data.content);
-                setBlogId(res.data.id);
-                setThumbnalValue(res.data.thumbnail);
+                setTitleValue(res.data.blog.title);
+                setEditorContent(res.data.blog.content);
+                setBlogId(res.data.blog.id);
+                setThumbnalValue(res.data.blog.thumbnail);
                 setLoading(false);
-                console.log(res.data);
+                console.log(res);
             })
             .catch((error) => {
                 console.log(error);

@@ -76,7 +76,7 @@ function MyBlogsItem({ data, setBlogItems, blogItems, type, deleting, setDeletin
                                             style={{ width: '100%', height: '100%' }}
                                             className={cx('link')}
                                         >
-                                            Chinh sua
+                                            Update
                                         </Link>
                                     </li>
                                     <li className={cx('drop-item')} onClick={handleDelete}>
