@@ -128,7 +128,7 @@ function Form({ type, setToggle }) {
                     dispatch(usersSlice.actions.getUser(res.data.user));
                     setLoading(false);
                     setToggle(false);
-                    if (role === 1) {
+                    if (role == 1) {
                         navigate(`/user/role`);
                     }
                 })
@@ -155,7 +155,7 @@ function Form({ type, setToggle }) {
                     dispatch(usersSlice.actions.getToken(res.data.access_token));
                     setLoading(false);
                     setToggle(false);
-                    if (role === 1) {
+                    if (role == 1) {
                         navigate(`/user/role`);
                     }
                 })
