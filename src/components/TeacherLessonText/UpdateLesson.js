@@ -6,7 +6,7 @@ import { Button, Flex } from 'antd';
 import { useDispatch } from 'react-redux';
 import { teacher } from '~/redux/reducer/TeacherSlice';
 import { useParams } from 'react-router-dom';
-import { createContentUpdate, updateContentUpdate } from '~/requestApi/requestUpdateClass';
+import { updateContentUpdate } from '~/requestApi/requestUpdateClass';
 import { toastify } from '~/utils/toast';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';

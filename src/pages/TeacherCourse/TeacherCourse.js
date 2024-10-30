@@ -1,11 +1,7 @@
-import classNames from 'classnames/bind';
-import styles from './TeacherCourse.module.scss';
 import TeacherLessonVideo from '~/components/TeacherLessonVideo/TeacherLessonVideo';
 import TeacherLessonText from '~/components/TeacherLessonText/TeacherLessonText';
 import TeacherLessonPractice from '~/components/TeacherLessonPractice/TeacherLessonPractice';
 import { useSelector } from 'react-redux';
-
-const cx = classNames.bind(styles);
 
 function TeacherCourse() {
     const activeLesson = useSelector((state) => state.activeLesson.lesson);

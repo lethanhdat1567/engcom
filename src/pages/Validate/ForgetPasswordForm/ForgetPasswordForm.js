@@ -2,7 +2,6 @@ import classNames from 'classnames/bind';
 import styles from './ForgetPasswordForm.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookOpenReader, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { Form, Input } from 'antd';
 import { errorIcon } from '~/assets/Icon';
 import Button from '~/components/Button';
 import { useEffect, useRef, useState } from 'react';

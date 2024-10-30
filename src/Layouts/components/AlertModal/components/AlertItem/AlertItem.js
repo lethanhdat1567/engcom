@@ -1,6 +1,5 @@
 import classNames from 'classnames/bind';
 import styles from './AlertItem.module.scss';
-import imgs from '~/assets/Image';
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner, faTrash } from '@fortawesome/free-solid-svg-icons';

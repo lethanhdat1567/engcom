@@ -1,6 +1,5 @@
 import classNames from 'classnames/bind';
 import styles from './ReplyItem.module.scss';
-import imgs from '~/assets/Image';
 import Tippy from '@tippyjs/react/headless';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical, faTrash } from '@fortawesome/free-solid-svg-icons';

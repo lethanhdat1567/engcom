@@ -1,7 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './LessonVideo.module.scss';
 import ReactPlayer from 'react-player/youtube';
-import { useSelector } from 'react-redux';
 import useCourseUtils from '~/utils/useCourseUtils';
 import NoContenLoading from '~/components/Loading/NoContentLoading/NoContenLoading';
 

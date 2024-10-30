@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './StudentLesson.module.scss';
 import { checked } from '~/assets/Icon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { validateIcon, validateText } from '~/utils/validateIcon';
 import { useDispatch, useSelector } from 'react-redux';
 import { course } from '~/redux/reducer/Course';

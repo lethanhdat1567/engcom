@@ -9,7 +9,6 @@ import { createBlog } from '~/requestApi/requestBlog';
 import { useNavigate } from 'react-router-dom';
 import Loading from '~/components/Loading/Loading';
 import UploadBanner from './UploadBanner';
-import { Bounce, toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toastify } from '~/utils/toast';
 

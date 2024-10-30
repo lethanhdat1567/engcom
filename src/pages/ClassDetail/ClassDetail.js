@@ -1,7 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './ClassDetail.module.scss';
 import imgs from '~/assets/Image';
-import Button from '~/components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faUser } from '@fortawesome/free-solid-svg-icons';
 import Comment from './Comment/Comment';
@@ -12,7 +11,6 @@ import ClassDetailLoading from '~/components/Loading/ClassDetailLoading/ClassDet
 import Img from '~/components/Img';
 import JoinClass from './JoinClass/JoinClass';
 import { handleAvatar } from '~/utils/handleAvatar';
-import InfoCart from '~/components/CartItem/InfoCart';
 
 const cx = classNames.bind(styles);
 

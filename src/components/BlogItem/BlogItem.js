@@ -1,12 +1,8 @@
 import classNames from 'classnames/bind';
 import styles from './BlogItem.module.scss';
 import { Link } from 'react-router-dom';
-import InfoItem from '../InfoItem/InfoItem';
 import imgs from '~/assets/Image';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
 import extractContent from '~/utils/extractContent';
-import { handleAvatar } from '~/utils/handleAvatar';
 import Img from '../Img';
 
 const cx = classNames.bind(styles);

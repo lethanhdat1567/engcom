@@ -6,6 +6,7 @@ import { readListBlog } from '~/requestApi/requestBlog';
 import { useSelector } from 'react-redux';
 import MyBlogsItem from '~/components/MyBlogsItem/MyBlogsItem';
 import SkeletonLoading from '~/components/Loading/SkeletonLoading';
+import imgs from '~/assets/Image';
 
 const cx = classNames.bind(styles);
 
@@ -33,7 +34,7 @@ function MyBlogs() {
             </div>
             <div className={cx('body')}>
                 <div className="row">
-                    <div className="col-12 col-lg-8">
+                    <div className="col-12 col-lg-9">
                         <div className={cx('list-wrap')}>
                             <ul className={cx('list')}>
                                 <li className={cx('item')}>
@@ -59,7 +60,9 @@ function MyBlogs() {
                             )}
                         </div>
                     </div>
-                    <div className="col-12 col-lg-4 d-none d-lg-block">sdsd</div>
+                    <div className="col-12 col-lg-3 d-none d-lg-block">
+                        <img className={cx('promotion')} src={imgs.blog2} />
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,7 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './Footer.module.scss';
 import Logo from '~/components/Logo/Logo';
-import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -20,7 +19,7 @@ function Footer() {
         },
         {
             title: 'Legal',
-            children: ['Developed by Bảo, Đạt, and Quân', '©2024. All Rights Reserved'],
+            children: ['Developed by Đạt, Quân, Bảo', '©2024. All Rights Reserved'],
         },
     ];
     return (

@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './CourseFooter.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight, faQuestion } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { courseBack, sideBar } from '~/assets/Icon';
 import { useSelector } from 'react-redux';
 import useCourseUtils from '~/utils/useCourseUtils';

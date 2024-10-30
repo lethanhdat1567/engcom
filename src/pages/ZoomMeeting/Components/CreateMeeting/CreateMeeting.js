@@ -2,11 +2,10 @@ import classNames from 'classnames/bind';
 import styles from './CreateMeeting.module.scss';
 import imgs from '~/assets/Image';
 import { Form, Input, Modal } from 'antd';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'antd/es/form/Form';
 import { addDocument, updateDocument } from '~/firebase/service';
 import { useDispatch, useSelector } from 'react-redux';
-import useFirestore from '~/hooks/useFirestore';
 import { zoom } from '~/redux/reducer/ZoomSlice';
 import { useNavigate } from 'react-router-dom';
 

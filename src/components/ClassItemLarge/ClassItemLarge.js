@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './ClassItemLarge.module.scss';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import InfoItem from '../InfoItem/InfoItem';
 import imgs from '~/assets/Image';
 import extractContent from '~/utils/extractContent';
@@ -32,7 +32,7 @@ function ClassItemLarge({ data, role = false }) {
                 <div className={cx('wrap-info')}>
                     <h2 className={cx('title')}>
                         <Link to={role ? '' : `${process.env.REACT_APP_ROOT}/class/${classData.class_id}`}>
-                            {classData.title}
+                            {classData.name}
                         </Link>
                     </h2>
                     <div className={cx('desc')} dangerouslySetInnerHTML={{ __html: content }}></div>

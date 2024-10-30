@@ -1,10 +1,9 @@
 import classNames from 'classnames/bind';
 import styles from './CommentItem.module.scss';
-import imgs from '~/assets/Image';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getComment, getResponseComment, insertComment } from '~/requestApi/requestComment';
+import { getResponseComment, insertComment } from '~/requestApi/requestComment';
 import Img from '../Img';
 
 const cx = classNames.bind(styles);

@@ -4,7 +4,7 @@ import './DataTable.scss';
 import { Alert, Button, Modal, Table } from 'antd';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faPenSquare, faSpinner, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faSpinner, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
 import { useState } from 'react';
 import { ClipLoader } from 'react-spinners';

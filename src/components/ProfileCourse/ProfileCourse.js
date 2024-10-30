@@ -2,7 +2,6 @@ import classNames from 'classnames/bind';
 import styles from './ProfileCourse.module.scss';
 import Tippy from '@tippyjs/react/headless';
 import { Link, useNavigate } from 'react-router-dom';
-import imgs from '~/assets/Image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';

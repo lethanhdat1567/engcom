@@ -1,14 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './Profile.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faEnvelope,
-    faLocationDot,
-    faPhone,
-    faPlus,
-    faUser,
-    faVenusMars,
-} from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faLocationDot, faPhone, faPlus, faVenusMars } from '@fortawesome/free-solid-svg-icons';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 

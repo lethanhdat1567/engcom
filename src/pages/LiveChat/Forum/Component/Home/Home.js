@@ -5,7 +5,6 @@ import CreatePost from '../CreatePost/CreatePost';
 import { useEffect, useState } from 'react';
 import { getAllLikePost, getAllPost } from '~/requestApi/requestPost';
 import { useDispatch, useSelector } from 'react-redux';
-import { error } from 'jodit/esm/core/helpers';
 import { post_like } from '~/redux/reducer/postLike';
 import ForumItemLoading from '~/components/Loading/ForumItemLoading/ForumItemLoading';
 

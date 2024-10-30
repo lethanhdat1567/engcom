@@ -45,7 +45,7 @@ function BlogsDetail() {
             });
     }, []);
     const handleSaveBlog = () => {
-        if (Object.keys(guest).length > 0) {
+        if (Object.keys(guest).length > 0 && guest.role_id !== 1) {
             setSaveBlogLoading(true);
             insertSaveBlog(guest.id, content.id)
                 .then((res) => {
@@ -62,7 +62,7 @@ function BlogsDetail() {
         }
     };
     const handleUnSave = () => {
-        if (Object.keys(guest).length > 0) {
+        if (Object.keys(guest).length > 0 && guest.role_id !== 1) {
             setSaveBlogLoading(true);
             deleteSaveBlog(guest.id, content.id)
                 .then((res) => {

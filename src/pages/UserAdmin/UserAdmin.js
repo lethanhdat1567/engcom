@@ -1,9 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './UserAdmin.module.scss';
-import { Button, Select } from 'antd';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { Select } from 'antd';
 import { useEffect, useState } from 'react';
 import DataTable from '~/components/DataTable/DataTable';
 import { getUser, updateRoleUser } from '~/requestApi/requestAdmin';

@@ -24,7 +24,6 @@ import Forum from '~/pages/LiveChat/Forum/Forum';
 import LiveChat from '~/pages/LiveChat/LiveChat';
 import MyBlogs from '~/pages/MyBlogs/MyBlogs';
 import NewPost from '~/pages/NewPost/NewPost';
-import Payment from '~/pages/Payment/Payment';
 import Profile from '~/pages/Profile/Profile';
 import Rank from '~/pages/Rank/Rank';
 import Role from '~/pages/Role/Role';
@@ -78,7 +77,6 @@ const studentPage = [
     { path: '/me/post', element: MyBlogs },
     { path: '/me/bookmark', element: Bookmark },
     { path: '/class/:slug', element: ClassDetail },
-    { path: '/payment/:slug', element: Payment, layout: HeaderOnly },
     { path: '/course/:slug', element: CourseStudent, layout: null },
     { path: '*', element: NotFound, layout: HeaderOnly },
 ];

@@ -1,10 +1,8 @@
 import classNames from 'classnames/bind';
 import styles from './Classes.module.scss';
 import ClassCart from '~/components/ClassCart/ClassCart';
-import imgs from '~/assets/Image';
 import { useEffect, useState } from 'react';
 import { getMyClass } from '~/requestApi/requestMyClass';
-import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import CartLoading from '~/components/Loading/CartLoading/CartLoading';
 import Skeleton from 'react-loading-skeleton';

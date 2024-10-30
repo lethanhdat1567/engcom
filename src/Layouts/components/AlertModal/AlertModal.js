@@ -35,7 +35,7 @@ function AlertModal({ showNav, setShowNav }) {
         <div className={cx('modal', { active: showNav })}>
             <div className={cx('content')}>
                 {loading ? (
-                    <div style={{ marginTop: '20px' }}>
+                    <div style={{ marginTop: '20px', padding: '0px 20px' }}>
                         <Skeleton height={50} />
                         <Skeleton height={390} style={{ marginTop: '10px' }} />
                         <Skeleton height={20} count={3} style={{ margin: '10px 0px' }} />

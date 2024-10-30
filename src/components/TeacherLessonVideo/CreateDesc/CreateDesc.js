@@ -1,9 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './CreateDesc.module.scss';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import JoditEditor from 'jodit-react';
-import { memo, useEffect, useRef } from 'react';
+import { memo, useRef } from 'react';
 
 const cx = classNames.bind(styles);
 

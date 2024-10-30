@@ -1,6 +1,5 @@
 import classNames from 'classnames/bind';
 import styles from './Home.module.scss';
-
 import SliderBanner from './SliderBanner';
 import Classes from './Classes';
 import { useEffect, useState } from 'react';

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import HeaderCourseStudent from '../components/HeaderCourseStudent/HeaderCourseStudent';
 import CourseSidebar from '../components/CourseSidebar/CourseSidebar';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getCourseStudent } from '~/requestApi/requestStudent';
 import Skeleton from 'react-loading-skeleton';
 import { ScaleLoader } from 'react-spinners';

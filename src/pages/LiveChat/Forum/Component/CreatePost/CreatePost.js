@@ -1,14 +1,13 @@
 import classNames from 'classnames/bind';
 import styles from './CreatePost.module.scss';
 import { Avatar, Button, Modal } from 'antd';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFileVideo, faImage } from '@fortawesome/free-regular-svg-icons';
+import { faImage } from '@fortawesome/free-regular-svg-icons';
 import ImageItem from '../ImageItem/ImageItem';
 import { SwiperSlide, Swiper } from 'swiper/react';
 import { useSelector } from 'react-redux';
-import { createPost } from '~/requestApi/requestPost';
 import request from '~/utils/request';
 import { handleAvatar } from '~/utils/handleAvatar';
 

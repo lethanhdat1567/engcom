@@ -1,8 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './CourseSidebarTeacher.module.scss';
 import CreateCourse from './CreateCourse';
-import { useEffect, useState } from 'react';
-import CreateLesson from './Lesson/CreateLesson';
+import { useState } from 'react';
 import CourseTeacher from './CourseTeacher/CourseTeacher';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';

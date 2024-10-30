@@ -1,9 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './TeacherClassUser.module.scss';
-import { Space, Table, Tag } from 'antd';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Link, useParams } from 'react-router-dom';
+import { Table } from 'antd';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getUserClass } from '~/requestApi/requestClass';
 import Skeleton from 'react-loading-skeleton';

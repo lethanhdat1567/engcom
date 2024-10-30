@@ -1,13 +1,11 @@
 import classNames from 'classnames/bind';
 import styles from './LessonTeacher.module.scss';
-import { checked } from '~/assets/Icon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faCircleXmark, faSpinner, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { faCircleXmark, faSpinner, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { teacher } from '~/redux/reducer/TeacherSlice';
 import { validateIcon, validateText } from '~/utils/validateIcon';
 import { activeLesson } from '~/redux/reducer/ActiveLesson';
-import { requestDeleteVideo, requestUploadVideo } from '~/requestApi/requestUpload';
 import { useParams } from 'react-router-dom';
 import { deleteLesson } from '~/requestApi/requestLesson';
 import { useState } from 'react';

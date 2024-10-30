@@ -1,6 +1,5 @@
 import classNames from 'classnames/bind';
 import styles from './ProfileHeader.module.scss';
-import imgs from '~/assets/Image';
 import Tippy from '@tippyjs/react/headless';
 import { Link, useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';

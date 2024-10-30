@@ -31,10 +31,7 @@ function Header() {
     const navigate = useNavigate();
     const location = useLocation();
     const validateUrl = () => {
-        return (
-            location.pathname.includes('/class/') || // [class/:slug]
-            location.pathname.includes('/me/')
-        );
+        return location.pathname.includes('/class/') || location.pathname.includes('/me/');
     };
 
     useEffect(() => {
@@ -84,7 +81,7 @@ function Header() {
                     </span>
                 </div>
                 <Search />
-                {user.id && user.role_id ? (
+                {user.id && user.role_id !== 1 ? (
                     <PrivateHeader />
                 ) : (
                     <PublicHeader

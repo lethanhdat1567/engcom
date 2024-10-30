@@ -1,8 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './CreateVideo.module.scss';
 import { useEffect, useState } from 'react';
-import { requestDeleteVideo, requestUploadVideo } from '~/requestApi/requestUpload';
-import { Button, Col, Flex, Input, message, Row, Typography } from 'antd';
+import { Button, Col, Flex, Input, Row, Typography } from 'antd';
 import { toastify } from '~/utils/toast';
 import useDebounce from '~/hooks/useDebounce';
 import ReactPlayer from 'react-player/youtube';

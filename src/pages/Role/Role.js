@@ -25,10 +25,9 @@ function Role() {
             value: 3,
             features: [
                 'Create and manage course content',
-                'Grade assignments and provide feedback',
+                'Participate in learning in other courses',
                 'Monitor student progress and attendance',
                 'Facilitate discussions and group activities',
-                'Communicate with students and parents',
             ],
         },
         {
@@ -38,7 +37,6 @@ function Role() {
             features: [
                 'Access course materials and resources',
                 'Participate in discussions and group work',
-                'Submit assignments and track grades',
                 'Communicate with instructors and peers',
                 'Monitor personal progress and set learning goals',
             ],

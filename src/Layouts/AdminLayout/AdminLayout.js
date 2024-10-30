@@ -4,10 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faBook,
     faBullhorn,
-    faGear,
     faHouse,
     faNewspaper,
-    faPersonMilitaryPointing,
     faShieldHalved,
     faUser,
 } from '@fortawesome/free-solid-svg-icons';

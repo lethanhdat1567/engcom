@@ -5,7 +5,6 @@ import Home from './Component/Home/Home';
 import { useEffect, useState } from 'react';
 import ProfileForum from './Component/ProfileForum/ProfileForum';
 import NavMobile from './Component/NavMobile/NavMobile';
-import ScrollToTop from '~/utils/ScrollToTop';
 
 const cx = classNames.bind(styles);
 

@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useId, useState } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import CreateLesson from './Lesson/CreateLesson';
 import { faFloppyDisk, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
 import { teacher } from '~/redux/reducer/TeacherSlice';

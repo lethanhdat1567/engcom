@@ -1,10 +1,9 @@
 import classNames from 'classnames/bind';
 import styles from './JoinClass.module.scss';
 import Button from '~/components/Button';
-import { Flex, Input } from 'antd';
+import { Input } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import priceTrander from '~/utils/priceTranfer';
 import { useDispatch, useSelector } from 'react-redux';
 import { validateFree } from '~/utils/validateSubscribe';
 import { checkPrivateClass, deleteSubscribe, insertSubscribe } from '~/requestApi/requestSubscribe';
@@ -31,7 +30,7 @@ function JoinClass({ data }) {
 
     // Handle free
     const handleSubFree = () => {
-        if (Object.keys(user).length === 0) {
+        if (Object.keys(user).length === 0 || user.role_id === 1) {
             setRegisModal(true);
         } else {
             if (!validateFree(freeClass, user.id, slug)) {
@@ -70,7 +69,7 @@ function JoinClass({ data }) {
             });
     };
     const handleSubmit = () => {
-        if (Object.keys(user).length === 0) {
+        if (Object.keys(user).length === 0 || user.role_id == 1) {
             setRegisModal(true);
         } else {
             if (allowSubmit) {

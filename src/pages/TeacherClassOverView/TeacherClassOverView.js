@@ -1,16 +1,14 @@
 import classNames from 'classnames/bind';
 import styles from './TeacherClassOverView.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faMoneyBill1, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faUser } from '@fortawesome/free-solid-svg-icons';
 import AnalystItem from '../TeacherClassHome/AnalystItem';
 import CartItem from '~/components/CartItem';
 import { useSelector } from 'react-redux';
-import CourseItem from '~/components/CourseItem/CourseItem';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getDetailClass } from '~/requestApi/requestClass';
 import Skeleton from 'react-loading-skeleton';
-import CartLoading from '~/components/Loading/CartLoading/CartLoading';
 
 const cx = classNames.bind(styles);
 

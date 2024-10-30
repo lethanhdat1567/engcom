@@ -1,7 +1,5 @@
 import classNames from 'classnames/bind';
 import styles from './CourseFooter.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { courseBack, sideBar } from '~/assets/Icon';
 
 const cx = classNames.bind(styles);

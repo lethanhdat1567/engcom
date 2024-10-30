@@ -1,8 +1,5 @@
 import classNames from 'classnames/bind';
 import styles from './CourseItem.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import LessonItem from './LessonItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd';
 import { teacher } from '~/redux/reducer/TeacherSlice';

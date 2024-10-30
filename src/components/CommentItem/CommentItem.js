@@ -2,7 +2,6 @@ import classNames from 'classnames/bind';
 import styles from './CommentItem.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp, faEllipsisVertical, faTrash } from '@fortawesome/free-solid-svg-icons';
-import imgs from '~/assets/Image';
 import Tippy from '@tippyjs/react/headless';
 import ReplyItem from '../ReplyItem/ReplyItem';
 import { useEffect, useState } from 'react';

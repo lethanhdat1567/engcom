@@ -3,12 +3,10 @@ import styles from './UpdateBlog.module.scss';
 import JoditEditor from 'jodit-react';
 import { useEffect, useRef, useState } from 'react';
 import Button from '~/components/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import { createBlog, readBlog, updateBlog } from '~/requestApi/requestBlog';
+import { useSelector } from 'react-redux';
+import { readBlog, updateBlog } from '~/requestApi/requestBlog';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ownData } from '~/redux/reducer/OwnDataSlice';
 import Loading from '~/components/Loading/Loading';
-import { storeData } from '~/redux/reducer/StoreSlice';
 import UploadBanner from '../NewPost/UploadBanner';
 
 const cx = classNames.bind(styles);

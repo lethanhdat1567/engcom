@@ -23,7 +23,7 @@ import { Alert, Flex } from 'antd';
 import { requestDeleteUpload, requestDeleteVideo } from '~/requestApi/requestUpload';
 import { teacher } from '~/redux/reducer/TeacherSlice';
 import Loading from '~/components/Loading/Loading';
-import { createClass, deleteClass, updateClass } from '~/requestApi/requestClass';
+import { createClass, deleteClass } from '~/requestApi/requestClass';
 import { activeLesson } from '~/redux/reducer/ActiveLesson';
 import { toast } from '~/redux/reducer/Toast';
 import { updateApprove } from '~/requestApi/requestAdmin';

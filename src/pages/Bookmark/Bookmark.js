@@ -2,11 +2,11 @@ import classNames from 'classnames/bind';
 import styles from './Bookmark.module.scss';
 import { Link } from 'react-router-dom';
 import MyBlogsItem from '~/components/MyBlogsItem/MyBlogsItem';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { getSaveBlog, readListBlog } from '~/requestApi/requestBlog';
-import { ownData } from '~/redux/reducer/OwnDataSlice';
+import { getSaveBlog } from '~/requestApi/requestBlog';
 import SkeletonLoading from '~/components/Loading/SkeletonLoading';
+import imgs from '~/assets/Image';
 
 const cx = classNames.bind(styles);
 
@@ -36,7 +36,7 @@ function Bookmark() {
             </div>
             <div className={cx('body')}>
                 <div className="row">
-                    <div className="col-12 col-lg-8">
+                    <div className="col-12 col-lg-9">
                         <div className={cx('list-wrap')}>
                             <ul className={cx('list')}>
                                 <li className={cx('item')}>
@@ -65,7 +65,9 @@ function Bookmark() {
                             </div>
                         </div>
                     </div>
-                    <div className="col-12 col-lg-4 d-none d-lg-block">sdsd</div>
+                    <div className="col-12 col-lg-3 d-none d-lg-block">
+                        <img className={cx('promotion')} src={imgs.blog1} />
+                    </div>
                 </div>
             </div>
         </div>

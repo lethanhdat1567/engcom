@@ -1,17 +1,12 @@
 import classNames from 'classnames/bind';
 import styles from './Blogs.module.scss';
-import InfoItem from '~/components/InfoItem/InfoItem';
 import imgs from '~/assets/Image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark, faEllipsis, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { faBookmark as bookmarkRegular } from '@fortawesome/free-regular-svg-icons';
 import { Link } from 'react-router-dom';
-import Tippy from '@tippyjs/react/headless';
-import Button from '~/components/Button';
-import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import extractContent from '~/utils/extractContent';
 import { handleTime } from '~/utils/handleTime';
-import { handleAvatar } from '~/utils/handleAvatar';
 import Img from '~/components/Img';
 import { deleteSaveBlog, insertSaveBlog } from '~/requestApi/requestBlog';
 import { useDispatch, useSelector } from 'react-redux';
@@ -34,7 +29,7 @@ function BlogItem({ data }) {
     const { content } = extractContent(blog?.content);
 
     const handleSaveBlog = () => {
-        if (Object.keys(guest).length > 0) {
+        if (Object.keys(guest).length > 0 && guest.role_id !== 1) {
             setLoading(true);
             insertSaveBlog(guest.id, blog.id)
                 .then((res) => {
@@ -51,7 +46,7 @@ function BlogItem({ data }) {
         }
     };
     const handleUnSave = () => {
-        if (Object.keys(guest).length > 0) {
+        if (Object.keys(guest).length > 0 && guest.role_id !== 1) {
             setLoading(true);
             deleteSaveBlog(guest.id, blog.id)
                 .then((res) => {

@@ -3,7 +3,6 @@ import styles from './CourseItem.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
-import Lesson from '../Lesson/Lesson';
 import StudentLesson from '~/components/StudentLesson/StudentLesson';
 import { useSelector } from 'react-redux';
 

@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBullhorn, faHome, faNewspaper, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { alert } from '~/assets/Icon';
 import AlertModal from '../AlertModal/AlertModal';
 import { useEffect, useState } from 'react';
 
@@ -69,8 +68,7 @@ function Navbar() {
         <>
             <div className={cx('navbar')}>
                 <ul className={cx('list')}>
-                    {/* Hiển thị navPublic nếu user là rỗng hoặc user.role_id là 2 */}
-                    {(Object.keys(user).length === 0 || user.role_id === 2) &&
+                    {(Object.keys(user).length === 0 || user.role_id === 1 || user.role_id === 2) &&
                         navPublic.map((item, index) => (
                             <NavLink
                                 to={item.to}
@@ -84,7 +82,6 @@ function Navbar() {
                             </NavLink>
                         ))}
 
-                    {/* Hiển thị navTeacher nếu user.role_id là 3 */}
                     {user.role_id === 3 &&
                         navTeacher.map((item, index) => (
                             <NavLink

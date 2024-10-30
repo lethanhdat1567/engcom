@@ -5,7 +5,6 @@ import { faCircleXmark, faSearch, faSpinner } from '@fortawesome/free-solid-svg-
 import Tippy from '@tippyjs/react/headless';
 import SearchContent from './SearchContent';
 import { useEffect, useRef, useState } from 'react';
-import imgs from '~/assets/Image';
 import useDebounce from '~/hooks/useDebounce';
 import { requestSearch } from '~/requestApi/requestSearch';
 import { useNavigate } from 'react-router-dom';

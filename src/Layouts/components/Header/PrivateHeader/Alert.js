@@ -3,7 +3,6 @@ import styles from './PrivateHeader.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
-import { Link } from 'react-router-dom';
 import AlertItem from '~/components/AlertItem/AlertItem';
 
 const cx = classNames.bind(styles);

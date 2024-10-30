@@ -3,7 +3,7 @@ import styles from './CartItem.module.scss';
 import { Link } from 'react-router-dom';
 import InfoItem from '../InfoItem/InfoItem';
 import imgs from '~/assets/Image';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import InfoCart from './InfoCart';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
@@ -13,6 +13,7 @@ import { toast } from '~/redux/reducer/Toast';
 const cx = classNames.bind(styles);
 
 function CartItem({ data, create = false }) {
+    const user = useSelector((state) => state.user.user);
     const dispatch = useDispatch();
     const cartItem = data.class;
     const cartInfo = data?.info;

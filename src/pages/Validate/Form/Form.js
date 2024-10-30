@@ -5,7 +5,7 @@ import Button from '~/components/Button';
 import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { loginValue, RegisterValue } from '~/utils/ValidateFilter';
 import request from '~/utils/request';
 import Loading from '~/components/Loading/Loading';

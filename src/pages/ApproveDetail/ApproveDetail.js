@@ -1,5 +1,3 @@
-import classNames from 'classnames/bind';
-import styles from './ApproveDetail.module.scss';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';

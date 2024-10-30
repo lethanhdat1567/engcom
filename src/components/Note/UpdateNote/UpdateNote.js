@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateNote } from '~/requestApi/requestNote';
 import Loading from '~/components/Loading/Loading';
 import { ownData } from '~/redux/reducer/OwnDataSlice';
-import NoteModal from '../NoteModal/NoteModal';
 
 const cx = classNames.bind(styles);
 const editorConfig = {

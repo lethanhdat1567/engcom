@@ -1,8 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './CartItem.module.scss';
-import priceTrander from '~/utils/priceTranfer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartPlus, faComputer, faLock, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faLock, faUsers } from '@fortawesome/free-solid-svg-icons';
 import imgs from '~/assets/Image';
 
 const cx = classNames.bind(styles);

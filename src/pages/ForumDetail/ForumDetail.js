@@ -4,7 +4,6 @@ import { Avatar } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical, faHeart, faRightFromBracket, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as LikeRegular } from '@fortawesome/free-regular-svg-icons';
-
 import Slider from './components/Slider/Slider';
 import Comment from './components/Comment/Comment';
 import { useNavigate, useParams } from 'react-router-dom';

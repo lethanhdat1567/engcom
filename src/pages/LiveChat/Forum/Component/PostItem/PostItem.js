@@ -4,7 +4,6 @@ import { Avatar } from 'antd';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 import './Post.scss';
-import imgs from '~/assets/Image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as faHeaderSolid } from '@fortawesome/free-solid-svg-icons';
@@ -19,7 +18,6 @@ import { useEffect, useState } from 'react';
 import { validatePostLike, validatePostLikeValue } from '~/utils/validatePostLike';
 import useDebounce from '~/hooks/useDebounce';
 import { post_like } from '~/redux/reducer/postLike';
-import { error } from 'jodit/esm/core/helpers';
 import ZoomImage from '~/components/ZoomImage/ZoomImage';
 
 const cx = classNames.bind(styles);

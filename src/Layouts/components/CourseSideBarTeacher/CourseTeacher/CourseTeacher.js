@@ -10,12 +10,10 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import CreateLesson from '../Lesson/CreateLesson';
-import Lesson from '../../CourseSidebar/Lesson/Lesson';
 import { useDispatch, useSelector } from 'react-redux';
 import { teacher } from '~/redux/reducer/TeacherSlice';
 import CreateCourse from '../CreateCourse';
 import LessonTeacher from '../../CourseSidebar/LessonTeacher/LessonTeacher';
-import { activeLesson } from '~/redux/reducer/ActiveLesson';
 import { Button, Modal } from 'antd';
 import { useParams } from 'react-router-dom';
 import { deleteCourseUpdate } from '~/requestApi/requestUpdateClass';

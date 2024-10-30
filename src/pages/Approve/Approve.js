@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Alert, Button, Modal, Table } from 'antd';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faEye, faSpinner, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
 import { getApprove, updateApprove } from '~/requestApi/requestAdmin';
 import { ClipLoader } from 'react-spinners';
