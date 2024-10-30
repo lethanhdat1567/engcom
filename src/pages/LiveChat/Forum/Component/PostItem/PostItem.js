@@ -103,7 +103,7 @@ function PostItem({ post, postValues, setPostValues }) {
                         <div className={cx('head-name')}>
                             <h3 className={cx('name')}>{userData.name}</h3>
                             <span className={cx('timer')}>{handleTime(post.created_at)}</span>
-                            {post.user.user_id === user.id && (
+                            {post.user.user_id == user.id && (
                                 <Tippy
                                     interactive
                                     visible={showDelete}
