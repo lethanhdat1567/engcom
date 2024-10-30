@@ -34,7 +34,7 @@ function App() {
         );
     };
     return (
-        <Router>
+        <Router basename="/engcom">
             <div className="App">
                 <ScrollToTop />
                 {!user.id && handleRoute(publicPage)}
