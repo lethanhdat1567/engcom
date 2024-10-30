@@ -30,10 +30,10 @@ function VideoCall() {
         navigator.clipboard
             .writeText(textToCopy)
             .then(() => {
-                message.success('Sao chép thành công!');
+                message.success('Copied successfully!');
             })
             .catch(() => {
-                message.error('Sao chép thất bại!');
+                message.error('Copy failed!');
             });
     };
 

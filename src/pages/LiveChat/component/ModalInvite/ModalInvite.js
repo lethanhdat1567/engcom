@@ -1,10 +1,10 @@
 import classNames from 'classnames/bind';
 import styles from './ModalInvite.module.scss';
 import { Avatar, Flex, Form, Modal, Select, Spin } from 'antd';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { debounce } from 'lodash';
 import { requestSearch } from '~/requestApi/requestSearch';
-import { collection, doc, updateDoc } from 'firebase/firestore';
+import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '~/firebase/config';
 
 const cx = classNames.bind(styles);

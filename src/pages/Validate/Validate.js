@@ -32,7 +32,12 @@ function Validate({ toggle, setToggle, field }) {
             toastify('This account has been used.', 'error', 2000, 'top-right');
             setLoading(false);
         } else {
-            console.log(error);
+            toastify(
+                'Please try again or sign in/register with a different method.',
+                'error',
+                2000,
+                'top-right',
+            );
             setLoading(false);
         }
     };
