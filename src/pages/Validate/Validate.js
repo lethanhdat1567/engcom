@@ -58,7 +58,6 @@ function Validate({ toggle, setToggle, field }) {
     };
 
     // Google
-
     const handleGGLogin = async () => {
         try {
             await signInWithRedirect(auth, ggProvider);
@@ -69,32 +68,34 @@ function Validate({ toggle, setToggle, field }) {
         }
     };
 
-    // Hàm này sẽ được gọi khi người dùng quay lại ứng dụng
-    const handleAuthRedirect = async () => {
-        setLoading(true);
-        try {
-            const result = await getRedirectResult(auth);
-            if (result) {
-                const userValue = await postSocial(result);
-                dispatch(usersSlice.actions.getUser(userValue.data.user));
-                dispatch(usersSlice.actions.getToken(userValue.data.access_token));
-                dispatch(usersSlice.actions.getRefreshToken(userValue.data.refresh_token));
-                setToggle(false);
-                if (userValue.data.user.role_id == 1) {
-                    navigate('/user/role');
-                }
-            }
-        } catch (error) {
-            console.error('Error getting redirect result:', error);
-            handleError(error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    // Gọi handleAuthRedirect khi trang được tải lại
     useEffect(() => {
-        handleAuthRedirect();
+        const fetchRedirectResult = async () => {
+            setLoading(true);
+            try {
+                const result = await getRedirectResult(auth);
+                console.log(result);
+
+                if (result) {
+                    const userValue = await postSocial(result);
+                    if (userValue && userValue.data) {
+                        dispatch(usersSlice.actions.getUser(userValue.data.user));
+                        dispatch(usersSlice.actions.getToken(userValue.data.access_token));
+                        dispatch(usersSlice.actions.getRefreshToken(userValue.data.refresh_token));
+                        setToggle(false);
+                        if (userValue.data.user.role_id === 1) {
+                            navigate('/user/role');
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Error getting redirect result:', error);
+                handleError(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchRedirectResult();
     }, []);
 
     const handleForm = (item) => {
