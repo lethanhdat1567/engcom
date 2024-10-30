@@ -43,7 +43,7 @@ function AlertItem({ data, setAlertData }) {
                     <h3 className={cx('title')}>
                         <span className={cx('decor')}>#</span> {data.title}
                     </h3>
-                    {user.role_id === 4 && (
+                    {user.role_id == 4 && (
                         <Tippy content="Delete content">
                             <span className={cx('delete-icon')} onClick={handleShowModal}>
                                 <FontAwesomeIcon icon={faTrash} style={{ color: 'red' }} className="fa-lg" />

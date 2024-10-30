@@ -39,15 +39,15 @@ function CourseLayout({ children }) {
 
     return (
         <div className={cx('wrap')}>
-            {user.role_id === 3 && <HeaderCourse />}
-            {user.role_id === 4 && <HeaderAdmin />}
+            {user.role_id == 3 && <HeaderCourse />}
+            {user.role_id == 4 && <HeaderAdmin />}
             {loading ? (
                 <UpdateLoading />
             ) : (
                 <>
                     <div className={cx('body')}>
                         <div className={cx('content', { full: !showNav })}>{children}</div>
-                        {(user.role_id === 3 || user.role_id === 4) && (
+                        {(user.role_id == 3 || user.role_id == 4) && (
                             <CourseSidebarTeacher showNav={showNav} setShowNav={setShowNav} />
                         )}
                     </div>

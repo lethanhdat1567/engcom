@@ -30,7 +30,7 @@ function JoinClass({ data }) {
 
     // Handle free
     const handleSubFree = () => {
-        if (Object.keys(user).length === 0 || user.role_id === 1) {
+        if (Object.keys(user).length === 0 || user.role_id == 1) {
             setRegisModal(true);
         } else {
             if (!validateFree(freeClass, user.id, slug)) {

@@ -12,7 +12,7 @@ function PrivateHeader() {
     return (
         <div className={cx('private-wrap')}>
             <ul className={cx('list')}>
-                {user.role_id === 2 && <Classes />}
+                {user.role_id == 2 && <Classes />}
                 <Note />
                 <ProfileHeader />
             </ul>

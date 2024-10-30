@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './NewPost.module.scss';
 import './DesignPost.scss';
 import JoditEditor from 'jodit-react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Button from '~/components/Button';
 import { useSelector } from 'react-redux';
 import { createBlog } from '~/requestApi/requestBlog';
@@ -47,6 +47,10 @@ function NewPost() {
             console.error('Error details:', error.response ? error.response.data : error.message);
         }
     };
+
+    useEffect(() => {
+        document.title = titleValue;
+    }, [titleValue]);
     return (
         <div className={cx('wrap')}>
             {loading && <Loading />}

@@ -255,7 +255,7 @@ function TeacherNavbar({ showNav, setShowNav }) {
                 </div>
                 <ul className={cx('list')}>
                     {slug
-                        ? user.role_id === 4
+                        ? user.role_id == 4
                             ? adminNav.map((item, index) => <NavList item={item} key={index} />)
                             : navItems.map((item, index) => <NavList item={item} key={index} />)
                         : createNav.map((item, index) => <NavList item={item} key={index} />)}
@@ -272,7 +272,7 @@ function TeacherNavbar({ showNav, setShowNav }) {
                         Export class
                     </Button>
                 )}
-                {user.role_id === 4 ? (
+                {user.role_id == 4 ? (
                     <>
                         <Button
                             save

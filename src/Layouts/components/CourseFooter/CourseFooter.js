@@ -68,7 +68,7 @@ function CourseFooter({ setShowNav, showNav }) {
                 <div
                     className={cx('side-bar')}
                     onClick={() => setShowNav(!showNav)}
-                    style={user.role_id === 4 ? { marginLeft: 'auto' } : {}}
+                    style={user.role_id == 4 ? { marginLeft: 'auto' } : {}}
                 >
                     <span className={cx('side-bar-icon')}>{showNav ? courseBack : sideBar}</span>
                 </div>

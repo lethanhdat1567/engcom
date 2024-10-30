@@ -11,10 +11,10 @@ const cx = classNames.bind(styles);
 function CommuItem({ data }) {
     const user = useSelector((state) => state.user.user);
     const [showRegisterModal, setShowRegisterModal] = useState(false);
-    console.log(Object.keys(user).length === 0 || user.role_id === 1);
+    console.log(Object.keys(user).length === 0 || user.role_id == 1);
 
     const handleNavigate = () => {
-        if (Object.keys(user).length === 0 || user.role_id === 1) {
+        if (Object.keys(user).length === 0 || user.role_id == 1) {
             setShowRegisterModal(true);
         }
     };
@@ -30,7 +30,7 @@ function CommuItem({ data }) {
                     <Link
                         className={cx('img-wrap')}
                         to={
-                            Object.keys(user).length === 0 || user.role_id === 1
+                            Object.keys(user).length === 0 || user.role_id == 1
                                 ? ''
                                 : `${process.env.REACT_APP_ROOT}/community${data.to}`
                         }
@@ -41,7 +41,7 @@ function CommuItem({ data }) {
                 </div>
                 <Button
                     to={
-                        Object.keys(user).length === 0 || user.role_id === 1
+                        Object.keys(user).length === 0 || user.role_id == 1
                             ? ''
                             : `${process.env.REACT_APP_ROOT}/community${data.to}`
                     }

@@ -38,10 +38,10 @@ function App() {
             <div className="App">
                 <ScrollToTop />
                 {!user.id && handleRoute(publicPage)}
-                {user.id && user.role_id === 1 && handleRoute(publicPage)}
-                {user.id && user.role_id === 2 && handleRoute(studentPage)}
-                {user.id && user.role_id === 3 && handleRoute(teacherPage)}
-                {user.id && user.role_id === 4 && handleRoute(adminPage)}
+                {user.id && user.role_id == 1 && handleRoute(publicPage)}
+                {user.id && user.role_id == 2 && handleRoute(studentPage)}
+                {user.id && user.role_id == 3 && handleRoute(teacherPage)}
+                {user.id && user.role_id == 4 && handleRoute(adminPage)}
             </div>
         </Router>
     );

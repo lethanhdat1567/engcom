@@ -46,7 +46,7 @@ function Home() {
         <>
             {/* <Loading /> */}
             <div className={cx('home')}>
-                {(user.role_id === 2 || Object.keys(user).length === 0) && (
+                {(user.role_id == 2 || Object.keys(user).length === 0) && (
                     <div className={cx('banner')}>
                         <SliderBanner />
                     </div>

@@ -68,7 +68,7 @@ function Navbar() {
         <>
             <div className={cx('navbar')}>
                 <ul className={cx('list')}>
-                    {(Object.keys(user).length === 0 || user.role_id === 1 || user.role_id === 2) &&
+                    {(Object.keys(user).length === 0 || user.role_id == 1 || user.role_id == 2) &&
                         navPublic.map((item, index) => (
                             <NavLink
                                 to={item.to}
@@ -82,7 +82,7 @@ function Navbar() {
                             </NavLink>
                         ))}
 
-                    {user.role_id === 3 &&
+                    {user.role_id == 3 &&
                         navTeacher.map((item, index) => (
                             <NavLink
                                 to={item.to}

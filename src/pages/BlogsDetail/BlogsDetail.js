@@ -44,8 +44,11 @@ function BlogsDetail() {
                 console.log(error);
             });
     }, []);
+    useEffect(() => {
+        document.title = title;
+    }, [title]);
     const handleSaveBlog = () => {
-        if (Object.keys(guest).length > 0 && guest.role_id !== 1) {
+        if (Object.keys(guest).length > 0) {
             setSaveBlogLoading(true);
             insertSaveBlog(guest.id, content.id)
                 .then((res) => {
@@ -62,7 +65,7 @@ function BlogsDetail() {
         }
     };
     const handleUnSave = () => {
-        if (Object.keys(guest).length > 0 && guest.role_id !== 1) {
+        if (Object.keys(guest).length > 0) {
             setSaveBlogLoading(true);
             deleteSaveBlog(guest.id, content.id)
                 .then((res) => {
