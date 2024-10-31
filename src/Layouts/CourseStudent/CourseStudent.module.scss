@@ -10,6 +10,7 @@
     .content {
         width: 77%;
         margin-bottom: 50px;
+        overflow: auto;
         @include abs.screen(lg) {
             margin-left: 0;
             width: 100%;

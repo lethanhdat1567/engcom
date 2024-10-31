@@ -22,7 +22,7 @@ function QuizContent({ data }) {
                             <li
                                 className={cx('item', {
                                     active: index == choiceActive,
-                                    correct: item.is_correct,
+                                    correct: Number(item.is_correct),
                                 })}
                                 key={index}
                                 onClick={() => setChoiceActive(index)}

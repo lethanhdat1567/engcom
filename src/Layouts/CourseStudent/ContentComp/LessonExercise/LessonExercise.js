@@ -22,7 +22,7 @@ function LessonExercise({ data }) {
     };
     const handleAnswer = () => {
         if (currentChoice) {
-            if (currentChoice.is_correct) {
+            if (Number(currentChoice.is_correct)) {
                 setIsWrong(false);
                 setIsCorrect(true);
                 handleDoneLesson();

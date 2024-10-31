@@ -11,6 +11,7 @@ import { deleteComment, getComment, getResponseComment } from '~/requestApi/requ
 import moment from 'moment';
 import Img from '../Img';
 import { useParams } from 'react-router-dom';
+import { handleAvatar } from '~/utils/handleAvatar';
 
 const cx = classNames.bind(styles);
 
@@ -61,7 +62,7 @@ function CommentItem({ item, setComments }) {
     return (
         <div className={cx('item')}>
             <div className={cx('info-wrap')}>
-                <Img src={owner.avatar || ''} className={cx('avatar')} />
+                <img src={handleAvatar(owner.avatar)} className={cx('avatar')} />
                 <div className={cx('user')}>
                     <h2 className={cx('user-name')}>
                         {owner.name} <span className={cx('timer')}>{handleTime()}</span>
