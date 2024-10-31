@@ -54,7 +54,9 @@ function MyBlogsItem({ data, setBlogItems, blogItems, type, deleting, setDeletin
 
     return (
         <div className={cx('blog-item', { delete: deleting })}>
-            <h3 className={cx('blog-title')}>{data?.title}</h3>
+            <Link to={type == 'save' ? `${process.env.REACT_APP_ROOT}/post/${data?.blog_id}` : ''}>
+                <h3 className={cx('blog-title')}>{data?.title}</h3>
+            </Link>
             <div className={cx('author')}>
                 <span className={cx('timer')}>{handleTime(data?.updated_at)}</span>
             </div>
