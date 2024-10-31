@@ -42,7 +42,7 @@ function HeaderSingle({ transparent }) {
                     </div>
                 )}
             </div>
-            {Object.keys(user).length > 0 && user.role_id !== 4 && (
+            {Object.keys(user).length > 0 && user.role_id != 4 && (
                 <div className={cx('right')}>
                     <Note />
                     <ProfileHeader />
