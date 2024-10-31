@@ -93,7 +93,7 @@ function QuizCreate() {
                     type="primary"
                     style={{ marginBottom: '10px' }}
                     onClick={handleSave}
-                    disabled={correctAnswerIndex === null || correctAnswerIndex === undefined}
+                    disabled={correctAnswerIndex == null || correctAnswerIndex == undefined}
                 >
                     {loading ? (
                         <FontAwesomeIcon icon={faSpinner} className="fa-solid fa-spinner fa-spin-pulse" />

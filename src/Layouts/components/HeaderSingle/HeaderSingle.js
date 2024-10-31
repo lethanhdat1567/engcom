@@ -16,7 +16,7 @@ function HeaderSingle({ transparent }) {
     const user = useSelector((state) => state.user.user);
 
     const validateUrl = () => {
-        if (location.pathname === '/community/meeting') {
+        if (location.pathname == '/community/meeting') {
             return false;
         }
         return true;

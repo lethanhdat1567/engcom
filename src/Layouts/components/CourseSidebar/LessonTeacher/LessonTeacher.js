@@ -18,7 +18,7 @@ function LessonTeacher({ data, index, course_index }) {
     const slug = useParams();
     const currentLesson = useSelector((state) => state.activeLesson.lesson);
     const contents = useSelector((state) => state.teacher.contents);
-    const currentContent = contents.find((item) => item.lesson_id === data.id);
+    const currentContent = contents.find((item) => item.lesson_id == data.id);
     const [showAlertModal, setShowAlertModal] = useState(false);
     const [deleteLessonLoading, setDeleteLessonLoading] = useState(false);
 
@@ -51,7 +51,7 @@ function LessonTeacher({ data, index, course_index }) {
 
     return (
         <>
-            <div className={cx('wrap', { active: currentLesson.id === data.id })}>
+            <div className={cx('wrap', { active: currentLesson.id == data.id })}>
                 <span className={cx('decor')}>{<FontAwesomeIcon icon={validateIcon(data?.type)} />}</span>
                 <div
                     className={cx('main')}

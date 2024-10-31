@@ -9,7 +9,7 @@ function useCourseUtils() {
 
     const courseUtils = {
         filterFirst(coursesData) {
-            if (!coursesData || coursesData.length === 0) return;
+            if (!coursesData || coursesData.length == 0) return;
 
             const allLessonsCompleted = coursesData.every((courseItem) =>
                 courseItem.lessons.every((lesson) => lesson.is_completed),
@@ -34,7 +34,7 @@ function useCourseUtils() {
 
                     // Cập nhật bài học đầu tiên trong danh sách lessons
                     const updatedLessons = coursesData[0].lessons.map((lessonItem, index) =>
-                        index === 0
+                        index == 0
                             ? { ...lessonItem, is_in_progress: true, is_completed: false }
                             : lessonItem,
                     );
@@ -89,11 +89,9 @@ function useCourseUtils() {
                 dispatch(course.actions.setSelectedLesson(updatedSelectedLesson));
 
                 // Lấy bài học tiếp theo
-                const currentCourse = courses.find(
-                    (courseItem) => courseItem.id === selectedLesson.course_id,
-                );
+                const currentCourse = courses.find((courseItem) => courseItem.id == selectedLesson.course_id);
                 const nextLessonIndex =
-                    currentCourse.lessons.findIndex((lesson) => lesson.id === selectedLesson.id) + 1;
+                    currentCourse.lessons.findIndex((lesson) => lesson.id == selectedLesson.id) + 1;
 
                 if (nextLessonIndex < currentCourse.lessons.length) {
                     const nextLesson = currentCourse.lessons[nextLessonIndex];
@@ -104,7 +102,7 @@ function useCourseUtils() {
                     }
                 } else {
                     // Nếu đã đến bài học cuối cùng, kiểm tra xem có khóa học tiếp theo không
-                    const currentCourseIndex = courses.findIndex((course) => course.id === currentCourse.id);
+                    const currentCourseIndex = courses.findIndex((course) => course.id == currentCourse.id);
                     const nextCourseIndex = currentCourseIndex + 1;
 
                     if (nextCourseIndex < courses.length) {
@@ -122,9 +120,9 @@ function useCourseUtils() {
             }
         },
         handleNextLesson() {
-            const currentCourse = courses.find((courseItem) => courseItem.id === selectedLesson.course_id);
+            const currentCourse = courses.find((courseItem) => courseItem.id == selectedLesson.course_id);
             const currentLessonIndex = currentCourse.lessons.findIndex(
-                (lesson) => lesson.id === selectedLesson.id,
+                (lesson) => lesson.id == selectedLesson.id,
             );
             const nextLessonIndex = currentLessonIndex + 1;
 
@@ -133,7 +131,7 @@ function useCourseUtils() {
                 dispatch(course.actions.setActiveLessonID(nextLesson.id));
                 dispatch(course.actions.setSelectedLesson(nextLesson));
             } else {
-                const currentCourseIndex = courses.findIndex((course) => course.id === currentCourse.id);
+                const currentCourseIndex = courses.findIndex((course) => course.id == currentCourse.id);
                 const nextCourseIndex = currentCourseIndex + 1;
 
                 if (nextCourseIndex < courses.length) {
@@ -147,11 +145,11 @@ function useCourseUtils() {
         },
         handlePrevLesson() {
             // Lấy khóa học hiện tại
-            const currentCourse = courses.find((courseItem) => courseItem.id === selectedLesson.course_id);
+            const currentCourse = courses.find((courseItem) => courseItem.id == selectedLesson.course_id);
 
             // Tìm chỉ số của bài học hiện tại
             const currentLessonIndex = currentCourse.lessons.findIndex(
-                (lesson) => lesson.id === selectedLesson.id,
+                (lesson) => lesson.id == selectedLesson.id,
             );
 
             // Tính chỉ số của bài học trước đó
@@ -162,7 +160,7 @@ function useCourseUtils() {
                 dispatch(course.actions.setActiveLessonID(prevLesson.id));
                 dispatch(course.actions.setSelectedLesson(prevLesson));
             } else {
-                const currentCourseIndex = courses.findIndex((course) => course.id === currentCourse.id);
+                const currentCourseIndex = courses.findIndex((course) => course.id == currentCourse.id);
                 const prevCourseIndex = currentCourseIndex - 1;
 
                 if (prevCourseIndex >= 0) {

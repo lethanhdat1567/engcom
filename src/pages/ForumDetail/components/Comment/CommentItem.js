@@ -41,7 +41,7 @@ function CommentItem({ comment, setCommentPost }) {
                         <span className={cx('comment-item-content-timmer')}>
                             {handleTime(comment.comment_created_at)}
                         </span>
-                        {comment.commenter_user_id === user.id && (
+                        {comment.commenter_user_id == user.id && (
                             <Tippy
                                 interactive
                                 visible={isShowDelete}

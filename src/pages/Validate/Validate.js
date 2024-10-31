@@ -28,7 +28,7 @@ function Validate({ toggle, setToggle, field }) {
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     const handleError = async (error) => {
-        if (error.code === 'auth/account-exists-with-different-credential') {
+        if (error.code == 'auth/account-exists-with-different-credential') {
             toastify('This account has been used.', 'error', 2000, 'top-right');
             setLoading(false);
         } else {

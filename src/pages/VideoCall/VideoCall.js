@@ -55,7 +55,7 @@ function VideoCall() {
                         const roomDoc = await getDoc(roomRef);
                         if (roomDoc.exists()) {
                             const currentMembers = roomDoc.data().members;
-                            if (currentMembers.length === 0) {
+                            if (currentMembers.length == 0) {
                                 await deleteDoc(roomRef);
                             }
                         }

@@ -22,7 +22,7 @@ function PasswordForm({ data, setShowForgot }) {
 
     const handleSubmit = () => {
         if (newPassword.trim() && confirmPassword.trim()) {
-            if (newPassword === confirmPassword) {
+            if (newPassword == confirmPassword) {
                 const values = {
                     password: newPassword,
                     password_confirmation: confirmPassword,

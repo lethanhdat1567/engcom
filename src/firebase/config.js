@@ -18,7 +18,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app); // Truyền app vào getAuth
 const db = getFirestore(app); // Truyền app vào getFirestore
 
-if (window.location.hostname === 'localhost') {
+if (window.location.hostname == 'localhost') {
     connectAuthEmulator(auth, 'http://localhost:9099');
     connectFirestoreEmulator(db, 'localhost', 8080);
 }

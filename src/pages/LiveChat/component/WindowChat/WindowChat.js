@@ -26,7 +26,7 @@ function WindowChat({ selectedRoomID, setSelectedRoomID, isShowNav, setIsShowNav
 
     useEffect(() => {
         if (selectedRoomID) {
-            const roomsValue = rooms.find((item) => item.id === selectedRoomID);
+            const roomsValue = rooms.find((item) => item.id == selectedRoomID);
             setSelectedRoom(roomsValue);
 
             setAllUserData([]);
@@ -36,7 +36,7 @@ function WindowChat({ selectedRoomID, setSelectedRoomID, isShowNav, setIsShowNav
                     .then((res) => {
                         const newUser = res.data.data;
                         setAllUserData((prev) => {
-                            const isUserExist = prev.some((user) => user.id === newUser.id);
+                            const isUserExist = prev.some((user) => user.id == newUser.id);
                             if (!isUserExist) {
                                 return [...prev, newUser];
                             }
@@ -158,7 +158,7 @@ function WindowChat({ selectedRoomID, setSelectedRoomID, isShowNav, setIsShowNav
                                         placeholder="Your message...."
                                         onChange={(e) => handleChange(e)}
                                         onKeyDown={(e) => {
-                                            if (e.key === 'Enter') {
+                                            if (e.key == 'Enter') {
                                                 e.preventDefault(); // Prevent new line
                                                 handleSubmit(); // Call your submit function
                                             }

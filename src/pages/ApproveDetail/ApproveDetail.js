@@ -9,7 +9,7 @@ function ApproveDetail() {
     const cartData = useSelector((state) => state.teacher.carts);
     const dispatch = useDispatch();
     useEffect(() => {
-        if (slug && Object.keys(cartData).length === 0) {
+        if (slug && Object.keys(cartData).length == 0) {
             getDetailClass(slug)
                 .then((res) => {
                     console.log(res);

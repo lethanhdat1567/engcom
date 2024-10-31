@@ -20,7 +20,7 @@ function Home() {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        if (Object.keys(classes).length === 0) {
+        if (Object.keys(classes).length == 0) {
             setLoading(true);
             getAllClasses()
                 .then((res) => {
@@ -46,7 +46,7 @@ function Home() {
         <>
             {/* <Loading /> */}
             <div className={cx('home')}>
-                {(user.role_id == 2 || Object.keys(user).length === 0) && (
+                {(user.role_id == 2 || Object.keys(user).length == 0) && (
                     <div className={cx('banner')}>
                         <SliderBanner />
                     </div>

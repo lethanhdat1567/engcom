@@ -21,7 +21,7 @@ function CourseLayout({ children }) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (Object.keys(coursesData).length === 0 && slug) {
+        if (Object.keys(coursesData).length == 0 && slug) {
             setLoading(true);
             getCourse(slug)
                 .then((res) => {

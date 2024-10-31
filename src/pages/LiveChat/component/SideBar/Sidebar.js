@@ -18,7 +18,7 @@ function Sidebar({ setSelectedRoomID, selectedRoomID, isShowNav, setIsShowNav })
     const rooms = useSelector((state) => state.rooms.rooms);
     useEffect(() => {
         if (selectedRoomID) {
-            const roomsValue = rooms.find((item) => item.id === selectedRoomID);
+            const roomsValue = rooms.find((item) => item.id == selectedRoomID);
             setSelectedRoom(roomsValue);
         }
     }, [rooms, selectedRoomID]);

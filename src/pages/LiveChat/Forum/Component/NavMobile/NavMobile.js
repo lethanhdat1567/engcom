@@ -30,7 +30,7 @@ function NavMobile({ activeIndex, setActiveIndex }) {
                     {navData.map((item, index) => {
                         return (
                             <li
-                                className={cx('item', { active: activeIndex === index })}
+                                className={cx('item', { active: activeIndex == index })}
                                 key={index}
                                 onClick={() => setActiveIndex(index)}
                             >

@@ -48,7 +48,7 @@ function Navbar({ isActive, setActive }) {
                     ? singleNav.map((item, index) => {
                           return (
                               <NavItem
-                                  isActive={isActive === index}
+                                  isActive={isActive == index}
                                   data={item}
                                   key={index}
                                   onClick={() => handleActive(index)}
@@ -58,7 +58,7 @@ function Navbar({ isActive, setActive }) {
                     : navItems.map((item, index) => {
                           return (
                               <NavItem
-                                  isActive={isActive === index}
+                                  isActive={isActive == index}
                                   data={item}
                                   key={index}
                                   onClick={() => handleActive(index)}

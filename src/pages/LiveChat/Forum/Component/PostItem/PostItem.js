@@ -26,7 +26,7 @@ function PostItem({ post, postValues, setPostValues }) {
     const [showDelete, setShowDelete] = useState(false);
     const user = useSelector((state) => state.user.user);
     const post_likes = useSelector((state) => state.post_like.post_like);
-    const post_like_item = post_likes.filter((item) => item.post_id === post.id);
+    const post_like_item = post_likes.filter((item) => item.post_id == post.id);
     const dispatch = useDispatch();
     const [isLiked, setIsLiked] = useState(validatePostLike(post_likes, post.id, user.id));
     const [likeValue, setLikeValue] = useState();

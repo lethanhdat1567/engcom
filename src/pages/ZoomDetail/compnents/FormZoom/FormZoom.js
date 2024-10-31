@@ -52,7 +52,7 @@ function FormZoom() {
         if (formValue) {
             const room = roomsData[0];
             if (room) {
-                if (room.meeting_password === formValue?.meeting_password) {
+                if (room.meeting_password == formValue?.meeting_password) {
                     if (!room.members.includes(user.id)) {
                         const roomRef = doc(db, 'zooms', room.zoom_id);
                         updateDoc(roomRef, {

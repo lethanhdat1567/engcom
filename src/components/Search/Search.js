@@ -136,7 +136,7 @@ function Search() {
                         onChange={(e) => handleChange(e)}
                         onClick={handleDropdown}
                         onKeyDown={(e) => {
-                            if (e.key === 'Enter') {
+                            if (e.key == 'Enter') {
                                 navigate(`/search?q=${searchValue}&type=more`);
                                 setShowSearch(false);
                             }

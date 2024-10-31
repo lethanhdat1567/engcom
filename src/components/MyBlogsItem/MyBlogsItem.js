@@ -60,7 +60,7 @@ function MyBlogsItem({ data, setBlogItems, blogItems, type, deleting, setDeletin
                 <span className={cx('timer')}>{handleTime(data?.updated_at)}</span>
             </div>
 
-            {type === 'save' ? (
+            {type == 'save' ? (
                 <span className={cx('icon', 'fa-lg')} onClick={handleUnSave}>
                     <FontAwesomeIcon icon={faBookmark} />
                 </span>

@@ -15,7 +15,7 @@ export const ownData = createSlice({
             state.notes.push(action.payload);
         },
         updateNotes(state, action) {
-            const stateIndex = state.notes.findIndex((item) => item.id === action.payload.id);
+            const stateIndex = state.notes.findIndex((item) => item.id == action.payload.id);
             if (stateIndex !== -1) {
                 state.notes[stateIndex] = { ...state.notes[stateIndex], ...action.payload };
             }

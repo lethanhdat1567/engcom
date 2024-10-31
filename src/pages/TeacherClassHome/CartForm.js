@@ -23,13 +23,13 @@ function CartForm({ states, setCartBanner, cartBanner }) {
         name: 'file',
         action: `${process.env.REACT_APP_BACKEND_API}engcom/upload-cart`,
         onChange(info) {
-            if (info.file.status === 'uploading') {
+            if (info.file.status == 'uploading') {
                 console.log('Uploading:', info.fileList);
             }
-            if (info.file.status === 'done') {
+            if (info.file.status == 'done') {
                 message.success(`${info.file.name} file uploaded successfully`);
                 setCartBanner(info.file.response.url);
-            } else if (info.file.status === 'error') {
+            } else if (info.file.status == 'error') {
                 message.error(`${info.file.name} file upload failed.`);
             }
         },
@@ -63,7 +63,7 @@ function CartForm({ states, setCartBanner, cartBanner }) {
                         <Select.Option value="public">Public class</Select.Option>
                         <Select.Option value="private">Private class</Select.Option>
                     </Select>
-                    {cartType === 'private' && (
+                    {cartType == 'private' && (
                         <Form.Item label="Set your password">
                             <Row gutter={[16, 16]}>
                                 <Col span={24}>

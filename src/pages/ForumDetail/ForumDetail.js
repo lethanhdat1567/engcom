@@ -133,7 +133,7 @@ function ForumDetail() {
                     <Avatar style={{ flexShrink: '0' }} src={handleAvatar(postValue?.user?.avatar)} />
                     <h3 className={cx('title')}>{postValue?.user?.name}</h3>
                     <span className={cx('timer')}>{handleTime(postValue?.created_at)}</span>
-                    {user.id === postValue?.user?.user_id && (
+                    {user.id == postValue?.user?.user_id && (
                         <Tippy
                             interactive
                             trigger="click"

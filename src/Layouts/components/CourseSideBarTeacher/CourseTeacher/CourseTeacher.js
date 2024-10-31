@@ -31,7 +31,7 @@ function CourseTeacher({ data, course_index }) {
     const [moreEdit, setMoreEdit] = useState(false);
     const [deleteCourseLoading, setDeleteCourseLoading] = useState(false);
 
-    const lessonData = lessons.filter((item, course_index) => item.course_id === data.id);
+    const lessonData = lessons.filter((item, course_index) => item.course_id == data.id);
 
     const handleDeleteCourse = () => {
         if (slug && Object.keys(slug)?.length > 0) {

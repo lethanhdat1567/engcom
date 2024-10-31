@@ -15,7 +15,7 @@ function Blogs() {
     const blogsData = useSelector((state) => state.storeData.blogs);
 
     useEffect(() => {
-        if (blogsData?.length === 0) {
+        if (blogsData?.length == 0) {
             setLoading(true);
             readAllBlogs()
                 .then((res) => {

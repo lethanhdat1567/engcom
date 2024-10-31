@@ -30,7 +30,7 @@ function JoinClass({ data }) {
 
     // Handle free
     const handleSubFree = () => {
-        if (Object.keys(user).length === 0 || user.role_id == 1) {
+        if (Object.keys(user).length == 0 || user.role_id == 1) {
             setRegisModal(true);
         } else {
             if (!validateFree(freeClass, user.id, slug)) {
@@ -55,7 +55,7 @@ function JoinClass({ data }) {
         }
     };
     const handleUnsub = () => {
-        const currentSub = freeClass.find((item) => item.class_id === data.id);
+        const currentSub = freeClass.find((item) => item.class_id == data.id);
         setLoading(true);
         deleteSubscribe(currentSub.id)
             .then((res) => {
@@ -69,7 +69,7 @@ function JoinClass({ data }) {
             });
     };
     const handleSubmit = () => {
-        if (Object.keys(user).length === 0 || user.role_id == 1) {
+        if (Object.keys(user).length == 0 || user.role_id == 1) {
             setRegisModal(true);
         } else {
             if (allowSubmit) {
@@ -177,7 +177,7 @@ function JoinClass({ data }) {
                                             placeholder="Enter class password..."
                                             status={privateError ? 'error' : ''}
                                             onKeyDown={(e) => {
-                                                if (e.key === 'Enter') {
+                                                if (e.key == 'Enter') {
                                                     handleSubmit();
                                                 }
                                             }}

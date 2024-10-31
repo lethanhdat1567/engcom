@@ -23,7 +23,7 @@ function Sercurity() {
 
     const handleSubmit = () => {
         if (ownPassword.trim() && newPassword.trim()) {
-            if (ownPassword === newPassword) {
+            if (ownPassword == newPassword) {
                 const values = {
                     userid: user.id,
                     password: newPassword,

@@ -18,7 +18,7 @@ function Classes({ data, title, type, to }) {
                 </div>
                 <Link
                     to={
-                        type === 'blog'
+                        type == 'blog'
                             ? `${process.env.REACT_APP_ROOT}/${to}`
                             : `${process.env.REACT_APP_ROOT}/classes/all`
                     }
@@ -29,7 +29,7 @@ function Classes({ data, title, type, to }) {
             </div>
             <div className={cx('row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-5')}>
                 {data.map((item, index) => {
-                    if (type === 'blog') {
+                    if (type == 'blog') {
                         return (
                             <div className="col" key={index}>
                                 <BlogItem data={item} />

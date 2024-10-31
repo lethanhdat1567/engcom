@@ -7,7 +7,7 @@ function TeacherCourse() {
     const activeLesson = useSelector((state) => state.activeLesson.lesson);
     const lessonContents = useSelector((state) => state.teacher.contents);
     const data = lessonContents?.find((item) => {
-        return item.lesson_id === activeLesson.id;
+        return item.lesson_id == activeLesson.id;
     });
     switch (activeLesson.type) {
         case 0: {

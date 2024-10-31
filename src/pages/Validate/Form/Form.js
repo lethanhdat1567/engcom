@@ -109,9 +109,9 @@ function Form({ type, setToggle }) {
     };
 
     const handleEyeClick = (name) => {
-        if (name === 'password') {
+        if (name == 'password') {
             setShowPassword((prev) => !prev);
-        } else if (name === 'password_confirmation') {
+        } else if (name == 'password_confirmation') {
             setShowConfirmPassword((prev) => !prev);
         }
     };
@@ -182,7 +182,7 @@ function Form({ type, setToggle }) {
             {loading && <Loading />}
             {validate[type].map((item, index) => {
                 const { name, label, placeholder, rules, type } = item;
-                if (type === 'password') {
+                if (type == 'password') {
                     return (
                         <div className={cx('form-group', { error: errors[name] })} key={name}>
                             {label && (
@@ -197,12 +197,12 @@ function Form({ type, setToggle }) {
                                     name={name}
                                     placeholder={placeholder}
                                     type={
-                                        (name === 'password' && showPassword) ||
-                                        (name === 'password_confirmation' && showConfirmPassword)
+                                        (name == 'password' && showPassword) ||
+                                        (name == 'password_confirmation' && showConfirmPassword)
                                             ? 'text'
                                             : 'password'
                                     }
-                                    ref={name === 'password' ? passRef : confirmPassRef}
+                                    ref={name == 'password' ? passRef : confirmPassRef}
                                     {...register(name, rules)}
                                 />
                                 <span className={cx('eye-icon')} onClick={() => handleEyeClick(name)}>

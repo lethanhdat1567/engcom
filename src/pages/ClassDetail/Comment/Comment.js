@@ -117,7 +117,7 @@ function Comment() {
                                         onFocus={() => setIsComment(true)}
                                         onChange={handleChange}
                                         onKeyDown={(e) => {
-                                            if (e.key === 'Enter') {
+                                            if (e.key == 'Enter') {
                                                 e.preventDefault();
                                                 handleSubmit();
                                             }

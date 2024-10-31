@@ -21,7 +21,7 @@ export const course = createSlice({
             // Tìm bài học và cập nhật trạng thái
             state.course.forEach((item) => {
                 item.lessons.forEach((lesson) => {
-                    if (lesson.id === lesson_id) {
+                    if (lesson.id == lesson_id) {
                         lesson.is_in_progress = true;
                         lesson.is_completed = false;
                     }
@@ -30,9 +30,9 @@ export const course = createSlice({
 
             // Thêm vào mảng progress nếu chưa có
             const existingProgressIndex = state.progress.findIndex(
-                (progress) => progress.id === lesson_id && progress.course_id === course_id,
+                (progress) => progress.id == lesson_id && progress.course_id == course_id,
             );
-            if (existingProgressIndex === -1) {
+            if (existingProgressIndex == -1) {
                 state.progress.push({
                     id: lesson_id, // Sử dụng id thay vì lesson_id
                     course_id, // Thêm course_id vào progress
@@ -49,7 +49,7 @@ export const course = createSlice({
             // Cập nhật trạng thái bài học
             state.course.forEach((item) => {
                 item.lessons.forEach((lesson) => {
-                    if (lesson.id === lessonId) {
+                    if (lesson.id == lessonId) {
                         lesson.is_completed = true;
                         lesson.is_in_progress = false;
                     }
@@ -58,7 +58,7 @@ export const course = createSlice({
 
             // Cập nhật mảng progress
             const existingProgressIndex = state.progress.findIndex(
-                (progress) => progress.id === lessonId && progress.course_id === course_id,
+                (progress) => progress.id == lessonId && progress.course_id == course_id,
             );
             if (existingProgressIndex !== -1) {
                 // Cập nhật nếu đã tồn tại

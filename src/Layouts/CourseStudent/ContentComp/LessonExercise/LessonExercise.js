@@ -65,7 +65,7 @@ function LessonExercise({ data }) {
                         return (
                             <li
                                 className={cx('item', {
-                                    active: index === choiceActive,
+                                    active: index == choiceActive,
                                     error: isWrong,
                                     correct: isCorrect,
                                 })}

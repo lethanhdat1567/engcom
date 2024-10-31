@@ -50,7 +50,7 @@ function CartItem({ data, create = false }) {
                                 return <InfoItem data={item} key={index} />;
                             })}
                         </div>
-                        {cartItem.id && create && cartItem.deleted === null && (
+                        {cartItem.id && create && cartItem.deleted == null && (
                             <div className={cx('alert-app')}>
                                 <span className={cx('alert-desc')}>pending approval...</span>
                                 <Tippy content="More detail">

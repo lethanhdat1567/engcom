@@ -18,7 +18,7 @@ function UserAdmin() {
         updateRoleUser(user_id, role_id)
             .then((res) => {
                 setData((prev) => {
-                    const index = prev.findIndex((user) => user.id === user_id);
+                    const index = prev.findIndex((user) => user.id == user_id);
                     if (index !== -1) {
                         const updatedUsers = [...prev];
                         updatedUsers[index] = { ...updatedUsers[index], role_id };

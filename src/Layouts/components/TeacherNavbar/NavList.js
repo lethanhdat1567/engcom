@@ -29,9 +29,9 @@ function NavList({ item }) {
             <ul className={cx('list-wrap', { active })}>
                 {item.children?.map((childItem, index) => {
                     let store = null;
-                    if (childItem.title === 'Your class') {
+                    if (childItem.title == 'Your class') {
                         store = cartData; // Đây là đối tượng
-                    } else if (childItem.title === 'Courses') {
+                    } else if (childItem.title == 'Courses') {
                         store = courses; // Đây là mảng
                     }
                     return (
@@ -44,13 +44,13 @@ function NavList({ item }) {
                                 <span className={cx('item-icon-sub')}>{childItem.icon}</span>
                                 <span className={cx('item-link')}>{childItem.title}</span>
                                 {!slug &&
-                                    childItem.title === 'Your class' &&
-                                    Object.keys(cartDataRedux).length === 0 && (
+                                    childItem.title == 'Your class' &&
+                                    Object.keys(cartDataRedux).length == 0 && (
                                         <span style={{ color: 'red' }} className={cx('null-alert')}>
                                             <FontAwesomeIcon icon={faXmark} />
                                         </span>
                                     )}
-                                {!slug && childItem.title === 'Courses' && courses.length === 0 && (
+                                {!slug && childItem.title == 'Courses' && courses.length == 0 && (
                                     <span style={{ color: 'red' }} className={cx('null-alert')}>
                                         <FontAwesomeIcon icon={faXmark} />
                                     </span>

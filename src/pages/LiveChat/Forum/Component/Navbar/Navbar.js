@@ -31,12 +31,12 @@ function Navbar({ activeIndex, setActiveIndex }) {
                     {navData.map((item, index) => {
                         return (
                             <li
-                                className={cx('item', { active: activeIndex === index })}
+                                className={cx('item', { active: activeIndex == index })}
                                 key={index}
                                 onClick={() => setActiveIndex(index)}
                             >
                                 <span className={cx('icon')}>
-                                    {activeIndex === index ? item.activeIcon : item.icon}
+                                    {activeIndex == index ? item.activeIcon : item.icon}
                                 </span>
                             </li>
                         );

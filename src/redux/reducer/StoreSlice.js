@@ -23,7 +23,7 @@ export const storeData = createSlice({
             }
         },
         updateBlogs(state, action) {
-            const stateIndex = state.blogs.findIndex((item) => item.id === action.payload.id);
+            const stateIndex = state.blogs.findIndex((item) => item.id == action.payload.id);
             if (stateIndex !== -1) {
                 state.blogs[stateIndex] = { ...state.blogs[stateIndex], ...action.payload };
             }

@@ -15,7 +15,7 @@ function App() {
                     let Layout = DefaultLayout;
                     if (item.layout) {
                         Layout = item.layout;
-                    } else if (item.layout === null) {
+                    } else if (item.layout == null) {
                         Layout = Fragment;
                     }
                     return (

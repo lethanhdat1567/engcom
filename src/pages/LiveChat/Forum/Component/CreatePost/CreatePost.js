@@ -106,7 +106,7 @@ function CreatePost() {
                                     grabCursor={imageUrls.length > 1}
                                     className="slider-post"
                                     spaceBetween={20}
-                                    slidesPerView={imageUrls.length === 1 ? 1 : 'auto'}
+                                    slidesPerView={imageUrls.length == 1 ? 1 : 'auto'}
                                 >
                                     {imageUrls.map((item, index) => {
                                         return (

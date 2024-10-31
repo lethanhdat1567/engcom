@@ -36,7 +36,7 @@ function TeacherClassCourse() {
                         {courses.map((item, index) => {
                             return <CourseItem data={item} key={index} />;
                         })}
-                        {courses.length === 0 && (
+                        {courses.length == 0 && (
                             <div className={cx('alert')}>You need to have as least 1 course!</div>
                         )}
                     </div>
@@ -59,7 +59,7 @@ function TeacherClassCourse() {
                 {courses.map((item, index) => {
                     return <CourseItem data={item} key={index} />;
                 })}
-                {courses.length === 0 && (
+                {courses.length == 0 && (
                     <div className={cx('alert')}>You need to have as least 1 course!</div>
                 )}
             </div>

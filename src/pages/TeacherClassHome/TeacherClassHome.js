@@ -101,7 +101,7 @@ function TeacherClassHome() {
     };
 
     useEffect(() => {
-        if (cartType === 'public') {
+        if (cartType == 'public') {
             setCartPassword('');
         }
     }, [cartType]);
@@ -114,7 +114,7 @@ function TeacherClassHome() {
         setCartSubject(cartData.subject);
     }, [cartData]);
     useEffect(() => {
-        if (slug && Object.keys(cartData).length === 0) {
+        if (slug && Object.keys(cartData).length == 0) {
             setLoading(true);
             getDetailClass(slug)
                 .then((res) => {

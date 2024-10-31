@@ -46,7 +46,7 @@ function CourseSidebarTeacher({ showNav, setShowNav }) {
             {courses.map((item, index) => {
                 return <CourseTeacher key={index} course_index={index} data={item} />;
             })}
-            <div className={cx('save-course-wrap', { block: lessons.length === 0 })} onClick={handleSave}>
+            <div className={cx('save-course-wrap', { block: lessons.length == 0 })} onClick={handleSave}>
                 <button className={cx('save-course')} style={{ background: 'blue' }}>
                     {slug ? 'Back' : 'Save'}
                 </button>

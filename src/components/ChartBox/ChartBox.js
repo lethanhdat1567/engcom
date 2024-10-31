@@ -14,7 +14,7 @@ function ChartBox({ data }) {
         <div className={cx('wrap')}>
             <div className={cx('left')}>
                 <div className={cx('head')}>
-                    <FontAwesomeIcon icon={data.title === 'Classes' ? faBook : faUsers} className="fa-xl" />
+                    <FontAwesomeIcon icon={data.title == 'Classes' ? faBook : faUsers} className="fa-xl" />
                     <p className={cx('title')}>Total {data?.title}</p>
                 </div>
                 <p className={cx('quantity')}>{data.total}</p>

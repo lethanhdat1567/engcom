@@ -15,7 +15,7 @@ function Classes() {
     const location = useLocation();
     const [classesData, setClassesData] = useState([]);
     const handleClick = () => {
-        if (location.pathname === '/my-class') {
+        if (location.pathname == '/my-class') {
             return;
         }
         setShow(true);

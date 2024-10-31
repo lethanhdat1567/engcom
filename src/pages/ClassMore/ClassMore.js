@@ -49,7 +49,7 @@ function ClassMore() {
                 <ul className={cx('list')}>
                     {navItems.map((item, index) => (
                         <li
-                            className={cx('item', { active: activeNav === index })}
+                            className={cx('item', { active: activeNav == index })}
                             key={index}
                             onClick={() => setActiveNav(index)}
                         >
@@ -83,7 +83,7 @@ function ClassMore() {
             </nav>
             <div className={cx('body')}>
                 <div className={cx('wrap-item')}>
-                    {classesData.length === 0 && !loading && <span>Don't have any classes</span>}
+                    {classesData.length == 0 && !loading && <span>Don't have any classes</span>}
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-5">
                         {loading
                             ? Array.from({ length: 8 }).map((_, index) => (

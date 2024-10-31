@@ -28,7 +28,7 @@ function DataTable({ columns, data, setData, field, loading }) {
     const handleDelete = () => {
         let id = deleteId;
         setDeletedLoading(true);
-        if (field === 'classes') {
+        if (field == 'classes') {
             deleteClass(id)
                 .then((res) => {
                     const newData = data.filter((item) => item.id !== id);
@@ -43,7 +43,7 @@ function DataTable({ columns, data, setData, field, loading }) {
                     toastify('Delete success', 'success', 2000, 'top-right');
                     console.log(error);
                 });
-        } else if (field === 'blogs') {
+        } else if (field == 'blogs') {
             deleteBlog(id)
                 .then((res) => {
                     const newData = data.filter((item) => item.id !== id);
@@ -57,7 +57,7 @@ function DataTable({ columns, data, setData, field, loading }) {
                     setDeletedLoading(false);
                     console.log(error);
                 });
-        } else if (field === 'users') {
+        } else if (field == 'users') {
             deleteUser(id)
                 .then((res) => {
                     const newData = data.filter((item) => item.id !== id);
@@ -93,7 +93,7 @@ function DataTable({ columns, data, setData, field, loading }) {
                                 render: (text, record) => {
                                     return (
                                         <div className={cx('utils')}>
-                                            {field === 'blogs' && (
+                                            {field == 'blogs' && (
                                                 <Tippy content="Detail">
                                                     <Link
                                                         style={{ display: 'inline-block', color: 'blue' }}

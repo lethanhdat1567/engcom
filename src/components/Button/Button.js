@@ -36,7 +36,7 @@ function Button({
     }
     if (disable) {
         Object.keys(props).map((key) => {
-            if (typeof props[key] === 'function' && key.startsWith('on')) {
+            if (typeof props[key] == 'function' && key.startsWith('on')) {
                 delete props[key];
             }
         });

@@ -185,7 +185,7 @@ function ForgetPasswordForm({ setShowForgot }) {
                                     </Button>
                                 )}
                             </div>
-                            {sendCodeMessage && error.length === 0 && (
+                            {sendCodeMessage && error.length == 0 && (
                                 <span className={cx('code')}>{sendCodeMessage}</span>
                             )}
                             {error.length > 0 && (

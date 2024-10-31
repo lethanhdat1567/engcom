@@ -62,7 +62,7 @@ function ProfileItem({ data }) {
         if (!adopt) {
             let value;
 
-            if (data.type === 'upload') {
+            if (data.type == 'upload') {
                 const formData = new FormData();
                 formData.append('file', uploadValue);
                 setLoading(true);
@@ -82,7 +82,7 @@ function ProfileItem({ data }) {
                         console.log(error);
                     });
             } else {
-                if (data.type === 'gender') {
+                if (data.type == 'gender') {
                     value = { [data.name]: genderValue };
                 } else {
                     value = { [data.name]: inputValue };
@@ -126,7 +126,7 @@ function ProfileItem({ data }) {
         <>
             <div className={cx('item')} onClick={() => setToggleModal(true)}>
                 <h3 className={cx('item-label')}>{data.title}</h3>
-                {data.type === 'upload' ? (
+                {data.type == 'upload' ? (
                     <img
                         className={cx('img')}
                         src={
@@ -139,7 +139,7 @@ function ProfileItem({ data }) {
                         }
                         alt="User Avatar"
                     />
-                ) : data.type === 'gender' ? (
+                ) : data.type == 'gender' ? (
                     <span className={cx('info')}>{genderValue || 'Unset'}</span>
                 ) : (
                     <span className={cx('info')}>{data.data || 'Unset'}</span>
@@ -151,7 +151,7 @@ function ProfileItem({ data }) {
 
             <Modal toggle={toggleModal} setToggle={setToggleModal}>
                 <div className={cx('modal-wrap')}>
-                    {data.type === 'upload' ? (
+                    {data.type == 'upload' ? (
                         <>
                             <div className={cx('modal-form-group')}>
                                 <Img
@@ -189,7 +189,7 @@ function ProfileItem({ data }) {
                             </p>
                             <div className={cx('modal-form-group')}>
                                 <label className={cx('modal-label')}>{data.title}</label>
-                                {data.type === 'gender' ? (
+                                {data.type == 'gender' ? (
                                     <Select
                                         placeholder="---Select your gender---"
                                         onChange={(value) => {

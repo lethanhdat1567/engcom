@@ -60,7 +60,7 @@ function Comment({ commentPost, setCommentPost }) {
                         onChange={handleChange}
                         value={inputValue}
                         onKeyDown={(e) => {
-                            if (e.key === 'Enter') {
+                            if (e.key == 'Enter') {
                                 e.preventDefault();
                                 handleSubmitComment();
                             }

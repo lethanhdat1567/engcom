@@ -47,7 +47,7 @@ function SearchMore() {
                 {navData.map((item, index) => {
                     return (
                         <div
-                            className={cx('nav-item', { active: navIndex === index })}
+                            className={cx('nav-item', { active: navIndex == index })}
                             key={index}
                             onClick={() => setNavIndex(index)}
                         >

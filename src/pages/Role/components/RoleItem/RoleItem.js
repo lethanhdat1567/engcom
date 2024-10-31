@@ -6,7 +6,7 @@ const cx = classNames.bind(styles);
 function RoleItem({ data, index, currentChoiceIndex, setCurrentChoiceIndex }) {
     return (
         <div
-            className={cx('wrap', { active: currentChoiceIndex === index })}
+            className={cx('wrap', { active: currentChoiceIndex == index })}
             onClick={() => setCurrentChoiceIndex(index)}
         >
             <img className={cx('img')} src={data.banner} />

@@ -58,7 +58,7 @@ function Rank() {
 
     useEffect(() => {
         setLoading(true);
-        if (typeFilter === 'subcribe') {
+        if (typeFilter == 'subcribe') {
             getSubRank()
                 .then((res) => {
                     setRankValues(res.data);
@@ -143,9 +143,7 @@ function Rank() {
                                             User
                                         </th>
                                         <th className={cx('item', 'rank')} scope="col">
-                                            {typeFilter === 'subcribe'
-                                                ? 'Subscribe number'
-                                                : 'Classes number'}
+                                            {typeFilter == 'subcribe' ? 'Subscribe number' : 'Classes number'}
                                         </th>
                                         <th className={cx('item', 'rank')} scope="col">
                                             Date of Participation

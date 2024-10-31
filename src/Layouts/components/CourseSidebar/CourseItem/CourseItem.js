@@ -13,7 +13,7 @@ function CourseItem({ data, course_index }) {
     const [showLesson, setShowLesson] = useState(false);
 
     useEffect(() => {
-        if (data.id === selectedLesson.course_id) {
+        if (data.id == selectedLesson.course_id) {
             setShowLesson(true);
         }
     }, [selectedLesson]);

@@ -27,7 +27,7 @@ export const teacher = createSlice({
             state.courses.push(action.payload);
         },
         updateCourse(state, action) {
-            const stateIndex = state.courses.findIndex((item) => item.id === action.payload.id);
+            const stateIndex = state.courses.findIndex((item) => item.id == action.payload.id);
             if (stateIndex !== -1) {
                 state.courses[stateIndex] = { ...state.courses[stateIndex], ...action.payload };
             }
@@ -49,7 +49,7 @@ export const teacher = createSlice({
             state.lessons.push(action.payload);
         },
         updateLesson(state, action) {
-            const stateIndex = state.lessons.findIndex((item) => item.id === action.payload.id);
+            const stateIndex = state.lessons.findIndex((item) => item.id == action.payload.id);
             if (stateIndex !== -1) {
                 state.lessons[stateIndex] = { ...state.lessons[stateIndex], ...action.payload };
             }
@@ -69,7 +69,7 @@ export const teacher = createSlice({
             state.contents.push(action.payload);
         },
         updateContent(state, action) {
-            const stateIndex = state.contents.findIndex((item) => item.id === action.payload.id);
+            const stateIndex = state.contents.findIndex((item) => item.id == action.payload.id);
             if (stateIndex !== -1) {
                 state.contents[stateIndex] = { ...state.contents[stateIndex], ...action.payload };
             }

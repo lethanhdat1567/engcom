@@ -24,7 +24,7 @@ function InfoCart({ data }) {
 
     return (
         <div className={cx('info-wrap')}>
-            {data.type === 'public' && (
+            {data.type == 'public' && (
                 <div className={cx('cost')}>
                     <span>
                         <FontAwesomeIcon className="fa-sm" icon={faUsers} style={{ color: '#f05123' }} />
@@ -32,7 +32,7 @@ function InfoCart({ data }) {
                     <p className={cx('free', { sale: data.discount > 0 })}>Free class</p>
                 </div>
             )}
-            {data.type === 'private' && (
+            {data.type == 'private' && (
                 <div className={cx('cost')}>
                     <span>
                         <FontAwesomeIcon className="fa-sm" icon={faLock} style={{ color: '#4f4e4e' }} />
