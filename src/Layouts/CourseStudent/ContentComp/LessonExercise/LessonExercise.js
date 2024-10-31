@@ -49,7 +49,6 @@ function LessonExercise({ data }) {
             }
         }
     };
-    console.log(data);
 
     return (
         <div className={cx('wrap')}>

@@ -28,7 +28,6 @@ function CourseFooter({ setShowNav, showNav }) {
     const handlePrev = () => {
         handlePrevLesson();
     };
-    console.log(validateIcon(currentLesson?.type));
 
     return (
         <>

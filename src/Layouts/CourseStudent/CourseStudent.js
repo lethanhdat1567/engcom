@@ -35,6 +35,8 @@ function CourseStudent() {
         setLoading(true);
         getCourseStudent(slug, user.id)
             .then((res) => {
+                console.log(res.data);
+
                 filterFirst(res.data);
                 setLoading(false);
             })
@@ -48,7 +50,6 @@ function CourseStudent() {
         if (user && progressData.length > 0 && user.role_id !== 4) {
             insertProgress(user.id, progressData)
                 .then((res) => {
-                    console.log('Progress saved:', res);
                     dispatch(course.actions.resetProgress());
                 })
                 .catch((error) => {

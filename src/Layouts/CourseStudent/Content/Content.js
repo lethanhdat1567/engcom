@@ -11,13 +11,13 @@ const cx = classNames.bind(styles);
 function Content({ lessonContent }) {
     if (lessonContent) {
         switch (lessonContent.type) {
-            case '0': {
+            case 0: {
                 return <LessonVideo data={lessonContent} />;
             }
-            case '1': {
+            case 1: {
                 return <LessonText data={lessonContent} />;
             }
-            case '2': {
+            case 2: {
                 return <LessonExercise data={lessonContent.content} />;
             }
             default: {
