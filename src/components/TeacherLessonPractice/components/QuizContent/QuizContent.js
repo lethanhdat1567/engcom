@@ -21,7 +21,7 @@ function QuizContent({ data }) {
                         return (
                             <li
                                 className={cx('item', {
-                                    active: index === choiceActive,
+                                    active: index == choiceActive,
                                     correct: item.is_correct,
                                 })}
                                 key={index}

@@ -69,7 +69,7 @@ function ReplyItem({ data, setResponses, commentParent }) {
                     </div>
                 )}
             >
-                {user.id === data.user.id && (
+                {user.id == data.user.id && (
                     <span className={cx('setting')} onClick={() => setIsDelete(true)}>
                         <FontAwesomeIcon icon={faEllipsisVertical} />
                     </span>

@@ -29,7 +29,7 @@ function StudentLesson({ lesson, index, course_index }) {
         <div
             className={cx('wrap', {
                 blocked: isBlocked,
-                active: activeLessonID === lesson.id,
+                active: activeLessonID == lesson.id,
             })}
             onClick={handleClick}
         >

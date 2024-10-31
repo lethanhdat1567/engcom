@@ -117,7 +117,7 @@ function CommentItem({ item, setComments }) {
                     </div>
                 )}
             >
-                {user.id === item.user.id && (
+                {user.id == item.user.id && (
                     <span className={cx('setting')} onClick={() => setIsDelete(true)}>
                         <FontAwesomeIcon icon={faEllipsisVertical} />
                     </span>

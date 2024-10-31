@@ -13,7 +13,7 @@ function CourseItem({ data }) {
     const handleDelete = () => {
         dispatch(teacher.actions.deleteCourse(data.id));
     };
-    const lessonData = lessons.filter((item) => item.course_id === data.id);
+    const lessonData = lessons.filter((item) => item.course_id == data.id);
     return (
         <div className={cx('course')}>
             <div className={cx('wrap')}>

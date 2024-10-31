@@ -42,7 +42,7 @@ function QuizCreate() {
         if (slug) {
             setLoading(true);
             const questions = questionData.map((item, index) => {
-                return { text: item, is_correct: index === correctAnswerIndex ? 1 : 0 };
+                return { text: item, is_correct: index == correctAnswerIndex ? 1 : 0 };
             });
             const insertValues = {
                 lesson_id: lesson.id,
@@ -61,7 +61,7 @@ function QuizCreate() {
                 });
         } else {
             const questions = questionData.map((item, index) => {
-                return { text: item, is_correct: index === correctAnswerIndex ? 1 : 0 };
+                return { text: item, is_correct: index == correctAnswerIndex ? 1 : 0 };
             });
             const values = {
                 id,
@@ -83,7 +83,7 @@ function QuizCreate() {
     function handleDelete(index) {
         const updatedQuestions = questionData.filter((_, i) => i !== index);
         setQuestionData(updatedQuestions);
-        if (correctAnswerIndex === index) setCorrectAnswerIndex(null); // Reset nếu xóa đáp án đúng
+        if (correctAnswerIndex == index) setCorrectAnswerIndex(null); // Reset nếu xóa đáp án đúng
     }
 
     return (
@@ -127,7 +127,7 @@ function QuizCreate() {
                                             <input
                                                 type="radio"
                                                 name="correctAnswer"
-                                                checked={correctAnswerIndex === index}
+                                                checked={correctAnswerIndex == index}
                                                 onChange={() => setCorrectAnswerIndex(index)}
                                             />
                                         </div>

@@ -11,7 +11,6 @@ const cx = classNames.bind(styles);
 function CommuItem({ data }) {
     const user = useSelector((state) => state.user.user);
     const [showRegisterModal, setShowRegisterModal] = useState(false);
-    console.log(Object.keys(user).length === 0 || user.role_id == 1);
 
     const handleNavigate = () => {
         if (Object.keys(user).length === 0 || user.role_id == 1) {
