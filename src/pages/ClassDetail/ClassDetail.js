@@ -31,7 +31,7 @@ function ClassDetail() {
                 setLoading(false);
                 console.log(error);
             });
-    }, []);
+    }, [slug]);
 
     const validateType = () => {
         switch (classData.type) {

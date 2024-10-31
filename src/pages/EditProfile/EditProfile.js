@@ -10,6 +10,7 @@ function EditProfile() {
 
     const handleResize = () => {
         if (window.innerWidth < 998) {
+            console.log('test');
             setActive(-1);
         } else {
             setActive(0);
@@ -18,11 +19,6 @@ function EditProfile() {
 
     useEffect(() => {
         handleResize();
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
     }, []);
 
     return (
