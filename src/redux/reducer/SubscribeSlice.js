@@ -13,7 +13,7 @@ export const subscribeClass = createSlice({
             state.free.push(action.payload);
         },
         deleteFree(state, action) {
-            const newClass = state.free.filter((item) => item.id !== action.payload);
+            const newClass = state.free.filter((item) => item.id != action.payload);
             state.free = newClass;
         },
     },

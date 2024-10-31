@@ -103,6 +103,7 @@ const teacherPage = [
     { path: '/post/:slug', element: UpdateBLog, layout: HeaderOnly },
     { path: '/course/:slug', element: CourseStudent, layout: null },
     { path: '/search', element: SearchMore },
+    { path: '/my-class', element: Classes },
 
     // Update class
     { path: '/own/:slug/', element: TeacherClassHome, layout: TeacherClassLayout },

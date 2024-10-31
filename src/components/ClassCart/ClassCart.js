@@ -11,7 +11,6 @@ function ClassCart({ data }) {
     const info = data.info;
     const progressData = data.progress;
     const progress = (progressData.current_lesson / progressData.total_lesson) * 100;
-    console.log(progressData);
 
     return (
         <div className={cx('wrap')}>
