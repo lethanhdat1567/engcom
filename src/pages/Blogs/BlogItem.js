@@ -125,7 +125,6 @@ function BlogItem({ data }) {
                     <div dangerouslySetInnerHTML={{ __html: content }} className={cx('body-desc')}></div>
                 </div>
                 <div className={cx('footer')}>
-                    {console.log(blog.updated_at)}
                     <span className={cx('blog-info')}>{handleTime(blog.updated_at)}</span>
                 </div>
             </section>

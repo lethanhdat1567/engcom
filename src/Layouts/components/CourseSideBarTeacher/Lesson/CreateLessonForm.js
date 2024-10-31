@@ -3,10 +3,6 @@ import styles from './Lesson.module.scss';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import {
-    faBook,
-    faBookOpen,
-    faCamera,
-    faChevronDown,
     faCircleCheck,
     faCircleXmark,
     faFileLines,
@@ -87,7 +83,7 @@ function CreateLessonForm({ showCreateLesson, setShowCreateLesson, course_id }) 
                 const values = {
                     id: uuidv4(),
                     course_id: course_id,
-                    type: typeValue,
+                    type: `${typeValue}`,
                     name: titleValue,
                 };
                 setTitleValue('');

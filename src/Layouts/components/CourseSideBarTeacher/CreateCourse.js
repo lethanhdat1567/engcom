@@ -32,7 +32,6 @@ function CreateCourse({ setShowCreate, data }) {
                     };
                     updateCourseUpdate(data.id, values)
                         .then((res) => {
-                            console.log(res);
                             dispatch(teacher.actions.updateCourse(res.data));
                             setShowCreate(false);
                             setCreateCourseLoading(false);

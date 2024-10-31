@@ -51,7 +51,6 @@ function MyBlogsItem({ data, setBlogItems, blogItems, type, deleting, setDeletin
                 });
         }
     };
-    console.log(data);
 
     return (
         <div className={cx('blog-item', { delete: deleting })}>

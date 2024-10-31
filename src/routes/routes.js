@@ -101,6 +101,7 @@ const teacherPage = [
     { path: '/me/bookmark', element: Bookmark },
     { path: '/profile/:slug', element: Profile, layout: SingleLayout },
     { path: '/post/:slug', element: UpdateBLog, layout: HeaderOnly },
+    { path: '/course/:slug', element: CourseStudent, layout: null },
     { path: '/search', element: SearchMore },
 
     // Update class

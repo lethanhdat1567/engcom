@@ -161,6 +161,8 @@ function Rank() {
                                     ) : (
                                         <>
                                             {rankValues?.map((item, index) => {
+                                                console.log(item);
+
                                                 return (
                                                     <tr className={cx('item-wrap')} key={index}>
                                                         <td className={cx('item')}>#{index + 1}</td>
@@ -177,7 +179,7 @@ function Rank() {
                                                                     <span className={cx('name')}>
                                                                         {item.name}
                                                                     </span>
-                                                                    <UserRole type={item.type} />
+                                                                    <UserRole type={item.role_id} />
                                                                 </div>
                                                             </Link>
                                                         </td>

@@ -9,9 +9,9 @@ function UserRole({ type }) {
     return (
         <div className={cx('wrap')}>
             <span className={cx('icon')}>
-                <FontAwesomeIcon icon={type == 2 ? faGraduationCap : faChalkboard} />
+                <FontAwesomeIcon icon={Number(type) === 2 ? faGraduationCap : faChalkboard} />
             </span>
-            <span className={cx('title')}>{type == 2 ? 'Student' : 'Teacher'}</span>
+            <span className={cx('title')}>{Number(type) === 2 ? 'Student' : 'Teacher'}</span>
         </div>
     );
 }

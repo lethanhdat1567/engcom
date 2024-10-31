@@ -9,14 +9,14 @@ function TeacherCourse() {
     const data = lessonContents?.find((item) => {
         return item.lesson_id == activeLesson.id;
     });
-    switch (activeLesson.type) {
-        case '0': {
+    switch (Number(activeLesson.type)) {
+        case 0: {
             return <TeacherLessonVideo data={data} />;
         }
-        case '1': {
+        case 1: {
             return <TeacherLessonText data={data} />;
         }
-        case '2': {
+        case 2: {
             return <TeacherLessonPractice data={data} />;
         }
         default: {
