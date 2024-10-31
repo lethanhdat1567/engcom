@@ -60,7 +60,7 @@ function NoteItem({ data, utils, setShowModal, setActiveNote }) {
                 </div>
             </div>
             <Modal
-                title="Warning infomation"
+                title="Warning information"
                 open={showDelete}
                 onCancel={() => setShowDelete(false)}
                 onOk={handleDelete}

@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getResponseComment, insertComment } from '~/requestApi/requestComment';
 import Img from '../Img';
+import { handleAvatar } from '~/utils/handleAvatar';
 
 const cx = classNames.bind(styles);
 
@@ -57,7 +58,7 @@ function FormReply({ isReply, setIsReply, parent_id, setResponses }) {
 
     return (
         <div className={cx('com-head', { active: isReply })}>
-            <Img src={user.avatar || ''} className={cx('com-avatar')} />
+            <img src={handleAvatar(user.avatar)} className={cx('com-avatar')} />
             <div className={cx('com-input-wrap')}>
                 <input
                     onChange={handleChange}

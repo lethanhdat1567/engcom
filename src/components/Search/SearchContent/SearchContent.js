@@ -20,7 +20,7 @@ function SearchContent({ data, searchValue, setShowSearch }) {
                             Show more
                         </Link>
                     </div>
-                    <div className={cx('content')}>
+                    <div className={cx('content')} onClick={() => setShowSearch(false)}>
                         <ValidateData data={data} />
                     </div>
                 </>

@@ -8,6 +8,7 @@ import Img from '../Img';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { deleteComment, getResponseComment } from '~/requestApi/requestComment';
+import { handleAvatar } from '~/utils/handleAvatar';
 
 const cx = classNames.bind(styles);
 
@@ -43,7 +44,7 @@ function ReplyItem({ data, setResponses, commentParent }) {
     return (
         <div className={cx('item')}>
             <div className={cx('info-wrap')}>
-                <Img src={data.user.avatar || ''} className={cx('avatar')} />
+                <img src={handleAvatar(data.user.avatar)} className={cx('avatar')} />
                 <div className={cx('user')}>
                     <h2 className={cx('user-name')}>
                         {data.user.name} <span className={cx('timer')}>{handleTime()}</span>
