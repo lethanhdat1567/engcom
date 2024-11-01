@@ -55,7 +55,6 @@ function UpdateBLog() {
                 setBlogId(res.data.blog.id);
                 setThumbnalValue(res.data.blog.thumbnail);
                 setLoading(false);
-                console.log(res);
             })
             .catch((error) => {
                 console.log(error);

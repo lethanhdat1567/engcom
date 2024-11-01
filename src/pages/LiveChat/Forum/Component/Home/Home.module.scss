@@ -28,5 +28,8 @@
         border-radius: 20px;
         padding: 10px;
         overflow: hidden;
+        @include abs.screen(md) {
+            margin-bottom: 60px;
+        }
     }
 }

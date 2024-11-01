@@ -9,7 +9,13 @@ import Comment from './components/Comment/Comment';
 import { useNavigate, useParams } from 'react-router-dom';
 import Tippy from '@tippyjs/react/headless';
 import { useEffect, useState } from 'react';
-import { deleteLikePost, getCommentPost, getDetailPost, inserLikePost } from '~/requestApi/requestPost';
+import {
+    deleteLikePost,
+    getAllLikePost,
+    getCommentPost,
+    getDetailPost,
+    inserLikePost,
+} from '~/requestApi/requestPost';
 import { handleTime } from '~/utils/handleTime';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -37,9 +43,6 @@ function ForumDetail() {
     const likeDebounce = useDebounce(likeValue, 500);
     const [isZoomIn, setIsZoomIn] = useState(false);
     const [zoomSrc, setZoomSrc] = useState('');
-
-    console.log('current_user: ', user);
-    console.log('user: ', postValue);
 
     const handleLike = () => {
         setIsLiked(!isLiked);
@@ -94,6 +97,13 @@ function ForumDetail() {
                     .then((res) => {
                         setCommentPost(res.comments);
                         setLoading(false);
+                        getAllLikePost()
+                            .then((res) => {
+                                dispatch(post_like.actions.getLiked(res.data));
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            });
                     })
                     .catch((error) => {
                         console.log(error);
@@ -104,6 +114,10 @@ function ForumDetail() {
                 console.log(error);
             });
     }, [slug]);
+    useEffect(() => {
+        const liked = validatePostLike(post_likes, parseInt(slug), user.id);
+        setIsLiked(liked);
+    }, [post_likes, slug, user.id]);
 
     return loading ? (
         <div className={cx('wrap')}>

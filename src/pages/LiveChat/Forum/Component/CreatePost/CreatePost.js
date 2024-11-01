@@ -10,12 +10,14 @@ import { SwiperSlide, Swiper } from 'swiper/react';
 import { useSelector } from 'react-redux';
 import request from '~/utils/request';
 import { handleAvatar } from '~/utils/handleAvatar';
+import { subToastify, toastify } from '~/utils/toast';
 
 const cx = classNames.bind(styles);
 
 function CreatePost() {
     const [showCreatePost, setShowCreatePost] = useState(false);
-    const [imageValues, setImageValues] = useState();
+    const [loading, setLoading] = useState(false);
+    const [imageValues, setImageValues] = useState([]);
     const [imageUrls, setImageUrls] = useState([]);
     const [contentValue, setContentValue] = useState('');
     const user = useSelector((state) => state.user.user);
@@ -23,6 +25,7 @@ function CreatePost() {
     const handleCancle = () => {
         setShowCreatePost(false);
     };
+
     const handleSubmit = () => {
         if (contentValue.trim() || imageValues.length > 0) {
             const values = {
@@ -30,6 +33,7 @@ function CreatePost() {
                 content: contentValue,
                 thumbnails: imageValues,
             };
+            setLoading(true);
             request
                 .post(`engcom/fakeThreads`, values, {
                     headers: {
@@ -37,12 +41,15 @@ function CreatePost() {
                     },
                 })
                 .then((res) => {
+                    setLoading(false);
                     setContentValue('');
                     setImageUrls([]);
                     setImageValues([]);
                     setShowCreatePost(false);
+                    subToastify('Post successfully created, your post is in your profile.');
                 })
                 .catch((error) => {
+                    setLoading(false);
                     setContentValue('');
                     setImageUrls([]);
                     setImageValues([]);
@@ -52,12 +59,16 @@ function CreatePost() {
     };
 
     const handleUpdateImg = (e) => {
-        const imageFiles = Array.from(e.target.files);
-        if (imageFiles.length > 0) {
-            setImageValues(e.target.files);
-            const newVideosUrl = imageFiles.map((item) => URL.createObjectURL(item));
+        const newImageFiles = Array.from(e.target.files);
+
+        if (newImageFiles.length > 0) {
+            setImageValues((prev) => [...prev, ...newImageFiles]);
+
+            const newVideosUrl = newImageFiles.map((item) => URL.createObjectURL(item));
             setImageUrls((prev) => [...prev, ...newVideosUrl]);
         }
+
+        e.target.value = null;
     };
 
     return (
@@ -79,6 +90,7 @@ function CreatePost() {
                         type="primary"
                         onClick={handleSubmit}
                         disabled={!contentValue.trim()}
+                        loading={loading}
                     >
                         Post
                     </Button>,
@@ -87,7 +99,7 @@ function CreatePost() {
                 <div className={cx('modal')}>
                     <Avatar size="medium" style={{ flexShrink: 0 }} src={handleAvatar(user.avatar)} />
                     <div className={cx('modal-body')}>
-                        <span className={cx('modal-name')}>Le Thanh Dat</span>
+                        <span className={cx('modal-name')}>{user.name}</span>
                         <TextareaAutosize
                             placeholder="Type something..."
                             rows={1}

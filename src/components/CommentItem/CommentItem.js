@@ -47,7 +47,6 @@ function CommentItem({ item, setComments }) {
         getResponseComment(slug)
             .then((res) => {
                 const resData = res.data;
-
                 const resValues = resData.filter((resItem) => {
                     return resItem.parent_id == item.id;
                 });

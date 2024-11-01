@@ -45,7 +45,12 @@ function FormReply({ isReply, setIsReply, parent_id, setResponses }) {
             .then((res) => {
                 getResponseComment(slug)
                     .then((res) => {
-                        setResponses(res.data);
+                        const resData = res.data;
+                        const resValues = resData.filter((resItem) => {
+                            return resItem.parent_id == parent_id;
+                        });
+
+                        setResponses(resValues);
                     })
                     .catch((error) => {
                         console.log(error);
