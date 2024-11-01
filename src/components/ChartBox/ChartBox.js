@@ -8,7 +8,6 @@ const cx = classNames.bind(styles);
 
 function ChartBox({ data }) {
     const dataAnalysis = data.daily;
-    console.log(data);
 
     return (
         <div className={cx('wrap')}>
@@ -35,7 +34,7 @@ function ChartBox({ data }) {
                                             }}
                                         >
                                             <p>{`Date: ${payload[0].payload.date}`}</p>
-                                            <p>{`Users: ${payload[0].value}`}</p>
+                                            <p>{`${data?.title}: ${payload[0].value}`}</p>
                                         </div>
                                     );
                                 }

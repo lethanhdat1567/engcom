@@ -97,7 +97,7 @@ function BlogsDetail() {
                                     <span className={cx('timer')}>{handleTime(content.created_at)}</span>
                                 </div>
                             </div>
-                            {guest.role_id !== 4 && (
+                            {guest.role_id != 4 && (
                                 <div className={cx('right')}>
                                     <div className={cx('utils')}>
                                         {validateSaveBlog(saveBlogs, guest.id, content.id) ? (
