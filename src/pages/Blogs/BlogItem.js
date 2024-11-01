@@ -80,7 +80,7 @@ function BlogItem({ data }) {
                         />
                         <span className={cx('info-name')}>{user.user}</span>
                     </Link>
-                    {blog.user_id !== guest.id && (
+                    {blog.user_id != guest.id && (
                         <div className={cx('utils')}>
                             {validateSaveBlog(saveBlogs, guest.id, blog.id) ? (
                                 loading ? (
