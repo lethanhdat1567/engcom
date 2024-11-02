@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './LessonExercise.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Flex } from 'antd';
 import confetti from 'canvas-confetti';
 import useCourseUtils from '~/utils/useCourseUtils';
@@ -49,6 +49,13 @@ function LessonExercise({ data }) {
             }
         }
     };
+
+    useEffect(() => {
+        setChoiceActive();
+        setCurrentChoice();
+        setIsWrong(false);
+        setIsCorrect(false);
+    }, [data]);
 
     return (
         <div className={cx('wrap')}>
