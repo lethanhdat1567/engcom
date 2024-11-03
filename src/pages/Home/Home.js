@@ -70,7 +70,7 @@ function Home() {
                         <div className={cx('content')}>
                             {classes?.public?.length > 0 && (
                                 <Classes
-                                    data={classes?.public.slice(0, 8)}
+                                    data={classes?.public.slice(0, 4)}
                                     title="PUBLIC CLASSES"
                                     to="public"
                                 />

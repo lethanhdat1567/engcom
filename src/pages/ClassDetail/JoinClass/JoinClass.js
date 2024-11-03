@@ -120,7 +120,7 @@ function JoinClass({ data }) {
         navigate(`/course/${data.id}`);
     };
 
-    if (data.type && user.id !== data.user_id) {
+    if (data.type && user.id != data.user_id) {
         const typeCase = {
             public() {
                 return (
