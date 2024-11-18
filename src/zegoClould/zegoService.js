@@ -1,8 +1,8 @@
 // services/videoCallService.js
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
 
-const appID = 1289352846; // Đặt appID ở đây
-const serverSecret = 'ae7a6fd3ce34bb46468e3f0d18c02c36';
+const appID = 1603525138; // Đặt appID ở đây
+const serverSecret = '7395a980c060cbfcb493b8f759360052';
 
 export const startCallVideo = (roomID, userName, containerElement) => {
     const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
