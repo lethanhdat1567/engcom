@@ -23,6 +23,8 @@ function AlertModal({ showNav, setShowNav }) {
             .get(`engcom/alert`)
             .then((res) => {
                 setLoading(false);
+                console.log(res);
+
                 setAlertData(res.data.data);
             })
             .catch((error) => {
@@ -30,6 +32,7 @@ function AlertModal({ showNav, setShowNav }) {
                 console.log(error);
             });
     }, []);
+    console.log(alertData);
 
     return (
         <div className={cx('modal', { active: showNav })}>
@@ -48,7 +51,7 @@ function AlertModal({ showNav, setShowNav }) {
                             </span>
                         </div>
                         <div className={cx('body')}>
-                            {alertData.map((item, index) => {
+                            {alertData?.map((item, index) => {
                                 return <AlertItem data={item} key={index} />;
                             })}
                         </div>
